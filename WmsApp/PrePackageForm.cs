@@ -59,6 +59,8 @@ namespace WmsApp
             request.startTime = dtBegin.Value.ToString("yyyy-MM-dd 00:00:00");
             request.endTime = dtBegin.Value.ToString("yyyy-MM-dd 23:59:59");
 
+            request.customerCode = UserInfo.CustomerCode;
+            request.warehouseCode = UserInfo.WareHouseCode;
 
             GoodsResponse response = client.Execute(request);
            if (!response.IsError)

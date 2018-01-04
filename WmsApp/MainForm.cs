@@ -189,9 +189,9 @@ namespace WmsApp
 
           string version=System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-          this.Text = this.Text + "--" + UserInfo.PartnerName + "(" + UserInfo.PartnerCode + ")" + "---" + version;
+          this.Text = this.Text + "--" + UserInfo.PartnerName + "(" + UserInfo.PartnerCode + ")" ;
             //lbUserName.Text =UserInfo.RealName+"("+ UserInfo.UserName+")";
-          this.Text += "----货主:"+UserInfo.CustomerName+"----仓库:"+UserInfo.WareHouseName;
+          this.Text += "----货主:" + UserInfo.CustomerName + "----仓库:" + UserInfo.WareHouseName + "---" + version;
             #if(DEBUG)
 
           this.Text = this.Text + "测试版";

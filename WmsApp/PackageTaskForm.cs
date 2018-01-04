@@ -67,6 +67,7 @@ namespace WmsApp
                 request.skuCode ="%"+tbName.Text.Trim()+"%";
             }
             request.customerCode = UserInfo.CustomerCode;
+            request.warehouseCode = UserInfo.WareHouseCode;
             request.packTaskType = 10;
 
             if (cbStatus.SelectedIndex == 0)
@@ -262,7 +263,7 @@ namespace WmsApp
                             request.skuCode = tbName.Text.Trim();
                             request.packTaskType = 10;
                             request.customerCode = UserInfo.CustomerCode;
-
+                            request.warehouseCode = UserInfo.WareHouseCode;
                             if (cbStatus.SelectedIndex == 0)
                             {
                                 request.status = null;
