@@ -11,6 +11,7 @@ using System.Net;
 using System.Text;
 using System.Windows.Forms;
 using WmsSDK;
+using WmsSDK.Model;
 using WmsSDK.Request;
 using WmsSDK.Response;
 
@@ -80,6 +81,12 @@ namespace WmsApp
                 return;
             }
 
+            if (cbWare.SelectedIndex==0)
+            {
+                  MessageBox.Show("请选择仓库!");
+                 return;
+            }
+
             try
             {
                 btnOk.Enabled = false;
@@ -87,9 +94,12 @@ namespace WmsApp
                 LoginRequest request = new LoginRequest();
                 request.name = tbUserName.Text.Trim();
                 request.password = tbPwd.Text.Trim();
+                request.warehouseCode = cbWare.SelectedValue.ToString();
                 string json = DefalutWMSClient.GetJson(request);
 
-                string result = PostMoths("http://www.bjkalf.net:8090/services/user/checkAndGetUserResource", json);
+             //   string result = PostMoths("http://www.bjkalf.net:8090/services/user/checkAndGetUserResource", json);
+
+                string result = PostMoths("http://test.api.portal.bjshengeng.com/services/user/checkAndGetUserResource", json);
 
                 LoginResponse response = DefalutWMSClient.ToObject<LoginResponse>(result);
 
@@ -108,19 +118,34 @@ namespace WmsApp
                     tbPwd.Focus();
                     return;
                 }
+                if (response.result.customerMap==null||response.result.customerMap.Count==0)
+                {
+                    MessageBox.Show("用户还未绑定货主!");
+                    return;
+                }
+
                 UserInfo.UserName = tbUserName.Text.Trim();
                 UserInfo.PartnerName = response.result.companyName;
                 UserInfo.PartnerCode = response.result.companyCode;
-                UserInfo.WareHouseCode = "10";
-                UserInfo.WareHouseName = "北京康安利丰平谷1仓";
+                //UserInfo.WareHouseCode = "10";
+                //UserInfo.WareHouseName = "北京康安利丰平谷1仓";
                 UserInfo.RealName = response.result.cnName;
                 UserInfo.CompanyName = response.result.companyName;
                 UserInfo.menuDtos = response.result.menuDtos;
-                UserInfo.CustomerCode = response.result.id.ToString();
-                UserInfo.CustomerName = response.result.cnName;
+                UserInfo.id = response.result.id.ToString();
+                UserInfo.cnName = response.result.cnName;
 
+                UserInfo.WareHouseCode = cbWare.SelectedValue.ToString();
+                UserInfo.WareHouseName = cbWare.Text;
 
-                this.DialogResult = DialogResult.OK;
+                CustomerSelectForm selectForm = new CustomerSelectForm(response.result.customerMap, response.result.defaultCustomerCode);
+                selectForm.ShowDialog();
+                if (selectForm.DialogResult==DialogResult.OK)
+                {
+                    this.DialogResult = DialogResult.OK;
+                }
+
+               
             }
             catch (Exception ex)
             {
@@ -159,6 +184,43 @@ namespace WmsApp
         {
                string version=System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
                tbVersion.Text = "Version " + version;
+               try
+               {
+                   BindWare();
+               }
+               catch (Exception ex)
+               {
+                   MessageBox.Show("获取数据异常");
+               }
+        }
+
+        private  void BindWare()
+        {
+            WarehouseInfoRequest request = new WarehouseInfoRequest();
+            WarehouseInfoResponse response = client.Execute(request);
+            if (!response.IsError)
+            {
+                if (response.result != null)
+                {
+                    List<WarehouseInfo> wareList = new List<WarehouseInfo>();
+                    foreach (WarehouseInfo item in response.result)
+                    {
+                        wareList.Add(item);
+                    }
+                    wareList.Insert(0, new WarehouseInfo() { WarehouseCode = "", WarehouseName = "请选择" });
+                    this.cbWare.DataSource = wareList;
+                    this.cbWare.ValueMember = "WarehouseCode";
+                    this.cbWare.DisplayMember = "WarehouseName";
+                }
+            }
+        }
+
+      
+
+
+        private static void BindCustomer()
+        {
+
         }
     }
 }

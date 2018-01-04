@@ -19,6 +19,18 @@ namespace WmsSDK.Request
 
         [JsonProperty("warehouseId")]
         public string wareHouseId { get; set; }
+
+         [JsonProperty("warehouseCode")]
+        public String warehouseCode { get; set; }
+
+         [JsonProperty("warehouseName")]
+        public String warehouseName { get; set; }
+
+         [JsonProperty("customerCode")]
+        public String customerCode { get; set; }
+
+         [JsonProperty("customerName")]
+        public String customerName { get; set; }
     }
 
     public class PreprocessInfoQueryRequest : IWMSRequest<PreprocessInfoResponse>
@@ -53,6 +65,13 @@ namespace WmsSDK.Request
 
           [JsonProperty("status")]
         public int? status { get; set; }
+
+
+         [JsonProperty("warehouseCode")]
+          public string warehouseCode { get; set; }
+
+         [JsonProperty("customerCode")]
+          public string customerCode { get; set; }
 
     }
 

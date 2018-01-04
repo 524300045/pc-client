@@ -23,6 +23,10 @@ namespace WmsApp
        public static string CompanyName;
 
 
+       public static string id;
+
+       public static string cnName;
+
        public static string CustomerCode;
 
        public static string CustomerName;

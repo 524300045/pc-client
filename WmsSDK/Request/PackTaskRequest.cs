@@ -55,5 +55,8 @@ namespace WmsSDK.Request
         /// </summary>
              [JsonProperty("packTaskType")]
                public int? packTaskType { get; set; }
+
+          [JsonProperty("customerCode")]
+             public string customerCode { get; set; }
     }
 }

@@ -21,5 +21,12 @@ namespace WmsSDK.Model
        public string companyCode { get; set; }
 
        public List<Menu> menuDtos { get; set; }
+
+
+      // public string customerMap { get; set; }
+
+       public Dictionary<string,string> customerMap {get;set;}
+
+       public string defaultCustomerCode {get;set;}
     }
 }

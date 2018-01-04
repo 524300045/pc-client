@@ -98,7 +98,8 @@ namespace WmsApp
             {
                 request.status = 1;
             }
-           
+            request.customerCode = UserInfo.CustomerCode;
+            request.warehouseCode = UserInfo.WareHouseCode;
             request.partnerCode = UserInfo.PartnerCode;
             request.PageIndex = paginator.PageNo;
             request.PageSize = paginator.PageSize;

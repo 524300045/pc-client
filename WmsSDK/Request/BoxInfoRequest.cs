@@ -34,5 +34,11 @@ namespace WmsSDK.Request
 
           [JsonProperty("partnerCode")]
         public string partnerCode { get; set; }
+
+          [JsonProperty("customerCode")]
+          public string customerCode { get; set; }
+
+         [JsonProperty("warehouseCode")]
+          public string warehouseCode { get; set; }
     }
 }

@@ -66,7 +66,7 @@ namespace WmsApp
             {
                 request.skuCode ="%"+tbName.Text.Trim()+"%";
             }
-          
+            request.customerCode = UserInfo.CustomerCode;
             request.packTaskType = 10;
 
             if (cbStatus.SelectedIndex == 0)
@@ -261,6 +261,7 @@ namespace WmsApp
                             request.partnerCode = UserInfo.PartnerCode;
                             request.skuCode = tbName.Text.Trim();
                             request.packTaskType = 10;
+                            request.customerCode = UserInfo.CustomerCode;
 
                             if (cbStatus.SelectedIndex == 0)
                             {

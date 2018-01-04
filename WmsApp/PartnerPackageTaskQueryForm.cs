@@ -55,6 +55,7 @@ namespace WmsApp
         {
             StoreInfoRequest request = new StoreInfoRequest();
             request.partnerCode = UserInfo.PartnerCode;
+            request.customerCode = UserInfo.CustomerCode;
             StoreInfoResponse response = client.Execute(request);
             if (!response.IsError)
             {
@@ -80,6 +81,9 @@ namespace WmsApp
             request.startTime = dtBegin.Value.ToString("yyyy-MM-dd 00:00:00");
             request.endTime = dtBegin.Value.ToString("yyyy-MM-dd 23:59:59");
             request.partnerCode = UserInfo.PartnerCode;
+            request.customerCode = UserInfo.CustomerCode;
+            request.warehouseCode = UserInfo.WareHouseCode;
+
             if (tbName.Text.Trim()!="")
             {
                 request.skuCode = "%"+tbName.Text.Trim()+"%";
@@ -240,6 +244,9 @@ namespace WmsApp
                             request.startTime = dtBegin.Value.ToString("yyyy-MM-dd 00:00:00");
                             request.endTime = dtBegin.Value.ToString("yyyy-MM-dd 23:59:59");
                             request.partnerCode = UserInfo.PartnerCode;
+                            request.customerCode = UserInfo.CustomerCode;
+                            request.warehouseCode = UserInfo.WareHouseCode;
+
                             if (tbName.Text.Trim() != "")
                             {
                                 request.skuCode = "%" + tbName.Text.Trim();

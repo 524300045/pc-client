@@ -369,6 +369,8 @@ namespace WmsApp
         {
             StoreInfoRequest request = new StoreInfoRequest();
             request.partnerCode = UserInfo.PartnerCode;
+            request.customerCode = UserInfo.CustomerCode;
+
             StoreInfoResponse response = client.Execute(request);
             if (!response.IsError)
             {
@@ -433,7 +435,8 @@ namespace WmsApp
             request.PageIndex = paginator.PageNo;
             request.PageSize = paginator.PageSize;
             request.partnerCode = UserInfo.PartnerCode;
-
+            request.customerCode = UserInfo.CustomerCode;
+            request.warehouseCode = UserInfo.WareHouseCode;
             if (cbStatus.SelectedIndex == 0)
             {
                 request.status = null;
@@ -575,6 +578,8 @@ namespace WmsApp
                             request.PageIndex = m;
                             request.PageSize = paginator.PageSize;
                             request.partnerCode = UserInfo.PartnerCode;
+                            request.customerCode = UserInfo.CustomerCode;
+                            request.warehouseCode = UserInfo.WareHouseCode;
 
                             if (cbStatus.SelectedIndex == 0)
                             {

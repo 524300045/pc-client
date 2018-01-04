@@ -8,6 +8,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WmsSDK;
+using WmsSDK.Model;
+using WmsSDK.Request;
+using WmsSDK.Response;
 
 namespace WmsApp
 {
@@ -33,12 +36,12 @@ namespace WmsApp
             }
 #if(!DEBUG)
             //升级
-            //if (!ApplicationDeployment.IsNetworkDeployed && args.Length == 0)
-            //{
-            //    Process.Start("SuperUpdate.exe");
-            //    Application.Exit();
-            //    return;
-            //}
+            if (!ApplicationDeployment.IsNetworkDeployed && args.Length == 0)
+            {
+                Process.Start("SuperUpdate.exe");
+                Application.Exit();
+                return;
+            }
 #endif
             log4net.Config.XmlConfigurator.Configure();
             Application.EnableVisualStyles();
@@ -52,18 +55,23 @@ namespace WmsApp
     // DefalutWMSClient.DefaultServiceAddress = " http://api.cooperate.bjkalf.net/services";
 #endif
 
+          
             LoginForm loginForm = new LoginForm();
             loginForm.StartPosition = FormStartPosition.CenterParent;
             loginForm.FormBorderStyle = FormBorderStyle.FixedDialog;
             loginForm.ShowDialog();
             if (loginForm.DialogResult != DialogResult.OK)
             {
+
+
                 Application.Exit();
                 return;
             }
             Application.Run(MainForm.Instance);
 
         }
+
+   
 
         /// <summary>
         /// 处理应用程序域内的未处理异常（非UI线程异常）

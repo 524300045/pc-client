@@ -252,6 +252,11 @@ namespace WmsApp
 
                     PreprocessInfoRequest request = new PreprocessInfoRequest();
                     request.wareHouseId = UserInfo.WareHouseCode;
+                    request.warehouseCode = UserInfo.WareHouseCode;
+                    request.warehouseName = UserInfo.WareHouseName;
+                    request.customerCode = UserInfo.CustomerCode;
+                    request.customerName = UserInfo.CustomerName;
+
                     request.request = list;
                     PreprocessInfoAddResponse response = client.Execute(request);
                     if (!response.IsError)

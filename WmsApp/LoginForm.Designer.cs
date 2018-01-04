@@ -36,6 +36,8 @@
             this.btnOk = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.tbVersion = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cbWare = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -58,7 +60,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(58, 111);
+            this.label2.Location = new System.Drawing.Point(58, 106);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 12);
             this.label2.TabIndex = 0;
@@ -75,7 +77,7 @@
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(77, 169);
+            this.btnOk.Location = new System.Drawing.Point(81, 238);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 3;
@@ -85,7 +87,7 @@
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(198, 169);
+            this.btnExit.Location = new System.Drawing.Point(212, 238);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 23);
             this.btnExit.TabIndex = 4;
@@ -102,16 +104,36 @@
             this.tbVersion.Size = new System.Drawing.Size(0, 12);
             this.tbVersion.TabIndex = 0;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(58, 149);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(47, 12);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "仓  库:";
+            // 
+            // cbWare
+            // 
+            this.cbWare.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbWare.FormattingEnabled = true;
+            this.cbWare.Location = new System.Drawing.Point(130, 144);
+            this.cbWare.Name = "cbWare";
+            this.cbWare.Size = new System.Drawing.Size(167, 20);
+            this.cbWare.TabIndex = 5;
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(370, 236);
+            this.ClientSize = new System.Drawing.Size(401, 299);
+            this.Controls.Add(this.cbWare);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.tbPwd);
             this.Controls.Add(this.tbUserName);
             this.Controls.Add(this.tbVersion);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -134,5 +156,7 @@
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Label tbVersion;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cbWare;
     }
 }

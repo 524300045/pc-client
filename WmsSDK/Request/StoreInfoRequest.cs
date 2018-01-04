@@ -14,5 +14,7 @@ namespace WmsSDK.Request
         }
 
         public string partnerCode { get; set; }
+
+        public string customerCode { get; set; }
     }
 }

@@ -191,7 +191,7 @@ namespace WmsApp
 
           this.Text = this.Text + "--" + UserInfo.PartnerName + "(" + UserInfo.PartnerCode + ")" + "---" + version;
             //lbUserName.Text =UserInfo.RealName+"("+ UserInfo.UserName+")";
-
+          this.Text += "----货主:"+UserInfo.CustomerName+"----仓库:"+UserInfo.WareHouseName;
             #if(DEBUG)
 
           this.Text = this.Text + "测试版";

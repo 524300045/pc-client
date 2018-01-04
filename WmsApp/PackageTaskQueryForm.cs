@@ -64,6 +64,9 @@ namespace WmsApp
             }
             request.packTaskCode = tbTaskCode.Text.Trim();
 
+            request.customerCode = UserInfo.CustomerCode;
+            request.warehouseCode = UserInfo.WareHouseCode;
+
             PackageTaskDetailResponse response = client.Execute(request);
             if (!response.IsError)
             {
@@ -190,6 +193,8 @@ namespace WmsApp
                                 request.skuCode = "%" + tbName.Text.Trim() + "%";
                             }
                             request.packTaskCode = tbTaskCode.Text.Trim();
+                            request.customerCode = UserInfo.CustomerCode;
+                            request.warehouseCode = UserInfo.WareHouseCode;
 
                             PackageTaskDetailResponse response = client.Execute(request);
                             if (!response.IsError)

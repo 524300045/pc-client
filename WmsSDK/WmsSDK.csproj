@@ -82,6 +82,7 @@
     <Compile Include="Model\StoreInfo.cs" />
     <Compile Include="Model\SubMenu.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="Model\WarehouseInfo.cs" />
     <Compile Include="NetworkMonitor.cs" />
     <Compile Include="PageUtil.cs" />
     <Compile Include="PaginatorDTO.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="Request\PreprocessInfoCountRequest.cs" />
     <Compile Include="Request\PreprocessInfoRequest.cs" />
     <Compile Include="Request\StoreInfoRequest.cs" />
+    <Compile Include="Request\WarehouseInfoRequest.cs" />
     <Compile Include="Response\BoxInfoAddResponse.cs" />
     <Compile Include="Response\BoxInfoResponse.cs" />
     <Compile Include="Response\GoodsResponse.cs" />
@@ -112,6 +114,7 @@
     <Compile Include="Response\PartnerPackageTaskResponse.cs" />
     <Compile Include="Response\PreprocessInfoResponse.cs" />
     <Compile Include="Response\StoreInfoResponse.cs" />
+    <Compile Include="Response\WarehouseInfoResponse.cs" />
     <Compile Include="WMSResponse.cs" />
   </ItemGroup>
   <ItemGroup>
