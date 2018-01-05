@@ -41,6 +41,7 @@ namespace WmsApp
             StoreInfoRequest request = new StoreInfoRequest();
             request.partnerCode = UserInfo.PartnerCode;
             request.customerCode = UserInfo.CustomerCode;
+            request.warehouseCode = UserInfo.WareHouseCode;
 
            StoreInfoResponse response=client.Execute(request);
            if (!response.IsError)
