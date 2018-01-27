@@ -197,6 +197,10 @@ namespace WmsApp
           this.Text = this.Text + "测试版";
            #endif
 
+                  #if(!DEBUG)
+
+          
+
           List<SubMenu> subMenu = null;
             var result = UserInfo.menuDtos.Where(p => p.menuCode == "RE00052");
             if (result != null && result.FirstOrDefault() != null)
@@ -232,7 +236,8 @@ namespace WmsApp
 
                 }
             }
-           
+          #endif
+
         }
 
 
@@ -249,6 +254,33 @@ namespace WmsApp
             if (fx == null)
             {
                 AddToFrame(new PartnerPackageTaskQueryForm());
+            }
+            else
+            {
+                fx.Activate();
+            }
+        }
+
+        private void tsbGoodsPrint_Click(object sender, EventArgs e)
+        {
+            DockContent fx = FindCurrentForm("GoodsBarCodePrintForm");
+            if (fx == null)
+            {
+                AddToFrame(new GoodsBarCodePrintForm());
+            }
+            else
+            {
+                fx.Activate();
+            }
+        }
+
+        private void tsbParnterPrint_Click(object sender, EventArgs e)
+        {
+
+            DockContent fx = FindCurrentForm("PartnerGoodsBarCodePrintForm");
+            if (fx == null)
+            {
+                AddToFrame(new PartnerGoodsBarCodePrintForm());
             }
             else
             {

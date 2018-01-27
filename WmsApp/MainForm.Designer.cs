@@ -44,6 +44,8 @@
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbGoodsPrint = new System.Windows.Forms.ToolStripButton();
+            this.tsbParnterPrint = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbExit = new System.Windows.Forms.ToolStripButton();
@@ -69,12 +71,14 @@
             this.toolStripSeparator6,
             this.toolStripButton5,
             this.toolStripSeparator7,
+            this.tsbGoodsPrint,
+            this.tsbParnterPrint,
             this.toolStripButton3,
             this.toolStripSeparator8,
             this.tsbExit});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1195, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(1293, 27);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -192,6 +196,27 @@
             this.toolStripSeparator7.Name = "toolStripSeparator7";
             this.toolStripSeparator7.Size = new System.Drawing.Size(6, 27);
             // 
+            // tsbGoodsPrint
+            // 
+            this.tsbGoodsPrint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbGoodsPrint.Image = ((System.Drawing.Image)(resources.GetObject("tsbGoodsPrint.Image")));
+            this.tsbGoodsPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbGoodsPrint.Name = "tsbGoodsPrint";
+            this.tsbGoodsPrint.Size = new System.Drawing.Size(133, 24);
+            this.tsbGoodsPrint.Tag = "RE00090";
+            this.tsbGoodsPrint.Text = "康安条码打印";
+            this.tsbGoodsPrint.Click += new System.EventHandler(this.tsbGoodsPrint_Click);
+            // 
+            // tsbParnterPrint
+            // 
+            this.tsbParnterPrint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbParnterPrint.Image = ((System.Drawing.Image)(resources.GetObject("tsbParnterPrint.Image")));
+            this.tsbParnterPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbParnterPrint.Name = "tsbParnterPrint";
+            this.tsbParnterPrint.Size = new System.Drawing.Size(153, 24);
+            this.tsbParnterPrint.Text = "供应商条码打印";
+            this.tsbParnterPrint.Click += new System.EventHandler(this.tsbParnterPrint_Click);
+            // 
             // toolStripButton3
             // 
             this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -228,14 +253,14 @@
             this.dockPanel1.Location = new System.Drawing.Point(0, 27);
             this.dockPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.dockPanel1.Name = "dockPanel1";
-            this.dockPanel1.Size = new System.Drawing.Size(1195, 492);
+            this.dockPanel1.Size = new System.Drawing.Size(1293, 492);
             this.dockPanel1.TabIndex = 18;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1195, 519);
+            this.ClientSize = new System.Drawing.Size(1293, 519);
             this.Controls.Add(this.dockPanel1);
             this.Controls.Add(this.toolStrip1);
             this.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -274,6 +299,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.ToolStripButton tsbGoodsPrint;
+        private System.Windows.Forms.ToolStripButton tsbParnterPrint;
     }
 }
 

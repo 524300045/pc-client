@@ -72,7 +72,9 @@
     <Compile Include="IWMSRequest.cs" />
     <Compile Include="Model\BoxInfoAdd.cs" />
     <Compile Include="Model\BoxInfo.cs" />
+    <Compile Include="Model\GoodsBarCode.cs" />
     <Compile Include="Model\Goods.cs" />
+    <Compile Include="Model\GoodsCategory.cs" />
     <Compile Include="Model\Menu.cs" />
     <Compile Include="Model\PackagePackTask.cs" />
     <Compile Include="Model\PackTask.cs" />
@@ -89,6 +91,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Request\BoxInfoAddRequest.cs" />
     <Compile Include="Request\BoxInfoRequest.cs" />
+    <Compile Include="Request\GoodsCategoryQueryRequest.cs" />
+    <Compile Include="Request\GoodsQueryRequest.cs" />
     <Compile Include="Request\GoodsRequest.cs" />
     <Compile Include="Request\LoginRequest.cs" />
     <Compile Include="Request\PackageDelRequest.cs" />
@@ -104,6 +108,8 @@
     <Compile Include="Request\WarehouseInfoRequest.cs" />
     <Compile Include="Response\BoxInfoAddResponse.cs" />
     <Compile Include="Response\BoxInfoResponse.cs" />
+    <Compile Include="Response\GoodsCategoryResponse.cs" />
+    <Compile Include="Response\GoodsBarCodeResponse.cs" />
     <Compile Include="Response\GoodsResponse.cs" />
     <Compile Include="Model\PackageDetailQuery.cs" />
     <Compile Include="Response\LoginResponse.cs" />
