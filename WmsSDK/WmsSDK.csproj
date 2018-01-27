@@ -92,6 +92,7 @@
     <Compile Include="Request\BoxInfoAddRequest.cs" />
     <Compile Include="Request\BoxInfoRequest.cs" />
     <Compile Include="Request\GoodsCategoryQueryRequest.cs" />
+    <Compile Include="Request\PartnerGoodsQueryRequest.cs" />
     <Compile Include="Request\GoodsQueryRequest.cs" />
     <Compile Include="Request\GoodsRequest.cs" />
     <Compile Include="Request\LoginRequest.cs" />
