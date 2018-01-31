@@ -214,6 +214,7 @@
             this.tsbParnterPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbParnterPrint.Name = "tsbParnterPrint";
             this.tsbParnterPrint.Size = new System.Drawing.Size(153, 24);
+            this.tsbParnterPrint.Tag = "RE00095";
             this.tsbParnterPrint.Text = "供应商条码打印";
             this.tsbParnterPrint.Click += new System.EventHandler(this.tsbParnterPrint_Click);
             // 
