@@ -88,17 +88,17 @@ namespace WmsApp
                    {
                        foreach (Goods item in goodsList)
                        {
-                           if (item.orderNum == "")
+                           if (item.orderNum ==0)
                            {
                                item.diffNum = 0;
                            }
                            else
                            {
-                               item.diffNum = int.Parse(item.orderNum) - (int)item.packageNum;
+                               item.diffNum = item.orderNum.Value- (int)item.packageNum;
                            }
                        }
                    }
-                   IPagedList<Goods> pageList = new PagedList<Goods>(goodsList.OrderBy(p => p.goodsName), recordCount, totalPage);
+                   IPagedList<Goods> pageList = new PagedList<Goods>(goodsList.OrderByDescending(p => p.orderNum), recordCount, totalPage);
                    sortList = new SortableBindingList<Goods>(pageList.ContentList);
                    
                  

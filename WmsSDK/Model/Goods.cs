@@ -115,7 +115,7 @@ namespace WmsSDK.Model
            public int? packageNum { get; set; }
 
           [JsonProperty("orderNum")]
-          public String orderNum { get; set; }
+          public int? orderNum { get; set; }
 
 
           public int diffNum { get; set; }
