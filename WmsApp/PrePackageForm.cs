@@ -261,12 +261,12 @@ namespace WmsApp
                         DataRow dr = dtExecl.NewRow();
                         dr[0] = dataGridView1.Rows[i].Cells["skuCode"].Value.ToString();
                         dr[1] = dataGridView1.Rows[i].Cells["goodsName"].Value.ToString();
-                        dr[2] = dataGridView1.Rows[i].Cells["goodsModel"].Value.ToString();
-                        dr[3] = dataGridView1.Rows[i].Cells["goodsUnit"].Value.ToString();
-                        dr[4] = dataGridView1.Rows[i].Cells["physicsUnit"].Value.ToString();
-                        dr[5] = dataGridView1.Rows[i].Cells["modelNum"].Value.ToString();
-                        dr[6] = dataGridView1.Rows[i].Cells["orderNum"].Value.ToString();
-                        dr[7] = dataGridView1.Rows[i].Cells["packageNum"].Value.ToString();
+                        dr[2] = dataGridView1.Rows[i].Cells["goodsModel"].Value==null?"":dataGridView1.Rows[i].Cells["goodsModel"].Value.ToString();
+                        dr[3] = dataGridView1.Rows[i].Cells["goodsUnit"].Value==null?"":dataGridView1.Rows[i].Cells["goodsUnit"].Value.ToString();
+                        dr[4] = dataGridView1.Rows[i].Cells["physicsUnit"].Value==null?"":dataGridView1.Rows[i].Cells["physicsUnit"].Value.ToString();
+                        dr[5] = dataGridView1.Rows[i].Cells["modelNum"].Value == null ? "" : dataGridView1.Rows[i].Cells["modelNum"].Value.ToString();
+                        dr[6] = dataGridView1.Rows[i].Cells["orderNum"].Value==null?"":dataGridView1.Rows[i].Cells["orderNum"].Value.ToString();
+                        dr[7] =dataGridView1.Rows[i].Cells["packageNum"].Value==null?"":dataGridView1.Rows[i].Cells["packageNum"].Value.ToString();
                         
                         dtExecl.Rows.Add(dr);
                     }
