@@ -254,22 +254,60 @@ namespace WmsApp
                     DataColumn dc10 = new DataColumn("包装数量");
                     dtExecl.Columns.Add(dc10);
 
-             
-                    for (int i = 0; i < dataGridView1.Rows.Count; i++)
-                    {
 
-                        DataRow dr = dtExecl.NewRow();
-                        dr[0] = dataGridView1.Rows[i].Cells["skuCode"].Value.ToString();
-                        dr[1] = dataGridView1.Rows[i].Cells["goodsName"].Value.ToString();
-                        dr[2] = dataGridView1.Rows[i].Cells["goodsModel"].Value==null?"":dataGridView1.Rows[i].Cells["goodsModel"].Value.ToString();
-                        dr[3] = dataGridView1.Rows[i].Cells["goodsUnit"].Value==null?"":dataGridView1.Rows[i].Cells["goodsUnit"].Value.ToString();
-                        dr[4] = dataGridView1.Rows[i].Cells["physicsUnit"].Value==null?"":dataGridView1.Rows[i].Cells["physicsUnit"].Value.ToString();
-                        dr[5] = dataGridView1.Rows[i].Cells["modelNum"].Value == null ? "" : dataGridView1.Rows[i].Cells["modelNum"].Value.ToString();
-                        dr[6] = dataGridView1.Rows[i].Cells["orderNum"].Value==null?"":dataGridView1.Rows[i].Cells["orderNum"].Value.ToString();
-                        dr[7] =dataGridView1.Rows[i].Cells["packageNum"].Value==null?"":dataGridView1.Rows[i].Cells["packageNum"].Value.ToString();
-                        
-                        dtExecl.Rows.Add(dr);
+
+                    GoodsRequest request = new GoodsRequest();
+                    request.PageIndex = 1;
+                    request.PageSize =500;
+                    if (!string.IsNullOrWhiteSpace(tbName.Text.Trim()))
+                    {
+                        request.goodsName = "%" + tbName.Text.Trim() + "%";
                     }
+                    request.partnerCode = UserInfo.PartnerCode;
+                    request.isPreprocess = 1;
+                    request.isFresh = 1;
+                    request.startTime = dtBegin.Value.ToString("yyyy-MM-dd 00:00:00");
+                    request.endTime = dtBegin.Value.ToString("yyyy-MM-dd 23:59:59");
+                    request.customerCode = UserInfo.CustomerCode;
+                    request.warehouseCode = UserInfo.WareHouseCode;
+                    GoodsResponse response = client.Execute(request);
+                    if (!response.IsError)
+                   {
+                       if (response.result!= null)
+                       {
+                           for (int i = 0; i < response.result.Count; i++)
+                           {
+
+                               DataRow dr = dtExecl.NewRow();
+                               dr[0] = response.result[i].skuCode.ToString();
+                               dr[1] = response.result[i].goodsName.ToString();
+                               dr[2] = response.result[i].goodsModel == null ? "" : response.result[i].goodsModel.ToString();
+                               dr[3] = response.result[i].goodsUnit == null ? "" : response.result[i].goodsUnit.ToString();
+                               dr[4] = response.result[i].physicsUnit == null ? "" : response.result[i].physicsUnit.ToString();
+                               dr[5] = response.result[i].modelNum == null ? "" : response.result[i].modelNum.ToString();
+                               dr[6] = response.result[i].orderNum == null ? "" : response.result[i].orderNum.ToString();
+                               dr[7] = response.result[i].packageNum == null ? "" : response.result[i].packageNum.ToString();
+
+                               dtExecl.Rows.Add(dr);
+                           }
+                       }
+                   }
+
+                    //for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                    //{
+
+                    //    DataRow dr = dtExecl.NewRow();
+                    //    dr[0] = dataGridView1.Rows[i].Cells["skuCode"].Value.ToString();
+                    //    dr[1] = dataGridView1.Rows[i].Cells["goodsName"].Value.ToString();
+                    //    dr[2] = dataGridView1.Rows[i].Cells["goodsModel"].Value==null?"":dataGridView1.Rows[i].Cells["goodsModel"].Value.ToString();
+                    //    dr[3] = dataGridView1.Rows[i].Cells["goodsUnit"].Value==null?"":dataGridView1.Rows[i].Cells["goodsUnit"].Value.ToString();
+                    //    dr[4] = dataGridView1.Rows[i].Cells["physicsUnit"].Value==null?"":dataGridView1.Rows[i].Cells["physicsUnit"].Value.ToString();
+                    //    dr[5] = dataGridView1.Rows[i].Cells["modelNum"].Value == null ? "" : dataGridView1.Rows[i].Cells["modelNum"].Value.ToString();
+                    //    dr[6] = dataGridView1.Rows[i].Cells["orderNum"].Value==null?"":dataGridView1.Rows[i].Cells["orderNum"].Value.ToString();
+                    //    dr[7] =dataGridView1.Rows[i].Cells["packageNum"].Value==null?"":dataGridView1.Rows[i].Cells["packageNum"].Value.ToString();
+                        
+                    //    dtExecl.Rows.Add(dr);
+                    //}
 
 
 

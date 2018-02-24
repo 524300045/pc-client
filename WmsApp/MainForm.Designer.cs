@@ -46,6 +46,7 @@
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbGoodsPrint = new System.Windows.Forms.ToolStripButton();
             this.tsbParnterPrint = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbExit = new System.Windows.Forms.ToolStripButton();
@@ -73,12 +74,13 @@
             this.toolStripSeparator7,
             this.tsbGoodsPrint,
             this.tsbParnterPrint,
+            this.toolStripButton6,
             this.toolStripButton3,
             this.toolStripSeparator8,
             this.tsbExit});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1293, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(1370, 27);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -218,6 +220,16 @@
             this.tsbParnterPrint.Text = "供应商条码打印";
             this.tsbParnterPrint.Click += new System.EventHandler(this.tsbParnterPrint_Click);
             // 
+            // toolStripButton6
+            // 
+            this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
+            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton6.Name = "toolStripButton6";
+            this.toolStripButton6.Size = new System.Drawing.Size(93, 24);
+            this.toolStripButton6.Text = "容器打印";
+            this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click);
+            // 
             // toolStripButton3
             // 
             this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -254,14 +266,14 @@
             this.dockPanel1.Location = new System.Drawing.Point(0, 27);
             this.dockPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.dockPanel1.Name = "dockPanel1";
-            this.dockPanel1.Size = new System.Drawing.Size(1293, 492);
+            this.dockPanel1.Size = new System.Drawing.Size(1370, 492);
             this.dockPanel1.TabIndex = 18;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1293, 519);
+            this.ClientSize = new System.Drawing.Size(1370, 519);
             this.Controls.Add(this.dockPanel1);
             this.Controls.Add(this.toolStrip1);
             this.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -302,6 +314,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripButton tsbGoodsPrint;
         private System.Windows.Forms.ToolStripButton tsbParnterPrint;
+        private System.Windows.Forms.ToolStripButton toolStripButton6;
     }
 }
 

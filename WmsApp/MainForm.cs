@@ -288,6 +288,22 @@ namespace WmsApp
             }
         }
 
+        private void toolStripButton6_Click(object sender, EventArgs e)
+        {
+
+
+            DockContent fx = FindCurrentForm("ContainerPrintForm");
+            if (fx == null)
+            {
+                AddToFrame(new ContainerPrintForm());
+            }
+            else
+            {
+                fx.Activate();
+            }
+
+        }
+
     
     }
 }

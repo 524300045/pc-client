@@ -31,16 +31,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.chk = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.oper = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.categoryName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.twoCategoryName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.threeCategoryName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.skuCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.goodsName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.goodsModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.goodsGrade = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.barCodeStr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cbBarCode = new System.Windows.Forms.ComboBox();
             this.cbFresh = new System.Windows.Forms.ComboBox();
@@ -56,6 +46,16 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.chk = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.oper = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.categoryName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.twoCategoryName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.threeCategoryName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.skuCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.goodsName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.goodsModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.goodsGrade = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.barCodeStr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -94,79 +94,6 @@
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
-            // 
-            // chk
-            // 
-            this.chk.HeaderText = "选择";
-            this.chk.Name = "chk";
-            // 
-            // oper
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            this.oper.DefaultCellStyle = dataGridViewCellStyle1;
-            this.oper.HeaderText = "操作";
-            this.oper.Name = "oper";
-            this.oper.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.oper.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.oper.Text = "打印";
-            this.oper.ToolTipText = "打印";
-            this.oper.UseColumnTextForButtonValue = true;
-            // 
-            // categoryName
-            // 
-            this.categoryName.DataPropertyName = "categoryName";
-            this.categoryName.HeaderText = "一级分类";
-            this.categoryName.Name = "categoryName";
-            this.categoryName.ReadOnly = true;
-            // 
-            // twoCategoryName
-            // 
-            this.twoCategoryName.DataPropertyName = "twoCategoryName";
-            this.twoCategoryName.HeaderText = "二级分类";
-            this.twoCategoryName.Name = "twoCategoryName";
-            this.twoCategoryName.ReadOnly = true;
-            // 
-            // threeCategoryName
-            // 
-            this.threeCategoryName.DataPropertyName = "threeCategoryName";
-            this.threeCategoryName.HeaderText = "三级分类";
-            this.threeCategoryName.Name = "threeCategoryName";
-            this.threeCategoryName.ReadOnly = true;
-            // 
-            // skuCode
-            // 
-            this.skuCode.DataPropertyName = "skuCode";
-            this.skuCode.HeaderText = "商品编码";
-            this.skuCode.Name = "skuCode";
-            this.skuCode.ReadOnly = true;
-            // 
-            // goodsName
-            // 
-            this.goodsName.DataPropertyName = "goodsName";
-            this.goodsName.HeaderText = "商品名称";
-            this.goodsName.Name = "goodsName";
-            this.goodsName.ReadOnly = true;
-            // 
-            // goodsModel
-            // 
-            this.goodsModel.DataPropertyName = "goodsModel";
-            this.goodsModel.HeaderText = "规格";
-            this.goodsModel.Name = "goodsModel";
-            this.goodsModel.ReadOnly = true;
-            // 
-            // goodsGrade
-            // 
-            this.goodsGrade.DataPropertyName = "goodsGrade";
-            this.goodsGrade.HeaderText = "等级";
-            this.goodsGrade.Name = "goodsGrade";
-            this.goodsGrade.ReadOnly = true;
-            // 
-            // barCodeStr
-            // 
-            this.barCodeStr.DataPropertyName = "barCodeStr";
-            this.barCodeStr.HeaderText = "条码";
-            this.barCodeStr.Name = "barCodeStr";
             // 
             // groupBox1
             // 
@@ -329,6 +256,80 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "一级分类:";
             // 
+            // chk
+            // 
+            this.chk.HeaderText = "选择";
+            this.chk.Name = "chk";
+            // 
+            // oper
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.oper.DefaultCellStyle = dataGridViewCellStyle1;
+            this.oper.HeaderText = "操作";
+            this.oper.Name = "oper";
+            this.oper.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.oper.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.oper.Text = "打印";
+            this.oper.ToolTipText = "打印";
+            this.oper.UseColumnTextForButtonValue = true;
+            // 
+            // categoryName
+            // 
+            this.categoryName.DataPropertyName = "categoryName";
+            this.categoryName.HeaderText = "一级分类";
+            this.categoryName.Name = "categoryName";
+            this.categoryName.ReadOnly = true;
+            // 
+            // twoCategoryName
+            // 
+            this.twoCategoryName.DataPropertyName = "twoCategoryName";
+            this.twoCategoryName.HeaderText = "二级分类";
+            this.twoCategoryName.Name = "twoCategoryName";
+            this.twoCategoryName.ReadOnly = true;
+            // 
+            // threeCategoryName
+            // 
+            this.threeCategoryName.DataPropertyName = "threeCategoryName";
+            this.threeCategoryName.HeaderText = "三级分类";
+            this.threeCategoryName.Name = "threeCategoryName";
+            this.threeCategoryName.ReadOnly = true;
+            // 
+            // skuCode
+            // 
+            this.skuCode.DataPropertyName = "skuCode";
+            this.skuCode.HeaderText = "商品编码";
+            this.skuCode.Name = "skuCode";
+            this.skuCode.ReadOnly = true;
+            // 
+            // goodsName
+            // 
+            this.goodsName.DataPropertyName = "goodsName";
+            this.goodsName.HeaderText = "商品名称";
+            this.goodsName.Name = "goodsName";
+            this.goodsName.ReadOnly = true;
+            // 
+            // goodsModel
+            // 
+            this.goodsModel.DataPropertyName = "goodsModel";
+            this.goodsModel.HeaderText = "规格";
+            this.goodsModel.Name = "goodsModel";
+            this.goodsModel.ReadOnly = true;
+            // 
+            // goodsGrade
+            // 
+            this.goodsGrade.DataPropertyName = "goodsGrade";
+            this.goodsGrade.HeaderText = "等级";
+            this.goodsGrade.Name = "goodsGrade";
+            this.goodsGrade.ReadOnly = true;
+            // 
+            // barCodeStr
+            // 
+            this.barCodeStr.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.barCodeStr.DataPropertyName = "barCodeStr";
+            this.barCodeStr.HeaderText = "条码";
+            this.barCodeStr.Name = "barCodeStr";
+            // 
             // PartnerGoodsBarCodePrintForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -364,6 +365,8 @@
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.ComboBox cbFresh;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox cbBarCode;
+        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DataGridViewCheckBoxColumn chk;
         private System.Windows.Forms.DataGridViewButtonColumn oper;
         private System.Windows.Forms.DataGridViewTextBoxColumn categoryName;
@@ -374,7 +377,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn goodsModel;
         private System.Windows.Forms.DataGridViewTextBoxColumn goodsGrade;
         private System.Windows.Forms.DataGridViewTextBoxColumn barCodeStr;
-        private System.Windows.Forms.ComboBox cbBarCode;
-        private System.Windows.Forms.Label label6;
     }
 }

@@ -352,8 +352,9 @@ namespace WmsApp
 
         public void GetPrintPicture(Bitmap image, PrintPageEventArgs g, PreprocessInfo preprocessInfo)
         {
-
-            if (goods.twoCategoryCode == "0103")
+            // if (goods.categoryCode == "10" || goods.categoryCode == "11" || goods.categoryCode == "12" || goods.categoryCode == "13" || goods.categoryCode == "17" || goods.categoryCode == "20")
+            //if (goods.twoCategoryCode == "0103")
+            if (goods.categoryCode == "10")
             {
                 Font fontCu = new Font("宋体", 12f, FontStyle.Bold);
                 int height = 15;

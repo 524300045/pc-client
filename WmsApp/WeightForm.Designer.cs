@@ -257,7 +257,7 @@
             this.lbStorePlanNumKe.AutoSize = true;
             this.lbStorePlanNumKe.Font = new System.Drawing.Font("宋体", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbStorePlanNumKe.ForeColor = System.Drawing.Color.Red;
-            this.lbStorePlanNumKe.Location = new System.Drawing.Point(259, 113);
+            this.lbStorePlanNumKe.Location = new System.Drawing.Point(123, 147);
             this.lbStorePlanNumKe.Name = "lbStorePlanNumKe";
             this.lbStorePlanNumKe.Size = new System.Drawing.Size(0, 23);
             this.lbStorePlanNumKe.TabIndex = 0;

@@ -61,6 +61,8 @@ namespace WmsApp
 
         public string wareHouseName;
 
+        public string topCategoryCode;
+
         public WeightForm()
         {
             InitializeComponent();
@@ -132,7 +134,7 @@ namespace WmsApp
                     curUnit = response.result.goodsUnit;
 
                     twoCategoryCode = response.result.twoCategoryCode;
-
+                    topCategoryCode = response.result.categoryCode;
                 }
                 else
                 {
@@ -263,8 +265,8 @@ namespace WmsApp
 
         public void GetPrintPicture(Bitmap image, PrintPageEventArgs g)
         {
-
-            if (twoCategoryCode == "0103")
+            //   if (topCategoryCode == "10" || topCategoryCode == "11" || topCategoryCode == "12" || topCategoryCode == "13" || topCategoryCode == "17" || topCategoryCode == "20")
+            if (topCategoryCode == "10")
             {
                 Font fontCu = new Font("宋体", 12f, FontStyle.Bold);
                 int height = 15;

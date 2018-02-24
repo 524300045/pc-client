@@ -90,6 +90,15 @@ namespace WmsSDK.Model
          [JsonProperty("twoCategoryCode")]
          public String twoCategoryCode { get; set; }
 
+         /** 一级分类编码 */
+         [JsonProperty("categoryCode")]
+         public String categoryCode { get; set; }
+         /** 一级分类名称 */
+
+          [JsonProperty("categoryName")]
+         public String categoryName { get; set; }
+
+
           public string StatusDes {
 
               get
