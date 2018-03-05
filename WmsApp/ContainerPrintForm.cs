@@ -27,14 +27,11 @@ namespace WmsApp
 
         private PaginatorDTO paginator;
 
-        private SortableBindingList<GoodsBarCode> sortList = null;
+        private SortableBindingList<WmsSDK.Model.Container> sortList = null;
 
-        List<GoodsBarCode> goodsList;
+        List<WmsSDK.Model.Container> list;
 
-        private string curGoodName = "";
-        private string curSkuCode = "";
-        private string curGoodsGrade = "";
-        private string curGoodsModel = "";
+        string curBarCode = "";
 
         public ContainerPrintForm()
         {
@@ -74,12 +71,12 @@ namespace WmsApp
             }
             if (m == 0)
             {
-                MessageBox.Show("请选择要打印条码的商品");
+                MessageBox.Show("请选择要打印的容器");
                 return;
             }
 
             int num = 0;
-            BarCodePrintNumForm form = new BarCodePrintNumForm();
+            ContainerPrintNumForm form = new ContainerPrintNumForm();
             if (form.ShowDialog() == DialogResult.OK)
             {
                 num = form.number;
@@ -92,14 +89,8 @@ namespace WmsApp
             {
                 if ((bool)dataGridView1.Rows[i].Cells[0].EditedFormattedValue == true)
                 {
-                    String skucode = this.dataGridView1.Rows[i].Cells["skuCode"].Value == null ? "" : this.dataGridView1.Rows[i].Cells["skuCode"].Value.ToString();
-                    String name = this.dataGridView1.Rows[i].Cells["goodsName"].Value == null ? "" : this.dataGridView1.Rows[i].Cells["goodsName"].Value.ToString();
-                    String goodsModel = this.dataGridView1.Rows[i].Cells["goodsModel"].Value == null ? "" : this.dataGridView1.Rows[i].Cells["goodsModel"].Value.ToString();
-                    String goodsGrade = this.dataGridView1.Rows[i].Cells["goodsGrade"].Value == null ? "" : this.dataGridView1.Rows[i].Cells["goodsGrade"].Value.ToString();
-                    curSkuCode = skucode;
-                    curGoodName = name;
-                    curGoodsGrade = goodsGrade;
-                    curGoodsModel = goodsModel;
+                    String barCode = this.dataGridView1.Rows[i].Cells["barCode"].Value == null ? "" : this.dataGridView1.Rows[i].Cells["barCode"].Value.ToString();
+                    curBarCode = barCode;
                     PrintDocument document = new PrintDocument();
                     document.DefaultPageSettings.PaperSize = new PaperSize("Custum", 270, 180);
 
@@ -135,18 +126,24 @@ namespace WmsApp
         
             string name = tbName.Text.Trim();
 
-            GoodsQueryRequest request = new GoodsQueryRequest();
+            ContainerQueryRequest request = new ContainerQueryRequest();
             request.PageIndex = paginator.PageNo;
             request.PageSize = paginator.PageSize;
-            request.goodsName = name;
-            request.categoryCode = codeOne;
-     
-            request.isFresh = null;
-           
-         
+            request.areaCode = cbOne.SelectedValue.ToString();
+            request.containerCode = name;
+            request.status = null;
+            if (cbStatus.SelectedIndex==1)
+            {
+                request.status = 1;
+            }
+
+            if (cbStatus.SelectedIndex ==2)
+            {
+                request.status = 2;
+            }
 
 
-            GoodsBarCodeResponse response = client.Execute(request);
+            ContainerResponse response = client.Execute(request);
             if (!response.IsError)
             {
                 if (response.result == null)
@@ -165,9 +162,21 @@ namespace WmsApp
                     {
                         totalPage = recordCount / paginator.PageSize + 1;
                     }
-                    goodsList = response.result;
-                    IPagedList<GoodsBarCode> pageList = new PagedList<GoodsBarCode>(goodsList.OrderBy(p => p.goodsName), recordCount, totalPage);
-                    sortList = new SortableBindingList<GoodsBarCode>(pageList.ContentList);
+                    list = response.result;
+                    foreach (WmsSDK.Model.Container item in list)
+                    {
+                        if (item.status==1)
+                        {
+                            item.StatusDes = "空闲";
+                        }
+
+                        if (item.status == 2)
+                        {
+                            item.StatusDes = "占用";
+                        }
+                    }
+                    IPagedList<WmsSDK.Model.Container> pageList = new PagedList<WmsSDK.Model.Container>(list, recordCount, totalPage);
+                    sortList = new SortableBindingList<WmsSDK.Model.Container>(pageList.ContentList);
                     this.dataGridView1.DataSource = sortList;
                     pageSplit1.Description = "共查询到" + pageList.RecordCount + "条记录";
                     pageSplit1.PageCount = pageList.PageCount;
@@ -185,35 +194,25 @@ namespace WmsApp
             {
                 this.dataGridView1.AutoGenerateColumns = false;
                 DatagridViewCheckBoxHeaderCell cbHeader = new DatagridViewCheckBoxHeaderCell();
-                //colCB.HeaderCell = cbHeader;
-
-                //dataGridView1.Columns.Add(colCB);
+            
                 cbHeader.Value = string.Empty;
 
                 cbHeader.OnCheckBoxClicked += new CheckBoxClickedHandler(cbHeader_OnCheckBoxClicked);
                 dataGridView1.Columns[0].HeaderCell = cbHeader;
 
                 paginator = new PaginatorDTO { PageNo = 1, PageSize = 30 };
-           
-            
-                GoodsCategoryQueryRequest request = new GoodsCategoryQueryRequest();
-                request.level = "1";
-                GoodsCategoryResponse response = client.Execute(request);
+
+
+                WarehouseAreaRequest request = new WarehouseAreaRequest();
+                request.warehouseCode = UserInfo.WareHouseCode;
+                WarehouseAreaResponse response = client.Execute(request);
                 if (!response.IsError)
                 {
-                    List<GoodsCategory> categoryList = null;
-                    if (response.result == null)
-                    {
-                        categoryList = new List<GoodsCategory>();
-                    }
-                    else
-                    {
-                        categoryList = response.result;
-                    }
-                    categoryList.Insert(0, new GoodsCategory() { categoryCode = "", categoryName = "全部" });
-                    cbOne.DataSource = categoryList;
-                    cbOne.DisplayMember = "categoryName";
-                    cbOne.ValueMember = "categoryCode";
+                    List<WarehouseArea> list = response.result;
+                    list.Insert(0, new WarehouseArea() { areaCode = "", areaName = "全部" });
+                    cbOne.DataSource = list;
+                    cbOne.DisplayMember = "areaName";
+                    cbOne.ValueMember = "areaCode";
                 }
 
                 
@@ -222,6 +221,8 @@ namespace WmsApp
             {
                 MessageBox.Show("加载异常" + ex.Message);
             }
+            cbOne.SelectedIndex = 0;
+            cbStatus.SelectedIndex = 0;
         }
 
         private void cbHeader_OnCheckBoxClicked(bool state)
@@ -248,54 +249,10 @@ namespace WmsApp
             BindDgv();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewColumn column = dataGridView1.Columns[e.ColumnIndex];
-                if (column is DataGridViewButtonColumn)
-                {
-                    if (column.Name == "oper")
-                    {
-                        String skucode = this.dataGridView1.CurrentRow.Cells["skuCode"].Value == null ? "" : this.dataGridView1.CurrentRow.Cells["skuCode"].Value.ToString();
-                        String name = this.dataGridView1.CurrentRow.Cells["goodsName"].Value == null ? "" : this.dataGridView1.CurrentRow.Cells["goodsName"].Value.ToString();
-                        String goodsModel = this.dataGridView1.CurrentRow.Cells["goodsModel"].Value == null ? "" : this.dataGridView1.CurrentRow.Cells["goodsModel"].Value.ToString();
-                        String goodsGrade = this.dataGridView1.CurrentRow.Cells["goodsGrade"].Value == null ? "" : this.dataGridView1.CurrentRow.Cells["goodsGrade"].Value.ToString();
-                        curSkuCode = skucode;
-                        curGoodName = name;
-                        curGoodsGrade = goodsGrade;
-                        curGoodsModel = goodsModel;
-
-                        PrintDocument document = new PrintDocument();
-                        document.DefaultPageSettings.PaperSize = new PaperSize("Custum", 270, 180);
-
-#if(!DEBUG)
-                                PrintDialog dialog = new PrintDialog();
-                                document.PrintPage += new PrintPageEventHandler(this.pd_PrintBoxPage);
-                                dialog.Document = document;
-#else
-                        PrintPreviewDialog dialog = new PrintPreviewDialog();
-                        document.PrintPage += new PrintPageEventHandler(this.pd_PrintBoxPage);
-                        dialog.Document = document;
-#endif
-
-                        try
-                        {
-                            document.Print();
-                        }
-                        catch (Exception exception)
-                        {
-                            MessageBox.Show("打印异常" + exception);
-                            document.PrintController.OnEndPrint(document, new PrintEventArgs());
-                        }
-                    }
-                }
-            }
-        }
-
+   
         private void pd_PrintBoxPage(object sender, PrintPageEventArgs e) //触发打印事件
         {
-            Bitmap bt = CreateQRCode(curSkuCode);
+            Bitmap bt = CreateQRCode(curBarCode);
             GetPrintPicture(bt, e);
         }
 
@@ -305,8 +262,8 @@ namespace WmsApp
             {
                 DisableECI = true,
                 CharacterSet = "UTF-8",
-                Width = 80,
-                Height = 80
+                Width = 160,
+                Height = 160
             };
             BarcodeWriter writer = new BarcodeWriter();
             writer.Format = BarcodeFormat.QR_CODE;
@@ -327,27 +284,16 @@ namespace WmsApp
             //int pointX = 10;
 
             //左上角二维码
-            Rectangle dest2Rect = new Rectangle(30, 5, image.Width, image.Height);
+            Rectangle dest2Rect = new Rectangle(60, 5, image.Width, image.Height);
             g.Graphics.DrawImage(image, dest2Rect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel);
 
 
             //商品编码
-            RectangleF layoutRectangleRight = new RectangleF(135, 20, 300f, 85f);
-            g.Graphics.DrawString("商品编码:" + curSkuCode, font, brush, layoutRectangleRight);
+            RectangleF layoutRectangleRight = new RectangleF(110, 145, 300f, 85f);
+            g.Graphics.DrawString(curBarCode, font, brush, layoutRectangleRight);
 
 
-            //商品名称
-            layoutRectangleRight = new RectangleF(50, 85, 160f, 85f);
-            g.Graphics.DrawString(curGoodName, new Font("宋体", 8f), brush, layoutRectangleRight);
-
-
-            //规格，等级
-            RectangleF layoutRectangle = new RectangleF(50, 125, 180f, 30f);
-            g.Graphics.DrawString(curGoodsModel + "," + curGoodsGrade, new Font("宋体", 8f), brush, layoutRectangle);
-
-            //右下角二维码
-            Rectangle rightCodeLayout = new Rectangle(200, 80, image.Width, image.Height);
-            g.Graphics.DrawImage(image, rightCodeLayout, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel);
+           
 
         }
 

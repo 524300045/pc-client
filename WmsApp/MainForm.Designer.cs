@@ -227,6 +227,7 @@
             this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton6.Name = "toolStripButton6";
             this.toolStripButton6.Size = new System.Drawing.Size(93, 24);
+            this.toolStripButton6.Tag = "RE00135";
             this.toolStripButton6.Text = "容器打印";
             this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click);
             // 

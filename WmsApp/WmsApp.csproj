@@ -64,6 +64,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContainerPrintNumForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContainerPrintNumForm.Designer.cs">
+      <DependentUpon>ContainerPrintNumForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="BarCodePrintNumForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -188,6 +194,9 @@
     <Compile Include="TabWindow.designer.cs">
       <DependentUpon>TabWindow.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ContainerPrintNumForm.resx">
+      <DependentUpon>ContainerPrintNumForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BarCodePrintNumForm.resx">
       <DependentUpon>BarCodePrintNumForm.cs</DependentUpon>
     </EmbeddedResource>
