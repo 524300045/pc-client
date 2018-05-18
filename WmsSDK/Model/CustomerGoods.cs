@@ -86,7 +86,9 @@ namespace WmsSDK.Model
     /** 更新人 */
        public String updateUser { get; set; }
     /** 是否有效 */
-       public int? yn { get; set; } 
-    
+       public int? yn { get; set; }
+
+
+       public Double expiryDate { get; set; }
     }
 }

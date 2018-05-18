@@ -37,22 +37,29 @@ namespace WmsApp
             this.dataGridView1.AutoGenerateColumns = false;
             dtBegin.Value = DateTime.Today.AddDays(2).AddDays(-1);
             paginator = new PaginatorDTO { PageNo = 1, PageSize = 100 };
-            //BindDgv();a
+         
             Task.Factory.StartNew(() => {
                 btnQuery_Click(null,null);
             });
         }
 
-        private void BindDgv()
+        private void BindDgv(string name)
         {
             GoodsRequest request = new GoodsRequest();
             request.PageIndex = paginator.PageNo;
             request.PageSize = paginator.PageSize;
             //request.skuCode= "%"+tbName.Text.Trim()+"%";
-            if (!string.IsNullOrWhiteSpace(tbName.Text.Trim()))
+            //if (!string.IsNullOrWhiteSpace(tbName.Text.Trim()))
+            //{
+            //    request.goodsName = "%" + tbName.Text.Trim() + "%";
+            //}
+
+            if (!string.IsNullOrWhiteSpace(name))
             {
-                request.goodsName = "%" + tbName.Text.Trim() + "%";
+                request.goodsName = "%" +name + "%";
             }
+
+
             request.partnerCode = UserInfo.PartnerCode;
             request.isPreprocess = 1;
             request.isFresh = 1;
@@ -172,6 +179,7 @@ namespace WmsApp
         private void btnQuery_Click(object sender, EventArgs e)
         {
 
+            string name = tbName.Text.Trim();
             Task.Factory.StartNew(() =>
             {
 
@@ -183,7 +191,7 @@ namespace WmsApp
                         btnQuery.Enabled = false;
                     }));
                     paginator.PageNo = 1;
-                    BindDgv();
+                    BindDgv(name);
                 }
                 catch (Exception ex)
                 {
@@ -207,7 +215,7 @@ namespace WmsApp
         private void pageSplit1_PageChanged(object sender, EventArgs e)
         {
             paginator.PageNo = pageSplit1.PageNo;
-            BindDgv();
+            BindDgv(tbName.Text.Trim());
         }
 
         private void tbName_KeyDown(object sender, KeyEventArgs e)

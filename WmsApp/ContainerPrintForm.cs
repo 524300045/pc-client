@@ -46,6 +46,7 @@ namespace WmsApp
         {
             try
             {
+                paginator = new PaginatorDTO { PageNo = 1, PageSize = 30 };
                 btnQuery.Enabled = false;
                 BindDgv();
             }

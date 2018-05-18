@@ -101,6 +101,7 @@ namespace WmsApp
             //获取可用的任务
             PackTaskCodeRequest request = new PackTaskCodeRequest();
             request.packTaskCode = taskCode;
+            request.customerCode = UserInfo.CustomerCode;
             PackTaskDetailResponse response = client.Execute(request);
             if (!response.IsError)
             {
@@ -335,7 +336,13 @@ namespace WmsApp
 
                 //保质期
                 layoutRectangleRight = new RectangleF(pointX + image.Width, 130, 300f, 85f);
-                g.Graphics.DrawString("保 质 期: 3天", new Font("宋体", 10f), brush, layoutRectangleRight);
+                double day = 0;
+                if (curPackTaskDetail!=null)
+                {
+                    day = curPackTaskDetail.expiryDate;
+                }
+                g.Graphics.DrawString("保 质 期: "+day+"天", new Font("宋体", 10f), brush, layoutRectangleRight);
+
             }
             else
             {

@@ -39,6 +39,8 @@ namespace WmsApp
         public string orderNum;
         public DateTime dt;
 
+
+
         public PreWeightForm(Goods _goods,DateTime _dt)
         {
             InitializeComponent();
@@ -46,6 +48,22 @@ namespace WmsApp
             client = new DefalutWMSClient();
             this.dt = _dt;
 
+        }
+
+        double expireDay = 0;
+        private void getCustomerInfo(string skuCode)
+        {
+            CustomerGoodsBySkuRequest request = new CustomerGoodsBySkuRequest();
+            request.customerCode = UserInfo.CustomerCode;
+            request.skuCode = skuCode;
+            CustomerGoodsBySkuResponse response = client.Execute(request);
+            if (!response.IsError)
+            {
+                if (response.result != null)
+                {
+                    expireDay = response.result.expiryDate;
+                }
+            }
         }
 
         private void btnEsc_Click(object sender, EventArgs e)
@@ -82,6 +100,7 @@ namespace WmsApp
             lbUpDown.Text = downWeight.ToString("f2") + goods.goodsUnit + "--" + upWeight.ToString("f2") + goods.goodsUnit;
             lbModelNum.Text = goods.modelNum + goods.goodsUnit + "/" + goods.physicsUnit;
             tbWeight.Focus();
+            getCustomerInfo(goods.skuCode);
         }
 
         private void GetCount()
@@ -432,7 +451,7 @@ namespace WmsApp
 
                 //保质期
                 layoutRectangleRight = new RectangleF(pointX + image.Width, 130, 300f, 85f);
-                g.Graphics.DrawString("保 质 期: 3天", new Font("宋体", 10f), brush, layoutRectangleRight);
+                g.Graphics.DrawString("保 质 期: " + expireDay + "天", new Font("宋体", 10f), brush, layoutRectangleRight);
             }
             else
             {

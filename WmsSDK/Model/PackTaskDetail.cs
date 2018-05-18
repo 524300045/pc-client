@@ -98,6 +98,8 @@ namespace WmsSDK.Model
           [JsonProperty("categoryName")]
          public String categoryName { get; set; }
 
+         [JsonProperty("expiryDate")]
+          public Double expiryDate { get; set; }
 
           public string StatusDes {
 
