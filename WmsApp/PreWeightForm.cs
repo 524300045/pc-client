@@ -403,7 +403,7 @@ namespace WmsApp
 
                 //生产厂家
                 layoutRectangleRight = new RectangleF(pointX, 70, 300f, 85f);
-                g.Graphics.DrawString("厂家:" + UserInfo.CompanyName, new Font("宋体", 8f), brush, layoutRectangleRight);
+                g.Graphics.DrawString("厂家:" + UserInfo.labelName, new Font("宋体", 8f), brush, layoutRectangleRight);
 
 
                 heightRight += 15;
@@ -431,7 +431,8 @@ namespace WmsApp
                 }
                 else
                 {
-                    g.Graphics.DrawString("1" + goods.physicsUnit, fontCu, brush, layoutRectangle);
+                   // g.Graphics.DrawString("1" + goods.physicsUnit+"/"+goods.modelNum+goods.goodsUnit, fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString(goods.goodsModel, fontCu, brush, layoutRectangle);
                 }
 
 
@@ -508,7 +509,9 @@ namespace WmsApp
                 }
                 else
                 {
-                    g.Graphics.DrawString("1" + goods.physicsUnit, fontCu, brush, layoutRectangle);
+                   // g.Graphics.DrawString("1" + goods.physicsUnit+"/"+goods.modelNum+goods.goodsUnit, fontCu, brush, layoutRectangle);
+
+                    g.Graphics.DrawString(goods.goodsModel, fontCu, brush, layoutRectangle);
                 }
 
 

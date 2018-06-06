@@ -30,6 +30,10 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbWorkShop = new System.Windows.Forms.ComboBox();
+            this.cbProcessProduct = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.btnExport = new System.Windows.Forms.Button();
             this.cbStatus = new System.Windows.Forms.ComboBox();
             this.tbName = new System.Windows.Forms.TextBox();
@@ -57,6 +61,8 @@
             this.finishNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StandNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.warehouseName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.processProductAttrDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productWorkshopAttrDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -64,6 +70,10 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbWorkShop);
+            this.groupBox1.Controls.Add(this.cbProcessProduct);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.btnExport);
             this.groupBox1.Controls.Add(this.cbStatus);
             this.groupBox1.Controls.Add(this.tbName);
@@ -76,14 +86,50 @@
             this.groupBox1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1162, 55);
+            this.groupBox1.Size = new System.Drawing.Size(1162, 82);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "查询条件";
             // 
+            // cbWorkShop
+            // 
+            this.cbWorkShop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbWorkShop.FormattingEnabled = true;
+            this.cbWorkShop.Location = new System.Drawing.Point(369, 52);
+            this.cbWorkShop.Name = "cbWorkShop";
+            this.cbWorkShop.Size = new System.Drawing.Size(141, 24);
+            this.cbWorkShop.TabIndex = 7;
+            // 
+            // cbProcessProduct
+            // 
+            this.cbProcessProduct.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbProcessProduct.FormattingEnabled = true;
+            this.cbProcessProduct.Location = new System.Drawing.Point(105, 48);
+            this.cbProcessProduct.Name = "cbProcessProduct";
+            this.cbProcessProduct.Size = new System.Drawing.Size(121, 24);
+            this.cbProcessProduct.TabIndex = 7;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(235, 51);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(80, 16);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "生产车间:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(23, 51);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(80, 16);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "加工工序:";
+            // 
             // btnExport
             // 
-            this.btnExport.Location = new System.Drawing.Point(794, 19);
+            this.btnExport.Location = new System.Drawing.Point(681, 51);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(75, 23);
             this.btnExport.TabIndex = 5;
@@ -125,7 +171,7 @@
             // 
             // btnQuery
             // 
-            this.btnQuery.Location = new System.Drawing.Point(690, 18);
+            this.btnQuery.Location = new System.Drawing.Point(577, 50);
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(75, 23);
             this.btnQuery.TabIndex = 1;
@@ -166,9 +212,9 @@
             this.groupBox2.Controls.Add(this.dataGridView1);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox2.Location = new System.Drawing.Point(0, 55);
+            this.groupBox2.Location = new System.Drawing.Point(0, 82);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1162, 412);
+            this.groupBox2.Size = new System.Drawing.Size(1162, 385);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "明细";
@@ -178,7 +224,7 @@
             this.pageSplit1.BackColor = System.Drawing.Color.LightGray;
             this.pageSplit1.Description = "";
             this.pageSplit1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pageSplit1.Location = new System.Drawing.Point(3, 361);
+            this.pageSplit1.Location = new System.Drawing.Point(3, 334);
             this.pageSplit1.Name = "pageSplit1";
             this.pageSplit1.PageCount = 1;
             this.pageSplit1.PageNo = 1;
@@ -211,11 +257,13 @@
             this.orderNum,
             this.finishNum,
             this.StandNum,
-            this.warehouseName});
+            this.warehouseName,
+            this.processProductAttrDesc,
+            this.productWorkshopAttrDesc});
             this.dataGridView1.Location = new System.Drawing.Point(3, 22);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(1134, 323);
+            this.dataGridView1.Size = new System.Drawing.Size(1134, 296);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
@@ -354,6 +402,22 @@
             this.warehouseName.Visible = false;
             this.warehouseName.Width = 97;
             // 
+            // processProductAttrDesc
+            // 
+            this.processProductAttrDesc.DataPropertyName = "processProductAttrDesc";
+            this.processProductAttrDesc.HeaderText = "加工工序";
+            this.processProductAttrDesc.Name = "processProductAttrDesc";
+            this.processProductAttrDesc.ReadOnly = true;
+            this.processProductAttrDesc.Width = 97;
+            // 
+            // productWorkshopAttrDesc
+            // 
+            this.productWorkshopAttrDesc.DataPropertyName = "productWorkshopAttrDesc";
+            this.productWorkshopAttrDesc.HeaderText = "生产车间";
+            this.productWorkshopAttrDesc.Name = "productWorkshopAttrDesc";
+            this.productWorkshopAttrDesc.ReadOnly = true;
+            this.productWorkshopAttrDesc.Width = 97;
+            // 
             // PackageTaskForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -385,6 +449,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private Wms.Controls.Pager.PageSplit pageSplit1;
+        private System.Windows.Forms.Button btnExport;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cbProcessProduct;
+        private System.Windows.Forms.ComboBox cbWorkShop;
         private System.Windows.Forms.DataGridViewButtonColumn Column12;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn status;
@@ -401,6 +470,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn finishNum;
         private System.Windows.Forms.DataGridViewTextBoxColumn StandNum;
         private System.Windows.Forms.DataGridViewTextBoxColumn warehouseName;
-        private System.Windows.Forms.Button btnExport;
+        private System.Windows.Forms.DataGridViewTextBoxColumn processProductAttrDesc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productWorkshopAttrDesc;
     }
 }

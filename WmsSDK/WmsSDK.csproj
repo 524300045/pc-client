@@ -74,6 +74,7 @@
     <Compile Include="Model\BoxInfo.cs" />
     <Compile Include="Model\Container.cs" />
     <Compile Include="Model\CustomerGoods.cs" />
+    <Compile Include="Model\Dict.cs" />
     <Compile Include="Model\GoodsBarCode.cs" />
     <Compile Include="Model\Goods.cs" />
     <Compile Include="Model\GoodsCategory.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Model\PackagePackTask.cs" />
     <Compile Include="Model\PackTask.cs" />
     <Compile Include="Model\PackTaskDetail.cs" />
+    <Compile Include="Model\Partner.cs" />
     <Compile Include="Model\PreprocessInfo.cs" />
     <Compile Include="Model\PreprocessInfoAdd.cs" />
     <Compile Include="Model\StoreInfo.cs" />
@@ -95,6 +97,7 @@
     <Compile Include="Request\BoxInfoAddRequest.cs" />
     <Compile Include="Request\BoxInfoRequest.cs" />
     <Compile Include="Request\CustomerGoodsBySkuRequest.cs" />
+    <Compile Include="Request\ProcessProductRequest.cs" />
     <Compile Include="Request\GoodsCategoryQueryRequest.cs" />
     <Compile Include="Request\ContainerQueryRequest.cs" />
     <Compile Include="Request\PartnerGoodsQueryRequest.cs" />
@@ -108,8 +111,10 @@
     <Compile Include="Request\PackTaskCodeRequest.cs" />
     <Compile Include="Request\PackTaskRequest.cs" />
     <Compile Include="Request\PartnerPackageTaskRequest.cs" />
+    <Compile Include="Request\PartnerRequest.cs" />
     <Compile Include="Request\PreprocessInfoCountRequest.cs" />
     <Compile Include="Request\PreprocessInfoRequest.cs" />
+    <Compile Include="Request\ProductWorkShopRequest.cs" />
     <Compile Include="Request\StoreInfoRequest.cs" />
     <Compile Include="Request\WarehouseAreaRequest.cs" />
     <Compile Include="Request\WarehouseInfoRequest.cs" />
@@ -117,6 +122,7 @@
     <Compile Include="Response\BoxInfoResponse.cs" />
     <Compile Include="Response\ContainerResponse.cs" />
     <Compile Include="Response\CustomerGoodsBySkuResponse.cs" />
+    <Compile Include="Response\ProcessProductResponse.cs" />
     <Compile Include="Response\GoodsCategoryResponse.cs" />
     <Compile Include="Response\GoodsBarCodeResponse.cs" />
     <Compile Include="Response\GoodsResponse.cs" />
@@ -127,7 +133,9 @@
     <Compile Include="Response\PackDetailResponse.cs" />
     <Compile Include="Response\PackTaskResponse.cs" />
     <Compile Include="Response\PartnerPackageTaskResponse.cs" />
+    <Compile Include="Response\PartnerResponse.cs" />
     <Compile Include="Response\PreprocessInfoResponse.cs" />
+    <Compile Include="Response\ProductWorkShopResponse.cs" />
     <Compile Include="Response\StoreInfoResponse.cs" />
     <Compile Include="Response\WarehouseAreaResponse.cs" />
     <Compile Include="Response\WarehouseInfoResponse.cs" />

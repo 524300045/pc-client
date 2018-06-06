@@ -113,6 +113,9 @@ namespace WmsSDK.Model
           [JsonProperty("warehouseName")]
          public String warehouseName { get; set; }
 
+          public String processProductAttrDesc { get; set; }
+
+          public String productWorkshopAttrDesc { get; set; }
 
         public string statusdes
         {

@@ -31,6 +31,9 @@ namespace WmsApp
 
        public static string CustomerName;
 
+
+       public static string labelName;
+
        public static List<Menu> menuDtos { get; set; }
     }
 }

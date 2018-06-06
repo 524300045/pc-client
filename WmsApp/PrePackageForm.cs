@@ -37,13 +37,55 @@ namespace WmsApp
             this.dataGridView1.AutoGenerateColumns = false;
             dtBegin.Value = DateTime.Today.AddDays(2).AddDays(-1);
             paginator = new PaginatorDTO { PageNo = 1, PageSize = 100 };
-         
+
+            BindProcess();
+            BindWorkShop();
+
+
             Task.Factory.StartNew(() => {
                 btnQuery_Click(null,null);
             });
         }
 
-        private void BindDgv(string name)
+        private void BindProcess()
+        {
+            ProcessProductRequest request = new ProcessProductRequest();
+            ProcessProductResponse response = client.Execute(request);
+            if (!response.IsError)
+            {
+                if (response.result != null)
+                {
+                    List<Dict> list = new List<Dict>();
+                    list = response.result;
+                    list.Insert(0, new Dict() { code = "0", name = "全部" });
+
+                    this.cbProcessProduct.DataSource = list;
+                    this.cbProcessProduct.ValueMember = "code";
+                    this.cbProcessProduct.DisplayMember = "name";
+                }
+            }
+        }
+
+        //绑定车间
+        private void BindWorkShop()
+        {
+            ProductWorkShopRequest request = new ProductWorkShopRequest();
+            ProductWorkShopResponse response = client.Execute(request);
+            if (!response.IsError)
+            {
+                if (response.result != null)
+                {
+                    List<Dict> list = new List<Dict>();
+                    list = response.result;
+                    list.Insert(0, new Dict() { code = "0", name = "全部" });
+
+                    this.cbWorkShop.DataSource = list;
+                    this.cbWorkShop.ValueMember = "code";
+                    this.cbWorkShop.DisplayMember = "name";
+                }
+            }
+        }
+        private void BindDgv(string name,int? productprocess,int? workshop)
         {
             GoodsRequest request = new GoodsRequest();
             request.PageIndex = paginator.PageNo;
@@ -68,6 +110,12 @@ namespace WmsApp
 
             request.customerCode = UserInfo.CustomerCode;
             request.warehouseCode = UserInfo.WareHouseCode;
+
+            request.processProductAttr = productprocess;
+            request.productWorkshopAttr = workshop;
+
+
+         
 
             GoodsResponse response = client.Execute(request);
            if (!response.IsError)
@@ -180,6 +228,19 @@ namespace WmsApp
         {
 
             string name = tbName.Text.Trim();
+
+            int? processProduct=null;
+            int? workShop = null;
+            if (cbProcessProduct.SelectedIndex != 0)
+            {
+                processProduct = int.Parse(cbProcessProduct.SelectedValue.ToString());
+            }
+
+            if (cbWorkShop.SelectedIndex != 0)
+            {
+                workShop = int.Parse(cbWorkShop.SelectedValue.ToString());
+            }
+
             Task.Factory.StartNew(() =>
             {
 
@@ -191,7 +252,7 @@ namespace WmsApp
                         btnQuery.Enabled = false;
                     }));
                     paginator.PageNo = 1;
-                    BindDgv(name);
+                    BindDgv(name, processProduct, workShop);
                 }
                 catch (Exception ex)
                 {
@@ -215,7 +276,19 @@ namespace WmsApp
         private void pageSplit1_PageChanged(object sender, EventArgs e)
         {
             paginator.PageNo = pageSplit1.PageNo;
-            BindDgv(tbName.Text.Trim());
+            int? processProduct=null;
+             int? workShop = null;
+            if (cbProcessProduct.SelectedIndex != 0)
+            {
+                processProduct = int.Parse(cbProcessProduct.SelectedValue.ToString());
+            }
+
+            if (cbWorkShop.SelectedIndex != 0)
+            {
+                workShop = int.Parse(cbWorkShop.SelectedValue.ToString());
+            }
+
+            BindDgv(tbName.Text.Trim(), processProduct, workShop);
         }
 
         private void tbName_KeyDown(object sender, KeyEventArgs e)
@@ -259,10 +332,16 @@ namespace WmsApp
                     dtExecl.Columns.Add(dc8);
                     DataColumn dc9 = new DataColumn("订单需求数量");
                     dtExecl.Columns.Add(dc9);
+
                     DataColumn dc10 = new DataColumn("包装数量");
                     dtExecl.Columns.Add(dc10);
 
 
+                    DataColumn dc11 = new DataColumn("加工工序");
+                    dtExecl.Columns.Add(dc11);
+
+                    DataColumn dc12 = new DataColumn("生产车间");
+                    dtExecl.Columns.Add(dc12);
 
                     GoodsRequest request = new GoodsRequest();
                     request.PageIndex = 1;
@@ -295,7 +374,8 @@ namespace WmsApp
                                dr[5] = response.result[i].modelNum == null ? "" : response.result[i].modelNum.ToString();
                                dr[6] = response.result[i].orderNum == null ? "" : response.result[i].orderNum.ToString();
                                dr[7] = response.result[i].packageNum == null ? "" : response.result[i].packageNum.ToString();
-
+                               dr[8] = response.result[i].processProductAttrDesc == null ? "" : response.result[i].processProductAttrDesc.ToString();
+                               dr[9] = response.result[i].productWorkshopAttrDesc == null ? "" : response.result[i].productWorkshopAttrDesc.ToString();
                                dtExecl.Rows.Add(dr);
                            }
                        }

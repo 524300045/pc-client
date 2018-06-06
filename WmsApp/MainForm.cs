@@ -10,7 +10,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
+using WmsSDK;
 using WmsSDK.Model;
+using WmsSDK.Request;
+using WmsSDK.Response;
 
 namespace WmsApp
 {
@@ -21,6 +24,8 @@ namespace WmsApp
             InitializeComponent();
         }
         private static MainForm instance;
+
+        private IWMSClient client = null;
         internal static MainForm Instance
         {
             get
@@ -237,7 +242,19 @@ namespace WmsApp
                 }
             }
           #endif
-
+          client = new DefalutWMSClient();
+          PartnerRequest request = new PartnerRequest();
+          request.partnerCode = UserInfo.PartnerCode;
+          request.customerCode = UserInfo.CustomerCode;
+          request.warehouseCode = UserInfo.WareHouseCode;
+          PartnerResponse response = client.Execute(request);
+          if (!response.IsError)
+          {
+              if (response.result != null)
+              {
+                  UserInfo.labelName = response.result.labelName;
+              }
+          }
         }
 
 

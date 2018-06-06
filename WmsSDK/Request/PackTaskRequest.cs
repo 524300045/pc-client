@@ -61,5 +61,12 @@ namespace WmsSDK.Request
 
            [JsonProperty("warehouseCode")]
           public string warehouseCode;
+
+
+           /*加工工序*/
+           public int? processProductAttr { get; set; }
+
+           /*生产车间*/
+           public int? productWorkshopAttr { get; set; }
     }
 }

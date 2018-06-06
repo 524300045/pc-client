@@ -121,6 +121,10 @@ namespace WmsSDK.Model
           public int diffNum { get; set; }
 
             [JsonProperty("twoCategoryCode")]
-          public String twoCategoryCode; 
+          public String twoCategoryCode;
+
+            public String processProductAttrDesc { get; set; }
+
+            public String productWorkshopAttrDesc { get; set; }
     }
 }

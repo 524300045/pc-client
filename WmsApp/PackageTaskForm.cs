@@ -37,6 +37,8 @@ namespace WmsApp
             try
             {
 
+                BindProcess();
+                BindWorkShop();
                 dtBegin.Value = DateTime.Today.AddDays(2).AddDays(-1);
                 //   dtEnd.Value = DateTime.Today.AddDays(1).AddSeconds(-1);
 
@@ -52,6 +54,46 @@ namespace WmsApp
             }
 
 
+        }
+
+        //绑定加工工序
+        private void BindProcess()
+        {
+            ProcessProductRequest request = new ProcessProductRequest();
+            ProcessProductResponse response = client.Execute(request);
+            if (!response.IsError)
+            {
+                if (response.result!= null)
+                {
+                    List<Dict> list = new List<Dict>();
+                    list = response.result;
+                    list.Insert(0, new Dict() { code = "0", name = "全部" });
+
+                    this.cbProcessProduct.DataSource = list;
+                    this.cbProcessProduct.ValueMember = "code";
+                    this.cbProcessProduct.DisplayMember = "name";
+                }
+            }
+        }
+
+        //绑定车间
+        private void BindWorkShop()
+        {
+            ProductWorkShopRequest request = new ProductWorkShopRequest();
+            ProductWorkShopResponse response = client.Execute(request);
+            if (!response.IsError)
+            {
+                if (response.result != null)
+                {
+                    List<Dict> list = new List<Dict>();
+                    list = response.result;
+                    list.Insert(0, new Dict() { code = "0", name = "全部" });
+
+                    this.cbWorkShop.DataSource = list;
+                    this.cbWorkShop.ValueMember = "code";
+                    this.cbWorkShop.DisplayMember = "name";
+                }
+            }
         }
 
         private void BindDgv()
@@ -91,6 +133,16 @@ namespace WmsApp
             if (cbStatus.SelectedIndex == 4)
             {
                 request.status = 20;
+            }
+
+            if (cbProcessProduct.SelectedIndex!=0)
+            {
+                request.processProductAttr = int.Parse(cbProcessProduct.SelectedValue.ToString());
+            }
+
+            if (cbWorkShop.SelectedIndex!=0)
+            {
+                request.productWorkshopAttr = int.Parse(cbWorkShop.SelectedValue.ToString());
             }
 
             PackTaskResponse response = client.Execute(request);
@@ -249,6 +301,14 @@ namespace WmsApp
                     DataColumn dc12 = new DataColumn("标准包数");
                     dtExecl.Columns.Add(dc12);
 
+
+                    DataColumn dc13 = new DataColumn("加工工序");
+                    dtExecl.Columns.Add(dc13);
+
+                    DataColumn dc14 = new DataColumn("生产车间");
+                    dtExecl.Columns.Add(dc14);
+
+
                     List<PackTask> ptList = new List<PackTask>();
                     if (totalPage > 0)
                     {
@@ -329,6 +389,9 @@ namespace WmsApp
                             dr[9] = item.orderNum;
                             dr[10] = item.finishNum;
                             dr[11] = item.StandNum;
+
+                            dr[12] = item.processProductAttrDesc;
+                            dr[13] = item.productWorkshopAttrDesc;
                             dtExecl.Rows.Add(dr);
                         }
                      
