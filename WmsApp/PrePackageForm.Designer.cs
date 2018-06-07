@@ -31,6 +31,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnInput = new System.Windows.Forms.Button();
+            this.btnOrder = new System.Windows.Forms.Button();
+            this.chk = new System.Windows.Forms.CheckBox();
             this.cbWorkShop = new System.Windows.Forms.ComboBox();
             this.cbProcessProduct = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -44,6 +47,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.pageSplit1 = new Wms.Controls.Pager.PageSplit();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.chk1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Column12 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.skuCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.goodsName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,6 +60,7 @@
             this.packageNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.processProductAttrDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productWorkshopAttrDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isStandardProcess = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -63,6 +68,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnInput);
+            this.groupBox1.Controls.Add(this.btnOrder);
+            this.groupBox1.Controls.Add(this.chk);
             this.groupBox1.Controls.Add(this.cbWorkShop);
             this.groupBox1.Controls.Add(this.cbProcessProduct);
             this.groupBox1.Controls.Add(this.label5);
@@ -81,6 +89,36 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "查询条件";
+            // 
+            // btnInput
+            // 
+            this.btnInput.Location = new System.Drawing.Point(899, 55);
+            this.btnInput.Name = "btnInput";
+            this.btnInput.Size = new System.Drawing.Size(158, 23);
+            this.btnInput.TabIndex = 14;
+            this.btnInput.Text = "批量打印(输入量)";
+            this.btnInput.UseVisualStyleBackColor = true;
+            this.btnInput.Click += new System.EventHandler(this.btnInput_Click);
+            // 
+            // btnOrder
+            // 
+            this.btnOrder.Location = new System.Drawing.Point(741, 56);
+            this.btnOrder.Name = "btnOrder";
+            this.btnOrder.Size = new System.Drawing.Size(150, 23);
+            this.btnOrder.TabIndex = 13;
+            this.btnOrder.Text = "批量打印(订单量)";
+            this.btnOrder.UseVisualStyleBackColor = true;
+            this.btnOrder.Click += new System.EventHandler(this.btnOrder_Click);
+            // 
+            // chk
+            // 
+            this.chk.AutoSize = true;
+            this.chk.Location = new System.Drawing.Point(616, 58);
+            this.chk.Name = "chk";
+            this.chk.Size = new System.Drawing.Size(107, 20);
+            this.chk.TabIndex = 12;
+            this.chk.Text = "标准化加工";
+            this.chk.UseVisualStyleBackColor = true;
             // 
             // cbWorkShop
             // 
@@ -207,6 +245,7 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.chk1,
             this.Column12,
             this.skuCode,
             this.goodsName,
@@ -218,7 +257,8 @@
             this.orderNum,
             this.packageNum,
             this.processProductAttrDesc,
-            this.productWorkshopAttrDesc});
+            this.productWorkshopAttrDesc,
+            this.isStandardProcess});
             this.dataGridView1.Location = new System.Drawing.Point(3, 22);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
@@ -226,6 +266,14 @@
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
+            // 
+            // chk1
+            // 
+            this.chk1.HeaderText = "选择";
+            this.chk1.Name = "chk1";
+            this.chk1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.chk1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.chk1.Width = 65;
             // 
             // Column12
             // 
@@ -331,6 +379,14 @@
             this.productWorkshopAttrDesc.ReadOnly = true;
             this.productWorkshopAttrDesc.Width = 97;
             // 
+            // isStandardProcess
+            // 
+            this.isStandardProcess.DataPropertyName = "isStandardProcess";
+            this.isStandardProcess.HeaderText = "isStandardProcess";
+            this.isStandardProcess.Name = "isStandardProcess";
+            this.isStandardProcess.Visible = false;
+            this.isStandardProcess.Width = 169;
+            // 
             // PrePackageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -365,6 +421,10 @@
         private System.Windows.Forms.ComboBox cbProcessProduct;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnInput;
+        private System.Windows.Forms.Button btnOrder;
+        private System.Windows.Forms.CheckBox chk;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn chk1;
         private System.Windows.Forms.DataGridViewButtonColumn Column12;
         private System.Windows.Forms.DataGridViewTextBoxColumn skuCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn goodsName;
@@ -377,5 +437,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn packageNum;
         private System.Windows.Forms.DataGridViewTextBoxColumn processProductAttrDesc;
         private System.Windows.Forms.DataGridViewTextBoxColumn productWorkshopAttrDesc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn isStandardProcess;
     }
 }

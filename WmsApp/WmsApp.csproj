@@ -94,6 +94,12 @@
     <Compile Include="ContainerPrintForm.Designer.cs">
       <DependentUpon>ContainerPrintForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="InputNumForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InputNumForm.Designer.cs">
+      <DependentUpon>InputNumForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="PartnerGoodsBarCodePrintForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -208,6 +214,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ContainerPrintForm.resx">
       <DependentUpon>ContainerPrintForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InputNumForm.resx">
+      <DependentUpon>InputNumForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PartnerGoodsBarCodePrintForm.resx">
       <DependentUpon>PartnerGoodsBarCodePrintForm.cs</DependentUpon>

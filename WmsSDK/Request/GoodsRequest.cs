@@ -66,5 +66,8 @@ namespace WmsSDK.Request
 
           /*生产车间*/
           public int? productWorkshopAttr { get; set; }
+
+        //是否标准化加工
+          public int? isStandardProcess { get; set; }
     }
 }

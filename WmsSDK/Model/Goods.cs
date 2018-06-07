@@ -126,5 +126,8 @@ namespace WmsSDK.Model
             public String processProductAttrDesc { get; set; }
 
             public String productWorkshopAttrDesc { get; set; }
+
+           [JsonProperty("isStandardProcess")]
+            public int? isStandardProcess { get; set; }
     }
 }

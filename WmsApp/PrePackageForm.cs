@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +16,9 @@ using WmsSDK;
 using WmsSDK.Model;
 using WmsSDK.Request;
 using WmsSDK.Response;
+using ZXing;
+using ZXing.Common;
+using ZXing.QrCode;
 
 namespace WmsApp
 {
@@ -26,6 +31,10 @@ namespace WmsApp
 
         List<Goods> goodsList;
         private IWMSClient client = null;
+
+          private PreprocessInfo curPreprocessInfo;
+          Goods goods;
+
         public PrePackageForm()
         {
             InitializeComponent();
@@ -35,6 +44,14 @@ namespace WmsApp
         private void PackageTaskForm_Load(object sender, EventArgs e)
         {
             this.dataGridView1.AutoGenerateColumns = false;
+
+            DatagridViewCheckBoxHeaderCell cbHeader = new DatagridViewCheckBoxHeaderCell();
+            cbHeader.Value = string.Empty;
+
+            cbHeader.OnCheckBoxClicked += new CheckBoxClickedHandler(cbHeader_OnCheckBoxClicked);
+            dataGridView1.Columns[0].HeaderCell = cbHeader;
+
+
             dtBegin.Value = DateTime.Today.AddDays(2).AddDays(-1);
             paginator = new PaginatorDTO { PageNo = 1, PageSize = 100 };
 
@@ -47,6 +64,18 @@ namespace WmsApp
             });
         }
 
+        private void cbHeader_OnCheckBoxClicked(bool state)
+        {
+            //这一句很重要结束编辑状态
+            dataGridView1.EndEdit();
+            if (dataGridView1.Rows.Count > 0)
+            {
+                for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                {
+                    dataGridView1.Rows[i].Cells[0].Value = state;
+                }
+            }
+        }
         private void BindProcess()
         {
             ProcessProductRequest request = new ProcessProductRequest();
@@ -85,7 +114,7 @@ namespace WmsApp
                 }
             }
         }
-        private void BindDgv(string name,int? productprocess,int? workshop)
+        private void BindDgv(string name,int? productprocess,int? workshop,int ? isStand)
         {
             GoodsRequest request = new GoodsRequest();
             request.PageIndex = paginator.PageNo;
@@ -114,6 +143,7 @@ namespace WmsApp
             request.processProductAttr = productprocess;
             request.productWorkshopAttr = workshop;
 
+            request.isStandardProcess = isStand;
 
          
 
@@ -241,6 +271,12 @@ namespace WmsApp
                 workShop = int.Parse(cbWorkShop.SelectedValue.ToString());
             }
 
+            int? isStand = null;
+            if (chk.Checked)
+            {
+                isStand = 1;
+            }
+
             Task.Factory.StartNew(() =>
             {
 
@@ -252,7 +288,7 @@ namespace WmsApp
                         btnQuery.Enabled = false;
                     }));
                     paginator.PageNo = 1;
-                    BindDgv(name, processProduct, workShop);
+                    BindDgv(name, processProduct, workShop, isStand);
                 }
                 catch (Exception ex)
                 {
@@ -288,7 +324,13 @@ namespace WmsApp
                 workShop = int.Parse(cbWorkShop.SelectedValue.ToString());
             }
 
-            BindDgv(tbName.Text.Trim(), processProduct, workShop);
+            int? isStand = null;
+            if (chk.Checked)
+            {
+                isStand = 1;
+            }
+
+            BindDgv(tbName.Text.Trim(), processProduct, workShop, isStand);
         }
 
         private void tbName_KeyDown(object sender, KeyEventArgs e)
@@ -412,6 +454,434 @@ namespace WmsApp
             finally
             {
 
+            }
+        }
+
+                private List<PreprocessInfo> preprocessInfoList;
+        private void btnOrder_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int m = 0;
+                for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                {
+                    if ((bool)dataGridView1.Rows[i].Cells[0].EditedFormattedValue == true)
+                    {
+                        m++;
+                    }
+                }
+                if (m == 0)
+                {
+                    MessageBox.Show("请选择要打印的商品");
+                    return;
+                }
+
+                for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                {
+                    if ((bool)dataGridView1.Rows[i].Cells[0].EditedFormattedValue == true)
+                    {
+                        if (this.dataGridView1.Rows[i].Cells["isStandardProcess"].Value == null)
+                        {
+                            continue;
+                        }
+                        if (this.dataGridView1.Rows[i].Cells["isStandardProcess"].Value.ToString() == "1")
+                        {
+                            int orderNum = 0;
+                            if (this.dataGridView1.Rows[i].Cells["orderNum"].Value != null)
+                            {
+                                orderNum = int.Parse(this.dataGridView1.Rows[i].Cells["orderNum"].Value.ToString());
+                            }
+                            int packageNum = 0;
+                            if (this.dataGridView1.Rows[i].Cells["packageNum"].Value != null)
+                            {
+                                packageNum = int.Parse(this.dataGridView1.Rows[i].Cells["packageNum"].Value.ToString());
+                            }
+
+                            if ((orderNum - packageNum) <= 0)
+                            {
+                                continue;
+                            }
+                             string skuCode = this.dataGridView1.Rows[i].Cells["skuCode"].Value.ToString();
+                             getCustomerInfo(skuCode);
+                            //打印
+                            //if (this.dataGridView1.Rows[i].Cells["weighed"].Value != null && int.Parse(this.dataGridView1.Rows[i].Cells["weighed"].Value.ToString()) == 1)
+                            //{
+                            int diff = orderNum - packageNum;
+                             goods = goodsList.Where(p => p.skuCode == skuCode).FirstOrDefault();
+                            List<PreprocessInfoAdd> list = new List<PreprocessInfoAdd>();
+                            for (int n = 0; n < diff; n++)
+                            {
+                                PreprocessInfoAdd add = new PreprocessInfoAdd();
+                                add.createUser = UserInfo.RealName;
+                                add.goodsName = goods.goodsName;
+                                add.goodsUnit = goods.goodsUnit;
+                                add.modelNum = goods.modelNum;
+                                add.operateUser = UserInfo.RealName;
+                                add.packWeight = goods.modelNum;
+                                add.partnerCode = UserInfo.PartnerCode;
+                                add.partnerName = UserInfo.PartnerName;
+                                add.physicsUnit = goods.physicsUnit;
+                                add.skuCode = goods.skuCode;
+                                add.status = 0;
+                                add.updateUser = UserInfo.RealName;
+                                list.Add(add);
+                            }
+                            //称重商品
+                            PreprocessInfoRequest request = new PreprocessInfoRequest();
+                            request.wareHouseId = UserInfo.WareHouseCode;
+                            request.warehouseCode = UserInfo.WareHouseCode;
+                            request.warehouseName = UserInfo.WareHouseName;
+                            request.customerCode = UserInfo.CustomerCode;
+                            request.customerName = UserInfo.CustomerName;
+                            request.request = list;
+                            PreprocessInfoAddResponse response = client.Execute(request);
+                            if (!response.IsError)
+                            {
+                                if (response.result != null)
+                                {
+                                    preprocessInfoList = response.result;
+                                    foreach (PreprocessInfo item in preprocessInfoList)
+                                    {
+                                        #region 打印
+                                        curPreprocessInfo = item;
+                                        PrintDocument document = new PrintDocument();
+                                        document.DefaultPageSettings.PaperSize = new PaperSize("Custum", 270, 180);
+
+#if(!DEBUG)
+                                PrintDialog dialog = new PrintDialog();
+                                document.PrintPage += new PrintPageEventHandler(this.pd_PrintPage);
+                                dialog.Document = document;
+#else
+                                        PrintPreviewDialog dialog = new PrintPreviewDialog();
+                                        document.PrintPage += new PrintPageEventHandler(this.pd_PrintPage);
+                                        dialog.Document = document;
+#endif
+                                        try
+                                        {
+                                            document.Print();
+                                        }
+                                        catch (Exception exception)
+                                        {
+                                            MessageBox.Show("打印异常" + exception);
+                                            document.PrintController.OnEndPrint(document, new PrintEventArgs());
+                                        }
+                                        #endregion
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("异常:"+ex.Message) ;
+            }
+        }
+
+        private void pd_PrintPage(object sender, PrintPageEventArgs e) //触发打印事件
+        {
+            Bitmap bt = CreateQRCode(curPreprocessInfo.preprocessCode);
+            GetPrintPicture(bt, e, curPreprocessInfo);
+        }
+
+
+        public static Bitmap CreateQRCode(string asset)
+        {
+            EncodingOptions options = new QrCodeEncodingOptions
+            {
+                DisableECI = true,
+                CharacterSet = "UTF-8",
+                Width = 80,
+                Height = 80
+            };
+            BarcodeWriter writer = new BarcodeWriter();
+            writer.Format = BarcodeFormat.QR_CODE;
+            writer.Options = options;
+            return writer.Write(asset);
+        }
+
+
+        double expireDay = 0;
+        private void getCustomerInfo(string skuCode)
+        {
+            CustomerGoodsBySkuRequest request = new CustomerGoodsBySkuRequest();
+            request.customerCode = UserInfo.CustomerCode;
+            request.skuCode = skuCode;
+            CustomerGoodsBySkuResponse response = client.Execute(request);
+            if (!response.IsError)
+            {
+                if (response.result != null)
+                {
+                    expireDay = response.result.expiryDate;
+                }
+            }
+        }
+
+
+        public void GetPrintPicture(Bitmap image, PrintPageEventArgs g, PreprocessInfo preprocessInfo)
+        {
+            // if (goods.categoryCode == "10" || goods.categoryCode == "11" || goods.categoryCode == "12" || goods.categoryCode == "13" || goods.categoryCode == "17" || goods.categoryCode == "20")
+            //if (goods.twoCategoryCode == "0103")
+            if (goods.categoryCode == "10")
+            {
+                Font fontCu = new Font("宋体", 12f, FontStyle.Bold);
+                int height = 15;
+                int heightRight = 15;
+
+                Font font = new Font("宋体", 10f);
+                Brush brush = new SolidBrush(Color.Black);
+                g.Graphics.SmoothingMode = SmoothingMode.HighQuality;
+                int interval = 5;
+                int pointX = 40;
+
+                RectangleF layoutRectangleRight = new RectangleF(135f, 5, 130f, 85f);
+                //g.Graphics.DrawString(preprocessInfo.preprocessCode, font, brush, layoutRectangleRight);
+
+                Rectangle destRect = new Rectangle(200, -15, image.Width, image.Height);
+                g.Graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel);
+                //heightRight =image.Width-20;
+
+                //layoutRectangleRight = new RectangleF(155, heightRight, 150f, 85f);
+                //g.Graphics.DrawString(UserInfo.CompanyName, font, brush, layoutRectangleRight);
+
+                heightRight += 40;
+
+                //流通号
+                layoutRectangleRight = new RectangleF(pointX, 55, 300f, 85f);
+                g.Graphics.DrawString("食品经营许可证号：JY11117051464030", new Font("宋体", 8f), brush, layoutRectangleRight);
+
+                //生产厂家
+                layoutRectangleRight = new RectangleF(pointX, 70, 300f, 85f);
+                g.Graphics.DrawString("厂家:" + UserInfo.labelName, new Font("宋体", 8f), brush, layoutRectangleRight);
+
+
+                heightRight += 15;
+                //layoutRectangleRight = new RectangleF(155, heightRight, 150f, 85f);
+                //g.Graphics.DrawString(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), font, brush, layoutRectangleRight);
+
+
+                //门店名称
+
+                RectangleF layoutRectangle = new RectangleF(pointX, height, 120f, 30f);
+
+
+
+                //商品名称
+                layoutRectangle = new RectangleF(pointX, 5, 180f, 30f);
+                g.Graphics.DrawString(preprocessInfo.goodsName, font, brush, layoutRectangle);
+
+                height += interval + 20;
+                //重量
+
+                layoutRectangle = new RectangleF(pointX, height - 15, 120f, 40f);
+                if (goods.weighed == 1)
+                {
+                    g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
+                }
+                else
+                {
+                    // g.Graphics.DrawString("1" + goods.physicsUnit+"/"+goods.modelNum+goods.goodsUnit, fontCu, brush, layoutRectangle);
+                   // g.Graphics.DrawString(goods.goodsModel, fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit, fontCu, brush, layoutRectangle);
+                   // g.Graphics.DrawString(int.Parse(goods.modelNum.ToString()) + goods.goodsUnit, fontCu, brush, layoutRectangle);
+                }
+
+
+                height += interval;
+
+                Rectangle dest2Rect = new Rectangle(pointX, 80, image.Width, image.Height);
+                g.Graphics.DrawImage(image, dest2Rect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel);
+
+                height = 70 + image.Height;
+
+                layoutRectangle = new RectangleF(pointX, height, 150f, 30f);
+                g.Graphics.DrawString(preprocessInfo.preprocessCode, font, brush, layoutRectangle);
+
+                //生产日期
+                layoutRectangleRight = new RectangleF(pointX + image.Width, 110, 300f, 85f);
+                g.Graphics.DrawString("生产日期:" + DateTime.Now.ToShortDateString().ToString(), new Font("宋体", 10f), brush, layoutRectangleRight);
+
+                //保质期
+                layoutRectangleRight = new RectangleF(pointX + image.Width, 130, 300f, 85f);
+                g.Graphics.DrawString("保 质 期: " + expireDay + "天", new Font("宋体", 10f), brush, layoutRectangleRight);
+            }
+            else
+            {
+
+
+                Font fontCu = new Font("宋体", 12f, FontStyle.Bold);
+                int height = 15;
+                int heightRight = 15;
+
+                Font font = new Font("宋体", 10f);
+                Brush brush = new SolidBrush(Color.Black);
+                g.Graphics.SmoothingMode = SmoothingMode.HighQuality;
+                int interval = 5;
+                int pointX = 40;
+
+                RectangleF layoutRectangleRight = new RectangleF(135f, 5, 130f, 85f);
+                //g.Graphics.DrawString(preprocessInfo.preprocessCode, font, brush, layoutRectangleRight);
+
+                Rectangle destRect = new Rectangle(200, -15, image.Width, image.Height);
+                g.Graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel);
+                //heightRight =image.Width-20;
+
+                //layoutRectangleRight = new RectangleF(155, heightRight, 150f, 85f);
+                //g.Graphics.DrawString(UserInfo.CompanyName, font, brush, layoutRectangleRight);
+
+                heightRight += 40;
+
+                layoutRectangleRight = new RectangleF(155, heightRight, 150f, 85f);
+                g.Graphics.DrawString(UserInfo.RealName, font, brush, layoutRectangleRight);
+
+
+                heightRight += 15;
+                //layoutRectangleRight = new RectangleF(155, heightRight, 150f, 85f);
+                //g.Graphics.DrawString(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), font, brush, layoutRectangleRight);
+
+
+                //门店名称
+
+                RectangleF layoutRectangle = new RectangleF(pointX, height, 120f, 30f);
+
+
+
+                //商品名称
+                layoutRectangle = new RectangleF(pointX, 5, 180f, 30f);
+                g.Graphics.DrawString(preprocessInfo.goodsName, font, brush, layoutRectangle);
+
+                height += interval + 20;
+                //重量
+
+                layoutRectangle = new RectangleF(pointX, height, 120f, 40f);
+                if (goods.weighed == 1)
+                {
+                    g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
+                }
+                else
+                {
+                    // g.Graphics.DrawString("1" + goods.physicsUnit+"/"+goods.modelNum+goods.goodsUnit, fontCu, brush, layoutRectangle);
+                   // g.Graphics.DrawString(goods.goodsModel, fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit, fontCu, brush, layoutRectangle);
+                }
+
+
+                height += interval;
+
+                Rectangle dest2Rect = new Rectangle(pointX, 80, image.Width, image.Height);
+                g.Graphics.DrawImage(image, dest2Rect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel);
+
+                height = 70 + image.Height;
+
+                layoutRectangle = new RectangleF(pointX, height, 150f, 30f);
+                g.Graphics.DrawString(preprocessInfo.preprocessCode, font, brush, layoutRectangle);
+            }
+        }
+
+
+        private void btnInput_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int m = 0;
+                for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                {
+                    if ((bool)dataGridView1.Rows[i].Cells[0].EditedFormattedValue == true)
+                    {
+                        m++;
+                    }
+                }
+                if (m == 0)
+                {
+                    MessageBox.Show("请选择要打印的商品");
+                    return;
+                }
+                InputNumForm form = new InputNumForm();
+                if (form.ShowDialog()!=DialogResult.OK)
+                {
+                    return;
+                }
+                for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                {
+                    if ((bool)dataGridView1.Rows[i].Cells[0].EditedFormattedValue == true)
+                    { 
+                           if (this.dataGridView1.Rows[i].Cells["isStandardProcess"].Value!= null&&this.dataGridView1.Rows[i].Cells["isStandardProcess"].Value.ToString() == "1")
+                           {
+                               string skuCode = this.dataGridView1.Rows[i].Cells["skuCode"].Value.ToString();
+                               getCustomerInfo(skuCode);
+                               goods = goodsList.Where(p => p.skuCode == skuCode).FirstOrDefault();
+                             
+                               List<PreprocessInfoAdd> list = new List<PreprocessInfoAdd>();
+                               for (int n = 0; n < form.num; n++)
+                               {
+                                   PreprocessInfoAdd add = new PreprocessInfoAdd();
+                                   add.createUser = UserInfo.RealName;
+                                   add.goodsName = goods.goodsName;
+                                   add.goodsUnit = goods.goodsUnit;
+                                   add.modelNum = goods.modelNum;
+                                   add.operateUser = UserInfo.RealName;
+                                   add.packWeight = goods.modelNum;
+                                   add.partnerCode = UserInfo.PartnerCode;
+                                   add.partnerName = UserInfo.PartnerName;
+                                   add.physicsUnit = goods.physicsUnit;
+                                   add.skuCode = goods.skuCode;
+                                   add.status = 0;
+                                   add.updateUser = UserInfo.RealName;
+                                   list.Add(add);
+                               }
+                               //称重商品
+                               PreprocessInfoRequest request = new PreprocessInfoRequest();
+                               request.wareHouseId = UserInfo.WareHouseCode;
+                               request.warehouseCode = UserInfo.WareHouseCode;
+                               request.warehouseName = UserInfo.WareHouseName;
+                               request.customerCode = UserInfo.CustomerCode;
+                               request.customerName = UserInfo.CustomerName;
+                               request.request = list;
+                               PreprocessInfoAddResponse response = client.Execute(request);
+                               if (!response.IsError)
+                               {
+                                   if (response.result != null)
+                                   {
+                                       preprocessInfoList = response.result;
+                                       foreach (PreprocessInfo item in preprocessInfoList)
+                                       {
+                                           #region 打印
+                                           curPreprocessInfo = item;
+                                           PrintDocument document = new PrintDocument();
+                                           document.DefaultPageSettings.PaperSize = new PaperSize("Custum", 270, 180);
+
+#if(!DEBUG)
+                                PrintDialog dialog = new PrintDialog();
+                                document.PrintPage += new PrintPageEventHandler(this.pd_PrintPage);
+                                dialog.Document = document;
+#else
+                                           PrintPreviewDialog dialog = new PrintPreviewDialog();
+                                           document.PrintPage += new PrintPageEventHandler(this.pd_PrintPage);
+                                           dialog.Document = document;
+#endif
+                                           try
+                                           {
+                                               document.Print();
+                                           }
+                                           catch (Exception exception)
+                                           {
+                                               MessageBox.Show("打印异常" + exception);
+                                               document.PrintController.OnEndPrint(document, new PrintEventArgs());
+                                           }
+                                           #endregion
+                                       }
+                                   }
+                               }
+
+                           }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("异常:" + ex.Message);
             }
         }
 

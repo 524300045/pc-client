@@ -431,8 +431,10 @@ namespace WmsApp
                 }
                 else
                 {
-                   // g.Graphics.DrawString("1" + goods.physicsUnit+"/"+goods.modelNum+goods.goodsUnit, fontCu, brush, layoutRectangle);
-                    g.Graphics.DrawString(goods.goodsModel, fontCu, brush, layoutRectangle);
+                //    g.Graphics.DrawString("1" + goods.physicsUnit+"/"+goods.modelNum+goods.goodsUnit, fontCu, brush, layoutRectangle);
+                   // g.Graphics.DrawString(goods.goodsModel, fontCu, brush, layoutRectangle);
+                   g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit, fontCu, brush, layoutRectangle);
+                    
                 }
 
 
@@ -509,9 +511,11 @@ namespace WmsApp
                 }
                 else
                 {
-                   // g.Graphics.DrawString("1" + goods.physicsUnit+"/"+goods.modelNum+goods.goodsUnit, fontCu, brush, layoutRectangle);
+                 //   g.Graphics.DrawString("1" + goods.physicsUnit+"/"+goods.modelNum+goods.goodsUnit, fontCu, brush, layoutRectangle);
+                  //  g.Graphics.DrawString(goods.goodsModel, fontCu, brush, layoutRectangle);
+                   // g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit, fontCu, brush, layoutRectangle);
 
-                    g.Graphics.DrawString(goods.goodsModel, fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit, fontCu, brush, layoutRectangle);
                 }
 
 
