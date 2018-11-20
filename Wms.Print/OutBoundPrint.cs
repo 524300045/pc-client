@@ -627,8 +627,8 @@ namespace Wms.Print
 
             //有效高度中当前页行数
             int mRowsInCurPage = 0;
-         //   mRowsInCurPage = (int)(validHeight / (float)(this.mBody1.RowHeight));
-            mRowsInCurPage = (int)(validHeight / (float)(42));
+            mRowsInCurPage = (int)(validHeight / (float)(this.mBody1.RowHeight));
+           // mRowsInCurPage = (int)(validHeight / (float)(42));
             //如果指定每页行数，则以其为主
             if (this.RowsPerPage > 0 && this.RowsPerPage < mRowsInCurPage)
             {

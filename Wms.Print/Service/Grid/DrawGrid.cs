@@ -466,17 +466,17 @@ namespace Wms.Print.Service.Grid
                 StringFormat sf = new StringFormat();			//字符格式
                 sf.LineAlignment = StringAlignment.Center;		//垂直居中
                 sf.FormatFlags = StringFormatFlags.LineLimit | StringFormatFlags.NoWrap;
-
+             //   sf.FormatFlags = StringFormatFlags.LineLimit;
                 for (int i = 0; i < lngRows; i++)
                 {
                     X1 = rec.X;
-                    Y1 = rec.Y + p_rowHeight*2 * i;					//****可用行数组
+                    Y1 = rec.Y + p_rowHeight * i;					//****可用行数组
 
                     for (int j = 0; j < lngCols; j++)
                     {
                         width = mArrColWidth[j];
 
-                        Rectangle recCell = new Rectangle(X1, Y1, width, p_rowHeight*2 + 4);  //实际上居中会稍微偏上，因为字体有预留边距
+                        Rectangle recCell = new Rectangle(X1, Y1, width, p_rowHeight + 4);  //实际上居中会稍微偏上，因为字体有预留边距
 
                         sf.Alignment = StringAlignment.Near;				//默认左对齐						
 
