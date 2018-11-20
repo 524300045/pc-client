@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wms.Controls", "Wms.Control
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperUpdate", "SuperUpdate\SuperUpdate.csproj", "{133089F1-195D-42AF-807F-CC05D2E7B920}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wms.Print", "Wms.Print\Wms.Print.csproj", "{216263B0-9DB4-465B-9D0C-1BB68B6FE51C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,12 @@ Global
 		{133089F1-195D-42AF-807F-CC05D2E7B920}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{133089F1-195D-42AF-807F-CC05D2E7B920}.Release|Any CPU.Build.0 = Release|Any CPU
 		{133089F1-195D-42AF-807F-CC05D2E7B920}.Release|x86.ActiveCfg = Release|Any CPU
+		{216263B0-9DB4-465B-9D0C-1BB68B6FE51C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{216263B0-9DB4-465B-9D0C-1BB68B6FE51C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{216263B0-9DB4-465B-9D0C-1BB68B6FE51C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{216263B0-9DB4-465B-9D0C-1BB68B6FE51C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{216263B0-9DB4-465B-9D0C-1BB68B6FE51C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{216263B0-9DB4-465B-9D0C-1BB68B6FE51C}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

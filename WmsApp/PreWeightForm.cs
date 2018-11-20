@@ -41,7 +41,7 @@ namespace WmsApp
 
 
 
-        public PreWeightForm(Goods _goods,DateTime _dt)
+        public PreWeightForm(Goods _goods, DateTime _dt)
         {
             InitializeComponent();
             this.goods = _goods;
@@ -106,7 +106,7 @@ namespace WmsApp
         private void GetCount()
         {
             PreprocessInfoCountRequest request = new PreprocessInfoCountRequest();
-         //   request.status = 0;
+            //   request.status = 0;
             request.skuCode = goods.skuCode;
             request.startTime = dt.AddDays(-1).ToString("yyyy-MM-dd 06:00:00");
             request.endTime = dt.ToString("yyyy-MM-dd 06:00:00");
@@ -180,6 +180,11 @@ namespace WmsApp
 
                         curWeight = Util.ConvertGToJin(weight);
 
+                        if (UserInfo.CustomerCode=="7001")
+                        {
+                            curWeight = weight / 1000;
+                        }
+
                         decimal downWeight = goods.modelNum - (goods.downLimit * goods.modelNum) / 100;
                         decimal upWeight = goods.modelNum + (goods.upLimit * goods.modelNum) / 100;
                         if (curWeight < downWeight)
@@ -216,7 +221,7 @@ namespace WmsApp
                             add.updateUser = UserInfo.RealName;
                             list.Add(add);
                         }
-                      
+
 
                         #endregion
                     }
@@ -269,29 +274,34 @@ namespace WmsApp
                         #endregion
                     }
 
-                    PreprocessInfoRequest request = new PreprocessInfoRequest();
-                    request.wareHouseId = UserInfo.WareHouseCode;
-                    request.warehouseCode = UserInfo.WareHouseCode;
-                    request.warehouseName = UserInfo.WareHouseName;
-                    request.customerCode = UserInfo.CustomerCode;
-                    request.customerName = UserInfo.CustomerName;
-
-                    request.request = list;
-                    PreprocessInfoAddResponse response = client.Execute(request);
-                    if (!response.IsError)
+                    if (UserInfo.CustomerCode != "7001")
                     {
 
-                        if (response.result != null)
+                        #region 正常客户
+
+
+
+                        PreprocessInfoRequest request = new PreprocessInfoRequest();
+                        request.wareHouseId = UserInfo.WareHouseCode;
+                        request.warehouseCode = UserInfo.WareHouseCode;
+                        request.warehouseName = UserInfo.WareHouseName;
+                        request.customerCode = UserInfo.CustomerCode;
+                        request.customerName = UserInfo.CustomerName;
+
+                        request.request = list;
+                        PreprocessInfoAddResponse response = client.Execute(request);
+                        if (!response.IsError)
                         {
 
-                            preprocessInfoList = response.result;
-                            foreach (PreprocessInfo item in preprocessInfoList)
+                            if (response.result != null)
                             {
-                                curPreprocessInfo = item;
-                                PrintDocument document = new PrintDocument();
-                                document.DefaultPageSettings.PaperSize = new PaperSize("Custum", 270, 180);
 
-
+                                preprocessInfoList = response.result;
+                                foreach (PreprocessInfo item in preprocessInfoList)
+                                {
+                                    curPreprocessInfo = item;
+                                    PrintDocument document = new PrintDocument();
+                                    document.DefaultPageSettings.PaperSize = new PaperSize("Custum", 270, 180);
 
 
 #if(!DEBUG)
@@ -299,28 +309,94 @@ namespace WmsApp
                                 document.PrintPage += new PrintPageEventHandler(this.pd_PrintPage);
                                 dialog.Document = document;
 #else
-                                PrintPreviewDialog dialog = new PrintPreviewDialog();
-                                document.PrintPage += new PrintPageEventHandler(this.pd_PrintPage);
-                                dialog.Document = document;
+                                    PrintPreviewDialog dialog = new PrintPreviewDialog();
+                                    document.PrintPage += new PrintPageEventHandler(this.pd_PrintPage);
+                                    dialog.Document = document;
 #endif
 
-                                try
-                                {
-                                    document.Print();
+                                    try
+                                    {
+                                        document.Print();
+                                    }
+                                    catch (Exception exception)
+                                    {
+                                        MessageBox.Show("打印异常" + exception);
+                                        document.PrintController.OnEndPrint(document, new PrintEventArgs());
+                                    }
                                 }
-                                catch (Exception exception)
+
+
+                            }
+                            GetCount();
+                        }
+
+                        #endregion
+
+                    }
+                    else
+                    {
+                        #region 西贝
+
+                        PreprocessXiBeiInfoRequest request = new PreprocessXiBeiInfoRequest();
+                        request.wareHouseId = UserInfo.WareHouseCode;
+                        request.warehouseCode = UserInfo.WareHouseCode;
+                        request.warehouseName = UserInfo.WareHouseName;
+                        request.customerCode = UserInfo.CustomerCode;
+                        request.customerName = UserInfo.CustomerName;
+
+                        request.request = list;
+                        PreprocessInfoAddResponse response = client.Execute(request);
+                        if (!response.IsError)
+                        {
+
+                            if (response.result != null)
+                            {
+
+                                preprocessInfoList = response.result;
+                                foreach (PreprocessInfo item in preprocessInfoList)
                                 {
-                                    MessageBox.Show("打印异常" + exception);
-                                    document.PrintController.OnEndPrint(document, new PrintEventArgs());
+                                    curPreprocessInfo = item;
+                                    PrintDocument document = new PrintDocument();
+                                    document.DefaultPageSettings.PaperSize = new PaperSize("Custum", 270, 180);
+
+
+#if(!DEBUG)
+                                PrintDialog dialog = new PrintDialog();
+                                document.PrintPage += new PrintPageEventHandler(this.pd_XiBeiPrintPage);
+                                dialog.Document = document;
+#else
+                                    PrintPreviewDialog dialog = new PrintPreviewDialog();
+                                    document.PrintPage += new PrintPageEventHandler(this.pd_XiBeiPrintPage);
+                                    dialog.Document = document;
+#endif
+
+                                    try
+                                    {
+                                        document.Print();
+                                    }
+                                    catch (Exception exception)
+                                    {
+                                        MessageBox.Show("打印异常" + exception);
+                                        document.PrintController.OnEndPrint(document, new PrintEventArgs());
+                                    }
                                 }
                             }
-
-
+                          
+                       
+                            GetCount();
                         }
-                        GetCount();
+                        else
+                        {
+                            MessageBox.Show("出现错误:" + goods.goodsName + response.Message);
+                        }
+
+                        #endregion
+
                     }
 
                     tbWeight.Text = "";
+
+
 
                 }
                 catch (Exception ex)
@@ -337,6 +413,84 @@ namespace WmsApp
 
             }
         }
+
+        private void pd_XiBeiPrintPage(object sender, PrintPageEventArgs e) //触发打印事件
+        {
+            Bitmap bt = CreateXiBeiQRCode(curPreprocessInfo.preprocessCode);
+            GetXiBeiPrintPicture(bt, e, curPreprocessInfo);
+        }
+
+        public static Bitmap CreateXiBeiQRCode(string asset)
+        {
+            EncodingOptions options = new QrCodeEncodingOptions
+            {
+                DisableECI = true,
+                CharacterSet = "UTF-8",
+                Width = 140,
+                Height = 140
+            };
+            BarcodeWriter writer = new BarcodeWriter();
+            writer.Format = BarcodeFormat.QR_CODE;
+            writer.Options = options;
+            return writer.Write(asset);
+        }
+
+        public void GetXiBeiPrintPicture(Bitmap image, PrintPageEventArgs g, PreprocessInfo preprocessInfo)
+        {
+
+            Font fontCu = new Font("宋体", 12f, FontStyle.Bold);
+            int height = 15;
+            int heightRight = 15;
+
+            Font font = new Font("宋体", 10f);
+            Brush brush = new SolidBrush(Color.Black);
+            g.Graphics.SmoothingMode = SmoothingMode.HighQuality;
+
+            int pointX = 5;
+
+            RectangleF layoutRectangleRight = new RectangleF(80f, 5, 130f, 85f);
+
+            Rectangle destRect = new Rectangle(145, -5, image.Width, image.Height);
+            g.Graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel);
+
+
+            heightRight += 40;
+
+
+            RectangleF layoutRectangle = new RectangleF(pointX, height, 120f, 30f);
+
+            //商品名称
+            layoutRectangle = new RectangleF(pointX, 15, 165f, 30f);
+            g.Graphics.DrawString("品名:" + preprocessInfo.goodsName, font, brush, layoutRectangle);
+
+            height += 40;
+            //重量
+
+            layoutRectangle = new RectangleF(pointX, height, 120f, 40f);
+            if (goods.weighed == 1)
+            {
+                g.Graphics.DrawString("净含量:"+preprocessInfo.packWeight+"Kg", font, brush, layoutRectangle);
+            }
+            else
+            {
+
+                g.Graphics.DrawString(goods.goodsModel, font, brush, layoutRectangle);
+            }
+         
+
+            height += 40;
+
+            
+            //生产日期
+            layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+            g.Graphics.DrawString("生产日期:" + DateTime.Now.ToShortDateString(), new Font("宋体", 10f), brush, layoutRectangleRight);
+
+
+            layoutRectangleRight = new RectangleF(pointX, height + 30, 300f, 85f);
+            g.Graphics.DrawString("北京康安利丰农业有限公司", new Font("宋体", 10f), brush, layoutRectangleRight);
+
+        }
+
 
         private void WeightForm_KeyDown(object sender, KeyEventArgs e)
         {
@@ -431,10 +585,10 @@ namespace WmsApp
                 }
                 else
                 {
-                //    g.Graphics.DrawString("1" + goods.physicsUnit+"/"+goods.modelNum+goods.goodsUnit, fontCu, brush, layoutRectangle);
-                   // g.Graphics.DrawString(goods.goodsModel, fontCu, brush, layoutRectangle);
-                   g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit, fontCu, brush, layoutRectangle);
-                    
+                    //    g.Graphics.DrawString("1" + goods.physicsUnit+"/"+goods.modelNum+goods.goodsUnit, fontCu, brush, layoutRectangle);
+                    // g.Graphics.DrawString(goods.goodsModel, fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit, fontCu, brush, layoutRectangle);
+
                 }
 
 
@@ -511,9 +665,9 @@ namespace WmsApp
                 }
                 else
                 {
-                 //   g.Graphics.DrawString("1" + goods.physicsUnit+"/"+goods.modelNum+goods.goodsUnit, fontCu, brush, layoutRectangle);
-                  //  g.Graphics.DrawString(goods.goodsModel, fontCu, brush, layoutRectangle);
-                   // g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit, fontCu, brush, layoutRectangle);
+                    //   g.Graphics.DrawString("1" + goods.physicsUnit+"/"+goods.modelNum+goods.goodsUnit, fontCu, brush, layoutRectangle);
+                    //  g.Graphics.DrawString(goods.goodsModel, fontCu, brush, layoutRectangle);
+                    // g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit, fontCu, brush, layoutRectangle);
 
                     g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit, fontCu, brush, layoutRectangle);
                 }
@@ -533,7 +687,7 @@ namespace WmsApp
 
         private void tbBiaoQianNum_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode==Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 tbWeight_KeyDown(sender, e);
             }

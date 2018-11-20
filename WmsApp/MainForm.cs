@@ -242,6 +242,20 @@ namespace WmsApp
                 }
             }
           #endif
+
+            //添加导航窗体
+
+          DockContent fx = FindCurrentForm("NavigationForm");
+          if (fx == null)
+          {
+              AddToFrame(new NavigationForm());
+          }
+          else
+          {
+              fx.Activate();
+          }
+
+
           client = new DefalutWMSClient();
           PartnerRequest request = new PartnerRequest();
           request.partnerCode = UserInfo.PartnerCode;
@@ -319,6 +333,19 @@ namespace WmsApp
                 fx.Activate();
             }
 
+        }
+
+        private void tsbSendPrint_Click(object sender, EventArgs e)
+        {
+            DockContent fx = FindCurrentForm("SendPrintForm");
+            if (fx == null)
+            {
+                AddToFrame(new SendPrintForm());
+            }
+            else
+            {
+                fx.Activate();
+            }
         }
 
     

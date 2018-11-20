@@ -79,12 +79,16 @@
     <Compile Include="Model\Goods.cs" />
     <Compile Include="Model\GoodsCategory.cs" />
     <Compile Include="Model\Menu.cs" />
+    <Compile Include="Model\OutBoundPrintModel.cs" />
+    <Compile Include="Model\OutBoundModel.cs" />
     <Compile Include="Model\PackagePackTask.cs" />
     <Compile Include="Model\PackTask.cs" />
     <Compile Include="Model\PackTaskDetail.cs" />
     <Compile Include="Model\Partner.cs" />
     <Compile Include="Model\PreprocessInfo.cs" />
     <Compile Include="Model\PreprocessInfoAdd.cs" />
+    <Compile Include="Model\ShipMentDetailVo.cs" />
+    <Compile Include="Model\ShipmentModel.cs" />
     <Compile Include="Model\StoreInfo.cs" />
     <Compile Include="Model\SubMenu.cs" />
     <Compile Include="Model\User.cs" />
@@ -97,6 +101,8 @@
     <Compile Include="Request\BoxInfoAddRequest.cs" />
     <Compile Include="Request\BoxInfoRequest.cs" />
     <Compile Include="Request\CustomerGoodsBySkuRequest.cs" />
+    <Compile Include="Request\OutBoundRequest.cs" />
+    <Compile Include="Request\PreprocessXiBeiInfoRequest.cs" />
     <Compile Include="Request\ProcessProductRequest.cs" />
     <Compile Include="Request\GoodsCategoryQueryRequest.cs" />
     <Compile Include="Request\ContainerQueryRequest.cs" />
@@ -122,6 +128,7 @@
     <Compile Include="Response\BoxInfoResponse.cs" />
     <Compile Include="Response\ContainerResponse.cs" />
     <Compile Include="Response\CustomerGoodsBySkuResponse.cs" />
+    <Compile Include="Response\OutBoundResponse.cs" />
     <Compile Include="Response\ProcessProductResponse.cs" />
     <Compile Include="Response\GoodsCategoryResponse.cs" />
     <Compile Include="Response\GoodsBarCodeResponse.cs" />

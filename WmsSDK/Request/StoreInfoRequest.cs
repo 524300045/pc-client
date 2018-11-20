@@ -19,4 +19,20 @@ namespace WmsSDK.Request
 
         public string warehouseCode { get; set; }
     }
+
+    public class StoreInfoAllRequest : IWMSRequest<StoreInfoResponse>
+    {
+        public string GetAPIPath()
+        {
+            return "/storeInfo/getAllStoreInfo";
+        }
+
+        public string partnerCode { get; set; }
+
+        public string customerCode { get; set; }
+
+        public string warehouseCode { get; set; }
+    }
+
+
 }

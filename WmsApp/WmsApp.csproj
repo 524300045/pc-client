@@ -100,6 +100,13 @@
     <Compile Include="InputNumForm.Designer.cs">
       <DependentUpon>InputNumForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="NavigationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NavigationForm.Designer.cs">
+      <DependentUpon>NavigationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OutBoundHelper.cs" />
     <Compile Include="PartnerGoodsBarCodePrintForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -166,6 +173,12 @@
     <Compile Include="PrintBoxForm.Designer.cs">
       <DependentUpon>PrintBoxForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SendPrintForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SendPrintForm.Designer.cs">
+      <DependentUpon>SendPrintForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserInfo.cs" />
     <Compile Include="PreWeightForm.cs">
       <SubType>Form</SubType>
@@ -218,6 +231,9 @@
     <EmbeddedResource Include="InputNumForm.resx">
       <DependentUpon>InputNumForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NavigationForm.resx">
+      <DependentUpon>NavigationForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PartnerGoodsBarCodePrintForm.resx">
       <DependentUpon>PartnerGoodsBarCodePrintForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -267,6 +283,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SendPrintForm.resx">
+      <DependentUpon>SendPrintForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TabWindow.resx">
       <DependentUpon>TabWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -312,6 +331,10 @@
     <ProjectReference Include="..\Wms.Controls\Wms.Controls.csproj">
       <Project>{9e1db730-7bae-49f0-959d-9979ac576cce}</Project>
       <Name>Wms.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Wms.Print\Wms.Print.csproj">
+      <Project>{216263b0-9db4-465b-9d0c-1bb68b6fe51c}</Project>
+      <Name>Wms.Print</Name>
     </ProjectReference>
     <ProjectReference Include="..\WmsSDK\WmsSDK.csproj">
       <Project>{0b656afd-2cff-4724-b3c9-249f6f0c9bdd}</Project>

@@ -97,7 +97,7 @@ namespace WmsApp
                 request.warehouseCode = cbWare.SelectedValue.ToString();
                 string json = DefalutWMSClient.GetJson(request);
 
-            // string result = PostMoths("http://www.bjkalf.net:8090/services/user/checkAndGetUserResource", json);
+       //   string result = PostMoths("http://www.bjkalf.net:8090/services/user/checkAndGetUserResource", json);
 
              string result = PostMoths("http://test.api.portal.bjshengeng.com/services/user/checkAndGetUserResource", json);
 
@@ -142,6 +142,11 @@ namespace WmsApp
                 selectForm.ShowDialog();
                 if (selectForm.DialogResult==DialogResult.OK)
                 {
+                    if (string.IsNullOrWhiteSpace(UserInfo.PartnerCode))
+                    {
+                        MessageBox.Show("获取不到供应商信息");
+                        return;
+                    }
                     this.DialogResult = DialogResult.OK;
                 }
 

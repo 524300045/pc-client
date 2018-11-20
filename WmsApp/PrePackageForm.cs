@@ -206,9 +206,16 @@ namespace WmsApp
         {
             if (e.RowIndex >= 0)
             {
+             
+
                 DataGridViewColumn column = dataGridView1.Columns[e.ColumnIndex];
                 if (column is DataGridViewButtonColumn)
                 {
+                    //if (UserInfo.CustomerCode == "7001")
+                    //{
+                    //    MessageBox.Show("当前货主无权操作!");
+                    //    return;
+                    //}
                     
                     string skucode = this.dataGridView1.CurrentRow.Cells["skuCode"].Value.ToString();
                     string goodsName = this.dataGridView1.CurrentRow.Cells["goodsName"].Value.ToString();
@@ -506,6 +513,9 @@ namespace WmsApp
                             //打印
                             //if (this.dataGridView1.Rows[i].Cells["weighed"].Value != null && int.Parse(this.dataGridView1.Rows[i].Cells["weighed"].Value.ToString()) == 1)
                             //{
+                            
+                             string goodsModel = this.dataGridView1.Rows[i].Cells["goodsModel"].Value.ToString();
+                             string goodsName = this.dataGridView1.Rows[i].Cells["goodsName"].Value.ToString();
                             int diff = orderNum - packageNum;
                              goods = goodsList.Where(p => p.skuCode == skuCode).FirstOrDefault();
                             List<PreprocessInfoAdd> list = new List<PreprocessInfoAdd>();
@@ -526,49 +536,112 @@ namespace WmsApp
                                 add.updateUser = UserInfo.RealName;
                                 list.Add(add);
                             }
-                            //称重商品
-                            PreprocessInfoRequest request = new PreprocessInfoRequest();
-                            request.wareHouseId = UserInfo.WareHouseCode;
-                            request.warehouseCode = UserInfo.WareHouseCode;
-                            request.warehouseName = UserInfo.WareHouseName;
-                            request.customerCode = UserInfo.CustomerCode;
-                            request.customerName = UserInfo.CustomerName;
-                            request.request = list;
-                            PreprocessInfoAddResponse response = client.Execute(request);
-                            if (!response.IsError)
+                            if (UserInfo.CustomerCode !="7001")
                             {
-                                if (response.result != null)
+                                #region 正常客户
+
+
+                                //称重商品
+                                PreprocessInfoRequest request = new PreprocessInfoRequest();
+                                request.wareHouseId = UserInfo.WareHouseCode;
+                                request.warehouseCode = UserInfo.WareHouseCode;
+                                request.warehouseName = UserInfo.WareHouseName;
+                                request.customerCode = UserInfo.CustomerCode;
+                                request.customerName = UserInfo.CustomerName;
+                                request.request = list;
+                                PreprocessInfoAddResponse response = client.Execute(request);
+                                if (!response.IsError)
                                 {
-                                    preprocessInfoList = response.result;
-                                    foreach (PreprocessInfo item in preprocessInfoList)
+                                    if (response.result != null)
                                     {
-                                        #region 打印
-                                        curPreprocessInfo = item;
-                                        PrintDocument document = new PrintDocument();
-                                        document.DefaultPageSettings.PaperSize = new PaperSize("Custum", 270, 180);
+                                        preprocessInfoList = response.result;
+                                        foreach (PreprocessInfo item in preprocessInfoList)
+                                        {
+                                            #region 打印
+                                            curPreprocessInfo = item;
+                                            PrintDocument document = new PrintDocument();
+                                            document.DefaultPageSettings.PaperSize = new PaperSize("Custum", 270, 180);
 
 #if(!DEBUG)
                                 PrintDialog dialog = new PrintDialog();
                                 document.PrintPage += new PrintPageEventHandler(this.pd_PrintPage);
                                 dialog.Document = document;
 #else
-                                        PrintPreviewDialog dialog = new PrintPreviewDialog();
-                                        document.PrintPage += new PrintPageEventHandler(this.pd_PrintPage);
-                                        dialog.Document = document;
+                                            PrintPreviewDialog dialog = new PrintPreviewDialog();
+                                            document.PrintPage += new PrintPageEventHandler(this.pd_PrintPage);
+                                            dialog.Document = document;
 #endif
-                                        try
-                                        {
-                                            document.Print();
+                                            try
+                                            {
+                                                document.Print();
+                                            }
+                                            catch (Exception exception)
+                                            {
+                                                MessageBox.Show("打印异常" + exception);
+                                                document.PrintController.OnEndPrint(document, new PrintEventArgs());
+                                            }
+                                            #endregion
                                         }
-                                        catch (Exception exception)
-                                        {
-                                            MessageBox.Show("打印异常" + exception);
-                                            document.PrintController.OnEndPrint(document, new PrintEventArgs());
-                                        }
-                                        #endregion
                                     }
                                 }
+                                #endregion
+
                             }
+                            else
+                            {
+                                #region 西贝客户
+                                PreprocessXiBeiInfoRequest request = new PreprocessXiBeiInfoRequest();
+                                request.wareHouseId = UserInfo.WareHouseCode;
+                                request.warehouseCode = UserInfo.WareHouseCode;
+                                request.warehouseName = UserInfo.WareHouseName;
+                                request.customerCode = UserInfo.CustomerCode;
+                                request.customerName = UserInfo.CustomerName;
+                                request.request = list;
+                                PreprocessInfoAddResponse response = client.Execute(request);
+                                if (!response.IsError)
+                                {
+                                    if (response.result != null)
+                                    {
+                                        preprocessInfoList = response.result;
+                                        foreach (PreprocessInfo item in preprocessInfoList)
+                                        {
+                                            item.goodsModel = goodsModel;
+
+                                            #region 打印
+                                            curPreprocessInfo = item;
+                                            PrintDocument document = new PrintDocument();
+                                            document.DefaultPageSettings.PaperSize = new PaperSize("Custum", 270, 180);
+
+#if(!DEBUG)
+                                PrintDialog dialog = new PrintDialog();
+                                document.PrintPage += new PrintPageEventHandler(this.pd_XiBeiPrintPage);
+                                dialog.Document = document;
+#else
+                                            PrintPreviewDialog dialog = new PrintPreviewDialog();
+                                            document.PrintPage += new PrintPageEventHandler(this.pd_XiBeiPrintPage);
+                                            dialog.Document = document;
+#endif
+                                            try
+                                            {
+                                                document.Print();
+                                            }
+                                            catch (Exception exception)
+                                            {
+                                                MessageBox.Show("打印异常" + exception);
+                                                document.PrintController.OnEndPrint(document, new PrintEventArgs());
+                                            }
+                                            #endregion
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("出现错误:" + goodsName + response.Message);
+                                }
+
+                                #endregion
+                            }
+                          
                         }
                     }
                 }
@@ -585,6 +658,12 @@ namespace WmsApp
             GetPrintPicture(bt, e, curPreprocessInfo);
         }
 
+        private void pd_XiBeiPrintPage(object sender, PrintPageEventArgs e) //触发打印事件
+        {
+            Bitmap bt = CreateXiBeiQRCode(curPreprocessInfo.preprocessCode);
+            GetXiBeiPrintPicture(bt, e, curPreprocessInfo);
+        }
+
 
         public static Bitmap CreateQRCode(string asset)
         {
@@ -594,6 +673,22 @@ namespace WmsApp
                 CharacterSet = "UTF-8",
                 Width = 80,
                 Height = 80
+            };
+            BarcodeWriter writer = new BarcodeWriter();
+            writer.Format = BarcodeFormat.QR_CODE;
+            writer.Options = options;
+            return writer.Write(asset);
+        }
+
+
+        public static Bitmap CreateXiBeiQRCode(string asset)
+        {
+            EncodingOptions options = new QrCodeEncodingOptions
+            {
+                DisableECI = true,
+                CharacterSet = "UTF-8",
+                Width =140,
+                Height = 140
             };
             BarcodeWriter writer = new BarcodeWriter();
             writer.Format = BarcodeFormat.QR_CODE;
@@ -780,6 +875,52 @@ namespace WmsApp
         }
 
 
+        public void GetXiBeiPrintPicture(Bitmap image, PrintPageEventArgs g, PreprocessInfo preprocessInfo)
+        {
+          
+                Font fontCu = new Font("宋体", 12f, FontStyle.Bold);
+                int height = 15;
+                int heightRight = 15;
+
+                Font font = new Font("宋体", 10f);
+                Brush brush = new SolidBrush(Color.Black);
+                g.Graphics.SmoothingMode = SmoothingMode.HighQuality;
+                
+                int pointX =5;
+
+                RectangleF layoutRectangleRight = new RectangleF(80f, 5, 130f, 85f);
+                
+                Rectangle destRect = new Rectangle(145, -5, image.Width, image.Height);
+                g.Graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel);
+              
+
+                heightRight += 40;
+
+       
+                RectangleF layoutRectangle = new RectangleF(pointX, height, 120f, 30f);
+
+                //商品名称
+                layoutRectangle = new RectangleF(pointX, 15, 165f, 30f);
+                g.Graphics.DrawString("品名:"+preprocessInfo.goodsName, font, brush, layoutRectangle);
+
+                height += 40;
+                //重量
+
+                layoutRectangle = new RectangleF(pointX, height, 120f, 40f);
+                g.Graphics.DrawString( preprocessInfo.goodsModel, font, brush, layoutRectangle);
+
+                 height += 40;
+
+           
+                //生产日期
+                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                g.Graphics.DrawString("生产日期:" + dtBegin.Value.ToShortDateString(), new Font("宋体", 10f), brush, layoutRectangleRight);
+
+
+                layoutRectangleRight = new RectangleF(pointX, height+30, 300f, 85f);
+                g.Graphics.DrawString("北京康安利丰农业有限公司", new Font("宋体", 10f), brush, layoutRectangleRight);
+           
+        }
         private void btnInput_Click(object sender, EventArgs e)
         {
             try
@@ -830,48 +971,111 @@ namespace WmsApp
                                    add.updateUser = UserInfo.RealName;
                                    list.Add(add);
                                }
-                               //称重商品
-                               PreprocessInfoRequest request = new PreprocessInfoRequest();
-                               request.wareHouseId = UserInfo.WareHouseCode;
-                               request.warehouseCode = UserInfo.WareHouseCode;
-                               request.warehouseName = UserInfo.WareHouseName;
-                               request.customerCode = UserInfo.CustomerCode;
-                               request.customerName = UserInfo.CustomerName;
-                               request.request = list;
-                               PreprocessInfoAddResponse response = client.Execute(request);
-                               if (!response.IsError)
+
+                               string goodsModel = this.dataGridView1.Rows[i].Cells["goodsModel"].Value.ToString();
+                               string goodsName = this.dataGridView1.Rows[i].Cells["goodsName"].Value.ToString();
+                               if (UserInfo.CustomerCode != "7001")
                                {
-                                   if (response.result != null)
+
+
+                                   //称重商品
+                                   PreprocessInfoRequest request = new PreprocessInfoRequest();
+                                   request.wareHouseId = UserInfo.WareHouseCode;
+                                   request.warehouseCode = UserInfo.WareHouseCode;
+                                   request.warehouseName = UserInfo.WareHouseName;
+                                   request.customerCode = UserInfo.CustomerCode;
+                                   request.customerName = UserInfo.CustomerName;
+                                   request.request = list;
+                                   PreprocessInfoAddResponse response = client.Execute(request);
+                                   if (!response.IsError)
                                    {
-                                       preprocessInfoList = response.result;
-                                       foreach (PreprocessInfo item in preprocessInfoList)
+                                       if (response.result != null)
                                        {
-                                           #region 打印
-                                           curPreprocessInfo = item;
-                                           PrintDocument document = new PrintDocument();
-                                           document.DefaultPageSettings.PaperSize = new PaperSize("Custum", 270, 180);
+                                           preprocessInfoList = response.result;
+                                           foreach (PreprocessInfo item in preprocessInfoList)
+                                           {
+                                               #region 打印
+                                               curPreprocessInfo = item;
+                                               PrintDocument document = new PrintDocument();
+                                               document.DefaultPageSettings.PaperSize = new PaperSize("Custum", 270, 180);
 
 #if(!DEBUG)
                                 PrintDialog dialog = new PrintDialog();
                                 document.PrintPage += new PrintPageEventHandler(this.pd_PrintPage);
                                 dialog.Document = document;
 #else
-                                           PrintPreviewDialog dialog = new PrintPreviewDialog();
-                                           document.PrintPage += new PrintPageEventHandler(this.pd_PrintPage);
-                                           dialog.Document = document;
+                                               PrintPreviewDialog dialog = new PrintPreviewDialog();
+                                               document.PrintPage += new PrintPageEventHandler(this.pd_PrintPage);
+                                               dialog.Document = document;
 #endif
-                                           try
-                                           {
-                                               document.Print();
+                                               try
+                                               {
+                                                   document.Print();
+                                               }
+                                               catch (Exception exception)
+                                               {
+                                                   MessageBox.Show("打印异常" + exception);
+                                                   document.PrintController.OnEndPrint(document, new PrintEventArgs());
+                                               }
+                                               #endregion
                                            }
-                                           catch (Exception exception)
-                                           {
-                                               MessageBox.Show("打印异常" + exception);
-                                               document.PrintController.OnEndPrint(document, new PrintEventArgs());
-                                           }
-                                           #endregion
                                        }
                                    }
+                               }
+                               else
+                               {
+                          
+                                   #region 西贝客户
+                                   PreprocessXiBeiInfoRequest request = new PreprocessXiBeiInfoRequest();
+                                   request.wareHouseId = UserInfo.WareHouseCode;
+                                   request.warehouseCode = UserInfo.WareHouseCode;
+                                   request.warehouseName = UserInfo.WareHouseName;
+                                   request.customerCode = UserInfo.CustomerCode;
+                                   request.customerName = UserInfo.CustomerName;
+                                   request.request = list;
+                                   PreprocessInfoAddResponse response = client.Execute(request);
+                                   if (!response.IsError)
+                                   {
+                                       if (response.result != null)
+                                       {
+                                           preprocessInfoList = response.result;
+                                           foreach (PreprocessInfo item in preprocessInfoList)
+                                           {
+                                               item.goodsModel = goodsModel;
+
+                                               #region 打印
+                                               curPreprocessInfo = item;
+                                               PrintDocument document = new PrintDocument();
+                                               document.DefaultPageSettings.PaperSize = new PaperSize("Custum", 270, 180);
+
+#if(!DEBUG)
+                                PrintDialog dialog = new PrintDialog();
+                                document.PrintPage += new PrintPageEventHandler(this.pd_XiBeiPrintPage);
+                                dialog.Document = document;
+#else
+                                               PrintPreviewDialog dialog = new PrintPreviewDialog();
+                                               document.PrintPage += new PrintPageEventHandler(this.pd_XiBeiPrintPage);
+                                               dialog.Document = document;
+#endif
+                                               try
+                                               {
+                                                   document.Print();
+                                               }
+                                               catch (Exception exception)
+                                               {
+                                                   MessageBox.Show("打印异常" + exception);
+                                                   document.PrintController.OnEndPrint(document, new PrintEventArgs());
+                                               }
+                                               #endregion
+                                           }
+                                       }
+                                   }
+                                   else
+                                   {
+                                       MessageBox.Show("出现错误:" + goodsName + response.Message);
+                                   }
+                                   #endregion
+
                                }
 
                            }

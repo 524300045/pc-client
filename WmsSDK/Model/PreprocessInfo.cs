@@ -44,7 +44,8 @@ namespace WmsSDK.Model
         /** 是否有效 */
         public int yn { get; set; }
 
-     
+
+        public string goodsModel { get; set; }
 
         public string StatusDes {
             get
