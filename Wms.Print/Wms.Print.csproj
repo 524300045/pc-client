@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{216263B0-9DB4-465B-9D0C-1BB68B6FE51C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sdbs.Wms.Print</RootNamespace>
+    <AssemblyName>Sdbs.Wms.Print</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BarCode\Code128Content.cs" />
+    <Compile Include="BarCode\Code128Rendering.cs" />
+    <Compile Include="DocumentObject\BarCode.cs" />
+    <Compile Include="DocumentObject\Body.cs" />
+    <Compile Include="DocumentObject\Bottom.cs" />
+    <Compile Include="DocumentObject\Footer.cs" />
+    <Compile Include="DocumentObject\Header.cs" />
+    <Compile Include="DocumentObject\LogoAndBarCode.cs" />
+    <Compile Include="DocumentObject\MultiHeader.cs" />
+    <Compile Include="DocumentObject\Outer.cs" />
+    <Compile Include="DocumentObject\Strings.cs" />
+    <Compile Include="DocumentObject\Top.cs" />
+    <Compile Include="OutBoundPrint.cs" />
+    <Compile Include="PrinterPageSetting\Delegate.cs" />
+    <Compile Include="PrinterPageSetting\Enum\Enum.cs" />
+    <Compile Include="PrinterPageSetting\IPrinterPageSetting.cs" />
+    <Compile Include="PrinterPageSetting\PrinterPageSetting.cs" />
+    <Compile Include="PrinterPageSetting\WebPrinterPageSetting.cs" />
+    <Compile Include="PrinterPageSetting\WinPrinterPageSetting.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\Base\DrawBase.cs" />
+    <Compile Include="Service\Base\DrawRectangle.cs" />
+    <Compile Include="Service\Base\IDraw.cs" />
+    <Compile Include="Service\Base\Printer.cs" />
+    <Compile Include="Service\Base\PrinterBase.cs" />
+    <Compile Include="Service\Base\PrinterMargins.cs" />
+    <Compile Include="Service\Base\PrinterSingleton.cs" />
+    <Compile Include="Service\Base\Sewing.cs" />
+    <Compile Include="Service\Grid\CellRectangle.cs" />
+    <Compile Include="Service\Grid\DrawGrid.cs" />
+    <Compile Include="Service\Grid\GridBase.cs" />
+    <Compile Include="Service\Grid\GridEnum.cs" />
+    <Compile Include="Service\Grid\IGrid.cs" />
+    <Compile Include="Service\Grid\MyGrid.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
