@@ -30,7 +30,7 @@ namespace Wms.Print.DocumentObject
             mdrawGrid.Merge = GridMergeFlag.None;
             //this.Font = new Font("宋体",12);
 
-            mdrawGrid.Font = new Font("宋体", 12);
+            mdrawGrid.Font = new Font("宋体", 20);
             mdrawGrid.PreferredRowHeight = mdrawGrid.Font.Height + 2;
         }
         /// <summary>

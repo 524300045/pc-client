@@ -465,11 +465,13 @@ namespace Wms.Print
         /// </summary>
         public void Preview()
         {
+            
             this.mCurrentPageIndex = 1;
             this.mCurrentRowIndex = 0;
             mCurrentRowIndex2 = 0;
             PrinterPageSetting.PrinterPageSetting printerPageSetting;
             printerPageSetting = new PrinterPageSetting.PrinterPageSetting(mPrintDocument);
+       
             printerPageSetting.PrintPage += new PrintPageDelegate(this.printerPageSetting_PrintPage);
             printerPageSetting.ShowPrintPreviewDialog();
         }
@@ -739,7 +741,10 @@ namespace Wms.Print
                     //如果每页都打印，对mFooter分页失去了意义
                     if (mFooter.IsDrawAllPage)
                     {
-                        OutObject(mFooter);
+                        Strings s = new Strings();
+                        s.Text = "第" + mCurrentPageIndex+"页";
+                        OutObject(s);
+                      //  OutObject(mFooter);
                     }
                     else
                     {

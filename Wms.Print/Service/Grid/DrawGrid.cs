@@ -465,8 +465,8 @@ namespace Wms.Print.Service.Grid
 
                 StringFormat sf = new StringFormat();			//字符格式
                 sf.LineAlignment = StringAlignment.Center;		//垂直居中
-                sf.FormatFlags = StringFormatFlags.LineLimit | StringFormatFlags.NoWrap;
-             //   sf.FormatFlags = StringFormatFlags.LineLimit;
+              //  sf.FormatFlags = StringFormatFlags.LineLimit | StringFormatFlags.NoWrap;
+                sf.FormatFlags = StringFormatFlags.LineLimit;
                 for (int i = 0; i < lngRows; i++)
                 {
                     X1 = rec.X;
@@ -497,8 +497,23 @@ namespace Wms.Print.Service.Grid
                         {
                             realFont = mFonts[j];
                         }
-
-                        g.DrawString(arrStrGrid[i, j], realFont, pmBrush, recCell, sf);
+                        if (j == 1 || j == 6)
+                        {
+                            if (arrStrGrid[i, j].Length>10)
+                            {
+                                g.DrawString(arrStrGrid[i, j], new Font("宋体",10.0F, FontStyle.Bold), pmBrush, recCell, sf);
+                            }
+                            else
+                            {
+                                g.DrawString(arrStrGrid[i, j], new Font("宋体", 10.0F, FontStyle.Bold), pmBrush, recCell, sf);
+                            }
+                        }
+                        else
+                        {
+                           // g.DrawString(arrStrGrid[i, j], realFont, pmBrush, recCell, sf);
+                            g.DrawString(arrStrGrid[i, j], new Font("宋体", 10.0F, FontStyle.Bold), pmBrush, recCell, sf);
+                        }
+                       
 
                         X1 += width;
 
