@@ -97,9 +97,9 @@ namespace WmsApp
                 request.warehouseCode = cbWare.SelectedValue.ToString();
                 string json = DefalutWMSClient.GetJson(request);
 
-       //   string result = PostMoths("http://www.bjkalf.net:8090/services/user/checkAndGetUserResource", json);
+           string result = PostMoths("http://www.bjkalf.net:8090/services/user/checkAndGetUserResource", json);
 
-             string result = PostMoths("http://test.api.portal.bjshengeng.com/services/user/checkAndGetUserResource", json);
+         //   string result = PostMoths("http://test.api.portal.bjshengeng.com/services/user/checkAndGetUserResource", json);
 
                 LoginResponse response = DefalutWMSClient.ToObject<LoginResponse>(result);
 

@@ -7,8 +7,8 @@
     <ProjectGuid>{216263B0-9DB4-465B-9D0C-1BB68B6FE51C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sdbs.Wms.Print</RootNamespace>
-    <AssemblyName>Sdbs.Wms.Print</AssemblyName>
+    <RootNamespace>Wms.Print</RootNamespace>
+    <AssemblyName>Wms.Print</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>

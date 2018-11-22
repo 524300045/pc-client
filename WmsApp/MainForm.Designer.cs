@@ -49,9 +49,9 @@
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbSendPrint = new System.Windows.Forms.ToolStripButton();
             this.tsbExit = new System.Windows.Forms.ToolStripButton();
             this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
-            this.tsbSendPrint = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,11 +74,11 @@
             this.toolStripButton5,
             this.toolStripSeparator7,
             this.tsbGoodsPrint,
+            this.tsbSendPrint,
             this.tsbParnterPrint,
             this.toolStripButton6,
             this.toolStripButton3,
             this.toolStripSeparator8,
-            this.tsbSendPrint,
             this.tsbExit});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -248,6 +248,17 @@
             this.toolStripSeparator8.Name = "toolStripSeparator8";
             this.toolStripSeparator8.Size = new System.Drawing.Size(6, 27);
             // 
+            // tsbSendPrint
+            // 
+            this.tsbSendPrint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbSendPrint.Image = ((System.Drawing.Image)(resources.GetObject("tsbSendPrint.Image")));
+            this.tsbSendPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSendPrint.Name = "tsbSendPrint";
+            this.tsbSendPrint.Size = new System.Drawing.Size(93, 24);
+            this.tsbSendPrint.Tag = "RE00181";
+            this.tsbSendPrint.Text = "发运打印";
+            this.tsbSendPrint.Click += new System.EventHandler(this.tsbSendPrint_Click);
+            // 
             // tsbExit
             // 
             this.tsbExit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -271,16 +282,6 @@
             this.dockPanel1.Name = "dockPanel1";
             this.dockPanel1.Size = new System.Drawing.Size(1370, 492);
             this.dockPanel1.TabIndex = 18;
-            // 
-            // tsbSendPrint
-            // 
-            this.tsbSendPrint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbSendPrint.Image = ((System.Drawing.Image)(resources.GetObject("tsbSendPrint.Image")));
-            this.tsbSendPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbSendPrint.Name = "tsbSendPrint";
-            this.tsbSendPrint.Size = new System.Drawing.Size(93, 24);
-            this.tsbSendPrint.Text = "发运打印";
-            this.tsbSendPrint.Click += new System.EventHandler(this.tsbSendPrint_Click);
             // 
             // MainForm
             // 

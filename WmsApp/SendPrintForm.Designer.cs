@@ -43,6 +43,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.gb = new System.Windows.Forms.GroupBox();
             this.dgv = new System.Windows.Forms.DataGridView();
+            this.pageSplit1 = new Wms.Controls.Pager.PageSplit();
             this.chk = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.orderNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.outboundTaskCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,7 +56,6 @@
             this.finishSortingTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IsPrintDes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.deliveryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pageSplit1 = new Wms.Controls.Pager.PageSplit();
             this.groupBox1.SuspendLayout();
             this.gb.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
@@ -237,6 +237,18 @@
             this.dgv.TabIndex = 1;
             this.dgv.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_RowPostPaint);
             // 
+            // pageSplit1
+            // 
+            this.pageSplit1.BackColor = System.Drawing.Color.LightGray;
+            this.pageSplit1.Description = "";
+            this.pageSplit1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pageSplit1.Location = new System.Drawing.Point(3, 387);
+            this.pageSplit1.Name = "pageSplit1";
+            this.pageSplit1.PageCount = 1;
+            this.pageSplit1.PageNo = 1;
+            this.pageSplit1.Size = new System.Drawing.Size(1103, 34);
+            this.pageSplit1.TabIndex = 0;
+            // 
             // chk
             // 
             this.chk.HeaderText = "全选";
@@ -248,6 +260,7 @@
             this.orderNo.HeaderText = "销售单号";
             this.orderNo.Name = "orderNo";
             this.orderNo.ReadOnly = true;
+            this.orderNo.Width = 150;
             // 
             // outboundTaskCode
             // 
@@ -255,6 +268,7 @@
             this.outboundTaskCode.HeaderText = "发运单号";
             this.outboundTaskCode.Name = "outboundTaskCode";
             this.outboundTaskCode.ReadOnly = true;
+            this.outboundTaskCode.Width = 150;
             // 
             // storedName
             // 
@@ -318,18 +332,7 @@
             this.deliveryDate.HeaderText = "发货日期";
             this.deliveryDate.Name = "deliveryDate";
             this.deliveryDate.ReadOnly = true;
-            // 
-            // pageSplit1
-            // 
-            this.pageSplit1.BackColor = System.Drawing.Color.LightGray;
-            this.pageSplit1.Description = "";
-            this.pageSplit1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pageSplit1.Location = new System.Drawing.Point(3, 387);
-            this.pageSplit1.Name = "pageSplit1";
-            this.pageSplit1.PageCount = 1;
-            this.pageSplit1.PageNo = 1;
-            this.pageSplit1.Size = new System.Drawing.Size(1103, 34);
-            this.pageSplit1.TabIndex = 0;
+            this.deliveryDate.Width = 150;
             // 
             // SendPrintForm
             // 
@@ -364,6 +367,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DateTimePicker dtEnd;
         private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.Button btnPrint;
+        private System.Windows.Forms.ComboBox cbPrinter;
+        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DataGridViewCheckBoxColumn chk;
         private System.Windows.Forms.DataGridViewTextBoxColumn orderNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn outboundTaskCode;
@@ -376,8 +382,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn finishSortingTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn IsPrintDes;
         private System.Windows.Forms.DataGridViewTextBoxColumn deliveryDate;
-        private System.Windows.Forms.Button btnPrint;
-        private System.Windows.Forms.ComboBox cbPrinter;
-        private System.Windows.Forms.Label label5;
     }
 }

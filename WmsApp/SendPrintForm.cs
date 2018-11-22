@@ -78,6 +78,7 @@ namespace WmsApp
             paginator = new PaginatorDTO { PageNo = 1, PageSize = 50 };
             dgv.Columns[0].HeaderCell = cbHeader;
             bindStore();
+            printerName = getAttributeValue("obprint");
 
             List<String> printList = LocalPrinter.GetLocalPrinters(printerName);
             cbPrinter.SelectedIndexChanged -= cbPrinter_SelectedIndexChanged;
@@ -129,9 +130,11 @@ namespace WmsApp
             }
 
             request.startTime = dtBegin.Value;
-            request.endTime =Convert.ToDateTime(dtEnd.Value.ToString("yyyy-MM-dd")+" 23:59:59");
+            request.endTime = Convert.ToDateTime(dtEnd.Value.ToString("yyyy-MM-dd") + " 23:59:59");
 
             request.isPrint = printstatus;
+           // request.status = 30;
+
 
             OutBoundPrintPageResponse response = client.Execute(request);
 
@@ -273,7 +276,16 @@ namespace WmsApp
 
                 foreach (string item in list)
                 {
-                    Print(item);
+        
+                    if (UserInfo.CustomerCode == "4001")
+                    {
+                        PrintRongDa(item);
+                    }
+                    else
+                    {
+                        Print(item);
+                    }
+
                 }
 
             }
@@ -303,9 +315,9 @@ namespace WmsApp
 
                 OutBoundPrintModel outBoundPrint = response.result;
 
-                OutBoundPrint orderPrint = new OutBoundPrint(false, new Margins(10, 10, 10, 140));
+                OutBoundPrint orderPrint = new OutBoundPrint(false, new Margins(10, 10, 10, 50));
                 Image barcode = Code128Rendering.GetCodeAorBImg(taskCode, 70, 1, true);
-                orderPrint.BarCode = OutBoundHelper.BuildBarCode(response.result.remark + "出库单", 1, null);
+                orderPrint.BarCode = OutBoundHelper.BuildBarCode(response.result.remark + "送货单", 1, null);
                 orderPrint.Header = OutBoundHelper.BuildHeader(outBoundPrint);
                 orderPrint.MultiHeader1 = OutBoundHelper.BuildMultiHeader();
                 string[,] arr = OutBoundHelper.ToArrFromList(detaiList);
@@ -313,12 +325,13 @@ namespace WmsApp
                 orderPrint.Bottom = OutBoundHelper.BuildBottom(response.result.companyAddress, UserInfo.RealName);
                 orderPrint.Footer = OutBoundHelper.BuildFooter();
 
+               // orderPrint.PrintDocument.DefaultPageSettings.PaperSize = new PaperSize("Custum", 2400, 2800);
                 orderPrint.PrintDocument.PrinterSettings.PrinterName = cbPrinter.Text;
 #if DEBUG
 
-                //  orderPrint.Print();
+            //   orderPrint.Print();
 
-                orderPrint.Preview();
+               orderPrint.Preview();
 #else
             //orderPrint.Preview(); 
             orderPrint.Print();
@@ -328,6 +341,54 @@ namespace WmsApp
             }
         }
 
+
+        // 24.13,, 27.94
+//        foreach(PaperSize ps in printDoc.PrinterSettings.PaperSizes)
+//{
+// if(ps.PaperName=="949W300H")
+// {
+//  printDoc.PrinterSettings.DefaultPageSettings.PaperSize=ps;
+//  printDoc.DefaultPageSettings.PaperSize=ps;
+// }
+//}
+
+        private void PrintRongDa(string taskCode)
+        {
+
+            OutBoundDetailPrintRequest request = new OutBoundDetailPrintRequest();
+            request.outboundTaskCode = taskCode;
+            request.printMan = UserInfo.UserName;
+            request.updateUser = UserInfo.UserName;
+            OutBoundPrintDetailResponse response = client.Execute(request);
+            if (!response.IsError)
+            {
+                List<ShipMentDetailVo> detaiList = response.result.detailList;
+
+                OutBoundPrintModel outBoundPrint = response.result;
+
+                OutBoundPrint orderPrint = new OutBoundPrint(false, new Margins(10, 10, 10, 50));
+                Image barcode = Code128Rendering.GetCodeAorBImg(taskCode, 70, 1, true);
+                orderPrint.BarCode = OutBoundHelper.BuildBarCode(response.result.remark + "送货单", 1, null);
+                orderPrint.Header = OutBoundHelper.BuildHeader(outBoundPrint);
+                orderPrint.MultiHeader1 = OutBoundHelper.BuildRongDaMultiHeader();
+                string[,] arr = OutBoundHelper.ToRongDaArrFromList(detaiList);
+                orderPrint.Body1 = OutBoundHelper.BuildRongDaArriveBody(arr);
+                orderPrint.Bottom = OutBoundHelper.BuildBottom(response.result.companyAddress, UserInfo.RealName);
+                orderPrint.Footer = OutBoundHelper.BuildFooter();
+
+                orderPrint.PrintDocument.PrinterSettings.PrinterName = cbPrinter.Text;
+#if DEBUG
+
+              orderPrint.Print();
+
+              //  orderPrint.Preview();
+#else
+            //orderPrint.Preview(); 
+            orderPrint.Print();
+#endif
+
+            }
+        }
         private void cbPrinter_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Configuration cfa = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
@@ -339,32 +400,77 @@ namespace WmsApp
         }
 
 
+        private string getAttributeValue(string strKey)
+        {
+            XmlDocument doc = new XmlDocument();
+            //获得配置文件的全路径  
+            string strFileName = Application.StartupPath+"\\config.xml";
+            // string  strFileName= AppDomain.CurrentDomain.BaseDirectory + "\\exe.config";  
+            doc.Load(strFileName);
+            //找出名称为“add”的所有元素  
+            XmlNodeList nodes = doc.GetElementsByTagName("config");
+            if (nodes != null && nodes.Count > 0)
+            {
+                for (int i = 0; i < nodes.Count; i++)
+                {
+                    //获得将当前元素的key属性  
+                    XmlAttribute att = nodes[i].Attributes["key"];
+                    //根据元素的第一个属性来判断当前的元素是不是目标元素  
+                    if (att.Value == strKey)
+                    {
+                        //对目标元素中的第二个属性赋值  
+                        att = nodes[i].Attributes["value"];
+                        string vaule = att.Value;
+                        return vaule;
+                        break;
+                    }
+                }
+            }
+
+            return "";
+        }
+
         //第一个参数是xml文件中的add节点的value，第二个参数是add节点的key  
         private void SaveConfig(string ConnenctionString, string strKey)
         {
             XmlDocument doc = new XmlDocument();
             //获得配置文件的全路径  
-            string strFileName = AppDomain.CurrentDomain.SetupInformation.ConfigurationFile;
+          //  string strFileName = AppDomain.CurrentDomain.SetupInformation.ConfigurationFile;
             // string  strFileName= AppDomain.CurrentDomain.BaseDirectory + "\\exe.config";  
+
+            string strFileName = Application.StartupPath + "\\config.xml";
             doc.Load(strFileName);
             //找出名称为“add”的所有元素  
-            XmlNodeList nodes = doc.GetElementsByTagName("add");
-            for (int i = 0; i < nodes.Count; i++)
+            XmlNodeList nodes = doc.GetElementsByTagName("config");
+            if (nodes != null && nodes.Count > 0)
             {
-                //获得将当前元素的key属性  
-                XmlAttribute att = nodes[i].Attributes["key"];
-                //根据元素的第一个属性来判断当前的元素是不是目标元素  
-                if (att.Value == strKey)
+                for (int i = 0; i < nodes.Count; i++)
                 {
-                    //对目标元素中的第二个属性赋值  
-                    att = nodes[i].Attributes["value"];
-                    att.Value = ConnenctionString;
-                    break;
+                    //获得将当前元素的key属性  
+                    XmlAttribute att = nodes[i].Attributes["key"];
+                    //根据元素的第一个属性来判断当前的元素是不是目标元素  
+                    if (att.Value == strKey)
+                    {
+                        //对目标元素中的第二个属性赋值  
+                        att = nodes[i].Attributes["value"];
+                        att.Value = ConnenctionString;
+                        break;
+                    }
                 }
             }
+            else
+            {
+
+                //XmlNode memberlist = doc.SelectSingleNode("configuration/appSettings");
+                //XmlElement memberB = doc.CreateElement("add");
+                //memberB.SetAttribute("key", "obprint");
+                //memberB.SetAttribute("value", ConnenctionString);
+                //memberlist.AppendChild(memberB);
+            }
+          
             //保存上面的修改  
             doc.Save(strFileName);
-            System.Configuration.ConfigurationManager.RefreshSection("appSettings");
+           // System.Configuration.ConfigurationManager.RefreshSection("appSettings");
         }
 
 

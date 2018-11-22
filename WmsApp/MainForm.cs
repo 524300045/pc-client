@@ -1,14 +1,17 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 using WeifenLuo.WinFormsUI.Docking;
 using WmsSDK;
 using WmsSDK.Model;
@@ -62,7 +65,7 @@ namespace WmsApp
         {
             if (dockPanel1.ActiveDocument != null)
             {
-               
+
                 dockPanel1.ActiveDocument.DockHandler.Close();
             }
         }
@@ -87,7 +90,7 @@ namespace WmsApp
             {
                 fx.Activate();
             }
-    
+
         }
 
         private DockContent FindCurrentForm(string name)
@@ -110,24 +113,24 @@ namespace WmsApp
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
             DockContent fx = FindCurrentForm("PackageDetailForm");
-             if (fx == null)
-             {
-                 AddToFrame(new PackageDetailForm());
-             }
-             else
-             {
-                 fx.Activate();
-             }
-            
+            if (fx == null)
+            {
+                AddToFrame(new PackageDetailForm());
+            }
+            else
+            {
+                fx.Activate();
+            }
+
         }
 
         private void tsbExit_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("确定要退出系统吗?","提示",MessageBoxButtons.OKCancel)==DialogResult.OK)
+            if (MessageBox.Show("确定要退出系统吗?", "提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
                 Application.Exit();
             }
-       
+
         }
 
         private void tsbPrePack_Click(object sender, EventArgs e)
@@ -142,21 +145,21 @@ namespace WmsApp
             {
                 fx.Activate();
             }
-           
+
         }
 
         private void tsbBox_Click(object sender, EventArgs e)
         {
             DockContent fx = FindCurrentForm("BoxPrintForm");
-                if (fx == null)
-                {
-                    AddToFrame(new BoxPrintForm());
-                }
-                else
-                {
-                    fx.Activate();
-                }
-          
+            if (fx == null)
+            {
+                AddToFrame(new BoxPrintForm());
+            }
+            else
+            {
+                fx.Activate();
+            }
+
         }
 
         private void tsbTaskQuery_Click(object sender, EventArgs e)
@@ -170,7 +173,7 @@ namespace WmsApp
             {
                 fx.Activate();
             }
-           
+
         }
 
         private void toolStripButton4_Click(object sender, EventArgs e)
@@ -184,29 +187,29 @@ namespace WmsApp
             {
                 fx.Activate();
             }
-           
+
         }
 
-   
+
 
         private void MainForm_Load(object sender, EventArgs e)
         {
 
-          string version=System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            string version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-          this.Text = this.Text + "--" + UserInfo.PartnerName + "(" + UserInfo.PartnerCode + ")" ;
+            this.Text = this.Text + "--" + UserInfo.PartnerName + "(" + UserInfo.PartnerCode + ")";
             //lbUserName.Text =UserInfo.RealName+"("+ UserInfo.UserName+")";
-          this.Text += "----货主:" + UserInfo.CustomerName + "----仓库:" + UserInfo.WareHouseName + "---" + version;
-            #if(DEBUG)
+            this.Text += "----货主:" + UserInfo.CustomerName + "----仓库:" + UserInfo.WareHouseName + "---" + version;
+#if(DEBUG)
 
           this.Text = this.Text + "测试版";
-           #endif
+#endif
 
-                  #if(!DEBUG)
+#if(!DEBUG)
 
-          
 
-          List<SubMenu> subMenu = null;
+
+            List<SubMenu> subMenu = null;
             var result = UserInfo.menuDtos.Where(p => p.menuCode == "RE00052");
             if (result != null && result.FirstOrDefault() != null)
             {
@@ -241,35 +244,42 @@ namespace WmsApp
 
                 }
             }
-          #endif
+#endif
+
+            //创建节点
+
+
 
             //添加导航窗体
 
-          DockContent fx = FindCurrentForm("NavigationForm");
-          if (fx == null)
-          {
-              AddToFrame(new NavigationForm());
-          }
-          else
-          {
-              fx.Activate();
-          }
+            DockContent fx = FindCurrentForm("NavigationForm");
+            if (fx == null)
+            {
+                AddToFrame(new NavigationForm());
+            }
+            else
+            {
+                fx.Activate();
+            }
 
 
-          client = new DefalutWMSClient();
-          PartnerRequest request = new PartnerRequest();
-          request.partnerCode = UserInfo.PartnerCode;
-          request.customerCode = UserInfo.CustomerCode;
-          request.warehouseCode = UserInfo.WareHouseCode;
-          PartnerResponse response = client.Execute(request);
-          if (!response.IsError)
-          {
-              if (response.result != null)
-              {
-                  UserInfo.labelName = response.result.labelName;
-              }
-          }
+            client = new DefalutWMSClient();
+            PartnerRequest request = new PartnerRequest();
+            request.partnerCode = UserInfo.PartnerCode;
+            request.customerCode = UserInfo.CustomerCode;
+            request.warehouseCode = UserInfo.WareHouseCode;
+            PartnerResponse response = client.Execute(request);
+            if (!response.IsError)
+            {
+                if (response.result != null)
+                {
+                    UserInfo.labelName = response.result.labelName;
+                }
+            }
         }
+
+
+      
 
 
 
@@ -337,6 +347,24 @@ namespace WmsApp
 
         private void tsbSendPrint_Click(object sender, EventArgs e)
         {
+            LogHelper.Log("tsbSendPrint_Click");
+            try
+            {
+               
+                if (!File.Exists(Application.StartupPath + "\\config.xml"))
+                {
+                    LogHelper.Log(Application.StartupPath);
+                    CreateConfigXml();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("tsbSendPrint_Click" + ex.Message);
+            }
+          
+          //  SaveConfig("", "obprint");
+
             DockContent fx = FindCurrentForm("SendPrintForm");
             if (fx == null)
             {
@@ -348,6 +376,45 @@ namespace WmsApp
             }
         }
 
-    
+
+        private void CreateConfigXml()
+        {
+
+            try
+            {
+
+           
+            //创建XmlDocument对象
+            XmlDocument xmlDoc = new XmlDocument();
+            //XML的声明<?xml version="1.0" encoding="gb2312"?> 
+            XmlDeclaration xmlSM = xmlDoc.CreateXmlDeclaration("1.0", "UTF-8", null);
+            //追加xmldecl位置
+            xmlDoc.AppendChild(xmlSM);
+            //添加一个名为Gen的根节点
+            XmlElement xml = xmlDoc.CreateElement("", "root", "");
+            //追加Gen的根节点位置
+            xmlDoc.AppendChild(xml);
+            //添加另一个节点,与Gen所匹配，查找<Gen>
+            XmlNode gen = xmlDoc.SelectSingleNode("root");
+            //添加一个名为<Zi>的节点   
+            XmlElement zi = xmlDoc.CreateElement("config");
+            //为<Zi>节点的属性
+            zi.SetAttribute("key", "obprint");
+            zi.SetAttribute("value", "");
+            gen.AppendChild(zi);//添加到<Gen>节点中   
+            //保存好创建的XML文档
+
+            xmlDoc.Save(Application.StartupPath + "\\config.xml");
+
+            }
+            catch (Exception ex)
+            {
+
+                LogHelper.Log(ex.Message);
+            }
+
+        }
+
+
     }
 }

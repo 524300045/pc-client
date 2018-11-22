@@ -497,22 +497,46 @@ namespace Wms.Print.Service.Grid
                         {
                             realFont = mFonts[j];
                         }
-                        if (j == 1 || j == 6)
+
+                        if (lngCols == 12)
                         {
-                            if (arrStrGrid[i, j].Length>10)
+                            if (j == 1 || j == 7)
                             {
-                                g.DrawString(arrStrGrid[i, j], new Font("宋体",10.0F, FontStyle.Bold), pmBrush, recCell, sf);
+                                if (arrStrGrid[i, j].Length > 10)
+                                {
+                                    g.DrawString(arrStrGrid[i, j], new Font("宋体", 10.0F, FontStyle.Bold), pmBrush, recCell, sf);
+                                }
+                                else
+                                {
+                                    g.DrawString(arrStrGrid[i, j], new Font("宋体", 10.0F, FontStyle.Bold), pmBrush, recCell, sf);
+                                }
                             }
                             else
                             {
+                                // g.DrawString(arrStrGrid[i, j], realFont, pmBrush, recCell, sf);
                                 g.DrawString(arrStrGrid[i, j], new Font("宋体", 10.0F, FontStyle.Bold), pmBrush, recCell, sf);
                             }
                         }
                         else
                         {
-                           // g.DrawString(arrStrGrid[i, j], realFont, pmBrush, recCell, sf);
-                            g.DrawString(arrStrGrid[i, j], new Font("宋体", 10.0F, FontStyle.Bold), pmBrush, recCell, sf);
+                            if (j == 1 || j == 6)
+                            {
+                                if (arrStrGrid[i, j].Length > 10)
+                                {
+                                    g.DrawString(arrStrGrid[i, j], new Font("宋体", 10.0F, FontStyle.Bold), pmBrush, recCell, sf);
+                                }
+                                else
+                                {
+                                    g.DrawString(arrStrGrid[i, j], new Font("宋体", 10.0F, FontStyle.Bold), pmBrush, recCell, sf);
+                                }
+                            }
+                            else
+                            {
+                                // g.DrawString(arrStrGrid[i, j], realFont, pmBrush, recCell, sf);
+                                g.DrawString(arrStrGrid[i, j], new Font("宋体", 10.0F, FontStyle.Bold), pmBrush, recCell, sf);
+                            }
                         }
+                     
                        
 
                         X1 += width;

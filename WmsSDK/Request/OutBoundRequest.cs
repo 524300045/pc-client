@@ -21,7 +21,7 @@ namespace WmsSDK.Request
 
         public int? isPrint;
 
-
+     //   public int status;
         public string GetAPIPath()
         {
             return "/outBound/getOutBoundPrintPageList";
