@@ -45,11 +45,11 @@
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbGoodsPrint = new System.Windows.Forms.ToolStripButton();
+            this.tsbSendPrint = new System.Windows.Forms.ToolStripButton();
             this.tsbParnterPrint = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbSendPrint = new System.Windows.Forms.ToolStripButton();
             this.tsbExit = new System.Windows.Forms.ToolStripButton();
             this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.toolStrip1.SuspendLayout();
@@ -211,6 +211,17 @@
             this.tsbGoodsPrint.Text = "康安条码打印";
             this.tsbGoodsPrint.Click += new System.EventHandler(this.tsbGoodsPrint_Click);
             // 
+            // tsbSendPrint
+            // 
+            this.tsbSendPrint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbSendPrint.Image = ((System.Drawing.Image)(resources.GetObject("tsbSendPrint.Image")));
+            this.tsbSendPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSendPrint.Name = "tsbSendPrint";
+            this.tsbSendPrint.Size = new System.Drawing.Size(93, 24);
+            this.tsbSendPrint.Tag = "RE00179";
+            this.tsbSendPrint.Text = "发运打印";
+            this.tsbSendPrint.Click += new System.EventHandler(this.tsbSendPrint_Click);
+            // 
             // tsbParnterPrint
             // 
             this.tsbParnterPrint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -247,17 +258,6 @@
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
             this.toolStripSeparator8.Size = new System.Drawing.Size(6, 27);
-            // 
-            // tsbSendPrint
-            // 
-            this.tsbSendPrint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbSendPrint.Image = ((System.Drawing.Image)(resources.GetObject("tsbSendPrint.Image")));
-            this.tsbSendPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbSendPrint.Name = "tsbSendPrint";
-            this.tsbSendPrint.Size = new System.Drawing.Size(93, 24);
-            this.tsbSendPrint.Tag = "RE00181";
-            this.tsbSendPrint.Text = "发运打印";
-            this.tsbSendPrint.Click += new System.EventHandler(this.tsbSendPrint_Click);
             // 
             // tsbExit
             // 

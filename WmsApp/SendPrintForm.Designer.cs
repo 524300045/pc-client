@@ -43,7 +43,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.gb = new System.Windows.Forms.GroupBox();
             this.dgv = new System.Windows.Forms.DataGridView();
-            this.pageSplit1 = new Wms.Controls.Pager.PageSplit();
             this.chk = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.orderNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.outboundTaskCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,6 +55,7 @@
             this.finishSortingTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IsPrintDes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.deliveryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pageSplit1 = new Wms.Controls.Pager.PageSplit();
             this.groupBox1.SuspendLayout();
             this.gb.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
@@ -79,7 +79,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 5);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1109, 59);
+            this.groupBox1.Size = new System.Drawing.Size(1017, 59);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "查询条件";
@@ -207,13 +207,16 @@
             this.gb.Controls.Add(this.pageSplit1);
             this.gb.Location = new System.Drawing.Point(12, 70);
             this.gb.Name = "gb";
-            this.gb.Size = new System.Drawing.Size(1109, 424);
+            this.gb.Size = new System.Drawing.Size(781, 424);
             this.gb.TabIndex = 1;
             this.gb.TabStop = false;
             // 
             // dgv
             // 
             this.dgv.AllowUserToAddRows = false;
+            this.dgv.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgv.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.chk,
@@ -228,26 +231,13 @@
             this.finishSortingTime,
             this.IsPrintDes,
             this.deliveryDate});
-            this.dgv.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv.Location = new System.Drawing.Point(3, 17);
             this.dgv.Name = "dgv";
             this.dgv.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.dgv.RowTemplate.Height = 23;
-            this.dgv.Size = new System.Drawing.Size(1103, 370);
+            this.dgv.Size = new System.Drawing.Size(717, 370);
             this.dgv.TabIndex = 1;
             this.dgv.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_RowPostPaint);
-            // 
-            // pageSplit1
-            // 
-            this.pageSplit1.BackColor = System.Drawing.Color.LightGray;
-            this.pageSplit1.Description = "";
-            this.pageSplit1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pageSplit1.Location = new System.Drawing.Point(3, 387);
-            this.pageSplit1.Name = "pageSplit1";
-            this.pageSplit1.PageCount = 1;
-            this.pageSplit1.PageNo = 1;
-            this.pageSplit1.Size = new System.Drawing.Size(1103, 34);
-            this.pageSplit1.TabIndex = 0;
             // 
             // chk
             // 
@@ -334,11 +324,24 @@
             this.deliveryDate.ReadOnly = true;
             this.deliveryDate.Width = 150;
             // 
+            // pageSplit1
+            // 
+            this.pageSplit1.BackColor = System.Drawing.Color.LightGray;
+            this.pageSplit1.Description = "";
+            this.pageSplit1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pageSplit1.Location = new System.Drawing.Point(3, 387);
+            this.pageSplit1.Name = "pageSplit1";
+            this.pageSplit1.PageCount = 1;
+            this.pageSplit1.PageNo = 1;
+            this.pageSplit1.Size = new System.Drawing.Size(775, 34);
+            this.pageSplit1.TabIndex = 0;
+            this.pageSplit1.PageChanged += new System.EventHandler(this.pageSplit1_PageChanged);
+            // 
             // SendPrintForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1133, 520);
+            this.ClientSize = new System.Drawing.Size(1065, 520);
             this.Controls.Add(this.gb);
             this.Controls.Add(this.groupBox1);
             this.Name = "SendPrintForm";

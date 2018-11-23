@@ -134,7 +134,7 @@ namespace WmsApp
 
             request.isPrint = printstatus;
            // request.status = 30;
-
+            request.page = paginator.PageNo;
 
             OutBoundPrintPageResponse response = client.Execute(request);
 
@@ -151,6 +151,15 @@ namespace WmsApp
                 foreach (var item in response.result)
                 {
 
+                    if (sortingNumCount!=null)
+                    {
+                        item.sortingNumCount = Convert.ToDecimal(item.sortingNumCount.ToString("f3"));
+                    }
+                    if ( item.actualNumCount!=null)
+                    {
+                        item.actualNumCount = Convert.ToDecimal(item.actualNumCount.ToString("f3"));
+                    }
+                 
                     if (item.status == 0)
                     {
                         item.StatusDes = "新建";
@@ -226,7 +235,7 @@ namespace WmsApp
             {
                 btnSearch.Text = "正在查询";
                 btnSearch.Enabled = false;
-
+                paginator.PageNo = 1;
                 BindDgv();
             }
             catch (Exception ex)
@@ -471,6 +480,12 @@ namespace WmsApp
             //保存上面的修改  
             doc.Save(strFileName);
            // System.Configuration.ConfigurationManager.RefreshSection("appSettings");
+        }
+
+        private void pageSplit1_PageChanged(object sender, EventArgs e)
+        {
+            paginator.PageNo = pageSplit1.PageNo;
+            BindDgv();
         }
 
 

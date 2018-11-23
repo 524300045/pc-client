@@ -48,10 +48,10 @@ namespace WmsSDK.Model
         public double deliveryNumCount { get; set; }
 
         /**实际发运量*/
-        public double actualNumCount { get; set; }
+        public decimal actualNumCount { get; set; }
 
         /**分拣数量总和*/
-        public double sortingNumCount { get; set; }
+        public decimal sortingNumCount { get; set; }
         /**采购单号*/
         public String orderNo { get; set; }
 

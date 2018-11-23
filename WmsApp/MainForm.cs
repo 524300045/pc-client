@@ -235,8 +235,9 @@ namespace WmsApp
                     if (item.Tag != null)
                     {
                         string tag = item.Tag.ToString();
+                        Console.WriteLine(item.Text);
                         var curResult = subMenu.Where(p => p.subMenuCode == tag);
-                        if (curResult == null)
+                        if (curResult == null || curResult.FirstOrDefault()==null)
                         {
                             item.Enabled = false;
                         }

@@ -44,6 +44,7 @@ namespace WmsSDK.Model
         /** 是否有效 */
         public int yn { get; set; }
 
+        public string productWorkshopAttrDesc { get; set; }
 
         public string goodsModel { get; set; }
 

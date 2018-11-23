@@ -516,6 +516,13 @@ namespace WmsApp
                             
                              string goodsModel = this.dataGridView1.Rows[i].Cells["goodsModel"].Value.ToString();
                              string goodsName = this.dataGridView1.Rows[i].Cells["goodsName"].Value.ToString();
+                             string _productWorkshopAttrDesc = "";
+
+                             if (this.dataGridView1.Rows[i].Cells["productWorkshopAttrDesc"].Value != null)
+                             {
+                                 _productWorkshopAttrDesc = this.dataGridView1.Rows[i].Cells["productWorkshopAttrDesc"].Value.ToString();
+                             }
+
                             int diff = orderNum - packageNum;
                              goods = goodsList.Where(p => p.skuCode == skuCode).FirstOrDefault();
                             List<PreprocessInfoAdd> list = new List<PreprocessInfoAdd>();
@@ -606,7 +613,7 @@ namespace WmsApp
                                         foreach (PreprocessInfo item in preprocessInfoList)
                                         {
                                             item.goodsModel = goodsModel;
-
+                                            item.productWorkshopAttrDesc = _productWorkshopAttrDesc;
                                             #region 打印
                                             curPreprocessInfo = item;
                                             PrintDocument document = new PrintDocument();
@@ -909,17 +916,34 @@ namespace WmsApp
                 layoutRectangle = new RectangleF(pointX, height, 120f, 40f);
                 g.Graphics.DrawString( preprocessInfo.goodsModel, font, brush, layoutRectangle);
 
-                 height += 40;
+                 height += 20;
 
            
                 //生产日期
                  layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                 g.Graphics.DrawString("生产日期:" + dtBegin.Value.ToShortDateString(), new Font("宋体", 10f), brush, layoutRectangleRight);
 
-
-                layoutRectangleRight = new RectangleF(pointX, height+30, 300f, 85f);
+                height += 20;
+                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                 g.Graphics.DrawString("北京康安利丰农业有限公司", new Font("宋体", 10f), brush, layoutRectangleRight);
-           
+
+
+                if (preprocessInfo.productWorkshopAttrDesc!=null&&preprocessInfo.productWorkshopAttrDesc != "" && preprocessInfo.productWorkshopAttrDesc != "净毛菜车间" && preprocessInfo.productWorkshopAttrDesc != "库房车间")
+            	{
+                    height +=20;
+                    layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                    g.Graphics.DrawString("保质期:" + expireDay + "天", new Font("宋体", 10f), brush, layoutRectangleRight);
+             	}
+             
+
+                height +=20;
+                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                g.Graphics.DrawString("储存方式:" + "0-8°", new Font("宋体", 10f), brush, layoutRectangleRight);
+
+                height += 20;
+                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                g.Graphics.DrawString("产地:" + "北京平谷", new Font("宋体", 10f), brush, layoutRectangleRight);
+             
         }
         private void btnInput_Click(object sender, EventArgs e)
         {
@@ -974,6 +998,11 @@ namespace WmsApp
 
                                string goodsModel = this.dataGridView1.Rows[i].Cells["goodsModel"].Value.ToString();
                                string goodsName = this.dataGridView1.Rows[i].Cells["goodsName"].Value.ToString();
+                               string _productWorkshopAttrDesc ="";
+                               if (this.dataGridView1.Rows[i].Cells["productWorkshopAttrDesc"].Value!=null)
+                               {
+                                   _productWorkshopAttrDesc = this.dataGridView1.Rows[i].Cells["productWorkshopAttrDesc"].Value.ToString();
+                               }
                                if (UserInfo.CustomerCode != "7001")
                                {
 
@@ -1042,6 +1071,7 @@ namespace WmsApp
                                            foreach (PreprocessInfo item in preprocessInfoList)
                                            {
                                                item.goodsModel = goodsModel;
+                                               item.productWorkshopAttrDesc = _productWorkshopAttrDesc;
 
                                                #region 打印
                                                curPreprocessInfo = item;

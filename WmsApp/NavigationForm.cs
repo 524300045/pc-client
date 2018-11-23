@@ -56,7 +56,7 @@ namespace WmsApp
                             if (((ToolStripButton)tsItem).Name == toolButtonName)
                             {
                                 var curResult = subMenu.Where(p => p.subMenuCode == ((ToolStripButton)tsItem).Tag.ToString());
-                                if (curResult == null)
+                                if (curResult == null || curResult.FirstOrDefault()==null)
                                 {
                                     MessageBox.Show("你无权操作当前菜单!");
                                 }

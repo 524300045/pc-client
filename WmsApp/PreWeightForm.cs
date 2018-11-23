@@ -356,6 +356,7 @@ namespace WmsApp
                                 foreach (PreprocessInfo item in preprocessInfoList)
                                 {
                                     curPreprocessInfo = item;
+                                    curPreprocessInfo.productWorkshopAttrDesc = goods.productWorkshopAttrDesc;
                                     PrintDocument document = new PrintDocument();
                                     document.DefaultPageSettings.PaperSize = new PaperSize("Custum", 270, 180);
 
@@ -478,16 +479,32 @@ namespace WmsApp
             }
          
 
-            height += 40;
+            height += 20;
 
             
             //生产日期
             layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
             g.Graphics.DrawString("生产日期:" + DateTime.Now.ToShortDateString(), new Font("宋体", 10f), brush, layoutRectangleRight);
 
-
-            layoutRectangleRight = new RectangleF(pointX, height + 30, 300f, 85f);
+             height +=20;
+            layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
             g.Graphics.DrawString("北京康安利丰农业有限公司", new Font("宋体", 10f), brush, layoutRectangleRight);
+
+            if (preprocessInfo.productWorkshopAttrDesc!=null&&preprocessInfo.productWorkshopAttrDesc != "" && preprocessInfo.productWorkshopAttrDesc != "净毛菜车间" && preprocessInfo.productWorkshopAttrDesc != "库房车间")
+            {
+                height += 20;
+                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                g.Graphics.DrawString("保质期:" + expireDay + "天", new Font("宋体", 10f), brush, layoutRectangleRight);
+            }
+
+
+            height += 20;
+            layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+            g.Graphics.DrawString("储存方式:" + "0-8°", new Font("宋体", 10f), brush, layoutRectangleRight);
+
+            height += 20;
+            layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+            g.Graphics.DrawString("产地:" + "北京平谷", new Font("宋体", 10f), brush, layoutRectangleRight);
 
         }
 
