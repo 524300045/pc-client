@@ -885,7 +885,7 @@ namespace WmsApp
         public void GetXiBeiPrintPicture(Bitmap image, PrintPageEventArgs g, PreprocessInfo preprocessInfo)
         {
           
-                Font fontCu = new Font("宋体", 12f, FontStyle.Bold);
+                Font fontCu = new Font("宋体", 10f, FontStyle.Bold);
                 int height = 15;
                 int heightRight = 15;
 
@@ -913,36 +913,38 @@ namespace WmsApp
                 height += 40;
                 //重量
 
-                layoutRectangle = new RectangleF(pointX, height, 120f, 40f);
+                layoutRectangle = new RectangleF(pointX, height, 165f, 40f);
                 g.Graphics.DrawString( preprocessInfo.goodsModel, font, brush, layoutRectangle);
 
-                 height += 20;
+                 height += 15;
 
            
                 //生产日期
                  layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                 g.Graphics.DrawString("生产日期:" + dtBegin.Value.ToShortDateString(), new Font("宋体", 10f), brush, layoutRectangleRight);
 
-                height += 20;
-                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                g.Graphics.DrawString("北京康安利丰农业有限公司", new Font("宋体", 10f), brush, layoutRectangleRight);
-
+              
 
                 if (preprocessInfo.productWorkshopAttrDesc!=null&&preprocessInfo.productWorkshopAttrDesc != "" && preprocessInfo.productWorkshopAttrDesc != "净毛菜车间" && preprocessInfo.productWorkshopAttrDesc != "库房车间")
             	{
-                    height +=20;
+                    height += 15;
                     layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                     g.Graphics.DrawString("保质期:" + expireDay + "天", new Font("宋体", 10f), brush, layoutRectangleRight);
              	}
              
 
-                height +=20;
+                height +=15;
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                g.Graphics.DrawString("储存方式:" + "0-8°", new Font("宋体", 10f), brush, layoutRectangleRight);
+                g.Graphics.DrawString("储存方式:" + "0-8°C", new Font("宋体", 10f), brush, layoutRectangleRight);
 
-                height += 20;
+                height += 15;
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                g.Graphics.DrawString("产地:" + "北京平谷", new Font("宋体", 10f), brush, layoutRectangleRight);
+                g.Graphics.DrawString("产地:" + "北京平谷", new Font("宋体", 8f), brush, layoutRectangleRight);
+
+                height += 15;
+                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                g.Graphics.DrawString("北京康安利丰农业有限公司", new Font("宋体", 8f), brush, layoutRectangleRight);
+
              
         }
         private void btnInput_Click(object sender, EventArgs e)
