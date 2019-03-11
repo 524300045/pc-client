@@ -78,6 +78,7 @@
     <Compile Include="Model\GoodsBarCode.cs" />
     <Compile Include="Model\Goods.cs" />
     <Compile Include="Model\GoodsCategory.cs" />
+    <Compile Include="Model\ImportOperateInfo.cs" />
     <Compile Include="Model\Menu.cs" />
     <Compile Include="Model\OutBoundPrintModel.cs" />
     <Compile Include="Model\OutBoundModel.cs" />
@@ -101,6 +102,8 @@
     <Compile Include="Request\BoxInfoAddRequest.cs" />
     <Compile Include="Request\BoxInfoRequest.cs" />
     <Compile Include="Request\CustomerGoodsBySkuRequest.cs" />
+    <Compile Include="Request\DictRequest.cs" />
+    <Compile Include="Request\ImportOrderExeclRequest.cs" />
     <Compile Include="Request\OutBoundRequest.cs" />
     <Compile Include="Request\PreprocessXiBeiInfoRequest.cs" />
     <Compile Include="Request\ProcessProductRequest.cs" />
@@ -128,7 +131,10 @@
     <Compile Include="Response\BoxInfoResponse.cs" />
     <Compile Include="Response\ContainerResponse.cs" />
     <Compile Include="Response\CustomerGoodsBySkuResponse.cs" />
+    <Compile Include="Response\DictResponse.cs" />
+    <Compile Include="Response\ImportOrderExeclResponse.cs" />
     <Compile Include="Response\OutBoundResponse.cs" />
+    <Compile Include="Response\OutBoundSendResponse.cs" />
     <Compile Include="Response\ProcessProductResponse.cs" />
     <Compile Include="Response\GoodsCategoryResponse.cs" />
     <Compile Include="Response\GoodsBarCodeResponse.cs" />

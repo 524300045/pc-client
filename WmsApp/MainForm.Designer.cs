@@ -51,6 +51,8 @@
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbExit = new System.Windows.Forms.ToolStripButton();
+            this.tsbOrderImport = new System.Windows.Forms.ToolStripButton();
+            this.tsbSend = new System.Windows.Forms.ToolStripButton();
             this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -79,7 +81,9 @@
             this.toolStripButton6,
             this.toolStripButton3,
             this.toolStripSeparator8,
-            this.tsbExit});
+            this.tsbExit,
+            this.tsbOrderImport,
+            this.tsbSend});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1370, 27);
@@ -269,6 +273,28 @@
             this.tsbExit.Text = "退出";
             this.tsbExit.Click += new System.EventHandler(this.tsbExit_Click);
             // 
+            // tsbOrderImport
+            // 
+            this.tsbOrderImport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbOrderImport.Image = ((System.Drawing.Image)(resources.GetObject("tsbOrderImport.Image")));
+            this.tsbOrderImport.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbOrderImport.Name = "tsbOrderImport";
+            this.tsbOrderImport.Size = new System.Drawing.Size(93, 24);
+            this.tsbOrderImport.Tag = "RE00181";
+            this.tsbOrderImport.Text = "订单导入";
+            this.tsbOrderImport.Click += new System.EventHandler(this.tsbOrderImport_Click);
+            // 
+            // tsbSend
+            // 
+            this.tsbSend.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbSend.Image = ((System.Drawing.Image)(resources.GetObject("tsbSend.Image")));
+            this.tsbSend.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSend.Name = "tsbSend";
+            this.tsbSend.Size = new System.Drawing.Size(93, 24);
+            this.tsbSend.Tag = "RE00182";
+            this.tsbSend.Text = "订单发运";
+            this.tsbSend.Click += new System.EventHandler(this.tsbSend_Click);
+            // 
             // dockPanel1
             // 
             this.dockPanel1.ActiveAutoHideContent = null;
@@ -330,6 +356,8 @@
         private System.Windows.Forms.ToolStripButton tsbParnterPrint;
         private System.Windows.Forms.ToolStripButton toolStripButton6;
         private System.Windows.Forms.ToolStripButton tsbSendPrint;
+        private System.Windows.Forms.ToolStripButton tsbOrderImport;
+        private System.Windows.Forms.ToolStripButton tsbSend;
     }
 }
 

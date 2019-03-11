@@ -34,6 +34,11 @@ namespace WmsApp
 
        public static string labelName;
 
+       /// <summary>
+       /// 区域名称
+       /// </summary>
+       public static String areaName;
+
        public static List<Menu> menuDtos { get; set; }
     }
 }

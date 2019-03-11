@@ -82,6 +82,9 @@ namespace WmsSDK.Response
          [JsonProperty("twoCategoryCode")]
           public String twoCategoryCode { get; set; }
 
+          [JsonProperty("categoryCode")]
+         public string categoryCode { get; set; }
+
         public string statusDes
         {
             get

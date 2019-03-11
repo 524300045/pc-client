@@ -23,10 +23,43 @@ namespace WmsSDK.Request
 
         public int page;
 
+     
+
      //   public int status;
         public string GetAPIPath()
         {
             return "/outBound/getOutBoundPrintPageList";
+        }
+
+    }
+
+
+    public class OutBoundQueryRequest : IWMSRequest<OutBoundPageResponse>
+    {
+        public String storedCode;
+
+        /** 开始时间 */
+        public DateTime startTime;
+        /** 结束时间 */
+        public DateTime endTime;
+
+        public String warehouseCode;
+
+        public String customerCode;
+
+
+        public int? status;
+
+        public int? isPrint;
+
+        public int page;
+
+
+
+        //   public int status;
+        public string GetAPIPath()
+        {
+            return "/outBound/getOutBoundPageList";
         }
 
     }
@@ -46,4 +79,45 @@ namespace WmsSDK.Request
     }
 
 
+    //public class OutBoundSendRequest : IWMSRequest<OutBoundSendResponse>
+    //{
+
+    //    public string GetAPIPath()
+    //    {
+    //        return "/outBound/getOutBoundPrintPageList";
+    //    }
+    //    public List<string> codes { get; set; }
+
+    //}
+
+    public class OutBoundCheckRequest : IWMSRequest<OutBoundCheckResponse>
+    {
+
+        public string GetAPIPath()
+        {
+            return "/outBound/check";
+        }
+        public List<string> outboundTaskCodes { get; set; }
+
+    }
+
+
+    public class OutBoundSendRequest : IWMSRequest<OutBoundSendResponse>
+    {
+
+        public string GetAPIPath()
+        {
+            return "/outBound/send";
+        }
+        public List<string> outboundTaskCodes { get; set; }
+
+        public String createUser { get; set; }
+
+        public String customerCode { get; set; }
+
+        public String warehouseCode { get; set; }
+
+        public String customerName { get; set; }
+
+    }
 }

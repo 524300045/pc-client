@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using WmsApp.Order;
 using WmsSDK.Model;
 
 namespace WmsApp
@@ -159,7 +160,25 @@ namespace WmsApp
         private void pbSendPrint_Click(object sender, EventArgs e)
         {
             OpenForm("tsbSendPrint");
+          
             
+        }
+
+        private void pbPrintMargin_Click(object sender, EventArgs e)
+        {
+            PrintPageForm form = new PrintPageForm();
+
+            form.ShowDialog();
+        }
+
+        private void pbOrderImport_Click(object sender, EventArgs e)
+        {
+            OpenForm("tsbOrderImport"); 
+        }
+
+        private void pbSend_Click(object sender, EventArgs e)
+        {
+            OpenForm("tsbSend"); 
         }
     
     }

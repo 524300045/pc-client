@@ -18,6 +18,15 @@ namespace WmsSDK.Response
        public PageUtil pageUtil { get; set; }
    }
 
+
+   public class OutBoundPageResponse : WMSResponse
+   {
+
+       public List<ShipmentModel> result { get; set; }
+
+       public PageUtil pageUtil { get; set; }
+   }
+
    public class OutBoundPrintDetailResponse : WMSResponse
    {
      //  public List<ShipMentDetailVo> result { get; set; }

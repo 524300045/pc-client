@@ -18,6 +18,8 @@ namespace WmsSDK.Request
         public string customerCode { get; set; }
 
         public string warehouseCode { get; set; }
+
+        public int? status { get; set; }
     }
 
     public class StoreInfoAllRequest : IWMSRequest<StoreInfoResponse>

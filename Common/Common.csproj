@@ -44,6 +44,9 @@
     <Reference Include="NPOI.OpenXml4Net">
       <HintPath>..\lib\NPOI.OpenXml4Net.dll</HintPath>
     </Reference>
+    <Reference Include="NPOI.OpenXmlFormats">
+      <HintPath>..\lib\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -55,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExcelHelper.cs" />
     <Compile Include="LogHelper.cs" />
     <Compile Include="NPOIHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

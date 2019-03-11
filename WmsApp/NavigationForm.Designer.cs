@@ -55,6 +55,12 @@
             this.label11 = new System.Windows.Forms.Label();
             this.pbSendPrint = new System.Windows.Forms.PictureBox();
             this.label12 = new System.Windows.Forms.Label();
+            this.pbPrintMargin = new System.Windows.Forms.PictureBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.pbOrderImport = new System.Windows.Forms.PictureBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.pbSend = new System.Windows.Forms.PictureBox();
+            this.label16 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbOrderPackage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbGoodsPackage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBoxPrint)).BeginInit();
@@ -68,6 +74,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbCloseAll)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPrePackQuery)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSendPrint)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPrintMargin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbOrderImport)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSend)).BeginInit();
             this.SuspendLayout();
             // 
             // pbOrderPackage
@@ -326,7 +335,7 @@
             // pbSendPrint
             // 
             this.pbSendPrint.Image = ((System.Drawing.Image)(resources.GetObject("pbSendPrint.Image")));
-            this.pbSendPrint.Location = new System.Drawing.Point(603, 195);
+            this.pbSendPrint.Location = new System.Drawing.Point(741, 195);
             this.pbSendPrint.Name = "pbSendPrint";
             this.pbSendPrint.Size = new System.Drawing.Size(78, 69);
             this.pbSendPrint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -337,18 +346,82 @@
             // label12
             // 
             this.label12.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label12.Location = new System.Drawing.Point(609, 267);
+            this.label12.Location = new System.Drawing.Point(747, 267);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(67, 23);
             this.label12.TabIndex = 1;
             this.label12.Text = "发运打印";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // pbPrintMargin
+            // 
+            this.pbPrintMargin.Image = ((System.Drawing.Image)(resources.GetObject("pbPrintMargin.Image")));
+            this.pbPrintMargin.Location = new System.Drawing.Point(603, 195);
+            this.pbPrintMargin.Name = "pbPrintMargin";
+            this.pbPrintMargin.Size = new System.Drawing.Size(78, 69);
+            this.pbPrintMargin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbPrintMargin.TabIndex = 0;
+            this.pbPrintMargin.TabStop = false;
+            this.pbPrintMargin.Click += new System.EventHandler(this.pbPrintMargin_Click);
+            // 
+            // label14
+            // 
+            this.label14.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label14.Location = new System.Drawing.Point(609, 267);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(67, 23);
+            this.label14.TabIndex = 1;
+            this.label14.Text = "打印边距";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pbOrderImport
+            // 
+            this.pbOrderImport.Image = ((System.Drawing.Image)(resources.GetObject("pbOrderImport.Image")));
+            this.pbOrderImport.Location = new System.Drawing.Point(870, 55);
+            this.pbOrderImport.Name = "pbOrderImport";
+            this.pbOrderImport.Size = new System.Drawing.Size(78, 69);
+            this.pbOrderImport.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbOrderImport.TabIndex = 0;
+            this.pbOrderImport.TabStop = false;
+            this.pbOrderImport.Click += new System.EventHandler(this.pbOrderImport_Click);
+            // 
+            // label15
+            // 
+            this.label15.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label15.Location = new System.Drawing.Point(845, 127);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(134, 23);
+            this.label15.TabIndex = 1;
+            this.label15.Text = "订单导入";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pbSend
+            // 
+            this.pbSend.Image = ((System.Drawing.Image)(resources.GetObject("pbSend.Image")));
+            this.pbSend.Location = new System.Drawing.Point(870, 195);
+            this.pbSend.Name = "pbSend";
+            this.pbSend.Size = new System.Drawing.Size(78, 69);
+            this.pbSend.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbSend.TabIndex = 0;
+            this.pbSend.TabStop = false;
+            this.pbSend.Click += new System.EventHandler(this.pbSend_Click);
+            // 
+            // label16
+            // 
+            this.label16.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label16.Location = new System.Drawing.Point(876, 267);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(67, 23);
+            this.label16.TabIndex = 1;
+            this.label16.Text = "发运";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // NavigationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1041, 504);
+            this.Controls.Add(this.label15);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -357,11 +430,14 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.label16);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.pbOrderImport);
             this.Controls.Add(this.pbPrePackQuery);
             this.Controls.Add(this.pbPackTaskQuery);
             this.Controls.Add(this.pbTaskQuery);
@@ -369,6 +445,8 @@
             this.Controls.Add(this.pbCloseAll);
             this.Controls.Add(this.pbBoxPrint);
             this.Controls.Add(this.pbSupplierBarCodePrint);
+            this.Controls.Add(this.pbPrintMargin);
+            this.Controls.Add(this.pbSend);
             this.Controls.Add(this.pbSendPrint);
             this.Controls.Add(this.pbContaierPrint);
             this.Controls.Add(this.pbExit);
@@ -390,6 +468,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbCloseAll)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPrePackQuery)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSendPrint)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPrintMargin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbOrderImport)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSend)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -422,6 +503,12 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.PictureBox pbSendPrint;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.PictureBox pbPrintMargin;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.PictureBox pbOrderImport;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.PictureBox pbSend;
+        private System.Windows.Forms.Label label16;
 
     }
 }

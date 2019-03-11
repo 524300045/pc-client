@@ -101,11 +101,36 @@
     <Compile Include="InputNumForm.Designer.cs">
       <DependentUpon>InputNumForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="LoaderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoaderForm.Designer.cs">
+      <DependentUpon>LoaderForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoadingHelper.cs" />
     <Compile Include="NavigationForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="NavigationForm.Designer.cs">
       <DependentUpon>NavigationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Order\OrderImportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Order\OrderImportForm.Designer.cs">
+      <DependentUpon>OrderImportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Order\OutBoundSendForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Order\OutBoundSendForm.Designer.cs">
+      <DependentUpon>OutBoundSendForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Order\SelectOrderExeclForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Order\SelectOrderExeclForm.Designer.cs">
+      <DependentUpon>SelectOrderExeclForm.cs</DependentUpon>
     </Compile>
     <Compile Include="OutBoundHelper.cs" />
     <Compile Include="PartnerGoodsBarCodePrintForm.cs">
@@ -174,18 +199,31 @@
     <Compile Include="PrintBoxForm.Designer.cs">
       <DependentUpon>PrintBoxForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PrintPageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintPageForm.Designer.cs">
+      <DependentUpon>PrintPageForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SendPrintForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SendPrintForm.Designer.cs">
       <DependentUpon>SendPrintForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SystemInfo.cs" />
     <Compile Include="UserInfo.cs" />
     <Compile Include="PreWeightForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PreWeightForm.Designer.cs">
       <DependentUpon>PreWeightForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WaitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WaitForm.Designer.cs">
+      <DependentUpon>WaitForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WeightForm.cs">
       <SubType>Form</SubType>
@@ -232,8 +270,20 @@
     <EmbeddedResource Include="InputNumForm.resx">
       <DependentUpon>InputNumForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="LoaderForm.resx">
+      <DependentUpon>LoaderForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NavigationForm.resx">
       <DependentUpon>NavigationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Order\OrderImportForm.resx">
+      <DependentUpon>OrderImportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Order\OutBoundSendForm.resx">
+      <DependentUpon>OutBoundSendForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Order\SelectOrderExeclForm.resx">
+      <DependentUpon>SelectOrderExeclForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PartnerGoodsBarCodePrintForm.resx">
       <DependentUpon>PartnerGoodsBarCodePrintForm.cs</DependentUpon>
@@ -274,6 +324,9 @@
     <EmbeddedResource Include="PrintBoxForm.resx">
       <DependentUpon>PrintBoxForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PrintPageForm.resx">
+      <DependentUpon>PrintPageForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -292,6 +345,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PreWeightForm.resx">
       <DependentUpon>PreWeightForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WaitForm.resx">
+      <DependentUpon>WaitForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WeightForm.resx">
       <DependentUpon>WeightForm.cs</DependentUpon>

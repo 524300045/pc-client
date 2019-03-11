@@ -43,13 +43,14 @@ namespace WmsApp
             request.partnerCode = UserInfo.PartnerCode;
             request.customerCode = UserInfo.CustomerCode;
             request.warehouseCode = UserInfo.WareHouseCode;
+            request.status = 1;
             StoreInfoResponse response = client.Execute(request);
             if (!response.IsError)
             {
                 if (response.result != null)
                 {
                     List<StoreInfo> storeList = new List<StoreInfo>();
-                    storeList = response.result.OrderBy(p=>p.storedCode).ToList();
+                    storeList = response.result.OrderBy(p=>p.priority).ToList();
                     this.dataGridView1.DataSource = storeList;
                     for (int i = 0; i < dataGridView1.Rows.Count; i++)
                     {

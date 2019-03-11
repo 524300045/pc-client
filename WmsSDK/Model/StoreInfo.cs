@@ -14,5 +14,8 @@ namespace WmsSDK.Model
         /** 门店名称 */
        [JsonProperty("storedName")]
        public String storedName { get; set; }
+
+
+       public int? priority { get; set; }
     }
 }

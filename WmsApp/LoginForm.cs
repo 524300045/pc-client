@@ -3,6 +3,7 @@ using Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -97,9 +98,15 @@ namespace WmsApp
                 request.warehouseCode = cbWare.SelectedValue.ToString();
                 string json = DefalutWMSClient.GetJson(request);
 
-      //  string result = PostMoths("http://www.bjkalf.net:8090/services/user/checkAndGetUserResource", json);
+                #if(!DEBUG)
+                 string result = PostMoths("http://www.bjkalf.net:8090/services/user/checkAndGetUserResource", json);
+#else
+                string result = PostMoths("http://test.api.portal.bjshengeng.com/services/user/checkAndGetUserResource", json);
+           
+#endif
 
-      string result = PostMoths("http://test.api.portal.bjshengeng.com/services/user/checkAndGetUserResource", json);
+
+               
 
                 LoginResponse response = DefalutWMSClient.ToObject<LoginResponse>(result);
 
@@ -189,6 +196,12 @@ namespace WmsApp
         {
                string version=System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
                tbVersion.Text = "Version " + version;
+             string leftMargin=GetConfigValue("printleft");
+            // MessageBox.Show(leftMargin);
+             if (!string.IsNullOrWhiteSpace(leftMargin))
+             {
+                 SystemInfo.PrintMarginLeft = int.Parse(leftMargin);
+             }
                try
                {
                    BindWare();
@@ -198,6 +211,23 @@ namespace WmsApp
                    MessageBox.Show("获取数据异常");
                }
         }
+
+
+        /// <summary>
+        /// 获取AppSettings中某一节点值
+        /// </summary>
+        /// <param name="key"></param>
+        public static string GetConfigValue(string key)
+        {
+                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                if (config.AppSettings.Settings[key] != null)
+                     return  config.AppSettings.Settings[key].Value;
+                else
+                  
+                return string.Empty;
+        }    
+
+
 
         private  void BindWare()
         {

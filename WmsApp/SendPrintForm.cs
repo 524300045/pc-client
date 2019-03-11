@@ -89,6 +89,7 @@ namespace WmsApp
             }
             cbPrinter.SelectedIndex = 0;
             cbPrinter.SelectedIndexChanged += cbPrinter_SelectedIndexChanged;
+            dtBegin.Focus();
         }
 
 
@@ -290,6 +291,10 @@ namespace WmsApp
                     {
                         PrintRongDa(item);
                     }
+                    else if (UserInfo.CustomerCode=="10001")
+                    {
+                        PrintTangChen(item);
+                    }
                     else
                     {
                         Print(item);
@@ -324,7 +329,8 @@ namespace WmsApp
 
                 OutBoundPrintModel outBoundPrint = response.result;
 
-                OutBoundPrint orderPrint = new OutBoundPrint(false, new Margins(10, 10, 10, 50));
+                OutBoundPrint orderPrint = new OutBoundPrint(false, new Margins(10, 10, 1, 1));
+                orderPrint.RowsPerPage = 27;
                 Image barcode = Code128Rendering.GetCodeAorBImg(taskCode, 70, 1, true);
                 orderPrint.BarCode = OutBoundHelper.BuildBarCode(response.result.remark + "送货单", 1, null);
                 orderPrint.Header = OutBoundHelper.BuildHeader(outBoundPrint);
@@ -338,9 +344,9 @@ namespace WmsApp
                 orderPrint.PrintDocument.PrinterSettings.PrinterName = cbPrinter.Text;
 #if DEBUG
 
-            //   orderPrint.Print();
+            orderPrint.Print();
 
-               orderPrint.Preview();
+              // orderPrint.Preview();
 #else
             //orderPrint.Preview(); 
             orderPrint.Print();
@@ -398,6 +404,47 @@ namespace WmsApp
 
             }
         }
+
+
+        private void PrintTangChen(string taskCode)
+        {
+
+            OutBoundDetailPrintRequest request = new OutBoundDetailPrintRequest();
+            request.outboundTaskCode = taskCode;
+            request.printMan = UserInfo.UserName;
+            request.updateUser = UserInfo.UserName;
+            OutBoundPrintDetailResponse response = client.Execute(request);
+            if (!response.IsError)
+            {
+                List<ShipMentDetailVo> detaiList = response.result.detailList;
+
+                OutBoundPrintModel outBoundPrint = response.result;
+
+                OutBoundPrint orderPrint = new OutBoundPrint(false, new Margins(10, 10, 10, 50));
+                Image barcode = Code128Rendering.GetCodeAorBImg(taskCode, 70, 1, true);
+                orderPrint.BarCode = OutBoundHelper.BuildBarCode(response.result.remark + "送货单", 1, null);
+                orderPrint.Header = OutBoundHelper.BuildTangChenHeader(outBoundPrint);
+                orderPrint.MultiHeader1 = OutBoundHelper.BuildTangChenMultiHeader();
+                string[,] arr = OutBoundHelper.ToTangChenArrFromList(detaiList);
+                orderPrint.Body1 = OutBoundHelper.BuildTangChenArriveBody(arr);
+                orderPrint.Bottom = OutBoundHelper.BuildBottom(response.result.companyAddress, UserInfo.RealName);
+                orderPrint.Footer = OutBoundHelper.BuildFooter();
+
+                orderPrint.PrintDocument.PrinterSettings.PrinterName = cbPrinter.Text;
+#if DEBUG
+
+                orderPrint.Print();
+
+                //  orderPrint.Preview();
+#else
+            //orderPrint.Preview(); 
+            orderPrint.Print();
+#endif
+
+            }
+        }
+
+
         private void cbPrinter_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Configuration cfa = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);

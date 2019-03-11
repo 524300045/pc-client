@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using WeifenLuo.WinFormsUI.Docking;
+using WmsApp.Order;
 using WmsSDK;
 using WmsSDK.Model;
 using WmsSDK.Request;
@@ -275,6 +276,7 @@ namespace WmsApp
                 if (response.result != null)
                 {
                     UserInfo.labelName = response.result.labelName;
+                    UserInfo.areaName = response.result.areaName;
                 }
             }
         }
@@ -414,6 +416,32 @@ namespace WmsApp
                 LogHelper.Log(ex.Message);
             }
 
+        }
+
+        private void tsbOrderImport_Click(object sender, EventArgs e)
+        {
+            DockContent fx = FindCurrentForm("OrderImportForm");
+            if (fx == null)
+            {
+                AddToFrame(new OrderImportForm());
+            }
+            else
+            {
+                fx.Activate();
+            }
+        }
+
+        private void tsbSend_Click(object sender, EventArgs e)
+        {
+            DockContent fx = FindCurrentForm("OutBoundSendForm");
+            if (fx == null)
+            {
+                AddToFrame(new OutBoundSendForm());
+            }
+            else
+            {
+                fx.Activate();
+            }
         }
 
 

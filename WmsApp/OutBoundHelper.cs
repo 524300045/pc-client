@@ -94,11 +94,27 @@ namespace WmsApp
             return mhObj;
         }
 
+        public static MultiHeader BuildTangChenMultiHeader()
+        {
+            MultiHeader mhObj;
+            mhObj = new MultiHeader(1, 10);
+            mhObj.Font = bodyBoldFont;
+            mhObj.ColsAlign = "CCCCCCC";
+            mhObj.Text = new string[,] { { "#", "名称", "单位", "下单量", "发货数", "#", "名称", "单位", "下单量", "发货数" } };
+            mhObj.ColsWidth = BuildTangChenColsWidth();
+            return mhObj;
+        }
+
         public static int[] BuildRongDaColsWidth()
         {
             return new int[] { 30, 155, 40, 60, 60, 65, 30, 155, 40, 60, 60, 65 };
         }
 
+
+        public static int[] BuildTangChenColsWidth()
+        {
+            return new int[] { 30, 155, 40, 60, 80, 30, 155, 40, 60,80 };
+        }
 
 
 
@@ -160,6 +176,25 @@ namespace WmsApp
             return headerObj;
         }
 
+
+        public static Header BuildTangChenHeader(OutBoundPrintModel orderModel)
+        {
+            Header headerObj = new Header();
+            headerObj.Font = bodyBoldFont;
+            if (orderModel.receiverPhone == null || orderModel.receiverPhone.ToString() == "null")
+            {
+                orderModel.receiverPhone = "";
+            }
+            headerObj.DataSource = new string[,] { 
+                                                                         { "购货单位:"+orderModel.storedName, "送货日期:"+Convert.ToDateTime(orderModel.deliveryDate).ToString("yyyy-MM-dd"),"交货单号:"+orderModel.outboundTaskCode}, 
+                                                                         { "联系人:"+orderModel.receiver, "地址:"+orderModel.address,""},
+                                                                          { "客户电话:"+orderModel.receiverPhone,"业务&电话:"+orderModel.customerPhone,""},
+                                                                           { "备注:"+orderModel.orderNo,"",""}
+                                                                         };
+            headerObj.DrawGrid.Merge = GridMergeFlag.Row;
+            return headerObj;
+        }
+
         /// <summary>
         /// 生成打印所需的body对象 换回商品信息
         /// </summary>
@@ -188,6 +223,17 @@ namespace WmsApp
             return body;
         }
 
+
+        public static Body BuildTangChenArriveBody(string[,] arr)
+        {
+            Body body = new Body();
+            body.IsAverageColsWidth = false;
+            body.Font = bodyBodyFont2;
+            //    body.ColsAlignString = "CCCCCCC";
+            body.DataSource = arr;
+            body.ColsWidth = BuildTangChenColsWidth();
+            return body;
+        }
 
         /// <summary>
         /// 获取图片的十六进制ascii码
@@ -377,6 +423,90 @@ namespace WmsApp
 
             return arrGridText;
         }
+
+
+        public static string[,] ToTangChenArrFromList(List<ShipMentDetailVo> list)
+        {
+
+            if (list == null)
+            {
+                return new string[0, 0];
+            }
+
+            int mRows, mCols;
+            string[,] arrGridText;
+
+            if (list.Count % 2 == 0)
+            {
+                mRows = list.Count / 2;
+            }
+            else
+            {
+                mRows = list.Count / 2 + 1;
+            }
+
+            mCols = 10;
+
+            arrGridText = new string[mRows, mCols];
+
+            if (list.Count % 2 == 0)
+            {
+                int m = 0;
+                for (int i = 0; i < mRows; i++)
+                {
+
+                    arrGridText[i, 0] = (m + 1).ToString();
+                    arrGridText[i, 1] = list[m].goodsName;
+                    arrGridText[i, 2] = list[m].goodsUnit;
+                    arrGridText[i, 3] = list[m].planNum.ToString("f2");
+                    arrGridText[i, 4] = list[m].deliveryNum.ToString("f3");
+                 
+                  //  arrGridText[i, 5] = (list[m].taxPrice * list[m].deliveryNum).ToString("f2");
+                    m = m + 1;
+                    arrGridText[i, 5] = (m + 1).ToString();
+                    arrGridText[i, 6] = list[m].goodsName;
+
+                    arrGridText[i, 7] = list[m].goodsUnit;
+                    arrGridText[i, 8] = list[m].planNum.ToString("f2");
+                    arrGridText[i, 9] = list[m].deliveryNum.ToString("f3");
+                
+                   // arrGridText[i, 11] = (list[m].taxPrice * list[m].deliveryNum).ToString("f2");
+                    m = m + 1;
+                }
+            }
+            else
+            {
+                int m = 0;
+                for (int i = 0; i < mRows; i++)
+                {
+                    arrGridText[i, 0] = (m + 1).ToString();
+                    arrGridText[i, 1] = list[m].goodsName;
+                    arrGridText[i, 2] = list[m].goodsUnit;
+                    arrGridText[i, 3] = list[m].planNum.ToString("f3");
+                    arrGridText[i,4] = list[m].deliveryNum.ToString("f3");
+                 //   arrGridText[i, 4] = list[m].taxPrice.ToString("f2");
+                //    arrGridText[i, 5] = (list[m].taxPrice * list[m].deliveryNum).ToString("f2");
+                    m = m + 1;
+                    if (i != mRows - 1)
+                    {
+                        arrGridText[i, 5] = (m + 1).ToString();
+                        arrGridText[i, 6] = list[m].goodsName;
+
+                        arrGridText[i, 7] = list[m].goodsUnit;
+                        arrGridText[i, 8] = list[m].planNum.ToString("f3");
+                        arrGridText[i, 9] = list[m].deliveryNum.ToString("f3");
+                  
+                        // arrGridText[i, 11] = (list[m].taxPrice * list[m].deliveryNum).ToString("f2");
+                        m = m + 1;
+                    }
+
+                }
+            }
+
+
+            return arrGridText;
+        }
+
 
 
         public static Footer BuildFooter()

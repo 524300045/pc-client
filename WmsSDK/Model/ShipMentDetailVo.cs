@@ -24,6 +24,8 @@ namespace WmsSDK.Model
 
         public decimal deliveryNum { get; set; }
 
+
+        public decimal planNum { get; set; }
         /**
          * 单行小计
          */

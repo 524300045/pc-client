@@ -137,6 +137,9 @@ namespace WmsApp
 
                             PrintDocument document = new PrintDocument();
                             document.DefaultPageSettings.PaperSize = new PaperSize("Custum", 270, 180);
+                            document.OriginAtMargins = true;
+                            document.DefaultPageSettings.Landscape = false;
+                            document.DefaultPageSettings.Margins = new Margins(SystemInfo.PrintMarginLeft, 1, 0, 1);
 
 #if(!DEBUG)
                         PrintDialog dialog = new PrintDialog();
@@ -206,7 +209,7 @@ namespace WmsApp
 
         public void GetPrintPicture(Bitmap image, PrintPageEventArgs g)
         {
-            if (curPackageDetailQuery.twoCategoryCode == "0103")
+            if (curPackageDetailQuery.categoryCode == "10")
             {
                 Font fontCu = new Font("宋体", 12f, FontStyle.Bold);
                 int height = 15;
@@ -216,12 +219,12 @@ namespace WmsApp
                 Brush brush = new SolidBrush(Color.Black);
                 g.Graphics.SmoothingMode = SmoothingMode.HighQuality;
                 int interval = 5;
-                int pointX = 35;
+                int pointX = 5;
 
                 RectangleF layoutRectangleRight = new RectangleF(135f, 5, 130f, 85f);
                 //g.Graphics.DrawString(preprocessInfo.preprocessCode, font, brush, layoutRectangleRight);
 
-                Rectangle destRect = new Rectangle(200, -15, image.Width, image.Height);
+                Rectangle destRect = new Rectangle(160, -15, image.Width, image.Height);
                 g.Graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel);
                 heightRight = image.Width - 20;
 
@@ -257,9 +260,10 @@ namespace WmsApp
                 Rectangle dest2Rect = new Rectangle(pointX, 80, image.Width, image.Height);
                 g.Graphics.DrawImage(image, dest2Rect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel);
 
+                Font fontCode = new Font("宋体", 8f);
                 height = 80 + image.Height - 15;
                 layoutRectangle = new RectangleF(pointX, height, 150f, 30f);
-                g.Graphics.DrawString(curPackageDetailQuery.packageCode, font, brush, layoutRectangle);
+                g.Graphics.DrawString(curPackageDetailQuery.packageCode, fontCode, brush, layoutRectangle);
 
                 //流通号
                 layoutRectangleRight = new RectangleF(pointX, 60, 300f, 85f);
@@ -288,12 +292,12 @@ namespace WmsApp
                 Brush brush = new SolidBrush(Color.Black);
                 g.Graphics.SmoothingMode = SmoothingMode.HighQuality;
                 int interval = 5;
-                int pointX = 35;
+                int pointX =5;
 
                 RectangleF layoutRectangleRight = new RectangleF(135f, 5, 130f, 85f);
                 //g.Graphics.DrawString(preprocessInfo.preprocessCode, font, brush, layoutRectangleRight);
 
-                Rectangle destRect = new Rectangle(200, -15, image.Width, image.Height);
+                Rectangle destRect = new Rectangle(160, -15, image.Width, image.Height);
                 g.Graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel);
                 heightRight = image.Width - 20;
 
@@ -335,9 +339,9 @@ namespace WmsApp
                 g.Graphics.DrawImage(image, dest2Rect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel);
 
                 height = 80 + image.Height - 15;
-
+                Font fontCode = new Font("宋体", 8f);
                 layoutRectangle = new RectangleF(pointX, height, 120f, 30f);
-                g.Graphics.DrawString(curPackageDetailQuery.packageCode, font, brush, layoutRectangle);
+                g.Graphics.DrawString(curPackageDetailQuery.packageCode, fontCode, brush, layoutRectangle);
             }
         }
 
