@@ -53,6 +53,8 @@ namespace WmsSDK.Request
            public String partnerName { get; set; }
 
 
+         [JsonProperty("goodsName")]
+           public string goodsName { get; set; }
 
     }
 }

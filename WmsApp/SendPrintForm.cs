@@ -286,14 +286,18 @@ namespace WmsApp
 
                 foreach (string item in list)
                 {
-        
-                    if (UserInfo.CustomerCode == "4001")
+
+                    if (UserInfo.CustomerCode == "4001" || UserInfo.CustomerCode == "12001")
                     {
                         PrintRongDa(item);
                     }
                     else if (UserInfo.CustomerCode=="10001")
                     {
                         PrintTangChen(item);
+                    }
+                    else if (UserInfo.CustomerCode=="7001")
+                    {
+                        PrintXiBei(item);
                     }
                     else
                     {
@@ -443,6 +447,47 @@ namespace WmsApp
 
             }
         }
+
+
+
+        private void PrintXiBei(string taskCode)
+        {
+
+            OutBoundDetailPrintRequest request = new OutBoundDetailPrintRequest();
+            request.outboundTaskCode = taskCode;
+            request.printMan = UserInfo.UserName;
+            request.updateUser = UserInfo.UserName;
+            OutBoundPrintDetailResponse response = client.Execute(request);
+            if (!response.IsError)
+            {
+                List<ShipMentDetailVo> detaiList = response.result.detailList;
+
+                OutBoundPrintModel outBoundPrint = response.result;
+
+                OutBoundPrint orderPrint = new OutBoundPrint(false, new Margins(10, 10, 10, 50));
+                Image barcode = Code128Rendering.GetCodeAorBImg(taskCode, 70, 1, true);
+                orderPrint.BarCode = OutBoundHelper.BuildBarCode(response.result.remark + "送货单", 1, null);
+                orderPrint.Header = OutBoundHelper.BuildXiBeiHeader(outBoundPrint);
+                orderPrint.MultiHeader1 = OutBoundHelper.BuildXiBeiHeader();
+                string[,] arr = OutBoundHelper.ToXiBeiArrFromList(detaiList);
+                orderPrint.Body1 = OutBoundHelper.BuildXiBeiArriveBody(arr);
+                orderPrint.Bottom = OutBoundHelper.BuildBottom(response.result.companyAddress, UserInfo.RealName);
+                orderPrint.Footer = OutBoundHelper.BuildFooter();
+
+                orderPrint.PrintDocument.PrinterSettings.PrinterName = cbPrinter.Text;
+#if DEBUG
+
+                orderPrint.Print();
+
+                //  orderPrint.Preview();
+#else
+            //orderPrint.Preview(); 
+            orderPrint.Print();
+#endif
+
+            }
+        }
+
 
 
         private void cbPrinter_SelectedIndexChanged(object sender, EventArgs e)

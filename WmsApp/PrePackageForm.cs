@@ -58,9 +58,29 @@ namespace WmsApp
             BindProcess();
             BindWorkShop();
 
+            string name = tbName.Text.Trim();
+
+            int? processProduct = null;
+            int? workShop = null;
+            if (cbProcessProduct.SelectedIndex != 0)
+            {
+                processProduct = int.Parse(cbProcessProduct.SelectedValue.ToString());
+            }
+
+            if (cbWorkShop.SelectedIndex != 0)
+            {
+                workShop = int.Parse(cbWorkShop.SelectedValue.ToString());
+            }
+
+            int? isStand = null;
+            if (chk.Checked)
+            {
+                isStand = 1;
+            }
 
             Task.Factory.StartNew(() => {
-                btnQuery_Click(null,null);
+               // btnQuery_Click(null,null);
+                QueryData(name, processProduct, workShop, isStand);
             });
         }
 
@@ -237,9 +257,35 @@ namespace WmsApp
                         
                     }
 
+                    //Task.Factory.StartNew(() =>
+                    //{
+                    //    btnQuery_Click(null, null);
+                    //});
+
+                    string name = tbName.Text.Trim();
+
+                    int? processProduct = null;
+                    int? workShop = null;
+                    if (cbProcessProduct.SelectedIndex != 0)
+                    {
+                        processProduct = int.Parse(cbProcessProduct.SelectedValue.ToString());
+                    }
+
+                    if (cbWorkShop.SelectedIndex != 0)
+                    {
+                        workShop = int.Parse(cbWorkShop.SelectedValue.ToString());
+                    }
+
+                    int? isStand = null;
+                    if (chk.Checked)
+                    {
+                        isStand = 1;
+                    }
+
                     Task.Factory.StartNew(() =>
                     {
-                        btnQuery_Click(null, null);
+                        // btnQuery_Click(null,null);
+                        QueryData(name, processProduct, workShop, isStand);
                     });
                   
                 }
@@ -314,6 +360,62 @@ namespace WmsApp
             });
 
        
+        }
+
+
+        private void QueryData(string name, int? processProduct, int? workShop, int? isStand)
+        {
+
+           // string name = tbName.Text.Trim();
+
+            //int? processProduct = null;
+         //   int? workShop = null;
+            //if (cbProcessProduct.SelectedIndex != 0)
+            //{
+            //    processProduct = int.Parse(cbProcessProduct.SelectedValue.ToString());
+            //}
+
+            //if (cbWorkShop.SelectedIndex != 0)
+            //{
+            //    workShop = int.Parse(cbWorkShop.SelectedValue.ToString());
+            //}
+
+            //int? isStand = null;
+            //if (chk.Checked)
+            //{
+            //    isStand = 1;
+            //}
+
+            Task.Factory.StartNew(() =>
+            {
+
+                try
+                {
+                    this.Invoke(new MethodInvoker(delegate()
+                    {
+                        btnQuery.Text = "正在查询";
+                        btnQuery.Enabled = false;
+                    }));
+                    paginator.PageNo = 1;
+                    BindDgv(name, processProduct, workShop, isStand);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("查询异常" + ex.Message);
+                    LogHelper.Log("btnQuery_Click" + ex.Message);
+                }
+                finally
+                {
+                    this.Invoke(new MethodInvoker(delegate()
+                    {
+                        btnQuery.Enabled = true;
+                        btnQuery.Text = "查询";
+                    }));
+
+                }
+            });
+
+
         }
 
         private void pageSplit1_PageChanged(object sender, EventArgs e)
@@ -493,6 +595,8 @@ namespace WmsApp
                         }
                         if (this.dataGridView1.Rows[i].Cells["isStandardProcess"].Value.ToString() == "1")
                         {
+                            string skuCode = this.dataGridView1.Rows[i].Cells["skuCode"].Value.ToString();
+
                             int orderNum = 0;
                             if (this.dataGridView1.Rows[i].Cells["orderNum"].Value != null)
                             {
@@ -506,14 +610,16 @@ namespace WmsApp
 
                             if ((orderNum - packageNum) <= 0)
                             {
+                                LogHelper.Log(skuCode+",没有订单量,"+orderNum+"--"+packageNum);
                                 continue;
                             }
-                             string skuCode = this.dataGridView1.Rows[i].Cells["skuCode"].Value.ToString();
+                          
                              getCustomerInfo(skuCode);
                             //打印
                             //if (this.dataGridView1.Rows[i].Cells["weighed"].Value != null && int.Parse(this.dataGridView1.Rows[i].Cells["weighed"].Value.ToString()) == 1)
                             //{
-                            
+                             LogHelper.Log(skuCode+",订单量:"+orderNum+",包装量:"+packageNum);
+
                              string goodsModel = this.dataGridView1.Rows[i].Cells["goodsModel"].Value.ToString();
                              string goodsName = this.dataGridView1.Rows[i].Cells["goodsName"].Value.ToString();
                              string _productWorkshopAttrDesc = "";
@@ -530,7 +636,7 @@ namespace WmsApp
                             {
                                 PreprocessInfoAdd add = new PreprocessInfoAdd();
                                 add.createUser = UserInfo.RealName;
-                                add.goodsName = goods.goodsName;
+                                add.goodsName = goods.shortName;
                                 add.goodsUnit = goods.goodsUnit;
                                 add.modelNum = goods.modelNum;
                                 add.operateUser = UserInfo.RealName;
@@ -964,6 +1070,13 @@ namespace WmsApp
 
                 height += 15;
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                g.Graphics.DrawString("食用方法:" + "非即食,彻底熟制后食用", new Font("宋体", 8f), brush, layoutRectangleRight);
+
+
+             
+
+                height += 15;
+                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                 g.Graphics.DrawString(string.IsNullOrWhiteSpace(UserInfo.labelName)?UserInfo.PartnerName:UserInfo.labelName, new Font("宋体", 8f), brush, layoutRectangleRight);
 
              
@@ -1005,7 +1118,7 @@ namespace WmsApp
                                {
                                    PreprocessInfoAdd add = new PreprocessInfoAdd();
                                    add.createUser = UserInfo.RealName;
-                                   add.goodsName = goods.goodsName;
+                                   add.goodsName = goods.shortName;
                                    add.goodsUnit = goods.goodsUnit;
                                    add.modelNum = goods.modelNum;
                                    add.operateUser = UserInfo.RealName;

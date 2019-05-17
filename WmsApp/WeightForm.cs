@@ -215,7 +215,7 @@ namespace WmsApp
                     request.updateUser = UserInfo.RealName;
                     request.partnerCode = UserInfo.PartnerCode;
                     request.partnerName = UserInfo.PartnerName;
-
+                    request.goodsName = curGoodsName;
 
 
                     PackageResponse response = client.Execute(request);
@@ -311,7 +311,7 @@ namespace WmsApp
                 height += 10;
                 //商品名称
                 layoutRectangle = new RectangleF(pointX, height, 180f, 30f);
-                g.Graphics.DrawString(curPackTaskDetail.goodsName, font, brush, layoutRectangle);
+                g.Graphics.DrawString(curPackTaskDetail.shortName, font, brush, layoutRectangle);
 
                 height += interval + 20;
                 //重量

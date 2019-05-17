@@ -129,5 +129,8 @@ namespace WmsSDK.Model
 
            [JsonProperty("isStandardProcess")]
             public int? isStandardProcess { get; set; }
+
+          [JsonProperty("shortName")]
+           public String shortName { get; set; }
     }
 }

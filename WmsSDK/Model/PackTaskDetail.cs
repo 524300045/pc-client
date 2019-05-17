@@ -101,6 +101,9 @@ namespace WmsSDK.Model
          [JsonProperty("expiryDate")]
           public Double expiryDate { get; set; }
 
+          [JsonProperty("shortName")]
+         public string shortName { get; set; }
+
           public string StatusDes {
 
               get

@@ -207,7 +207,7 @@ namespace WmsApp
                         {
                             PreprocessInfoAdd add = new PreprocessInfoAdd();
                             add.createUser = UserInfo.RealName;
-                            add.goodsName = goods.goodsName;
+                            add.goodsName = goods.shortName;
                             add.goodsUnit = goods.goodsUnit;
                             add.modelNum = goods.modelNum;
                             add.operateUser = UserInfo.RealName;
@@ -258,7 +258,7 @@ namespace WmsApp
                         {
                             PreprocessInfoAdd add = new PreprocessInfoAdd();
                             add.createUser = UserInfo.RealName;
-                            add.goodsName = goods.goodsName;
+                            add.goodsName = goods.shortName;
                             add.goodsUnit = goods.goodsUnit;
                             add.modelNum = goods.modelNum;
                             add.operateUser = UserInfo.RealName;
@@ -512,6 +512,10 @@ namespace WmsApp
             height += 15;
             layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
             g.Graphics.DrawString("产地:" + UserInfo.areaName, new Font("宋体", 8f), brush, layoutRectangleRight);
+
+            height += 15;
+            layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+            g.Graphics.DrawString("食用方法:" + "非即食,彻底熟制后食用", new Font("宋体", 8f), brush, layoutRectangleRight);
 
          
             height += 15;

@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <AutoUpdater>
-  <AppName>WmsApp.exe</AppName>
-  <ReleaseURL>http://172.31.24.17/</ReleaseURL>
-  <ReleaseDate>
-  </ReleaseDate>
-  <ReleaseVersion>
-  </ReleaseVersion>
-  <MinVersion>
-  </MinVersion>
-  <UpdateDes>
-  </UpdateDes>
-  <ApplicationStart>WmsApp.exe</ApplicationStart>
-  <ShortcutIcon>ico</ShortcutIcon>
-  <Releases>
-    <File name="WmsApp.exe" date="2016/07/15 10:07:31" size="39" />
-    <File name="WmsSDK.dll" date="2016/07/15 10:07:31" size="39" />
-    <File name="Wms.Controls.dll" date="2016/07/15 10:07:31" size="39" />
-    <File name="Common.dll" date="2016/07/15 10:07:31" size="39" />
-  </Releases>
+    <AppName>WmsApp.exe</AppName>
+    <ReleaseURL>http://172.31.24.17/</ReleaseURL>
+    <ReleaseDate>
+    </ReleaseDate>
+    <ReleaseVersion>
+    </ReleaseVersion>
+    <MinVersion>
+    </MinVersion>
+    <UpdateDes>
+    </UpdateDes>
+    <ApplicationStart>WmsApp.exe</ApplicationStart>
+    <ShortcutIcon>ico</ShortcutIcon>
+    <Releases>
+        <File name="WmsApp.exe" date="2016/07/15 10:07:31" size="39"/>
+        <File name="WmsSDK.dll" date="2016/07/15 10:07:31" size="39"/>
+        <File name="Wms.Controls.dll" date="2016/07/15 10:07:31" size="39"/>
+        <File name="Common.dll" date="2016/07/15 10:07:31" size="39"/>
+    </Releases>
 </AutoUpdater>

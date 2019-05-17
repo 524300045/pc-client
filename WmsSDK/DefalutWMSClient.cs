@@ -290,6 +290,7 @@ IP地址：statistics-IP
             {
                 string strURL = url;
                 HttpWebRequest request = GetWebRequest(url, "POST");
+                request.Timeout = 300000;
                 request.ContentType = "application/json;charset=UTF-8";
                 if (customHeaders != null && customHeaders.Count > 0)
                 {

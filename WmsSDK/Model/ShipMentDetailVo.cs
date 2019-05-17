@@ -26,6 +26,10 @@ namespace WmsSDK.Model
 
 
         public decimal planNum { get; set; }
+
+        public decimal modelNum { get; set; }
+
+        public decimal? modelWeight { get; set; }
         /**
          * 单行小计
          */
@@ -36,5 +40,7 @@ namespace WmsSDK.Model
         public String goodsUnit { get; set; }
 
         public OutBoundModel outBound;
+
+        public decimal taxNoPrice { get; set; }
     }
 }
