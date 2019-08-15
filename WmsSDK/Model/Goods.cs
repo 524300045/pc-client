@@ -132,5 +132,9 @@ namespace WmsSDK.Model
 
           [JsonProperty("shortName")]
            public String shortName { get; set; }
+
+
+                   [JsonProperty("foodWay")]
+          public string foodWay { get; set; }
     }
 }

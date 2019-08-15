@@ -279,11 +279,46 @@ namespace WmsApp
                     UserInfo.areaName = response.result.areaName;
                 }
             }
+
+           // UserInfo.labelName = "三河鲜洁农产品有限公司";
+            //if (UserInfo.CustomerCode=="7001")
+            //{
+            //    LoadXiBeiSkuCode();
+                
+            //}
+         
         }
 
 
-      
 
+
+        private void LoadXiBeiSkuCode()
+        {
+            try
+            {
+                List<string> skuCodeList = new List<string>();
+                string path = Application.StartupPath + "/xibei.txt";
+                if (File.Exists(path))
+                {
+                    StreamReader sr = new StreamReader(path, Encoding.Default);
+                    String line;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        Console.WriteLine(line.ToString());
+                        skuCodeList.Add(line.Trim().TrimEnd(new char[] {','}));
+                    }
+                }
+                SystemInfo.skuCodeXiBeiList = skuCodeList;
+                LogHelper.Log(skuCodeList.Count+"个SKU");
+            }
+            catch (Exception ex)
+            {
+
+                LogHelper.Log(ex.Message);
+            }
+        
+        
+        }
 
 
         /// <summary>

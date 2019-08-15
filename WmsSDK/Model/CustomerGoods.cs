@@ -90,5 +90,7 @@ namespace WmsSDK.Model
 
 
        public Double expiryDate { get; set; }
+
+       public string handleWay { get; set; }
     }
 }
