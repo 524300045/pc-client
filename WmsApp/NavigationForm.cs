@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using WmsApp.Order;
 using WmsSDK.Model;
@@ -180,6 +182,45 @@ namespace WmsApp
         {
             OpenForm("tsbSend"); 
         }
-    
+
+        /// <summary>
+        /// 重新登录
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pbLogin_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("确定要重新登陆吗?", "提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                Application.ExitThread();
+                Restart();
+            }
+          
+        }
+
+
+        private void Restart()
+        {
+
+            Thread thtmp = new Thread(new ParameterizedThreadStart(run));
+
+            object appName = Application.ExecutablePath;
+
+            Thread.Sleep(2000);
+
+            thtmp.Start(appName);
+
+        }
+
+        private void run(Object obj)
+        {
+
+            Process ps = new Process();
+
+            ps.StartInfo.FileName = obj.ToString();
+
+            ps.Start();
+
+        }
     }
 }

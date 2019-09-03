@@ -106,6 +106,37 @@ namespace WmsApp
         }
 
 
+
+        public static MultiHeader BuildPrintConfigHeader()
+        {
+            MultiHeader mhObj;
+            mhObj = new MultiHeader(1, 10);
+            mhObj.Font = bodyBoldFont;
+            mhObj.ColsAlign = "CCCCCCC";
+            mhObj.Text = new string[,] { { "#", "客户商品编码", "客户商品名称", "单位", "订货数量", "发货数量", "含税单价", "价税合计" } };
+            mhObj.ColsWidth = BuildPrintConfigColsWidth();
+            return mhObj;
+        }
+
+        public static Body BuildPrintConfigBody(string[,] arr)
+        {
+            Body body = new Body();
+            body.IsAverageColsWidth = false;
+            body.Font = bodyBodyFont2;
+            //    body.ColsAlignString = "CCCCCCC";
+            body.DataSource = arr;
+            body.ColsWidth = BuildPrintConfigColsWidth();
+            return body;
+        }
+
+
+        public static int[] BuildPrintConfigColsWidth()
+        {
+            return new int[] { 30, 100, 250, 60, 80, 100, 100, 110 };
+        }
+
+
+
         public static MultiHeader BuildXiBeiHeader()
         {
             MultiHeader mhObj;
@@ -601,6 +632,54 @@ namespace WmsApp
                     m = m + 1;
                 }
           
+            return arrGridText;
+        }
+
+
+
+        public static string[,] ToPrintConfigArrFromList(List<ShipMentDetailVo> list)
+        {
+
+            if (list == null)
+            {
+                return new string[0, 0];
+            }
+
+            int mRows, mCols;
+            string[,] arrGridText;
+
+            mRows = list.Count;
+
+            mCols = 8;
+
+            arrGridText = new string[mRows, mCols];
+
+
+            int m = 0;
+            for (int i = 0; i < mRows; i++)
+            {
+
+                arrGridText[i, 0] = (m + 1).ToString();
+                arrGridText[i, 1] = list[m].skuCode;
+                arrGridText[i, 2] = list[m].goodsName;
+                arrGridText[i, 3] = list[m].goodsUnit;
+
+                if (list[m].changeNum==0)
+                {
+                    list[m].changeNum = 1;
+                }
+                arrGridText[i, 4] = (list[m].planNum / list[m].changeNum).ToString("f2");
+                arrGridText[i, 5] =(list[m].deliveryNum / list[m].changeNum).ToString("f2");
+
+                if (list[m].customerTaxPrice==null)
+                {
+                    list[m].customerTaxPrice = list[m].taxPrice;
+                }
+                arrGridText[i, 6] = list[m].customerTaxPrice.ToString("f2");
+                arrGridText[i,7] = (list[m].taxPrice * list[m].deliveryNum).ToString("f2");
+                m = m + 1;
+            }
+
             return arrGridText;
         }
 

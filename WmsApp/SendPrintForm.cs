@@ -36,10 +36,29 @@ namespace WmsApp
 
         String printerName = ConfigurationManager.AppSettings["obprint"];
 
+        //打印配置LIST
+        private List<CustomerPrintConfig> printConfigList;
+
+
         public SendPrintForm()
         {
             InitializeComponent();
             client = new DefalutWMSClient();
+        }
+
+        private void GetPrintConfig()
+        {
+            printConfigList = new List<CustomerPrintConfig>();
+            CustomerPrintConfigRequest request = new CustomerPrintConfigRequest();
+
+            CustomerPrintConfigResponse response = client.Execute(request);
+            if (!response.IsError)
+            {
+                if (response.result != null)
+                {
+                    printConfigList = response.result;
+                }
+            }
         }
 
         private void bindStore()
@@ -89,6 +108,7 @@ namespace WmsApp
             }
             cbPrinter.SelectedIndex = 0;
             cbPrinter.SelectedIndexChanged += cbPrinter_SelectedIndexChanged;
+            GetPrintConfig();
             dtBegin.Focus();
         }
 
@@ -287,22 +307,33 @@ namespace WmsApp
                 foreach (string item in list)
                 {
 
-                    if (UserInfo.CustomerCode == "4001" || UserInfo.CustomerCode == "12001")
-                    {
-                        PrintRongDa(item);
-                    }
-                    else if (UserInfo.CustomerCode=="10001")
-                    {
-                        PrintTangChen(item);
-                    }
-                    else if (UserInfo.CustomerCode=="7001")
-                    {
-                        PrintXiBei(item);
+                    var result = printConfigList.Where(p=>p.customerCode==UserInfo.CustomerCode);
+                    if (result != null && result.FirstOrDefault() != null)
+                    { 
+                         //新的打印逻辑
+                        PrintNewConfig(item);
+
                     }
                     else
                     {
-                        Print(item);
+                        if (UserInfo.CustomerCode == "4001" || UserInfo.CustomerCode == "12001")
+                        {
+                            PrintRongDa(item);
+                        }
+                        else if (UserInfo.CustomerCode == "10001")
+                        {
+                            PrintTangChen(item);
+                        }
+                        else if (UserInfo.CustomerCode == "7001")
+                        {
+                            PrintXiBei(item);
+                        }
+                        else
+                        {
+                            Print(item);
+                        }
                     }
+                 
 
                 }
 
@@ -408,6 +439,47 @@ namespace WmsApp
 
             }
         }
+
+
+
+        private void PrintNewConfig(string taskCode)
+        {
+
+            OutBoundDetailPrintRequest request = new OutBoundDetailPrintRequest();
+            request.outboundTaskCode = taskCode;
+            request.printMan = UserInfo.UserName;
+            request.updateUser = UserInfo.UserName;
+            OutBoundPrintDetailResponse response = client.Execute(request);
+            if (!response.IsError)
+            {
+                List<ShipMentDetailVo> detaiList = response.result.detailList;
+
+                OutBoundPrintModel outBoundPrint = response.result;
+
+                OutBoundPrint orderPrint = new OutBoundPrint(false, new Margins(10, 10, 10, 50));
+                Image barcode = Code128Rendering.GetCodeAorBImg(taskCode, 70, 1, true);
+                orderPrint.BarCode = OutBoundHelper.BuildBarCode(response.result.remark + "送货单", 1, null);
+                orderPrint.Header = OutBoundHelper.BuildHeader(outBoundPrint);
+                orderPrint.MultiHeader1 = OutBoundHelper.BuildPrintConfigHeader();
+                string[,] arr = OutBoundHelper.ToPrintConfigArrFromList(detaiList);
+                orderPrint.Body1 = OutBoundHelper.BuildPrintConfigBody(arr);
+                orderPrint.Bottom = OutBoundHelper.BuildBottom(response.result.companyAddress, UserInfo.RealName);
+                orderPrint.Footer = OutBoundHelper.BuildFooter();
+
+                orderPrint.PrintDocument.PrinterSettings.PrinterName = cbPrinter.Text;
+#if DEBUG
+
+                orderPrint.Print();
+
+                //  orderPrint.Preview();
+#else
+            //orderPrint.Preview(); 
+            orderPrint.Print();
+#endif
+
+            }
+        }
+
 
 
         private void PrintTangChen(string taskCode)

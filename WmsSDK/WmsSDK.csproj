@@ -75,6 +75,7 @@
     <Compile Include="Model\BoxInfo.cs" />
     <Compile Include="Model\Container.cs" />
     <Compile Include="Model\CustomerGoods.cs" />
+    <Compile Include="Model\CustomerPrintConfig.cs" />
     <Compile Include="Model\Dict.cs" />
     <Compile Include="Model\GoodsBarCode.cs" />
     <Compile Include="Model\Goods.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="Request\BomRelationRequest.cs" />
     <Compile Include="Request\BoxInfoRequest.cs" />
     <Compile Include="Request\CustomerGoodsBySkuRequest.cs" />
+    <Compile Include="Request\CustomerPrintConfigRequest.cs" />
     <Compile Include="Request\DictRequest.cs" />
     <Compile Include="Request\ImportOrderExeclRequest.cs" />
     <Compile Include="Request\OutBoundRequest.cs" />
@@ -134,6 +136,7 @@
     <Compile Include="Response\BoxInfoResponse.cs" />
     <Compile Include="Response\ContainerResponse.cs" />
     <Compile Include="Response\CustomerGoodsBySkuResponse.cs" />
+    <Compile Include="Response\CustomerPrintConfigResponse.cs" />
     <Compile Include="Response\DictResponse.cs" />
     <Compile Include="Response\ImportOrderExeclResponse.cs" />
     <Compile Include="Response\OutBoundResponse.cs" />

@@ -18,11 +18,20 @@ namespace WmsSDK.Model
 
         public String goodsName { get; set; }
 
+        public String skuCode { get; set; }
+
         public decimal taxCount { get; set; }
 
         public decimal taxPrice { get; set; }
 
         public decimal deliveryNum { get; set; }
+
+
+        public decimal changeNum { get; set; }
+
+        public decimal customerTaxPrice { get; set; }
+
+        public decimal customerTaxNoPrice { get; set; }
 
 
         public decimal planNum { get; set; }
@@ -42,5 +51,7 @@ namespace WmsSDK.Model
         public OutBoundModel outBound;
 
         public decimal taxNoPrice { get; set; }
+
+
     }
 }
