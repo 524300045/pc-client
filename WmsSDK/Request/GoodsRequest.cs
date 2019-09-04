@@ -69,5 +69,7 @@ namespace WmsSDK.Request
 
         //是否标准化加工
           public int? isStandardProcess { get; set; }
+
+          public string groupCode { get; set; }
     }
 }

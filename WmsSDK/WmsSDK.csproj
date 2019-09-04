@@ -97,6 +97,7 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\WarehouseArea.cs" />
     <Compile Include="Model\WarehouseInfo.cs" />
+    <Compile Include="Model\WarehouseWorkGroup.cs" />
     <Compile Include="NetworkMonitor.cs" />
     <Compile Include="PageUtil.cs" />
     <Compile Include="PaginatorDTO.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="Request\StoreInfoRequest.cs" />
     <Compile Include="Request\WarehouseAreaRequest.cs" />
     <Compile Include="Request\WarehouseInfoRequest.cs" />
+    <Compile Include="Request\WarehouseWorkGroupRequest.cs" />
     <Compile Include="Response\BomRelationResponse.cs" />
     <Compile Include="Response\BoxInfoAddResponse.cs" />
     <Compile Include="Response\BoxInfoResponse.cs" />
@@ -158,6 +160,7 @@
     <Compile Include="Response\StoreInfoResponse.cs" />
     <Compile Include="Response\WarehouseAreaResponse.cs" />
     <Compile Include="Response\WarehouseInfoResponse.cs" />
+    <Compile Include="Response\WarehouseWorkGroupResponse.cs" />
     <Compile Include="WMSResponse.cs" />
   </ItemGroup>
   <ItemGroup>

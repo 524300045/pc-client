@@ -57,7 +57,7 @@ namespace WmsApp
 
             BindProcess();
             BindWorkShop();
-
+            BindWorkGroup();
             string name = tbName.Text.Trim();
 
             int? processProduct = null;
@@ -78,10 +78,19 @@ namespace WmsApp
                 isStand = 1;
             }
 
+            string groupCode = "";
+            if (cbWorkGroup.SelectedIndex != 0)
+            {
+                groupCode = this.cbWorkGroup.SelectedValue.ToString();
+            }
+
+            string startTime = dtBegin.Value.ToString("yyyy-MM-dd 00:00:00");
+            string endTime = dtBegin.Value.ToString("yyyy-MM-dd 23:59:59");
+
             Task.Factory.StartNew(() =>
             {
                 // btnQuery_Click(null,null);
-                QueryData(name, processProduct, workShop, isStand);
+                QueryData(name, processProduct, workShop, isStand, groupCode,startTime,endTime);
             });
         }
 
@@ -135,7 +144,33 @@ namespace WmsApp
                 }
             }
         }
-        private void BindDgv(string name, int? productprocess, int? workshop, int? isStand)
+
+
+        private void BindWorkGroup()
+        {
+            WarehouseWorkGroupRequest request = new WarehouseWorkGroupRequest();
+            request.warehouseCode = UserInfo.WareHouseCode;
+            WarehouseWorkGroupResponse response = client.Execute(request);
+            if (!response.IsError)
+            {
+                if (response.result != null)
+                {
+                    List<WarehouseWorkGroup> list = new List<WarehouseWorkGroup>();
+                    list = response.result;
+                    if (list==null)
+                    {
+                        list = new List<WarehouseWorkGroup>();
+                    }
+                    list.Insert(0, new WarehouseWorkGroup() { groupCode = "0", groupName = "全部" });
+                
+                    this.cbWorkGroup.DataSource = list;
+                    this.cbWorkGroup.ValueMember = "groupCode";
+                    this.cbWorkGroup.DisplayMember = "groupName";
+                }
+            }
+        }
+
+        private void BindDgv(string name, int? productprocess, int? workshop, int? isStand,string groupCode,string startTime,string endTime)
         {
             GoodsRequest request = new GoodsRequest();
             request.PageIndex = paginator.PageNo;
@@ -151,12 +186,16 @@ namespace WmsApp
                 request.goodsName = "%" + name + "%";
             }
 
+            request.groupCode = groupCode;
 
             request.partnerCode = UserInfo.PartnerCode;
             request.isPreprocess = 1;
             request.isFresh = 1;
-            request.startTime = dtBegin.Value.ToString("yyyy-MM-dd 00:00:00");
-            request.endTime = dtBegin.Value.ToString("yyyy-MM-dd 23:59:59");
+            //request.startTime = dtBegin.Value.ToString("yyyy-MM-dd 00:00:00");
+            //request.endTime = dtBegin.Value.ToString("yyyy-MM-dd 23:59:59");
+
+            request.startTime = startTime;
+            request.endTime = endTime;
 
             request.customerCode = UserInfo.CustomerCode;
             request.warehouseCode = UserInfo.WareHouseCode;
@@ -167,13 +206,21 @@ namespace WmsApp
             request.isStandardProcess = isStand;
 
 
-
+          
             GoodsResponse response = client.Execute(request);
             if (!response.IsError)
             {
                 if (response.result == null)
                 {
-                    this.dataGridView1.DataSource = null;
+                    
+                    this.Invoke(new MethodInvoker(delegate()
+                    {
+                        this.dataGridView1.DataSource = null;
+                        pageSplit1.Description = "共查询到0条记录";
+                        pageSplit1.PageCount =0;
+                        pageSplit1.PageNo = 0;
+                        pageSplit1.DataBind();
+                    }));
                 }
                 else
                 {
@@ -284,10 +331,19 @@ namespace WmsApp
                         isStand = 1;
                     }
 
+                    string groupCode = "";
+                    if (cbWorkGroup.SelectedIndex != 0)
+                    {
+                        groupCode = this.cbWorkGroup.SelectedValue.ToString();
+                    }
+
+                    string startTime = dtBegin.Value.ToString("yyyy-MM-dd 00:00:00");
+                    string endTime = dtBegin.Value.ToString("yyyy-MM-dd 23:59:59");
+
                     Task.Factory.StartNew(() =>
                     {
                         // btnQuery_Click(null,null);
-                        QueryData(name, processProduct, workShop, isStand);
+                        QueryData(name, processProduct, workShop, isStand, groupCode,startTime,endTime);
                     });
 
                 }
@@ -332,6 +388,15 @@ namespace WmsApp
                 isStand = 1;
             }
 
+            string groupCode = "";
+            if (cbWorkGroup.SelectedIndex!=0)
+            {
+                 groupCode = this.cbWorkGroup.SelectedValue.ToString();
+            }
+
+            string startTime = dtBegin.Value.ToString("yyyy-MM-dd 00:00:00");
+            string endTime = dtBegin.Value.ToString("yyyy-MM-dd 23:59:59");
+
             Task.Factory.StartNew(() =>
             {
 
@@ -343,7 +408,7 @@ namespace WmsApp
                         btnQuery.Enabled = false;
                     }));
                     paginator.PageNo = 1;
-                    BindDgv(name, processProduct, workShop, isStand);
+                    BindDgv(name, processProduct, workShop, isStand, groupCode, startTime, endTime);
                 }
                 catch (Exception ex)
                 {
@@ -365,7 +430,7 @@ namespace WmsApp
         }
 
 
-        private void QueryData(string name, int? processProduct, int? workShop, int? isStand)
+        private void QueryData(string name, int? processProduct, int? workShop, int? isStand,string groupCode,string startTime,string endTime)
         {
 
             // string name = tbName.Text.Trim();
@@ -399,7 +464,7 @@ namespace WmsApp
                         btnQuery.Enabled = false;
                     }));
                     paginator.PageNo = 1;
-                    BindDgv(name, processProduct, workShop, isStand);
+                    BindDgv(name, processProduct, workShop, isStand, groupCode,startTime,endTime);
                 }
                 catch (Exception ex)
                 {
@@ -440,8 +505,15 @@ namespace WmsApp
             {
                 isStand = 1;
             }
+            string groupCode = "";
+            if (cbWorkGroup.SelectedIndex != 0)
+            {
+                groupCode = this.cbWorkGroup.SelectedValue.ToString();
+            }
+            string startTime = dtBegin.Value.ToString("yyyy-MM-dd 00:00:00");
+            string endTime = dtBegin.Value.ToString("yyyy-MM-dd 23:59:59");
 
-            BindDgv(tbName.Text.Trim(), processProduct, workShop, isStand);
+            BindDgv(tbName.Text.Trim(), processProduct, workShop, isStand, groupCode,startTime,endTime);
         }
 
         private void tbName_KeyDown(object sender, KeyEventArgs e)

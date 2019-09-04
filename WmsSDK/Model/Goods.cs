@@ -136,5 +136,7 @@ namespace WmsSDK.Model
 
                    [JsonProperty("foodWay")]
           public string foodWay { get; set; }
+
+                   public String groupName { get; set; }
     }
 }

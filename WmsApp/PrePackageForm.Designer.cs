@@ -34,8 +34,10 @@
             this.btnInput = new System.Windows.Forms.Button();
             this.btnOrder = new System.Windows.Forms.Button();
             this.chk = new System.Windows.Forms.CheckBox();
+            this.cbWorkGroup = new System.Windows.Forms.ComboBox();
             this.cbWorkShop = new System.Windows.Forms.ComboBox();
             this.cbProcessProduct = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.btnExport = new System.Windows.Forms.Button();
@@ -62,6 +64,7 @@
             this.productWorkshopAttrDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.isStandardProcess = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.shortName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -72,8 +75,10 @@
             this.groupBox1.Controls.Add(this.btnInput);
             this.groupBox1.Controls.Add(this.btnOrder);
             this.groupBox1.Controls.Add(this.chk);
+            this.groupBox1.Controls.Add(this.cbWorkGroup);
             this.groupBox1.Controls.Add(this.cbWorkShop);
             this.groupBox1.Controls.Add(this.cbProcessProduct);
+            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.btnExport);
@@ -121,6 +126,15 @@
             this.chk.Text = "标准化加工";
             this.chk.UseVisualStyleBackColor = true;
             // 
+            // cbWorkGroup
+            // 
+            this.cbWorkGroup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbWorkGroup.FormattingEnabled = true;
+            this.cbWorkGroup.Location = new System.Drawing.Point(671, 17);
+            this.cbWorkGroup.Name = "cbWorkGroup";
+            this.cbWorkGroup.Size = new System.Drawing.Size(141, 24);
+            this.cbWorkGroup.TabIndex = 10;
+            // 
             // cbWorkShop
             // 
             this.cbWorkShop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -138,6 +152,15 @@
             this.cbProcessProduct.Name = "cbProcessProduct";
             this.cbProcessProduct.Size = new System.Drawing.Size(141, 24);
             this.cbProcessProduct.TabIndex = 11;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(586, 21);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(80, 16);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "加工小组:";
             // 
             // label5
             // 
@@ -159,7 +182,7 @@
             // 
             // btnExport
             // 
-            this.btnExport.Location = new System.Drawing.Point(724, 15);
+            this.btnExport.Location = new System.Drawing.Point(937, 18);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(75, 23);
             this.btnExport.TabIndex = 6;
@@ -195,7 +218,7 @@
             // 
             // btnQuery
             // 
-            this.btnQuery.Location = new System.Drawing.Point(616, 15);
+            this.btnQuery.Location = new System.Drawing.Point(829, 18);
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(75, 23);
             this.btnQuery.TabIndex = 1;
@@ -260,7 +283,8 @@
             this.processProductAttrDesc,
             this.productWorkshopAttrDesc,
             this.isStandardProcess,
-            this.shortName});
+            this.shortName,
+            this.groupName});
             this.dataGridView1.Location = new System.Drawing.Point(3, 22);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
@@ -397,6 +421,14 @@
             this.shortName.Visible = false;
             this.shortName.Width = 105;
             // 
+            // groupName
+            // 
+            this.groupName.DataPropertyName = "groupName";
+            this.groupName.HeaderText = "加工小组";
+            this.groupName.Name = "groupName";
+            this.groupName.ReadOnly = true;
+            this.groupName.Width = 97;
+            // 
             // PrePackageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -434,6 +466,8 @@
         private System.Windows.Forms.Button btnInput;
         private System.Windows.Forms.Button btnOrder;
         private System.Windows.Forms.CheckBox chk;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cbWorkGroup;
         private System.Windows.Forms.DataGridViewCheckBoxColumn chk1;
         private System.Windows.Forms.DataGridViewButtonColumn Column12;
         private System.Windows.Forms.DataGridViewTextBoxColumn skuCode;
@@ -449,5 +483,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn productWorkshopAttrDesc;
         private System.Windows.Forms.DataGridViewTextBoxColumn isStandardProcess;
         private System.Windows.Forms.DataGridViewTextBoxColumn shortName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn groupName;
     }
 }
