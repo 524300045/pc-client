@@ -39,6 +39,7 @@ namespace WmsApp
 
                 BindProcess();
                 BindWorkShop();
+                BindWorkGroup();
                 dtBegin.Value = DateTime.Today.AddDays(2).AddDays(-1);
                 //   dtEnd.Value = DateTime.Today.AddDays(1).AddSeconds(-1);
 
@@ -54,6 +55,30 @@ namespace WmsApp
             }
 
 
+        }
+
+        private void BindWorkGroup()
+        {
+            WarehouseWorkGroupRequest request = new WarehouseWorkGroupRequest();
+            request.warehouseCode = UserInfo.WareHouseCode;
+            WarehouseWorkGroupResponse response = client.Execute(request);
+            if (!response.IsError)
+            {
+                if (response.result != null)
+                {
+                    List<WarehouseWorkGroup> list = new List<WarehouseWorkGroup>();
+                    list = response.result;
+                    if (list == null)
+                    {
+                        list = new List<WarehouseWorkGroup>();
+                    }
+                    list.Insert(0, new WarehouseWorkGroup() { groupCode = "0", groupName = "全部" });
+
+                    this.cbWorkGroup.DataSource = list;
+                    this.cbWorkGroup.ValueMember = "groupCode";
+                    this.cbWorkGroup.DisplayMember = "groupName";
+                }
+            }
         }
 
         //绑定加工工序
@@ -143,6 +168,11 @@ namespace WmsApp
             if (cbWorkShop.SelectedIndex!=0)
             {
                 request.productWorkshopAttr = int.Parse(cbWorkShop.SelectedValue.ToString());
+            }
+
+            if (cbWorkGroup.SelectedIndex!=0)
+            {
+                request.groupCode = cbWorkGroup.SelectedValue.ToString();
             }
 
             PackTaskResponse response = client.Execute(request);
@@ -308,6 +338,9 @@ namespace WmsApp
                     DataColumn dc14 = new DataColumn("生产车间");
                     dtExecl.Columns.Add(dc14);
 
+                    DataColumn dc15 = new DataColumn("加工小组");
+                    dtExecl.Columns.Add(dc15);
+
 
                     List<PackTask> ptList = new List<PackTask>();
                     if (totalPage > 0)
@@ -392,6 +425,7 @@ namespace WmsApp
 
                             dr[12] = item.processProductAttrDesc;
                             dr[13] = item.productWorkshopAttrDesc;
+                            dr[14] = item.groupName;
                             dtExecl.Rows.Add(dr);
                         }
                      

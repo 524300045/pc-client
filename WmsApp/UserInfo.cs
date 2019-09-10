@@ -34,6 +34,8 @@ namespace WmsApp
 
        public static string labelName;
 
+       public static string foodLicenseNo;
+
        /// <summary>
        /// 区域名称
        /// </summary>

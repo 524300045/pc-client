@@ -568,6 +568,10 @@ namespace WmsApp
                     DataColumn dc12 = new DataColumn("生产车间");
                     dtExecl.Columns.Add(dc12);
 
+
+                    DataColumn dc13= new DataColumn("加工小组");
+                    dtExecl.Columns.Add(dc13);
+
                     GoodsRequest request = new GoodsRequest();
                     request.PageIndex = 1;
                     request.PageSize = 500;
@@ -601,6 +605,7 @@ namespace WmsApp
                                 dr[7] = response.result[i].packageNum == null ? "" : response.result[i].packageNum.ToString();
                                 dr[8] = response.result[i].processProductAttrDesc == null ? "" : response.result[i].processProductAttrDesc.ToString();
                                 dr[9] = response.result[i].productWorkshopAttrDesc == null ? "" : response.result[i].productWorkshopAttrDesc.ToString();
+                                dr[10] = response.result[i].groupName;
                                 dtExecl.Rows.Add(dr);
                             }
                         }
@@ -1076,8 +1081,11 @@ namespace WmsApp
 
                 height +=20;
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                g.Graphics.DrawString("食品经营许可证号：JY11117051464030", new Font("宋体", 10f), brush, layoutRectangleRight);
-
+             //   g.Graphics.DrawString("食品经营许可证号：JY11117051464030", new Font("宋体", 10f), brush, layoutRectangleRight);
+                if (UserInfo.foodLicenseNo!=null&&UserInfo.foodLicenseNo!="")
+                {
+                     g.Graphics.DrawString("食品经营许可证号："+UserInfo.foodLicenseNo, new Font("宋体", 10f), brush, layoutRectangleRight);
+                }
 
 
                 height +=15;
@@ -1155,8 +1163,11 @@ namespace WmsApp
 
                 height += 60;
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                g.Graphics.DrawString("食品经营许可证号：JY11117051464030", new Font("宋体", 10f), brush, layoutRectangleRight);
-
+             //   g.Graphics.DrawString("食品经营许可证号：JY11117051464030", new Font("宋体", 10f), brush, layoutRectangleRight);
+                if (UserInfo.foodLicenseNo != null && UserInfo.foodLicenseNo != "")
+                {
+                    g.Graphics.DrawString("食品经营许可证号："+UserInfo.foodLicenseNo, new Font("宋体", 10f), brush, layoutRectangleRight);
+                }
 
 
                 height += 20;
@@ -1210,7 +1221,12 @@ namespace WmsApp
 
                 //流通号
                 layoutRectangleRight = new RectangleF(pointX, 55, 300f, 85f);
-                g.Graphics.DrawString("食品经营许可证号：JY11117051464030", new Font("宋体", 8f), brush, layoutRectangleRight);
+              //  g.Graphics.DrawString("食品经营许可证号：JY11117051464030", new Font("宋体", 8f), brush, layoutRectangleRight);
+               
+                if (UserInfo.foodLicenseNo!=null&&UserInfo.foodLicenseNo!="")
+                {
+                    g.Graphics.DrawString("食品经营许可证号："+UserInfo.foodLicenseNo, new Font("宋体", 10f), brush, layoutRectangleRight);
+                }
 
                 //生产厂家
                 layoutRectangleRight = new RectangleF(pointX, 70, 300f, 85f);
@@ -1455,8 +1471,11 @@ namespace WmsApp
 
             height += 15;
             layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-            g.Graphics.DrawString("食品经营许可证号：JY11117051464030", new Font("宋体", 8f), brush, layoutRectangleRight);
-
+          //  g.Graphics.DrawString("食品经营许可证号：JY11117051464030", new Font("宋体", 8f), brush, layoutRectangleRight);
+            if (UserInfo.foodLicenseNo != null && UserInfo.foodLicenseNo != "")
+            {
+                g.Graphics.DrawString("食品经营许可证号："+UserInfo.foodLicenseNo, new Font("宋体", 8f), brush, layoutRectangleRight);
+            }
 
 
             height += 15;

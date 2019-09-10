@@ -58,5 +58,7 @@ namespace WmsSDK.Model
 
         /**标签线上名称**/
         public String labelName { get; set; }
+
+        public string foodLicenseNo { get; set; }
     }
 }

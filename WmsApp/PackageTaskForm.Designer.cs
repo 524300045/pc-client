@@ -30,6 +30,8 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbWorkGroup = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.cbWorkShop = new System.Windows.Forms.ComboBox();
             this.cbProcessProduct = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -63,6 +65,7 @@
             this.warehouseName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.processProductAttrDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productWorkshopAttrDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -70,6 +73,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbWorkGroup);
+            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.cbWorkShop);
             this.groupBox1.Controls.Add(this.cbProcessProduct);
             this.groupBox1.Controls.Add(this.label5);
@@ -90,6 +95,24 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "查询条件";
+            // 
+            // cbWorkGroup
+            // 
+            this.cbWorkGroup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbWorkGroup.FormattingEnabled = true;
+            this.cbWorkGroup.Location = new System.Drawing.Point(608, 52);
+            this.cbWorkGroup.Name = "cbWorkGroup";
+            this.cbWorkGroup.Size = new System.Drawing.Size(141, 24);
+            this.cbWorkGroup.TabIndex = 12;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(523, 56);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(80, 16);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "加工小组:";
             // 
             // cbWorkShop
             // 
@@ -129,7 +152,7 @@
             // 
             // btnExport
             // 
-            this.btnExport.Location = new System.Drawing.Point(681, 51);
+            this.btnExport.Location = new System.Drawing.Point(868, 51);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(75, 23);
             this.btnExport.TabIndex = 5;
@@ -171,7 +194,7 @@
             // 
             // btnQuery
             // 
-            this.btnQuery.Location = new System.Drawing.Point(577, 50);
+            this.btnQuery.Location = new System.Drawing.Point(764, 50);
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(75, 23);
             this.btnQuery.TabIndex = 1;
@@ -259,7 +282,8 @@
             this.StandNum,
             this.warehouseName,
             this.processProductAttrDesc,
-            this.productWorkshopAttrDesc});
+            this.productWorkshopAttrDesc,
+            this.groupName});
             this.dataGridView1.Location = new System.Drawing.Point(3, 22);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
@@ -418,6 +442,13 @@
             this.productWorkshopAttrDesc.ReadOnly = true;
             this.productWorkshopAttrDesc.Width = 97;
             // 
+            // groupName
+            // 
+            this.groupName.DataPropertyName = "groupName";
+            this.groupName.HeaderText = "加工小组";
+            this.groupName.Name = "groupName";
+            this.groupName.Width = 97;
+            // 
             // PackageTaskForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -454,6 +485,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cbProcessProduct;
         private System.Windows.Forms.ComboBox cbWorkShop;
+        private System.Windows.Forms.ComboBox cbWorkGroup;
+        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DataGridViewButtonColumn Column12;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn status;
@@ -472,5 +505,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn warehouseName;
         private System.Windows.Forms.DataGridViewTextBoxColumn processProductAttrDesc;
         private System.Windows.Forms.DataGridViewTextBoxColumn productWorkshopAttrDesc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn groupName;
     }
 }

@@ -68,5 +68,7 @@ namespace WmsSDK.Request
 
            /*生产车间*/
            public int? productWorkshopAttr { get; set; }
+
+           public string groupCode { get; set; }
     }
 }

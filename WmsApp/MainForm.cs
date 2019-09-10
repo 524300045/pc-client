@@ -277,6 +277,7 @@ namespace WmsApp
                 {
                     UserInfo.labelName = response.result.labelName;
                     UserInfo.areaName = response.result.areaName;
+                    UserInfo.foodLicenseNo = response.result.foodLicenseNo;
                 }
             }
 

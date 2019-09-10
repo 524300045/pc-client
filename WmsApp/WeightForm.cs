@@ -357,8 +357,11 @@ namespace WmsApp
 
                 height += 20;
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                g.Graphics.DrawString("食品经营许可证号：JY11117051464030", new Font("宋体", 10f), brush, layoutRectangleRight);
-
+              //  g.Graphics.DrawString("食品经营许可证号：JY11117051464030", new Font("宋体", 10f), brush, layoutRectangleRight);
+                if (UserInfo.foodLicenseNo != null && UserInfo.foodLicenseNo != "")
+                {
+                    g.Graphics.DrawString("食品经营许可证号："+UserInfo.foodLicenseNo, new Font("宋体", 10f), brush, layoutRectangleRight);
+                }
 
 
                 height += 20;
@@ -424,8 +427,11 @@ namespace WmsApp
 
                 height +=40;
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                g.Graphics.DrawString("食品经营许可证号：JY11117051464030", new Font("宋体", 10f), brush, layoutRectangleRight);
-
+             //   g.Graphics.DrawString("食品经营许可证号：JY11117051464030", new Font("宋体", 10f), brush, layoutRectangleRight);
+                if (UserInfo.foodLicenseNo!=null&&UserInfo.foodLicenseNo!="")
+                {
+                    g.Graphics.DrawString("食品经营许可证号："+UserInfo.foodLicenseNo, new Font("宋体", 10f), brush, layoutRectangleRight);
+                }
 
 
                 height += 20;
@@ -499,8 +505,11 @@ namespace WmsApp
 
                 //流通号
                 layoutRectangleRight = new RectangleF(pointX, 60, 300f, 85f);
-                g.Graphics.DrawString("食品经营许可证号：JY11117051464030", new Font("宋体", 8f), brush, layoutRectangleRight);
-
+              //  g.Graphics.DrawString("食品经营许可证号：JY11117051464030", new Font("宋体", 8f), brush, layoutRectangleRight);
+                if (UserInfo.foodLicenseNo != null && UserInfo.foodLicenseNo != "")
+                {
+                    g.Graphics.DrawString("食品经营许可证号："+UserInfo.foodLicenseNo, new Font("宋体", 8f), brush, layoutRectangleRight);
+                }
                 //生产厂家
                 layoutRectangleRight = new RectangleF(pointX, 75, 300f, 85f);
                 g.Graphics.DrawString("厂家:" + UserInfo.labelName, new Font("宋体", 8f), brush, layoutRectangleRight);
