@@ -1019,9 +1019,12 @@ namespace WmsApp
 
             if (preprocessInfo.productWorkshopAttrDesc != null && preprocessInfo.productWorkshopAttrDesc != "" && preprocessInfo.productWorkshopAttrDesc != "净毛菜车间" && preprocessInfo.productWorkshopAttrDesc != "库房车间")
             {
-                height += 15;
-                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                g.Graphics.DrawString("保质期:" + expireDay + "天 " + "储存方式:0-8℃", new Font("宋体", 8f), brush, layoutRectangleRight);
+              
+                    height += 15;
+                    layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                    g.Graphics.DrawString("储存方式:0-8℃", new Font("宋体", 8f), brush, layoutRectangleRight);
+                
+             
             }
             else
             {
@@ -1033,22 +1036,32 @@ namespace WmsApp
             //height += 15;
             //layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
             //g.Graphics.DrawString("储存方式:" + "0-8℃", new Font("宋体", 10f), brush, layoutRectangleRight);
+            if (handleWay == "净")
+            {
+                height += 15;
+                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                g.Graphics.DrawString("赏味期至:" + DateTime.Now.AddDays(expireDay).ToShortDateString(), new Font("宋体", 8f), brush, layoutRectangleRight);
+            }
+
 
             height += 15;
             layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
             g.Graphics.DrawString("产地:" + UserInfo.areaName, new Font("宋体", 8f), brush, layoutRectangleRight);
 
-            height += 15;
-            layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
 
-            if (goods != null && !string.IsNullOrWhiteSpace(goods.foodWay))
-            {
-                g.Graphics.DrawString("食用方法:" + goods.foodWay, new Font("宋体", 8f), brush, layoutRectangleRight);
-            }
-            else
-            {
-                g.Graphics.DrawString("食用方法:", new Font("宋体", 8f), brush, layoutRectangleRight);
-            }
+         
+
+            //height += 15;
+            //layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+
+            //if (goods != null && !string.IsNullOrWhiteSpace(goods.foodWay))
+            //{
+            //    g.Graphics.DrawString("食用方法:" + goods.foodWay, new Font("宋体", 8f), brush, layoutRectangleRight);
+            //}
+            //else
+            //{
+            //    g.Graphics.DrawString("食用方法:", new Font("宋体", 8f), brush, layoutRectangleRight);
+            //}
 
             height += 15;
             layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
