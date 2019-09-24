@@ -732,7 +732,10 @@ namespace WmsApp
                             }
                             if (UserInfo.CustomerCode != "7001" && UserInfo.CustomerCode != "7002")
                             {
-                                if (UserInfo.CustomerCode == "15001" || UserInfo.CustomerCode == "11001")
+                                if (UserInfo.CustomerCode == "15001" || UserInfo.CustomerCode == "11001"
+                                    || UserInfo.CustomerCode == "18001"|| UserInfo.CustomerCode == "19001"
+                                       || UserInfo.CustomerCode == "22001" || UserInfo.CustomerCode == "31001" || UserInfo.CustomerCode == "32001"
+                                    )
                                 {
                                     #region 青柠泰和青年餐厅
 
@@ -782,6 +785,58 @@ namespace WmsApp
                                     }
 
                                     #endregion
+                                }
+                                else if (UserInfo.CustomerCode == "30001" || UserInfo.CustomerCode == "23001")
+                                {
+                                    //打印大标签，但是日期可以自定义
+                                    #region 汪洋和嘉和一品
+                                    PreprocessInfoRequest request = new PreprocessInfoRequest();
+                                    request.wareHouseId = UserInfo.WareHouseCode;
+                                    request.warehouseCode = UserInfo.WareHouseCode;
+                                    request.warehouseName = UserInfo.WareHouseName;
+                                    request.customerCode = UserInfo.CustomerCode;
+                                    request.customerName = UserInfo.CustomerName;
+                                    request.request = list;
+                                    PreprocessInfoAddResponse response = client.Execute(request);
+                                    if (!response.IsError)
+                                    {
+                                        if (response.result != null)
+                                        {
+                                            preprocessInfoList = response.result;
+                                            foreach (PreprocessInfo item in preprocessInfoList)
+                                            {
+                                                #region 打印
+                                                curPreprocessInfo = item;
+                                                PrintDocument document = new PrintDocument();
+                                                document.DefaultPageSettings.PaperSize = new PaperSize("Custum", 270, 180);
+                                                document.OriginAtMargins = true;
+                                                document.DefaultPageSettings.Landscape = false;
+                                                document.DefaultPageSettings.Margins = new Margins(SystemInfo.PrintMarginLeft, 1, 0, 1);
+#if(!DEBUG)
+                                                PrintDialog dialog = new PrintDialog();
+                                                document.PrintPage += new PrintPageEventHandler(this.pd_PrintCustomerDatePage);
+                                                dialog.Document = document;
+#else
+                                                PrintPreviewDialog dialog = new PrintPreviewDialog();
+                                                document.PrintPage += new PrintPageEventHandler(this.pd_PrintCustomerDatePage);
+                                                dialog.Document = document;
+#endif
+                                                try
+                                                {
+                                                    document.Print();
+                                                }
+                                                catch (Exception exception)
+                                                {
+                                                    MessageBox.Show("打印异常" + exception);
+                                                    document.PrintController.OnEndPrint(document, new PrintEventArgs());
+                                                }
+                                                #endregion
+                                            }
+                                        }
+                                    }
+
+                                    #endregion
+
                                 }
                                 else
                                 { 
@@ -920,6 +975,13 @@ namespace WmsApp
         {
             Bitmap bt = CreateQingQRCode(curPreprocessInfo.preprocessCode);
             GetPrintQingPicture(bt, e, curPreprocessInfo);
+        }
+
+
+        private void pd_PrintCustomerDatePage(object sender, PrintPageEventArgs e) //触发打印事件
+        {
+            Bitmap bt = CreateQingQRCode(curPreprocessInfo.preprocessCode);
+            GetPrintCustomerDatePicture(bt, e, curPreprocessInfo);
         }
 
         private void pd_XiBeiPrintPage(object sender, PrintPageEventArgs e) //触发打印事件
@@ -1191,6 +1253,185 @@ namespace WmsApp
         }
 
 
+        public void GetPrintCustomerDatePicture(Bitmap image, PrintPageEventArgs g, PreprocessInfo preprocessInfo)
+        {
+
+            if (goods.categoryCode == "10")
+            {
+
+                #region 分类为10
+
+                Font fontCu11 = new Font("宋体", 10f, FontStyle.Bold);
+                Font fontCu = new Font("宋体", 10f, FontStyle.Bold);
+                int height = 2;
+
+
+                Font font = new Font("宋体", 10f);
+                Brush brush = new SolidBrush(Color.Black);
+                g.Graphics.SmoothingMode = SmoothingMode.HighQuality;
+
+                int pointX = 5;
+
+                RectangleF layoutRectangleRight = new RectangleF(80f, 5, 130f, 85f);
+                Rectangle destRect = new Rectangle(145, -15, image.Width, image.Height);
+                g.Graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel);
+
+
+
+
+                RectangleF layoutRectangle = new RectangleF(pointX, height, 120f, 30f);
+                //商品名称
+                layoutRectangle = new RectangleF(pointX, height, 200f, 30f);
+                g.Graphics.DrawString("" + preprocessInfo.goodsName, fontCu11, brush, layoutRectangle);
+
+                height += 15;
+                //重量
+
+                layoutRectangle = new RectangleF(pointX, height, 125f, 40f);
+
+                if (goods.weighed == 1)
+                {
+                    g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
+                }
+                else
+                {
+                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit, fontCu, brush, layoutRectangle);
+                }
+
+                height += 15;
+
+
+                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                g.Graphics.DrawString("货主:" + UserInfo.CustomerName, new Font("宋体", 10f), brush, layoutRectangleRight);
+
+               
+                height += 15;
+                //生产日期
+                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                g.Graphics.DrawString("生产日期:" + dtBegin.Value.ToShortDateString(), new Font("宋体", 10f), brush, layoutRectangleRight);
+
+                height += 15;
+                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                g.Graphics.DrawString("保质期:" + expireDay + "天 ", new Font("宋体", 10f), brush, layoutRectangleRight);
+
+                height += 15;
+                //编码
+                Font fontCode = new Font("宋体", 8f);
+                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                g.Graphics.DrawString(preprocessInfo.preprocessCode, fontCode, brush, layoutRectangleRight);
+
+                height += 20;
+                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                //   g.Graphics.DrawString("食品经营许可证号：JY11117051464030", new Font("宋体", 10f), brush, layoutRectangleRight);
+                if (UserInfo.foodLicenseNo != null && UserInfo.foodLicenseNo != "")
+                {
+                    g.Graphics.DrawString("食品经营许可证号：" + UserInfo.foodLicenseNo, new Font("宋体", 10f), brush, layoutRectangleRight);
+                }
+
+
+                height += 15;
+                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                g.Graphics.DrawString(string.IsNullOrWhiteSpace(UserInfo.labelName) ? UserInfo.PartnerName : UserInfo.labelName, new Font("宋体", 10f), brush, layoutRectangleRight);
+
+                height += 15;
+                if (UserInfo.CustomerCode == "11001")
+                {
+                    if (goods != null && !string.IsNullOrWhiteSpace(goods.foodWay))
+                    {
+                        layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                        g.Graphics.DrawString("" + goods.foodWay, new Font("宋体", 8f), brush, layoutRectangleRight);
+                    }
+                }
+
+
+                #endregion
+            }
+            else
+            {
+
+                #region 分类不为10
+
+                Font fontCu11 = new Font("宋体", 10f, FontStyle.Bold);
+                Font fontCu = new Font("宋体", 10f, FontStyle.Bold);
+                int height = 2;
+
+
+                Font font = new Font("宋体", 10f);
+                Brush brush = new SolidBrush(Color.Black);
+                g.Graphics.SmoothingMode = SmoothingMode.HighQuality;
+
+                int pointX = 5;
+
+                RectangleF layoutRectangleRight = new RectangleF(80f, 5, 130f, 85f);
+
+                Rectangle destRect = new Rectangle(145, -15, image.Width, image.Height);
+                g.Graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel);
+
+
+
+                RectangleF layoutRectangle = new RectangleF(pointX, height, 120f, 30f);
+                //商品名称
+                layoutRectangle = new RectangleF(pointX, height, 200f, 30f);
+                g.Graphics.DrawString("" + preprocessInfo.goodsName, fontCu11, brush, layoutRectangle);
+
+                height += 15;
+                //重量
+
+                layoutRectangle = new RectangleF(pointX, height, 125f, 40f);
+
+                if (goods.weighed == 1)
+                {
+                    g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
+                }
+                else
+                {
+                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit, fontCu, brush, layoutRectangle);
+                }
+
+                height += 20;
+
+
+                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                g.Graphics.DrawString("货主:" + UserInfo.CustomerName, new Font("宋体", 10f), brush, layoutRectangleRight);
+
+                height += 15;
+                //编码
+                Font fontCode = new Font("宋体", 8f);
+                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                g.Graphics.DrawString(preprocessInfo.preprocessCode, fontCode, brush, layoutRectangleRight);
+
+
+
+                height += 60;
+                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                //   g.Graphics.DrawString("食品经营许可证号：JY11117051464030", new Font("宋体", 10f), brush, layoutRectangleRight);
+                if (UserInfo.foodLicenseNo != null && UserInfo.foodLicenseNo != "")
+                {
+                    g.Graphics.DrawString("食品经营许可证号：" + UserInfo.foodLicenseNo, new Font("宋体", 10f), brush, layoutRectangleRight);
+                }
+
+
+                height += 20;
+                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                g.Graphics.DrawString(string.IsNullOrWhiteSpace(UserInfo.labelName) ? UserInfo.PartnerName : UserInfo.labelName, new Font("宋体", 10f), brush, layoutRectangleRight);
+
+                height += 15;
+                if (UserInfo.CustomerCode == "11001")
+                {
+                    if (goods != null && !string.IsNullOrWhiteSpace(goods.foodWay))
+                    {
+                        layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                        g.Graphics.DrawString("" + goods.foodWay, new Font("宋体", 8f), brush, layoutRectangleRight);
+                    }
+                }
+
+
+
+                #endregion
+            }
+        }
+
+
         public void GetPrintPicture(Bitmap image, PrintPageEventArgs g, PreprocessInfo preprocessInfo)
         {
             // if (goods.categoryCode == "10" || goods.categoryCode == "11" || goods.categoryCode == "12" || goods.categoryCode == "13" || goods.categoryCode == "17" || goods.categoryCode == "20")
@@ -1433,9 +1674,9 @@ namespace WmsApp
 
             //生产日期
             layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-            g.Graphics.DrawString("生产日期:" + dtBegin.Value.ToShortDateString(), new Font("宋体", 10f), brush, layoutRectangleRight);
+          //  g.Graphics.DrawString("生产日期:" + dtBegin.Value.ToShortDateString(), new Font("宋体", 10f), brush, layoutRectangleRight);
 
-
+            g.Graphics.DrawString("生产日期:" + DateTime.Now.ToShortDateString(), new Font("宋体", 10f), brush, layoutRectangleRight);
 
             if (preprocessInfo.productWorkshopAttrDesc != null && preprocessInfo.productWorkshopAttrDesc != "" && preprocessInfo.productWorkshopAttrDesc != "净毛菜车间" && preprocessInfo.productWorkshopAttrDesc != "库房车间")
             {
@@ -1546,7 +1787,10 @@ namespace WmsApp
                             if (UserInfo.CustomerCode != "7001" && UserInfo.CustomerCode != "7002")
                             {
 
-                                if (UserInfo.CustomerCode == "15001" || UserInfo.CustomerCode == "11001")
+                                if (UserInfo.CustomerCode == "15001" || UserInfo.CustomerCode == "11001"
+                                    || UserInfo.CustomerCode == "18001" || UserInfo.CustomerCode == "19001"
+                                      || UserInfo.CustomerCode == "22001" || UserInfo.CustomerCode == "31001" || UserInfo.CustomerCode == "32001"
+                                    )
                                 {
                                     #region 青柠泰和青年餐厅
 
@@ -1596,6 +1840,58 @@ namespace WmsApp
                                     }
 
                                     #endregion
+                                }
+                                else if (UserInfo.CustomerCode == "30001" || UserInfo.CustomerCode == "23001")
+                                {
+                                    //打印大标签，但是日期可以自定义
+                                    #region 汪洋和嘉和一品
+                                    PreprocessInfoRequest request = new PreprocessInfoRequest();
+                                    request.wareHouseId = UserInfo.WareHouseCode;
+                                    request.warehouseCode = UserInfo.WareHouseCode;
+                                    request.warehouseName = UserInfo.WareHouseName;
+                                    request.customerCode = UserInfo.CustomerCode;
+                                    request.customerName = UserInfo.CustomerName;
+                                    request.request = list;
+                                    PreprocessInfoAddResponse response = client.Execute(request);
+                                    if (!response.IsError)
+                                    {
+                                        if (response.result != null)
+                                        {
+                                            preprocessInfoList = response.result;
+                                            foreach (PreprocessInfo item in preprocessInfoList)
+                                            {
+                                                #region 打印
+                                                curPreprocessInfo = item;
+                                                PrintDocument document = new PrintDocument();
+                                                document.DefaultPageSettings.PaperSize = new PaperSize("Custum", 270, 180);
+                                                document.OriginAtMargins = true;
+                                                document.DefaultPageSettings.Landscape = false;
+                                                document.DefaultPageSettings.Margins = new Margins(SystemInfo.PrintMarginLeft, 1, 0, 1);
+#if(!DEBUG)
+                                                PrintDialog dialog = new PrintDialog();
+                                                document.PrintPage += new PrintPageEventHandler(this.pd_PrintCustomerDatePage);
+                                                dialog.Document = document;
+#else
+                                                PrintPreviewDialog dialog = new PrintPreviewDialog();
+                                                document.PrintPage += new PrintPageEventHandler(this.pd_PrintCustomerDatePage);
+                                                dialog.Document = document;
+#endif
+                                                try
+                                                {
+                                                    document.Print();
+                                                }
+                                                catch (Exception exception)
+                                                {
+                                                    MessageBox.Show("打印异常" + exception);
+                                                    document.PrintController.OnEndPrint(document, new PrintEventArgs());
+                                                }
+                                                #endregion
+                                            }
+                                        }
+                                    }
+
+                                    #endregion
+
                                 }
                                 else
                                 {

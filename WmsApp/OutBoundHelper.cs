@@ -143,7 +143,7 @@ namespace WmsApp
             mhObj = new MultiHeader(1, 10);
             mhObj.Font = bodyBoldFont;
             mhObj.ColsAlign = "CCCCCCC";
-            mhObj.Text = new string[,] { { "#", "名称", "单位", "订货量", "发货斤数", "斤单价(含税)", "金额(含税)", "斤单价(不含税)", "金额(不含税)" } };
+            mhObj.Text = new string[,] { { "#", "名称", "单位", "订货量", "发货斤数", "单价(含税)", "金额(含税)", "单价(不含税)", "金额(不含税)" } };
             mhObj.ColsWidth = BuildXiBeiColsWidth();
             return mhObj;
         }
@@ -253,13 +253,46 @@ namespace WmsApp
             {
                 orderModel.receiverPhone = "";
             }
+            //String leftAddress = "";
+            //if (orderModel.address!=null&&orderModel.address.Length>=16)
+            //{
+            //    leftAddress = orderModel.address.Substring(16);
+            //    orderModel.address = orderModel.address.Substring(0,16);
+            //}
+            //headerObj.DataSource = new string[,] { 
+            //                                                             { "购货单位:"+orderModel.storedName, "送货日期:"+Convert.ToDateTime(orderModel.deliveryDate).ToString("yyyy-MM-dd"),"交货单号:"+orderModel.outboundTaskCode}, 
+            //                                                             { "联系人:"+orderModel.receiver, "地址:"+orderModel.address,leftAddress},
+            //                                                              { "客户电话:"+orderModel.receiverPhone,"业务&电话:"+orderModel.customerPhone,""},
+            //                                                               { "备注:"+orderModel.orderNo,"",""}
+            //                                                             };
+
+            string firstRow= "购货单位:"+orderModel.storedName+"    送货日期:"+Convert.ToDateTime(orderModel.deliveryDate).ToString("yyyy-MM-dd")+"    交货单号:"+orderModel.outboundTaskCode;
+
+            string stringSpcaeStr = "";
+            for (int i = 0; i < orderModel.storedName.Length; i++)
+            {
+                stringSpcaeStr += " ";
+            }
+            string secondRow = "联系人:" + (String.IsNullOrWhiteSpace(orderModel.receiver) ? stringSpcaeStr+" " : orderModel.receiver) + "    地址:" + orderModel.address;
+
+            string thirdRow = "";
+            if (string.IsNullOrWhiteSpace(orderModel.receiverPhone))
+            {
+                 thirdRow = "客户电话:" + stringSpcaeStr + "     业务&电话:" + orderModel.customerPhone;
+            }
+            else
+            {
+                 thirdRow = "客户电话:" + orderModel.receiverPhone + "     业务&电话:" + orderModel.customerPhone;
+            }
+           
+            string fourRow = "备注:" + orderModel.orderNo;
             headerObj.DataSource = new string[,] { 
-                                                                         { "购货单位:"+orderModel.storedName, "送货日期:"+Convert.ToDateTime(orderModel.deliveryDate).ToString("yyyy-MM-dd"),"交货单号:"+orderModel.outboundTaskCode}, 
-                                                                         { "联系人:"+orderModel.receiver, "地址:"+orderModel.address,""},
-                                                                          { "客户电话:"+orderModel.receiverPhone,"业务&电话:"+orderModel.customerPhone,""},
-                                                                           { "备注:"+orderModel.orderNo,"",""}
+                                                                         {firstRow}, 
+                                                                         {secondRow },
+                                                                          { thirdRow},
+                                                                           { fourRow}
                                                                          };
-            headerObj.DrawGrid.Merge = GridMergeFlag.Row;
+            headerObj.DrawGrid.Merge = GridMergeFlag.Col;
             return headerObj;
         }
 
@@ -603,7 +636,7 @@ namespace WmsApp
          
             mCols =9;
 
-            arrGridText = new string[mRows, mCols];
+            arrGridText = new string[mRows+1, mCols];
 
    
                 int m = 0;
@@ -630,6 +663,50 @@ namespace WmsApp
                     arrGridText[i, 8] = (list[m].taxNoPrice * list[m].deliveryNum).ToString("f2");
         
                     m = m + 1;
+                }
+
+                if (list.Count>0)
+                {
+                    decimal totalPlanNum = 0;
+                    decimal totalDeliveryNum = 0;
+                    decimal totalTaxAmount = 0;
+                    decimal totalTaxNoAmount = 0;
+
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        totalPlanNum += list[i].planNum;
+
+                        if (list[i].modelWeight != null && list[i].modelWeight != 0)
+                        {
+                            decimal curNum = list[i].deliveryNum * list[i].modelWeight.Value;
+                            totalDeliveryNum += (curNum / 500);
+                        }
+                        else
+                        {
+                            totalDeliveryNum += list[i].deliveryNum;
+                        }
+
+                        decimal taxAmount = list[i].taxPrice * list[i].deliveryNum;
+                        totalTaxAmount += taxAmount;
+
+                        decimal taxNoAmount = list[i].taxNoPrice * list[i].deliveryNum;
+                        totalTaxNoAmount += taxNoAmount;
+                    }
+
+                    arrGridText[mRows, 0] ="";
+                    arrGridText[mRows, 1] ="合计";
+                    arrGridText[mRows, 2] ="";
+                    arrGridText[mRows, 3] = totalPlanNum.ToString("f2");
+                    arrGridText[mRows, 4] = totalDeliveryNum.ToString("f2"); ;
+                  
+
+
+
+                    arrGridText[mRows, 5] ="";
+                    arrGridText[mRows, 6] = totalTaxAmount.ToString("f2");
+
+                    arrGridText[mRows, 7] ="";
+                    arrGridText[mRows, 8] = totalTaxNoAmount.ToString("f2");
                 }
           
             return arrGridText;

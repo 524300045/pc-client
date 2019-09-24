@@ -538,7 +538,25 @@ namespace WmsApp
 
                 OutBoundPrint orderPrint = new OutBoundPrint(false, new Margins(10, 10, 10, 50));
                 Image barcode = Code128Rendering.GetCodeAorBImg(taskCode, 70, 1, true);
-                orderPrint.BarCode = OutBoundHelper.BuildBarCode(response.result.remark + "送货单", 1, null);
+              //  orderPrint.BarCode = OutBoundHelper.BuildBarCode(response.result.remark + "送货单", 1, null);
+
+                if (response.result.storedCode == "C020097")
+                {
+                    orderPrint.BarCode = OutBoundHelper.BuildBarCode("三河市鲜洁农产品有限公司", 1, null);
+                }
+                else
+                {
+                    if (response.result.orderNo.StartsWith("CS"))
+                    {
+                        orderPrint.BarCode = OutBoundHelper.BuildBarCode(response.result.remark + "送货单", 1, null);
+                    }
+                    else
+                    {
+                        orderPrint.BarCode = OutBoundHelper.BuildBarCode("北京康安利丰农业有限公司送货单", 1, null);
+                    }
+                }
+              
+                
                 orderPrint.Header = OutBoundHelper.BuildXiBeiHeader(outBoundPrint);
                 orderPrint.MultiHeader1 = OutBoundHelper.BuildXiBeiHeader();
                 string[,] arr = OutBoundHelper.ToXiBeiArrFromList(detaiList);
