@@ -893,7 +893,7 @@ namespace WmsApp
 
                                     #endregion
                                 }
-                                else if (UserInfo.CustomerCode == "34001")
+                                else if (UserInfo.CustomerCode == "34001" || UserInfo.CustomerCode == "21001")
                                 {
                                     #region 云海肴
 
@@ -2153,7 +2153,7 @@ namespace WmsApp
                                 if (UserInfo.CustomerCode == "15001" || UserInfo.CustomerCode == "11001"
                                     || UserInfo.CustomerCode == "18001" || UserInfo.CustomerCode == "19001"
                                       || UserInfo.CustomerCode == "22001" || UserInfo.CustomerCode == "31001" || UserInfo.CustomerCode == "32001"
-                                     || UserInfo.CustomerCode == "37001" || UserInfo.CustomerCode == "25001" || UserInfo.CustomerCode == "21001"
+                                     || UserInfo.CustomerCode == "37001" || UserInfo.CustomerCode == "25001"
                                     )
                                 {
                                     #region 青柠泰和青年餐厅
@@ -2311,7 +2311,7 @@ namespace WmsApp
 
                                     #endregion
                                 }
-                                else if (UserInfo.CustomerCode == "34001")
+                                else if (UserInfo.CustomerCode == "34001" || UserInfo.CustomerCode == "21001")
                                 {
                                     #region 云海肴
  
