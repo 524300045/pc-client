@@ -138,5 +138,11 @@ namespace WmsSDK.Model
           public string foodWay { get; set; }
 
                    public String groupName { get; set; }
+
+                   public int? productWorkshopAttr { get; set; }
+
+
+                   [JsonProperty("customerGoodsName")]
+                   public String customerGoodsName { get; set; }
     }
 }

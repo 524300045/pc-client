@@ -269,9 +269,9 @@ namespace WmsApp
                 layoutRectangleRight = new RectangleF(pointX, 60, 300f, 85f);
                 g.Graphics.DrawString("食品经营许可证号：JY11117051464030", new Font("宋体", 8f), brush, layoutRectangleRight);
 
-                //生产厂家
+                
                 layoutRectangleRight = new RectangleF(pointX, 75, 300f, 85f);
-                g.Graphics.DrawString("厂家:" + UserInfo.CompanyName, new Font("宋体", 8f), brush, layoutRectangleRight);
+                g.Graphics.DrawString(UserInfo.CompanyName, new Font("宋体", 8f), brush, layoutRectangleRight);
 
                 //生产日期
                 layoutRectangleRight = new RectangleF(pointX + image.Width, 110, 300f, 85f);

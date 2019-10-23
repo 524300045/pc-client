@@ -80,6 +80,8 @@
     <Compile Include="BarCodePrintNumForm.Designer.cs">
       <DependentUpon>BarCodePrintNumForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomerOrderPackPrint.cs" />
+    <Compile Include="CustomerPrint.cs" />
     <Compile Include="CustomerSelectForm.cs">
       <SubType>Form</SubType>
     </Compile>

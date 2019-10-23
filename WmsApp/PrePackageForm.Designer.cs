@@ -65,6 +65,7 @@
             this.isStandardProcess = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.shortName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productWorkshopAttr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -284,7 +285,8 @@
             this.productWorkshopAttrDesc,
             this.isStandardProcess,
             this.shortName,
-            this.groupName});
+            this.groupName,
+            this.productWorkshopAttr});
             this.dataGridView1.Location = new System.Drawing.Point(3, 22);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
@@ -429,6 +431,14 @@
             this.groupName.ReadOnly = true;
             this.groupName.Width = 97;
             // 
+            // productWorkshopAttr
+            // 
+            this.productWorkshopAttr.DataPropertyName = "productWorkshopAttr";
+            this.productWorkshopAttr.HeaderText = "productWorkshopAttr";
+            this.productWorkshopAttr.Name = "productWorkshopAttr";
+            this.productWorkshopAttr.Visible = false;
+            this.productWorkshopAttr.Width = 185;
+            // 
             // PrePackageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -484,5 +494,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn isStandardProcess;
         private System.Windows.Forms.DataGridViewTextBoxColumn shortName;
         private System.Windows.Forms.DataGridViewTextBoxColumn groupName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productWorkshopAttr;
     }
 }

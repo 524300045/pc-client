@@ -118,6 +118,10 @@ namespace WmsSDK.Model
           public String productWorkshopAttrDesc { get; set; }
 
           public string groupName { get; set; }
+
+          public String customerGoodsName { get; set; }
+
+
         public string statusdes
         {
             get

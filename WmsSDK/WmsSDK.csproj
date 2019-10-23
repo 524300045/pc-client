@@ -110,6 +110,7 @@
     <Compile Include="Request\DictRequest.cs" />
     <Compile Include="Request\ImportOrderExeclRequest.cs" />
     <Compile Include="Request\OutBoundRequest.cs" />
+    <Compile Include="Request\PackageXiBeiRequest.cs" />
     <Compile Include="Request\PreprocessXiBeiInfoRequest.cs" />
     <Compile Include="Request\ProcessProductRequest.cs" />
     <Compile Include="Request\GoodsCategoryQueryRequest.cs" />

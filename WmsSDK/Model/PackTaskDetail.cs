@@ -104,6 +104,13 @@ namespace WmsSDK.Model
           [JsonProperty("shortName")]
          public string shortName { get; set; }
 
+           [JsonProperty("handleWay")]
+          public String handleWay { get; set; }
+
+        [JsonProperty("customerGoodsName")]
+           public String customerGoodsName { get; set; }
+
+
           public string StatusDes {
 
               get
