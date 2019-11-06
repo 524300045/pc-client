@@ -144,5 +144,12 @@ namespace WmsSDK.Model
 
                    [JsonProperty("customerGoodsName")]
                    public String customerGoodsName { get; set; }
+
+
+          [JsonProperty("mixContent")]
+                   public String mixContent { get; set; }
+
+          [JsonProperty("nutrients")]
+                   public String nutrients { get; set; }
     }
 }
