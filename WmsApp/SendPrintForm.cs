@@ -149,7 +149,8 @@ namespace WmsApp
             {
                 request.storedCode = cbStore.SelectedValue.ToString();
             }
-
+            request.storedName=tbStoredName.Text.Trim();
+     
             request.startTime = dtBegin.Value;
             request.endTime = Convert.ToDateTime(dtEnd.Value.ToString("yyyy-MM-dd") + " 23:59:59");
 

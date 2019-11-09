@@ -40,9 +40,6 @@
             this.pageSplit1 = new Wms.Controls.Pager.PageSplit();
             this.label1 = new System.Windows.Forms.Label();
             this.dgv = new System.Windows.Forms.DataGridView();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.gb = new System.Windows.Forms.GroupBox();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.chk = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.orderNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.outboundTaskCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,6 +53,11 @@
             this.IsPrintDes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.deliveryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gb = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.tbStoreName = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.gb.SuspendLayout();
@@ -64,7 +66,7 @@
             // 
             // btnSend
             // 
-            this.btnSend.Location = new System.Drawing.Point(806, 19);
+            this.btnSend.Location = new System.Drawing.Point(942, 20);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(75, 23);
             this.btnSend.TabIndex = 7;
@@ -74,7 +76,7 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(702, 20);
+            this.btnSearch.Location = new System.Drawing.Point(861, 21);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 6;
@@ -198,44 +200,6 @@
             this.dgv.TabIndex = 1;
             this.dgv.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_RowPostPaint);
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.btnSend);
-            this.groupBox1.Controls.Add(this.btnSearch);
-            this.groupBox1.Controls.Add(this.dtEnd);
-            this.groupBox1.Controls.Add(this.dtBegin);
-            this.groupBox1.Controls.Add(this.cbStatus);
-            this.groupBox1.Controls.Add(this.cbStore);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1032, 54);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "查询条件";
-            // 
-            // gb
-            // 
-            this.gb.Controls.Add(this.dgv);
-            this.gb.Location = new System.Drawing.Point(0, 60);
-            this.gb.Name = "gb";
-            this.gb.Size = new System.Drawing.Size(1020, 384);
-            this.gb.TabIndex = 3;
-            this.gb.TabStop = false;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.pageSplit1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 495);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1032, 33);
-            this.panel1.TabIndex = 4;
-            // 
             // chk
             // 
             this.chk.HeaderText = "全选";
@@ -328,6 +292,62 @@
             this.status.Name = "status";
             this.status.Visible = false;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.tbStoreName);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.btnSend);
+            this.groupBox1.Controls.Add(this.btnSearch);
+            this.groupBox1.Controls.Add(this.dtEnd);
+            this.groupBox1.Controls.Add(this.dtBegin);
+            this.groupBox1.Controls.Add(this.cbStatus);
+            this.groupBox1.Controls.Add(this.cbStore);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox1.Location = new System.Drawing.Point(0, 0);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(1032, 54);
+            this.groupBox1.TabIndex = 2;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "查询条件";
+            // 
+            // gb
+            // 
+            this.gb.Controls.Add(this.dgv);
+            this.gb.Location = new System.Drawing.Point(0, 60);
+            this.gb.Name = "gb";
+            this.gb.Size = new System.Drawing.Size(1020, 384);
+            this.gb.TabIndex = 3;
+            this.gb.TabStop = false;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.pageSplit1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 495);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1032, 33);
+            this.panel1.TabIndex = 4;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(674, 25);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(35, 12);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "门店:";
+            // 
+            // tbStoreName
+            // 
+            this.tbStoreName.Location = new System.Drawing.Point(710, 20);
+            this.tbStoreName.Name = "tbStoreName";
+            this.tbStoreName.Size = new System.Drawing.Size(136, 21);
+            this.tbStoreName.TabIndex = 9;
+            // 
             // OutBoundSendForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -378,5 +398,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn IsPrintDes;
         private System.Windows.Forms.DataGridViewTextBoxColumn deliveryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn status;
+        private System.Windows.Forms.TextBox tbStoreName;
+        private System.Windows.Forms.Label label5;
     }
 }

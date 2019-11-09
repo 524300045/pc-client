@@ -36,6 +36,21 @@ namespace WmsApp
             return writer.Write(asset);
         }
 
+        public static Bitmap CreateBig110QRCode(string asset)
+        {
+            EncodingOptions options = new QrCodeEncodingOptions
+            {
+                DisableECI = true,
+                CharacterSet = "UTF-8",
+                Width = 110,
+                Height = 110
+            };
+            BarcodeWriter writer = new BarcodeWriter();
+            writer.Format = BarcodeFormat.QR_CODE;
+            writer.Options = options;
+            return writer.Write(asset);
+        }
+
         public static Bitmap CreateBig80QRCode(string asset)
         {
             EncodingOptions options = new QrCodeEncodingOptions
@@ -95,7 +110,9 @@ namespace WmsApp
 
         private  void pd_PrintYunHaiYaoPage(object sender, PrintPageEventArgs e) //触发打印事件
         {
-            Bitmap bt = CreateBig80QRCode(curPreprocessInfo.preprocessCode);
+         //   Bitmap bt = CreateBig80QRCode(curPreprocessInfo.preprocessCode);
+            Bitmap bt = CreateBig110QRCode(curPreprocessInfo.preprocessCode);
+            
             GetPrintYunHaiYaoPicture(bt, e, curPreprocessInfo);
         }
 
@@ -119,7 +136,7 @@ namespace WmsApp
                 int pointX = 5;
 
                 RectangleF layoutRectangleRight = new RectangleF(80f, 5, 130f, 85f);
-                Rectangle destRect = new Rectangle(145, -15, image.Width, image.Height);
+                Rectangle destRect = new Rectangle(155, -15, image.Width, image.Height);
                 g.Graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel);
 
 
@@ -156,30 +173,16 @@ namespace WmsApp
                 height += 15;
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                 g.Graphics.DrawString("货主:" + UserInfo.CustomerName, new Font("宋体", 8f), brush, layoutRectangleRight);
-                //g.Graphics.DrawString("货主:云海肴", new Font("宋体", 10f), brush, layoutRectangleRight);
 
-                //height += 15;
-                ////生产日期
-                //layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                //g.Graphics.DrawString("生产日期:" + DateTime.Now.AddDays(1).ToShortDateString(), new Font("宋体", 8f), brush, layoutRectangleRight);
+                height += 15;
+                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                g.Graphics.DrawString("电话:010-89958567", new Font("宋体", 8f), brush, layoutRectangleRight);
 
                 height += 15;
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                 g.Graphics.DrawString("生产日期:" + sendDate.ToShortDateString() + " 保质期至:" + sendDate.AddDays(expireDay-1).ToShortDateString(), new Font("宋体", 8f), brush, layoutRectangleRight);
 
-                //height += 15;
-                //layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                //g.Graphics.DrawString("储存方式:0-8℃", new Font("宋体", 8f), brush, layoutRectangleRight);
-
-
-                //编码
-                //height += 15;
-                //Font fontCode = new Font("宋体", 8f);
-                //layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                //g.Graphics.DrawString(preprocessInfo.preprocessCode, fontCode, brush, layoutRectangleRight);
-
-               
-                
+          
                 if (UserInfo.foodLicenseNo != null && UserInfo.foodLicenseNo != "")
                 {
                     height += 15;
@@ -202,9 +205,7 @@ namespace WmsApp
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                 g.Graphics.DrawString("经销商:" + (string.IsNullOrWhiteSpace(UserInfo.labelName) ? UserInfo.PartnerName : UserInfo.labelName), new Font("宋体", 8f), brush, layoutRectangleRight);
 
-                height += 15;
-                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                g.Graphics.DrawString("电话:010-89958567", new Font("宋体", 8f), brush, layoutRectangleRight);
+             
 
 
                 height += 15;
@@ -234,7 +235,7 @@ namespace WmsApp
 
                 RectangleF layoutRectangleRight = new RectangleF(80f, 5, 130f, 85f);
 
-                Rectangle destRect = new Rectangle(145, -15, image.Width, image.Height);
+                Rectangle destRect = new Rectangle(155, -15, image.Width, image.Height);
                 g.Graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel);
 
 
@@ -356,7 +357,7 @@ namespace WmsApp
 
         private void pd_PrintHuangJiHuangPage(object sender, PrintPageEventArgs e) //触发打印事件
         {
-            Bitmap bt = CreateBig80QRCode(curPreprocessInfo.preprocessCode);
+            Bitmap bt = CreateBig110QRCode(curPreprocessInfo.preprocessCode);
             GetPrintHuangJiHuangPicture(bt, e, curPreprocessInfo);
         }
 
@@ -407,19 +408,21 @@ namespace WmsApp
              
                 }
 
+                height += 13;
+                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                g.Graphics.DrawString("货主:" + UserInfo.CustomerName + " 储存方式:0-8℃", new Font("宋体", 8f), brush, layoutRectangleRight);
 
-                height +=15;
+
+                height += 13;
+                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                g.Graphics.DrawString("电话:010-89958567", new Font("宋体", 8f), brush, layoutRectangleRight);
+
+                height +=13;
                 layoutRectangleRight = new RectangleF(pointX, height, 180f, 85f);
                 g.Graphics.DrawString("配料:" + goods.mixContent, new Font("宋体", 6f), brush, layoutRectangleRight);
-              
 
 
                 height += 20;
-                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                g.Graphics.DrawString("货主:" + UserInfo.CustomerName + " 储存方式:0-8℃", new Font("宋体", 8f), brush, layoutRectangleRight);
-              
-
-                height += 15;
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                 g.Graphics.DrawString("生产日期:" + DateTime.Now.ToShortDateString() + " 保质期至:" + DateTime.Now.AddDays(expireDay-1).ToShortDateString(), new Font("宋体", 8f), brush, layoutRectangleRight);
 
@@ -427,7 +430,7 @@ namespace WmsApp
 
                 if (UserInfo.foodLicenseNo != null && UserInfo.foodLicenseNo != "")
                 {
-                    height += 15;
+                    height += 13;
                     layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                     g.Graphics.DrawString("食品经营许可证号:" + UserInfo.foodLicenseNo, new Font("宋体", 8f), brush, layoutRectangleRight);
                 }
@@ -447,9 +450,7 @@ namespace WmsApp
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                 g.Graphics.DrawString("生产商:" + (string.IsNullOrWhiteSpace(UserInfo.labelName) ? UserInfo.PartnerName : UserInfo.labelName), new Font("宋体", 8f), brush, layoutRectangleRight);
 
-                height += 13;
-                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                g.Graphics.DrawString("电话:010-89958567", new Font("宋体", 8f), brush, layoutRectangleRight);
+              
 
 
                 height += 13;

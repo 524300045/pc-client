@@ -93,7 +93,7 @@ namespace WmsApp.Order
             {
                 request.storedCode = cbStore.SelectedValue.ToString();
             }
-
+            request.storedName = tbStoreName.Text.Trim();
             request.startTime = dtBegin.Value;
             request.endTime = Convert.ToDateTime(dtEnd.Value.ToString("yyyy-MM-dd") + " 23:59:59");
 

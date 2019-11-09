@@ -86,10 +86,10 @@ namespace WmsApp
         public static MultiHeader BuildMultiHuangJiHuangHeader()
         {
             MultiHeader mhObj;
-            mhObj = new MultiHeader(1, 8);
+            mhObj = new MultiHeader(1, 10);
             mhObj.Font = bodyBoldFont;
             mhObj.ColsAlign = "CCCCCCC";
-            mhObj.Text = new string[,] { { "#", "产品分类.名称.规格", "单位", "发货数", "#", "产品分类.名称.规格", "单位", "发货数" } };
+            mhObj.Text = new string[,] { { "#", "产品分类.名称.规格", "单位", "下单数", "发货数", "#", "产品分类.名称.规格", "单位", "下单数", "发货数" } };
             mhObj.ColsWidth = BuildHuangJiHuangColsWidth();
             return mhObj;
         }
@@ -179,7 +179,7 @@ namespace WmsApp
 
         public static int[] BuildHuangJiHuangColsWidth()
         {
-            return new int[] { 40, 170, 40, 70, 40, 170, 40, 70 };
+            return new int[] { 40, 170, 40, 70, 70, 40, 170, 40, 70, 70 };
         }
 
 
@@ -503,7 +503,7 @@ namespace WmsApp
                 mRows = list.Count / 2 + 1;
             }
 
-            mCols = 8;
+            mCols = 10;
 
             arrGridText = new string[mRows, mCols];
 
@@ -516,15 +516,17 @@ namespace WmsApp
                     arrGridText[i, 0] = (m + 1).ToString();
                     arrGridText[i, 1] = list[m].twoCategoryName + "." + list[m].goodsName + "." + list[m].goodsModel;
                     arrGridText[i, 2] = list[m].goodsUnit;
-                    arrGridText[i, 3] = list[m].deliveryNum.ToString("f3");
-                   // arrGridText[i, 4] = list[m].taxPrice.ToString("f2");
+                    arrGridText[i, 3] = list[m].planNum.ToString("f3");
+                    arrGridText[i, 4] = list[m].deliveryNum.ToString("f3");
+                    
 
                     m = m + 1;
-                    arrGridText[i, 4] = (m + 1).ToString();
-                    arrGridText[i, 5] = list[m].twoCategoryName + "." + list[m].goodsName + "." + list[m].goodsModel;
+                    arrGridText[i, 5] = (m + 1).ToString();
+                    arrGridText[i, 6] = list[m].twoCategoryName + "." + list[m].goodsName + "." + list[m].goodsModel;
 
-                    arrGridText[i,6] = list[m].goodsUnit;
-                    arrGridText[i, 7] = list[m].deliveryNum.ToString("f3");
+                    arrGridText[i,7] = list[m].goodsUnit;
+                    arrGridText[i, 8] = list[m].planNum.ToString("f3");
+                    arrGridText[i, 9] = list[m].deliveryNum.ToString("f3");
                  //   arrGridText[i, 9] = list[m].taxPrice.ToString("f2");
                     m = m + 1;
                 }
@@ -537,16 +539,18 @@ namespace WmsApp
                     arrGridText[i, 0] = (m + 1).ToString();
                     arrGridText[i, 1] = list[m].twoCategoryName + "." + list[m].goodsName + "." + list[m].goodsModel;
                     arrGridText[i, 2] = list[m].goodsUnit;
-                    arrGridText[i, 3] = list[m].deliveryNum.ToString("f3");
+                    arrGridText[i, 3] = list[m].planNum.ToString("f3");
+                    arrGridText[i, 4] = list[m].deliveryNum.ToString("f3");
                    // arrGridText[i, 4] = list[m].taxPrice.ToString("f2");
                     m = m + 1;
                     if (i != mRows - 1)
                     {
-                        arrGridText[i, 4] = (m + 1).ToString();
-                        arrGridText[i, 5] = list[m].twoCategoryName + "." + list[m].goodsName + "." + list[m].goodsModel;
+                        arrGridText[i, 5] = (m + 1).ToString();
+                        arrGridText[i, 6] = list[m].twoCategoryName + "." + list[m].goodsName + "." + list[m].goodsModel;
 
-                        arrGridText[i, 6] = list[m].goodsUnit;
-                        arrGridText[i, 7] = list[m].deliveryNum.ToString("f3");
+                        arrGridText[i, 7] = list[m].goodsUnit;
+                        arrGridText[i, 8] = list[m].planNum.ToString("f3");
+                        arrGridText[i, 9] = list[m].deliveryNum.ToString("f3");
                       //  arrGridText[i, 9] = list[m].taxPrice.ToString("f2");
 
                         m = m + 1;

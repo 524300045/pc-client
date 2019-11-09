@@ -23,6 +23,7 @@ namespace WmsSDK.Request
 
         public int page;
 
+        public string storedName;
      
 
      //   public int status;
@@ -37,6 +38,8 @@ namespace WmsSDK.Request
     public class OutBoundQueryRequest : IWMSRequest<OutBoundPageResponse>
     {
         public String storedCode;
+
+        public string storedName { get; set; }
 
         /** 开始时间 */
         public DateTime startTime;

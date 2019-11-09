@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tbStoredName = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.cbPrinter = new System.Windows.Forms.ComboBox();
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
@@ -65,6 +67,8 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.tbStoredName);
+            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.cbPrinter);
             this.groupBox1.Controls.Add(this.btnPrint);
             this.groupBox1.Controls.Add(this.btnSearch);
@@ -79,10 +83,26 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 5);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1017, 59);
+            this.groupBox1.Size = new System.Drawing.Size(1041, 83);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "查询条件";
+            // 
+            // tbStoredName
+            // 
+            this.tbStoredName.Location = new System.Drawing.Point(48, 53);
+            this.tbStoredName.Name = "tbStoredName";
+            this.tbStoredName.Size = new System.Drawing.Size(143, 21);
+            this.tbStoredName.TabIndex = 10;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(10, 59);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 12);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "门店:";
             // 
             // cbPrinter
             // 
@@ -96,7 +116,7 @@
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(936, 21);
+            this.btnPrint.Location = new System.Drawing.Point(332, 52);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(75, 23);
             this.btnPrint.TabIndex = 7;
@@ -106,7 +126,7 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(855, 22);
+            this.btnSearch.Location = new System.Drawing.Point(240, 52);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 6;
@@ -205,9 +225,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gb.Controls.Add(this.dgv);
             this.gb.Controls.Add(this.pageSplit1);
-            this.gb.Location = new System.Drawing.Point(12, 70);
+            this.gb.Location = new System.Drawing.Point(12, 94);
             this.gb.Name = "gb";
-            this.gb.Size = new System.Drawing.Size(848, 438);
+            this.gb.Size = new System.Drawing.Size(848, 414);
             this.gb.TabIndex = 1;
             this.gb.TabStop = false;
             // 
@@ -235,7 +255,7 @@
             this.dgv.Name = "dgv";
             this.dgv.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.dgv.RowTemplate.Height = 23;
-            this.dgv.Size = new System.Drawing.Size(784, 384);
+            this.dgv.Size = new System.Drawing.Size(820, 360);
             this.dgv.TabIndex = 1;
             this.dgv.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_RowPostPaint);
             // 
@@ -329,7 +349,7 @@
             this.pageSplit1.BackColor = System.Drawing.Color.LightGray;
             this.pageSplit1.Description = "";
             this.pageSplit1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pageSplit1.Location = new System.Drawing.Point(3, 401);
+            this.pageSplit1.Location = new System.Drawing.Point(3, 377);
             this.pageSplit1.Name = "pageSplit1";
             this.pageSplit1.PageCount = 1;
             this.pageSplit1.PageNo = 1;
@@ -385,5 +405,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn finishSortingTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn IsPrintDes;
         private System.Windows.Forms.DataGridViewTextBoxColumn deliveryDate;
+        private System.Windows.Forms.TextBox tbStoredName;
+        private System.Windows.Forms.Label label6;
     }
 }
