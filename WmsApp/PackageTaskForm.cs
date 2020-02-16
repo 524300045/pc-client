@@ -248,7 +248,9 @@ namespace WmsApp
                     }
                     string warehouseName = this.dataGridView1.CurrentRow.Cells["warehouseName"].Value == null ? "" : this.dataGridView1.CurrentRow.Cells["warehouseName"].Value.ToString();
                     //这里可以编写你需要的任意关于按钮事件的操作~
-                    if (UserInfo.CustomerCode == "30001" || UserInfo.CustomerCode == "23001" || UserInfo.CustomerCode == "34001")
+                    if (UserInfo.CustomerCode == "30001" || UserInfo.CustomerCode == "23001" || UserInfo.CustomerCode == "34001"
+                        || UserInfo.CustomerCode == "20001" || UserInfo.CustomerCode == "24001" || UserInfo.CustomerCode == "24002"
+                        )
                     {
                         WeightForm weightForm = new WeightForm(id, taskCode, orderCount, standNum, processDes, orderNum, this.dtBegin.Value, productCurWorkshopAttrDesc);
                         weightForm.wareHouseName = warehouseName;
@@ -259,7 +261,7 @@ namespace WmsApp
                     }
                     else
                     {
-                        WeightForm weightForm = new WeightForm(id, taskCode, orderCount, standNum, processDes, orderNum, productCurWorkshopAttrDesc);
+                        WeightForm weightForm = new WeightForm(id, taskCode, orderCount, standNum, processDes, orderNum, productCurWorkshopAttrDesc,this.dtBegin.Value);
                         weightForm.wareHouseName = warehouseName;
                         if (weightForm.ShowDialog() == DialogResult.OK)
                         {

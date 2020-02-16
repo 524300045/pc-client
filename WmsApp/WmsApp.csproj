@@ -210,6 +210,12 @@
     <Compile Include="PrintPageForm.Designer.cs">
       <DependentUpon>PrintPageForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SelectProductDateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectProductDateForm.Designer.cs">
+      <DependentUpon>SelectProductDateForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SendPrintForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -342,6 +348,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SelectProductDateForm.resx">
+      <DependentUpon>SelectProductDateForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SendPrintForm.resx">
       <DependentUpon>SendPrintForm.cs</DependentUpon>
     </EmbeddedResource>

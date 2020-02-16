@@ -56,10 +56,10 @@ namespace WmsApp
            // DefalutWMSClient.DefaultServiceAddress = " http://api.cooperate.bjkalf.net:8080/services";
             DefalutWMSClient.DefaultServiceAddress = " http://api.cooperate.bjkalf.net/services";
 #else
-       //  DefalutWMSClient.DefaultServiceAddress = " http://127.0.0.1:8480/webservice/services";
+            //DefalutWMSClient.DefaultServiceAddress = " http://127.0.0.1:8480/webservice/services";
            // DefalutWMSClient.DefaultServiceAddress = " http://47.92.86.16:81/services";
-      DefalutWMSClient.DefaultServiceAddress = " http://test.api.vcps.bjshengeng.com/services";
- //DefalutWMSClient.DefaultServiceAddress = " http://api.cooperate.bjkalf.net/services";
+          DefalutWMSClient.DefaultServiceAddress = " http://test.api.vcps.bjshengeng.com/services";
+        //    DefalutWMSClient.DefaultServiceAddress = " http://api.cooperate.bjkalf.net/services";
 #endif
 
           

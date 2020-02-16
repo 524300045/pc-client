@@ -65,14 +65,14 @@ namespace SuperUpdate
 
                     AppTool.DeleteTempFolder(tempPath);
                     Application.Exit();
-                    AppTool.Start("WmsApp.exe");
+                    AppTool.Start("CpsApp.exe");
                 }
             }
             else
             {
                 AppTool.DeleteTempFolder(tempPath);
                 Application.Exit();
-                AppTool.Start("WmsApp.exe");
+                AppTool.Start("CpsApp.exe");
             }
 
         }
@@ -80,7 +80,7 @@ namespace SuperUpdate
         public static String GetFileVersion()
         {
             // Get the file version for the notepad. 
-            FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo("WmsApp.exe");
+            FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo("CpsApp.exe");
 
             return myFileVersionInfo.FileVersion;
       

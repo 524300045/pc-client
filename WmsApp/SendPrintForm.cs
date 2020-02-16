@@ -334,6 +334,16 @@ namespace WmsApp
                             //黄记煌
                             PrintHuangJiHuang(item);
                         }
+                        else if (UserInfo.CustomerCode=="11001")
+                        {
+                            //青年餐厅
+                            PrintQingNian(item);
+                        }
+                        else if (UserInfo.CustomerCode=="43001")
+                        {
+                            //胖哥俩
+                            PrintPangGeLiang(item);
+                        }
                         else
                         {
                             Print(item);
@@ -398,6 +408,91 @@ namespace WmsApp
         }
 
 
+        /// <summary>
+        /// 打印胖哥俩
+        /// </summary>
+        /// <param name="taskCode"></param>
+        private void PrintPangGeLiang(string taskCode)
+        {
+
+
+            OutBoundDetailPrintRequest request = new OutBoundDetailPrintRequest();
+            request.outboundTaskCode = taskCode;
+            request.printMan = UserInfo.UserName;
+            request.updateUser = UserInfo.UserName;
+            OutBoundPrintDetailResponse response = client.Execute(request);
+            if (!response.IsError)
+            {
+                List<ShipMentDetailVo> detaiList = response.result.detailList;
+
+                OutBoundPrintModel outBoundPrint = response.result;
+
+                OutBoundPrint orderPrint = new OutBoundPrint(false, new Margins(10, 10, 1, 1));
+                orderPrint.RowsPerPage = 27;
+                Image barcode = Code128Rendering.GetCodeAorBImg(taskCode, 70, 1, true);
+                orderPrint.BarCode = OutBoundHelper.BuildBarCode(response.result.remark + "送货单", 1, null);
+                orderPrint.Header = OutBoundHelper.BuildPangGeLiangHeader(outBoundPrint);
+                orderPrint.MultiHeader1 = OutBoundHelper.BuildPangGeLiangMultiHeader();
+                string[,] arr = OutBoundHelper.ToPangGeLiangArrFromList(detaiList);
+                orderPrint.Body1 = OutBoundHelper.BuildPangGeLiangArriveBody(arr);
+                orderPrint.Bottom = OutBoundHelper.BuildBottom(response.result.companyAddress, UserInfo.RealName);
+                orderPrint.Footer = OutBoundHelper.BuildFooter();
+
+                orderPrint.PrintDocument.PrinterSettings.PrinterName = cbPrinter.Text;
+#if DEBUG
+
+                orderPrint.Print();
+
+#else
+            //orderPrint.Preview(); 
+            orderPrint.Print();
+#endif
+
+
+            }
+        }
+
+        private void PrintQingNian(string taskCode)
+        {
+
+
+            OutBoundDetailPrintRequest request = new OutBoundDetailPrintRequest();
+            request.outboundTaskCode = taskCode;
+            request.printMan = UserInfo.UserName;
+            request.updateUser = UserInfo.UserName;
+            OutBoundPrintDetailResponse response = client.Execute(request);
+            if (!response.IsError)
+            {
+                List<ShipMentDetailVo> detaiList = response.result.detailList;
+
+                OutBoundPrintModel outBoundPrint = response.result;
+
+                OutBoundPrint orderPrint = new OutBoundPrint(false, new Margins(10, 10, 1, 1));
+                orderPrint.RowsPerPage = 27;
+                Image barcode = Code128Rendering.GetCodeAorBImg(taskCode, 70, 1, true);
+                orderPrint.BarCode = OutBoundHelper.BuildBarCode(response.result.remark + "送货单", 1, null);
+                orderPrint.Header = OutBoundHelper.BuildHeader(outBoundPrint);
+                orderPrint.MultiHeader1 = OutBoundHelper.BuildQingNianMultiHeader();
+                string[,] arr = OutBoundHelper.ToQingNianArrFromList(detaiList);
+                orderPrint.Body1 = OutBoundHelper.BuildQingNianArriveBody(arr);
+                orderPrint.Bottom = OutBoundHelper.BuildBottom(response.result.companyAddress, UserInfo.RealName);
+                orderPrint.Footer = OutBoundHelper.BuildFooter();
+
+                // orderPrint.PrintDocument.DefaultPageSettings.PaperSize = new PaperSize("Custum", 2400, 2800);
+                orderPrint.PrintDocument.PrinterSettings.PrinterName = cbPrinter.Text;
+#if DEBUG
+
+                orderPrint.Print();
+
+                // orderPrint.Preview();
+#else
+            //orderPrint.Preview(); 
+            orderPrint.Print();
+#endif
+
+
+            }
+        }
 
         private void PrintHuangJiHuang(string taskCode)
         {

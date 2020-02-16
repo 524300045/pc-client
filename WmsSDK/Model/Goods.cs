@@ -151,5 +151,10 @@ namespace WmsSDK.Model
 
           [JsonProperty("nutrients")]
                    public String nutrients { get; set; }
+
+          //BOM重量
+
+                [JsonProperty("bomWeight")]
+          public decimal bomWeight { get; set; }
     }
 }
