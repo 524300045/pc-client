@@ -24,6 +24,8 @@ namespace WmsApp
 
         DateTime sendDate;
 
+        string productDate = "";
+
         public static Bitmap CreateBigQRCode(string asset)
         {
             EncodingOptions options = new QrCodeEncodingOptions
@@ -337,8 +339,9 @@ namespace WmsApp
         #region 黄记煌
 
 
-        public void PrintHuangJiHuang(List<PreprocessInfo> preprocessInfoList, Goods _goods, double _expireDay)
+        public void PrintHuangJiHuang(List<PreprocessInfo> preprocessInfoList, Goods _goods, double _expireDay,string _productDate)
         {
+            this.productDate = _productDate;
             goods = _goods;
             expireDay = _expireDay;
             foreach (PreprocessInfo item in preprocessInfoList)
@@ -442,9 +445,9 @@ namespace WmsApp
 
                 height += 20;
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                g.Graphics.DrawString("生产日期:" + DateTime.Now.ToShortDateString() + " 保质期至:" + DateTime.Now.AddDays(expireDay-1).ToShortDateString(), new Font("宋体", 8f), brush, layoutRectangleRight);
-
-
+             //   g.Graphics.DrawString("生产日期:" + DateTime.Now.ToShortDateString() + " 保质期至:" + DateTime.Now.AddDays(expireDay-1).ToShortDateString(), new Font("宋体", 8f), brush, layoutRectangleRight);
+                g.Graphics.DrawString("生产日期:" + this.productDate + " 保质期至:" + Convert.ToDateTime(this.productDate).AddDays(expireDay - 1).ToShortDateString(), new Font("宋体", 8f), brush, layoutRectangleRight);
+             
 
                 if (UserInfo.foodLicenseNo != null && UserInfo.foodLicenseNo != "")
                 {

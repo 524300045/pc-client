@@ -993,7 +993,8 @@ namespace WmsApp
                                                 item.productWorkshopAttrDesc = _productWorkshopAttrDesc;
                                             }
 
-                                            new CustomerPrint().PrintYunHaiYao(preprocessInfoList, goods, expireDay,this.dtBegin.Value);
+                                           // new CustomerPrint().PrintYunHaiYao(preprocessInfoList, goods, expireDay,this.dtBegin.Value);
+                                            new CustomerPrint().PrintYunHaiYao(preprocessInfoList, goods, expireDay,Convert.ToDateTime(productDate));
                                         }
                                     }
 
@@ -1022,7 +1023,7 @@ namespace WmsApp
                                                 item.productWorkshopAttrDesc = _productWorkshopAttrDesc;
                                             }
 
-                                            new CustomerPrint().PrintHuangJiHuang(preprocessInfoList, goods, expireDay);
+                                            new CustomerPrint().PrintHuangJiHuang(preprocessInfoList, goods, expireDay,productDate);
                                         }
                                     }
                                     #endregion
@@ -1049,7 +1050,7 @@ namespace WmsApp
                                                 item.productWorkshopAttrDesc = _productWorkshopAttrDesc;
                                             }
                                             goods.weighed = 0;//改成非承重
-                                            new CustomerPrint().PrintKongGang(preprocessInfoList, goods, expireDay, this.dtBegin.Value);
+                                            new CustomerPrint().PrintKongGang(preprocessInfoList, goods, expireDay, Convert.ToDateTime(this.productDate));
                                         }
                                     }
 
@@ -1077,7 +1078,7 @@ namespace WmsApp
                                                 item.productWorkshopAttrDesc = _productWorkshopAttrDesc;
                                             }
                                             goods.weighed = 0;//改成非承重
-                                            new CustomerPrint().PrintHangShi(preprocessInfoList, goods, expireDay, this.dtBegin.Value);
+                                            new CustomerPrint().PrintHangShi(preprocessInfoList, goods, expireDay, Convert.ToDateTime(this.productDate));
                                         }
                                     }
 
@@ -1513,9 +1514,10 @@ namespace WmsApp
                 g.Graphics.DrawString("货主:" + UserInfo.CustomerName, new Font("宋体", 10f), brush, layoutRectangleRight);
 
                 height +=15;
-                //生产日期
+                //生产日期 productDate
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                g.Graphics.DrawString("生产日期:" + DateTime.Now.ToShortDateString(), new Font("宋体", 10f), brush, layoutRectangleRight);
+              //  g.Graphics.DrawString("生产日期:" + DateTime.Now.ToShortDateString(), new Font("宋体", 10f), brush, layoutRectangleRight);
+                g.Graphics.DrawString("生产日期:" + productDate, new Font("宋体", 10f), brush, layoutRectangleRight);
 
                     height +=15;
                     layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
@@ -1909,9 +1911,10 @@ namespace WmsApp
 
                
                 height += 15;
-                //生产日期
+                //生产日期 productDate
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                g.Graphics.DrawString("生产日期:" + dtBegin.Value.ToShortDateString(), new Font("宋体", 10f), brush, layoutRectangleRight);
+              //  g.Graphics.DrawString("生产日期:" + dtBegin.Value.ToShortDateString(), new Font("宋体", 10f), brush, layoutRectangleRight);
+                g.Graphics.DrawString("生产日期:" + productDate, new Font("宋体", 10f), brush, layoutRectangleRight);
 
                 height += 15;
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
@@ -2110,10 +2113,10 @@ namespace WmsApp
 
 
                 height += 15;
-                //生产日期
+                //生产日期 productDate
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                g.Graphics.DrawString("生产日期:" + dtBegin.Value.ToShortDateString(), new Font("宋体", 10f), brush, layoutRectangleRight);
-
+             //   g.Graphics.DrawString("生产日期:" + dtBegin.Value.ToShortDateString(), new Font("宋体", 10f), brush, layoutRectangleRight);
+                g.Graphics.DrawString("生产日期:" + productDate, new Font("宋体", 10f), brush, layoutRectangleRight);
                 //height += 15;
                 //layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                 //g.Graphics.DrawString("保质期:" + expireDay + "天 ", new Font("宋体", 10f), brush, layoutRectangleRight);
@@ -2297,7 +2300,7 @@ namespace WmsApp
 
                 
                 layoutRectangleRight = new RectangleF(pointX, 60, 300f, 85f);
-                g.Graphics.DrawString("经销商:" + UserInfo.labelName, new Font("宋体", 8f), brush, layoutRectangleRight);
+                g.Graphics.DrawString("经销商:" + UserInfo.labelName, new Font("宋体", 7f), brush, layoutRectangleRight);
 
 
                 if (preprocessInfo.productWorkshopAttrDesc != null && preprocessInfo.productWorkshopAttrDesc != "")
@@ -2348,10 +2351,10 @@ namespace WmsApp
                 layoutRectangleRight = new RectangleF(pointX + image.Width, 96, 300f, 85f);
                 g.Graphics.DrawString("货主:" + UserInfo.CustomerName, new Font("宋体", 8f), brush, layoutRectangleRight);
 
-                //生产日期
+                //生产日期 productDate
                 layoutRectangleRight = new RectangleF(pointX + image.Width, 106, 300f, 85f);
-                g.Graphics.DrawString("生产日期:" + DateTime.Now.ToShortDateString().ToString(), new Font("宋体", 8f), brush, layoutRectangleRight);
-
+            //    g.Graphics.DrawString("生产日期:" + DateTime.Now.ToShortDateString().ToString(), new Font("宋体", 8f), brush, layoutRectangleRight);
+                g.Graphics.DrawString("生产日期:" + productDate.ToString(), new Font("宋体", 8f), brush, layoutRectangleRight);
                 //保质期
                 layoutRectangleRight = new RectangleF(pointX + image.Width, 116, 300f, 85f);
                 g.Graphics.DrawString("保 质 期: " + expireDay + "天", new Font("宋体", 8f), brush, layoutRectangleRight);
@@ -2906,21 +2909,31 @@ namespace WmsApp
                     return;
                 }
 
-                if (UserInfo.CustomerCode == "19001" || UserInfo.CustomerCode == "12001"
-                  || UserInfo.CustomerCode == "7001" || UserInfo.CustomerCode == "11001"
-                    || UserInfo.CustomerCode == "32001" || UserInfo.CustomerCode == "4001"
-                    || UserInfo.CustomerCode == "1001" || UserInfo.CustomerCode == "18001"
-                  )
+                //if (UserInfo.CustomerCode == "19001" || UserInfo.CustomerCode == "12001"
+                //  || UserInfo.CustomerCode == "7001" || UserInfo.CustomerCode == "11001"
+                //    || UserInfo.CustomerCode == "32001" || UserInfo.CustomerCode == "4001"
+                //    || UserInfo.CustomerCode == "1001" || UserInfo.CustomerCode == "18001"
+                //  )
+                //{
+                //    SelectProductDateForm selectDateForm = new SelectProductDateForm();
+                //    if (selectDateForm.ShowDialog() == DialogResult.OK)
+                //    {
+                //        productDate = selectDateForm.ProductDateStr;
+                //    }
+                //    else
+                //    {
+                //        return;
+                //    }
+                //}
+
+                SelectProductDateForm selectDateForm = new SelectProductDateForm();
+                if (selectDateForm.ShowDialog() == DialogResult.OK)
                 {
-                    SelectProductDateForm selectDateForm = new SelectProductDateForm();
-                    if (selectDateForm.ShowDialog() == DialogResult.OK)
-                    {
-                        productDate = selectDateForm.ProductDateStr;
-                    }
-                    else
-                    {
-                        return;
-                    }
+                    productDate = selectDateForm.ProductDateStr;
+                }
+                else
+                {
+                    return;
                 }
 
 
@@ -3207,7 +3220,7 @@ namespace WmsApp
                                                 item.productWorkshopAttrDesc = _productWorkshopAttrDesc;
                                             }
 
-                                            new CustomerPrint().PrintYunHaiYao(preprocessInfoList,goods,expireDay,this.dtBegin.Value);
+                                            new CustomerPrint().PrintYunHaiYao(preprocessInfoList,goods,expireDay,Convert.ToDateTime(this.productDate));
                                         }
                                     }
 
@@ -3236,7 +3249,7 @@ namespace WmsApp
                                                 item.productWorkshopAttrDesc = _productWorkshopAttrDesc;
                                             }
 
-                                            new CustomerPrint().PrintHuangJiHuang(preprocessInfoList, goods, expireDay);
+                                            new CustomerPrint().PrintHuangJiHuang(preprocessInfoList, goods, expireDay,this.productDate);
                                         }
                                     }
 
@@ -3264,7 +3277,7 @@ namespace WmsApp
                                                 item.productWorkshopAttrDesc = _productWorkshopAttrDesc;
                                             }
                                             goods.weighed = 0;
-                                            new CustomerPrint().PrintKongGang(preprocessInfoList, goods, expireDay,this.dtBegin.Value);
+                                            new CustomerPrint().PrintKongGang(preprocessInfoList, goods, expireDay,Convert.ToDateTime(this.productDate));
                                         }
                                     }
 
@@ -3292,7 +3305,7 @@ namespace WmsApp
                                                 item.productWorkshopAttrDesc = _productWorkshopAttrDesc;
                                             }
                                             goods.weighed = 0;
-                                            new CustomerPrint().PrintHangShi(preprocessInfoList, goods, expireDay,this.dtBegin.Value);
+                                            new CustomerPrint().PrintHangShi(preprocessInfoList, goods, expireDay,Convert.ToDateTime(this.productDate));
                                         }
                                     }
 

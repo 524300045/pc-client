@@ -983,7 +983,7 @@ namespace WmsApp
                                 if (response.result != null)
                                 {
                                     preprocessInfoList = response.result;
-                                    new CustomerPrint().PrintHuangJiHuang(preprocessInfoList, goods, expireDay);
+                                    new CustomerPrint().PrintHuangJiHuang(preprocessInfoList, goods, expireDay,DateTime.Now.ToString("yyyy-MM-dd"));
                                 }
                                 GetCount();
                             }
