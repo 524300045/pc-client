@@ -386,24 +386,7 @@ namespace WmsApp
 
         private void tsbSendPrint_Click(object sender, EventArgs e)
         {
-            //LogHelper.Log("tsbSendPrint_Click");
-            //try
-            //{
-               
-            //    if (!File.Exists(Application.StartupPath + "\\config.xml"))
-            //    {
-            //        LogHelper.Log(Application.StartupPath);
-            //        CreateConfigXml();
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-
-            //    MessageBox.Show("tsbSendPrint_Click" + ex.Message);
-            //}
-          
-          //  SaveConfig("", "obprint");
-
+         
             DockContent fx = FindCurrentForm("SendPrintForm");
             if (fx == null)
             {
