@@ -52,6 +52,11 @@ namespace WmsSDK.Model
 
         public decimal taxNoPrice { get; set; }
 
+        /// <summary>
+        /// 库区属性
+        /// </summary>
+        public string areaAttr { get; set; }
+
 
     }
 }

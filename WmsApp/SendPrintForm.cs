@@ -61,6 +61,29 @@ namespace WmsApp
             }
         }
 
+        private void bindFreshAttr()
+        {
+            DictRequest request = new DictRequest();
+            request.type = "freshAreaAttr";
+
+            DictResponse response = client.Execute(request);
+            if (!response.IsError)
+            {
+                if (response.result != null)
+                {
+
+                    List<Dict> list = new List<Dict>();
+                    list = response.result;
+                    list.Insert(0, new Dict() { code = "-1", name = "全部" });
+
+                    this.cbFreshAttr.DataSource = list;
+                    this.cbFreshAttr.ValueMember = "code";
+                    this.cbFreshAttr.DisplayMember = "name";
+                    cbFreshAttr.SelectedIndex = 0;
+                }
+            }
+        }
+
         private void bindStore()
         {
             StoreInfoAllRequest request = new StoreInfoAllRequest();
@@ -98,7 +121,7 @@ namespace WmsApp
             dgv.Columns[0].HeaderCell = cbHeader;
             bindStore();
             printerName = getAttributeValue("obprint");
-
+            bindFreshAttr();
             List<String> printList = LocalPrinter.GetLocalPrinters(printerName);
             cbPrinter.SelectedIndexChanged -= cbPrinter_SelectedIndexChanged;
             //   cbPrinter.DataSource = printList;
@@ -157,6 +180,17 @@ namespace WmsApp
             request.isPrint = printstatus;
            // request.status = 30;
             request.page = paginator.PageNo;
+
+            int? freshAttr = int.Parse(cbFreshAttr.SelectedValue.ToString());
+            if (freshAttr == -1)
+            {
+                request.freshAttr = null;
+            }
+            else
+            {
+                request.freshAttr = freshAttr;
+            }
+
 
             OutBoundPrintPageResponse response = client.Execute(request);
 
@@ -329,6 +363,11 @@ namespace WmsApp
                         {
                             PrintXiBei(item);
                         }
+                        else if (UserInfo.CustomerCode=="7002"||UserInfo.CustomerCode=="7003")
+                        {
+                            //西贝干调和西贝外阜
+                            PrintXiBeiGanTiao(item);
+                        }
                         else if (UserInfo.CustomerCode=="21001")
                         {
                             //黄记煌
@@ -407,6 +446,51 @@ namespace WmsApp
             }
         }
 
+        /// <summary>
+        /// 西贝干调和西贝外阜
+        /// </summary>
+        /// <param name="taskCode"></param>
+        private void PrintXiBeiGanTiao(string taskCode)
+        {
+
+
+            OutBoundDetailPrintRequest request = new OutBoundDetailPrintRequest();
+            request.outboundTaskCode = taskCode;
+            request.printMan = UserInfo.UserName;
+            request.updateUser = UserInfo.UserName;
+            OutBoundPrintDetailResponse response = client.Execute(request);
+            if (!response.IsError)
+            {
+                List<ShipMentDetailVo> detaiList = response.result.detailList;
+
+                OutBoundPrintModel outBoundPrint = response.result;
+
+                OutBoundPrint orderPrint = new OutBoundPrint(false, new Margins(10, 10, 1, 1));
+                orderPrint.RowsPerPage = 27;
+                Image barcode = Code128Rendering.GetCodeAorBImg(taskCode, 70, 1, true);
+                orderPrint.BarCode = OutBoundHelper.BuildBarCode(response.result.remark + "送货单", 1, null);
+                orderPrint.Header = OutBoundHelper.BuildHeader(outBoundPrint);
+                orderPrint.MultiHeader1 = OutBoundHelper.XiBeiGanTiaoBuildMultiHeader();
+                string[,] arr = OutBoundHelper.ToXiBeiGanTiaoArrFromList(detaiList);
+                orderPrint.Body1 = OutBoundHelper.BuildXiBeiGanTiaoArriveBody(arr);
+                orderPrint.Bottom = OutBoundHelper.BuildBottom(response.result.companyAddress, UserInfo.RealName);
+                orderPrint.Footer = OutBoundHelper.BuildFooter();
+
+                // orderPrint.PrintDocument.DefaultPageSettings.PaperSize = new PaperSize("Custum", 2400, 2800);
+                orderPrint.PrintDocument.PrinterSettings.PrinterName = cbPrinter.Text;
+#if DEBUG
+
+                orderPrint.Print();
+
+                // orderPrint.Preview();
+#else
+            //orderPrint.Preview(); 
+            orderPrint.Print();
+#endif
+
+
+            }
+        }
 
         /// <summary>
         /// 打印胖哥俩

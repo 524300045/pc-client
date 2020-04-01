@@ -78,7 +78,28 @@ namespace WmsApp.Order
             }
         }
 
+        private void bindFreshAttr()
+        {
+            DictRequest request = new DictRequest();
+            request.type = "freshAreaAttr";
 
+            DictResponse response = client.Execute(request);
+            if (!response.IsError)
+            {
+                if (response.result != null)
+                {
+                    
+                    List<Dict> list = new List<Dict>();
+                    list = response.result;
+                    list.Insert(0, new Dict() { code = "-1", name = "全部" });
+
+                    this.cbFreshAttr.DataSource = list;
+                    this.cbFreshAttr.ValueMember = "code";
+                    this.cbFreshAttr.DisplayMember = "name";
+                    cbFreshAttr.SelectedIndex = 0;
+                }
+            }
+        }
 
 
         private void BindDgv()
@@ -106,6 +127,17 @@ namespace WmsApp.Order
                 request.status = status;
             }
             request.isPrint = null;
+
+            int? freshAttr = int.Parse(cbFreshAttr.SelectedValue.ToString());
+            if (freshAttr == -1)
+            {
+                request.freshAttr = null;
+            }
+            else
+            {
+                request.freshAttr = freshAttr;
+            }
+
 
             request.page = paginator.PageNo;
 
@@ -215,6 +247,7 @@ namespace WmsApp.Order
             dgv.Columns[0].HeaderCell = cbHeader;
             bindStore();
             bindStatus();
+            bindFreshAttr();
            // BindDgv();
             cbHeader.OnCheckBoxClicked += new CheckBoxClickedHandler(cbHeader_OnCheckBoxClicked);
             dtBegin.Focus();

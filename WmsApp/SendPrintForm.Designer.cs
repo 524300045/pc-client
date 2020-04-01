@@ -58,6 +58,8 @@
             this.IsPrintDes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.deliveryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pageSplit1 = new Wms.Controls.Pager.PageSplit();
+            this.cbFreshAttr = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.gb.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
@@ -67,6 +69,8 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.cbFreshAttr);
+            this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.tbStoredName);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.cbPrinter);
@@ -116,7 +120,7 @@
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(332, 52);
+            this.btnPrint.Location = new System.Drawing.Point(627, 52);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(75, 23);
             this.btnPrint.TabIndex = 7;
@@ -126,7 +130,7 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(240, 52);
+            this.btnSearch.Location = new System.Drawing.Point(535, 52);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 6;
@@ -357,6 +361,24 @@
             this.pageSplit1.TabIndex = 0;
             this.pageSplit1.PageChanged += new System.EventHandler(this.pageSplit1_PageChanged);
             // 
+            // cbFreshAttr
+            // 
+            this.cbFreshAttr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbFreshAttr.FormattingEnabled = true;
+            this.cbFreshAttr.Location = new System.Drawing.Point(260, 55);
+            this.cbFreshAttr.Name = "cbFreshAttr";
+            this.cbFreshAttr.Size = new System.Drawing.Size(121, 20);
+            this.cbFreshAttr.TabIndex = 13;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(219, 61);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(35, 12);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "温区:";
+            // 
             // SendPrintForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -407,5 +429,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn deliveryDate;
         private System.Windows.Forms.TextBox tbStoredName;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox cbFreshAttr;
+        private System.Windows.Forms.Label label7;
     }
 }

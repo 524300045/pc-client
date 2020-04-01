@@ -54,10 +54,12 @@
             this.deliveryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbFreshAttr = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tbStoreName = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.gb = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.tbStoreName = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.gb.SuspendLayout();
@@ -66,7 +68,7 @@
             // 
             // btnSend
             // 
-            this.btnSend.Location = new System.Drawing.Point(942, 20);
+            this.btnSend.Location = new System.Drawing.Point(517, 56);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(75, 23);
             this.btnSend.TabIndex = 7;
@@ -76,7 +78,7 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(861, 21);
+            this.btnSearch.Location = new System.Drawing.Point(416, 55);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 6;
@@ -196,7 +198,7 @@
             this.dgv.Name = "dgv";
             this.dgv.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.dgv.RowTemplate.Height = 23;
-            this.dgv.Size = new System.Drawing.Size(1014, 364);
+            this.dgv.Size = new System.Drawing.Size(1014, 331);
             this.dgv.TabIndex = 1;
             this.dgv.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_RowPostPaint);
             // 
@@ -294,6 +296,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbFreshAttr);
+            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.tbStoreName);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.btnSend);
@@ -309,17 +313,51 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1032, 54);
+            this.groupBox1.Size = new System.Drawing.Size(1032, 87);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "查询条件";
             // 
+            // cbFreshAttr
+            // 
+            this.cbFreshAttr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbFreshAttr.FormattingEnabled = true;
+            this.cbFreshAttr.Location = new System.Drawing.Point(48, 58);
+            this.cbFreshAttr.Name = "cbFreshAttr";
+            this.cbFreshAttr.Size = new System.Drawing.Size(121, 20);
+            this.cbFreshAttr.TabIndex = 11;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(7, 58);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 12);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "温区:";
+            // 
+            // tbStoreName
+            // 
+            this.tbStoreName.Location = new System.Drawing.Point(710, 20);
+            this.tbStoreName.Name = "tbStoreName";
+            this.tbStoreName.Size = new System.Drawing.Size(136, 21);
+            this.tbStoreName.TabIndex = 9;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(674, 25);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(35, 12);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "门店:";
+            // 
             // gb
             // 
             this.gb.Controls.Add(this.dgv);
-            this.gb.Location = new System.Drawing.Point(0, 60);
+            this.gb.Location = new System.Drawing.Point(0, 93);
             this.gb.Name = "gb";
-            this.gb.Size = new System.Drawing.Size(1020, 384);
+            this.gb.Size = new System.Drawing.Size(1020, 351);
             this.gb.TabIndex = 3;
             this.gb.TabStop = false;
             // 
@@ -331,22 +369,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1032, 33);
             this.panel1.TabIndex = 4;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(674, 25);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(35, 12);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "门店:";
-            // 
-            // tbStoreName
-            // 
-            this.tbStoreName.Location = new System.Drawing.Point(710, 20);
-            this.tbStoreName.Name = "tbStoreName";
-            this.tbStoreName.Size = new System.Drawing.Size(136, 21);
-            this.tbStoreName.TabIndex = 9;
             // 
             // OutBoundSendForm
             // 
@@ -400,5 +422,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn status;
         private System.Windows.Forms.TextBox tbStoreName;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox cbFreshAttr;
+        private System.Windows.Forms.Label label6;
     }
 }

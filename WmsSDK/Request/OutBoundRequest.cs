@@ -24,6 +24,8 @@ namespace WmsSDK.Request
         public int page;
 
         public string storedName;
+
+        public int? freshAttr;
      
 
      //   public int status;
@@ -52,6 +54,8 @@ namespace WmsSDK.Request
 
 
         public int? status;
+
+        public int? freshAttr;
 
         public int? isPrint;
 
