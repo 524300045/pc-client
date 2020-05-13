@@ -53,8 +53,11 @@
             this.IsPrintDes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.deliveryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.waveName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ccbWave = new Wms.Controls.ComCheckBoxList();
             this.cbFreshAttr = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.tbStoreName = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -68,7 +71,7 @@
             // 
             // btnSend
             // 
-            this.btnSend.Location = new System.Drawing.Point(517, 56);
+            this.btnSend.Location = new System.Drawing.Point(520, 52);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(75, 23);
             this.btnSend.TabIndex = 7;
@@ -78,7 +81,7 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(416, 55);
+            this.btnSearch.Location = new System.Drawing.Point(416, 53);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 6;
@@ -192,7 +195,8 @@
             this.finishSortingTime,
             this.IsPrintDes,
             this.deliveryDate,
-            this.status});
+            this.status,
+            this.waveName});
             this.dgv.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv.Location = new System.Drawing.Point(3, 17);
             this.dgv.Name = "dgv";
@@ -294,9 +298,18 @@
             this.status.Name = "status";
             this.status.Visible = false;
             // 
+            // waveName
+            // 
+            this.waveName.DataPropertyName = "waveName";
+            this.waveName.HeaderText = "批次";
+            this.waveName.Name = "waveName";
+            this.waveName.ReadOnly = true;
+            // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.ccbWave);
             this.groupBox1.Controls.Add(this.cbFreshAttr);
+            this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.tbStoreName);
             this.groupBox1.Controls.Add(this.label5);
@@ -318,6 +331,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "查询条件";
             // 
+            // ccbWave
+            // 
+            this.ccbWave.DataSource = null;
+            this.ccbWave.Location = new System.Drawing.Point(220, 55);
+            this.ccbWave.Name = "ccbWave";
+            this.ccbWave.Size = new System.Drawing.Size(150, 20);
+            this.ccbWave.TabIndex = 18;
+            this.ccbWave.ItemClick += new Wms.Controls.ComCheckBoxList.CheckBoxListItemClick(this.ccbWave_ItemClick);
+            this.ccbWave.AllClick += new Wms.Controls.ComCheckBoxList.CheckBoxAllClick(this.ccbWave_AllClick);
+            // 
             // cbFreshAttr
             // 
             this.cbFreshAttr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -326,6 +349,15 @@
             this.cbFreshAttr.Name = "cbFreshAttr";
             this.cbFreshAttr.Size = new System.Drawing.Size(121, 20);
             this.cbFreshAttr.TabIndex = 11;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(179, 61);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(35, 12);
+            this.label8.TabIndex = 16;
+            this.label8.Text = "批次:";
             // 
             // label6
             // 
@@ -407,6 +439,11 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox gb;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TextBox tbStoreName;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox cbFreshAttr;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DataGridViewCheckBoxColumn chk;
         private System.Windows.Forms.DataGridViewTextBoxColumn orderNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn outboundTaskCode;
@@ -420,9 +457,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn IsPrintDes;
         private System.Windows.Forms.DataGridViewTextBoxColumn deliveryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn status;
-        private System.Windows.Forms.TextBox tbStoreName;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox cbFreshAttr;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn waveName;
+        private Wms.Controls.ComCheckBoxList ccbWave;
     }
 }

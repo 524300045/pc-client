@@ -340,7 +340,7 @@ namespace WmsApp
 #endif
                             }
                             else if (UserInfo.CustomerCode == "11001" || UserInfo.CustomerCode == "18001"
-                       || UserInfo.CustomerCode == "19001"
+                       || UserInfo.CustomerCode == "19001" || UserInfo.CustomerCode == "47001"
                        || UserInfo.CustomerCode == "32001")
                             {
                                 #region 青年餐厅

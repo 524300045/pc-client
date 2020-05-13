@@ -53,6 +53,8 @@
             this.tsbExit = new System.Windows.Forms.ToolStripButton();
             this.tsbOrderImport = new System.Windows.Forms.ToolStripButton();
             this.tsbSend = new System.Windows.Forms.ToolStripButton();
+            this.tsbSecondSend = new System.Windows.Forms.ToolStripButton();
+            this.tsbStore = new System.Windows.Forms.ToolStripButton();
             this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -83,7 +85,9 @@
             this.toolStripSeparator8,
             this.tsbExit,
             this.tsbOrderImport,
-            this.tsbSend});
+            this.tsbSend,
+            this.tsbSecondSend,
+            this.tsbStore});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1370, 27);
@@ -295,6 +299,28 @@
             this.tsbSend.Text = "订单发运";
             this.tsbSend.Click += new System.EventHandler(this.tsbSend_Click);
             // 
+            // tsbSecondSend
+            // 
+            this.tsbSecondSend.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbSecondSend.Image = ((System.Drawing.Image)(resources.GetObject("tsbSecondSend.Image")));
+            this.tsbSecondSend.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSecondSend.Name = "tsbSecondSend";
+            this.tsbSecondSend.Size = new System.Drawing.Size(93, 24);
+            this.tsbSecondSend.Tag = "RE00182";
+            this.tsbSecondSend.Text = "二次发运";
+            this.tsbSecondSend.Click += new System.EventHandler(this.tsbSecondSend_Click);
+            // 
+            // tsbStore
+            // 
+            this.tsbStore.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbStore.Image = ((System.Drawing.Image)(resources.GetObject("tsbStore.Image")));
+            this.tsbStore.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbStore.Name = "tsbStore";
+            this.tsbStore.Size = new System.Drawing.Size(93, 24);
+            this.tsbStore.Tag = "RE00182";
+            this.tsbStore.Text = "门店信息";
+            this.tsbStore.Click += new System.EventHandler(this.tsbStore_Click);
+            // 
             // dockPanel1
             // 
             this.dockPanel1.ActiveAutoHideContent = null;
@@ -358,6 +384,8 @@
         private System.Windows.Forms.ToolStripButton tsbSendPrint;
         private System.Windows.Forms.ToolStripButton tsbOrderImport;
         private System.Windows.Forms.ToolStripButton tsbSend;
+        private System.Windows.Forms.ToolStripButton tsbSecondSend;
+        private System.Windows.Forms.ToolStripButton tsbStore;
     }
 }
 

@@ -57,5 +57,9 @@ namespace WmsSDK.Model
         /** 是否有效 */
         [JsonProperty("yn")]
         public int yn { get; set; }
+
+        public string waveCode { get; set; }
+
+        public string waveName { get; set; }
     }
 }

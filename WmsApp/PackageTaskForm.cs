@@ -42,6 +42,7 @@ namespace WmsApp
                 BindWorkGroup();
                 dtBegin.Value = DateTime.Today.AddDays(2).AddDays(-1);
                 //   dtEnd.Value = DateTime.Today.AddDays(1).AddSeconds(-1);
+                bindWave();
 
                 this.dataGridView1.AutoGenerateColumns = false;
                 paginator = new PaginatorDTO { PageNo = 1, PageSize = 100 };
@@ -55,6 +56,33 @@ namespace WmsApp
             }
 
 
+        }
+
+        private void bindWave()
+        {
+            WaveCustomerStoreRequest request = new WaveCustomerStoreRequest();
+            request.warehouseCode = UserInfo.WareHouseCode;
+            request.customerCode = UserInfo.CustomerCode;
+
+            WaveCustomerStoreResponse response = client.Execute(request);
+            if (!response.IsError)
+            {
+                if (response.result != null)
+                {
+
+                    List<WaveCustomerStoreModel> list = new List<WaveCustomerStoreModel>();
+                    list = response.result;
+                    //list.Insert(0, new WaveCustomerStoreModel() { waveCode = "", waveName = "全部" });
+
+                    //this.cbWave.DataSource = list;
+                    //this.cbWave.ValueMember = "waveCode";
+                    //this.cbWave.DisplayMember = "waveName";
+                    //cbWave.SelectedIndex = 0;
+                    this.ccbWave.DataSource = list;
+                    this.ccbWave.ValueMember = "waveCode";
+                    this.ccbWave.DisplayMember = "waveName";
+                }
+            }
         }
 
         private void BindWorkGroup()
@@ -173,6 +201,22 @@ namespace WmsApp
             if (cbWorkGroup.SelectedIndex!=0)
             {
                 request.groupCode = cbWorkGroup.SelectedValue.ToString();
+            }
+
+            //if (cbWave.SelectedValue.ToString() != "")
+            //{
+            //    request.waveCode = cbWave.SelectedValue.ToString();
+            //}
+
+            if (this.ccbWave.CheckedItems.Count > 0)
+            {
+                List<String> waveCodeList = new List<string>();
+                foreach (var item in this.ccbWave.CheckedItems)
+                {
+                    WaveCustomerStoreModel wcsModel = (WaveCustomerStoreModel)item;
+                    waveCodeList.Add(wcsModel.waveCode);
+                }
+                request.waveCodeList = waveCodeList;
             }
 
             PackTaskResponse response = client.Execute(request);
@@ -466,6 +510,67 @@ namespace WmsApp
             {
 
             }
+        }
+
+        private void ccbWave_AllClick(object sender, EventArgs e)
+        {
+            List<string> selectList = new List<string>();
+
+            if (this.ccbWave.CheckedItems.Count > 0)
+            {
+                List<String> waveCodeList = new List<string>();
+                foreach (var item in this.ccbWave.CheckedItems)
+                {
+                    WaveCustomerStoreModel wcsModel = (WaveCustomerStoreModel)item;
+                    //selectText += wcsModel.waveName + ",";
+                    selectList.Add(wcsModel.waveName);
+                }
+            }
+
+            string selectText = "";
+            foreach (var item in selectList)
+            {
+                selectText += item + ",";
+            }
+            selectText = selectText.Trim(',');
+            this.ccbWave.SetTitleText(selectText);
+        }
+
+        private void ccbWave_ItemClick(object sender, ItemCheckEventArgs e)
+        {
+            List<string> selectList = new List<string>();
+
+            if (this.ccbWave.CheckedItems.Count > 0)
+            {
+                List<String> waveCodeList = new List<string>();
+                foreach (var item in this.ccbWave.CheckedItems)
+                {
+                    WaveCustomerStoreModel wcsModel = (WaveCustomerStoreModel)item;
+                    //selectText += wcsModel.waveName + ",";
+                    selectList.Add(wcsModel.waveName);
+                }
+            }
+
+            if (e.NewValue == CheckState.Checked)
+            {
+                //  selectText+=
+                WaveCustomerStoreModel wcsModel = (WaveCustomerStoreModel)this.ccbWave.Items[e.Index];
+                selectList.Add(wcsModel.waveName);
+            }
+
+            if (e.NewValue != CheckState.Checked)
+            {
+                WaveCustomerStoreModel wcsModel = (WaveCustomerStoreModel)this.ccbWave.Items[e.Index];
+                selectList.Remove(wcsModel.waveName);
+            }
+
+            string selectText = "";
+            foreach (var item in selectList)
+            {
+                selectText += item + ",";
+            }
+            selectText = selectText.Trim(',');
+            this.ccbWave.SetTitleText(selectText);
         }
 
 

@@ -84,6 +84,37 @@ namespace WmsApp
             }
         }
 
+        /// <summary>
+        /// 绑定批次
+        /// </summary>
+        private void bindWave()
+        {
+            WaveCustomerStoreRequest request = new WaveCustomerStoreRequest();
+            request.warehouseCode = UserInfo.WareHouseCode;
+            request.customerCode = UserInfo.CustomerCode;
+
+            WaveCustomerStoreResponse response = client.Execute(request);
+            if (!response.IsError)
+            {
+                if (response.result != null)
+                {
+                    
+                    List<WaveCustomerStoreModel> list = new List<WaveCustomerStoreModel>();
+                    list = response.result;
+                    //list.Insert(0, new WaveCustomerStoreModel() { waveCode = "", waveName = "全部" });
+
+                    //this.cbWave.DataSource = list;
+                    //this.cbWave.ValueMember = "waveCode";
+                    //this.cbWave.DisplayMember = "waveName";
+                    //cbWave.SelectedIndex = 0;
+
+                    this.ccbWave.DataSource = list;
+                    this.ccbWave.ValueMember = "waveCode";
+                    this.ccbWave.DisplayMember = "waveName";
+                }
+            }
+        }
+
         private void bindStore()
         {
             StoreInfoAllRequest request = new StoreInfoAllRequest();
@@ -120,6 +151,7 @@ namespace WmsApp
             paginator = new PaginatorDTO { PageNo = 1, PageSize = 50 };
             dgv.Columns[0].HeaderCell = cbHeader;
             bindStore();
+            bindWave();
             printerName = getAttributeValue("obprint");
             bindFreshAttr();
             List<String> printList = LocalPrinter.GetLocalPrinters(printerName);
@@ -191,6 +223,23 @@ namespace WmsApp
                 request.freshAttr = freshAttr;
             }
 
+           
+            if (this.ccbWave.CheckedItems.Count>0)
+            {
+                List<String> waveCodeList = new List<string>();
+                foreach (var item in this.ccbWave.CheckedItems)
+                {
+                    WaveCustomerStoreModel wcsModel = (WaveCustomerStoreModel)item;
+                    waveCodeList.Add(wcsModel.waveCode);
+                }
+                request.waveCodeList = waveCodeList;
+            }
+
+            //Console.WriteLine(this.ccbWave.CheckedItems.Count);
+            //if (cbWave.SelectedValue.ToString()!="")
+            //{
+            //    request.waveCode = cbWave.SelectedValue.ToString();
+            //}
 
             OutBoundPrintPageResponse response = client.Execute(request);
 
@@ -363,9 +412,15 @@ namespace WmsApp
                         {
                             PrintXiBei(item);
                         }
-                        else if (UserInfo.CustomerCode=="7002"||UserInfo.CustomerCode=="7003")
+                        else if (UserInfo.CustomerCode=="7003")
                         {
-                            //西贝干调和西贝外阜
+                            //西贝干调
+                          
+                            PrintXiBeiGanTiaoNew(item);
+                        }
+                        else if (UserInfo.CustomerCode=="7002")
+                        {
+                            //西贝外阜
                             PrintXiBeiGanTiao(item);
                         }
                         else if (UserInfo.CustomerCode=="21001")
@@ -378,10 +433,15 @@ namespace WmsApp
                             //青年餐厅
                             PrintQingNian(item);
                         }
-                        else if (UserInfo.CustomerCode=="43001")
+                        else if (UserInfo.CustomerCode == "43001" || UserInfo.CustomerCode == "49001")
                         {
                             //胖哥俩
                             PrintPangGeLiang(item);
+                        }
+                        else if (UserInfo.CustomerCode == "45001")
+                        {
+                           // 春播
+                            PrintChunBo(item);
                         }
                         else
                         {
@@ -446,6 +506,49 @@ namespace WmsApp
             }
         }
 
+
+        private void PrintChunBo(string taskCode)
+        {
+
+
+            OutBoundDetailPrintRequest request = new OutBoundDetailPrintRequest();
+            request.outboundTaskCode = taskCode;
+            request.printMan = UserInfo.UserName;
+            request.updateUser = UserInfo.UserName;
+            OutBoundPrintDetailResponse response = client.Execute(request);
+            if (!response.IsError)
+            {
+                List<ShipMentDetailVo> detaiList = response.result.detailList;
+
+                OutBoundPrintModel outBoundPrint = response.result;
+
+                OutBoundPrint orderPrint = new OutBoundPrint(false, new Margins(3, 3, 1, 1));
+                orderPrint.RowsPerPage = 27;
+                Image barcode = Code128Rendering.GetCodeAorBImg(taskCode, 70, 1, true);
+                orderPrint.BarCode = OutBoundHelper.BuildBarCode(response.result.remark + "送货单", 1, null);
+                orderPrint.Header = OutBoundHelper.BuildHeader(outBoundPrint);
+                orderPrint.MultiHeader1 = OutBoundHelper.BuildChunBoMultiHeader();
+                string[,] arr = OutBoundHelper.ToChunBoArrFromList(detaiList);
+                orderPrint.Body1 = OutBoundHelper.BuildChunBoArriveBody(arr);
+                orderPrint.Bottom = OutBoundHelper.BuildBottom(response.result.companyAddress, UserInfo.RealName);
+                orderPrint.Footer = OutBoundHelper.BuildFooter();
+
+                // orderPrint.PrintDocument.DefaultPageSettings.PaperSize = new PaperSize("Custum", 2400, 2800);
+                orderPrint.PrintDocument.PrinterSettings.PrinterName = cbPrinter.Text;
+#if DEBUG
+
+                orderPrint.Print();
+
+                // orderPrint.Preview();
+#else
+            //orderPrint.Preview(); 
+            orderPrint.Print();
+#endif
+
+
+            }
+        }
+
         /// <summary>
         /// 西贝干调和西贝外阜
         /// </summary>
@@ -491,6 +594,8 @@ namespace WmsApp
 
             }
         }
+
+     
 
         /// <summary>
         /// 打印胖哥俩
@@ -806,6 +911,50 @@ namespace WmsApp
 
 
 
+        private void PrintXiBeiGanTiaoNew(string taskCode)
+        {
+
+            OutBoundDetailPrintRequest request = new OutBoundDetailPrintRequest();
+            request.outboundTaskCode = taskCode;
+            request.printMan = UserInfo.UserName;
+            request.updateUser = UserInfo.UserName;
+            OutBoundPrintDetailResponse response = client.Execute(request);
+            if (!response.IsError)
+            {
+                List<ShipMentDetailVo> detaiList = response.result.detailList;
+
+                OutBoundPrintModel outBoundPrint = response.result;
+
+                OutBoundPrint orderPrint = new OutBoundPrint(false, new Margins(2, 2, 10, 50));
+                Image barcode = Code128Rendering.GetCodeAorBImg(taskCode, 70, 1, true);
+                //  orderPrint.BarCode = OutBoundHelper.BuildBarCode(response.result.remark + "送货单", 1, null);
+
+                orderPrint.BarCode = OutBoundHelper.BuildBarCode(response.result.remark + "送货单", 1, null);
+
+
+                orderPrint.Header = OutBoundHelper.BuildHeader(outBoundPrint);
+                orderPrint.MultiHeader1 = OutBoundHelper.BuildXiBeiGanTiaoHeaderNew();
+                string[,] arr = OutBoundHelper.ToXiBeiGanTiaoNewArrFromList(detaiList);
+                orderPrint.Body1 = OutBoundHelper.BuildXiBeiGanTiaoNewArriveBody(arr);
+                orderPrint.Bottom = OutBoundHelper.BuildBottom(response.result.companyAddress, UserInfo.RealName);
+                orderPrint.Footer = OutBoundHelper.BuildFooter();
+
+                orderPrint.PrintDocument.PrinterSettings.PrinterName = cbPrinter.Text;
+#if DEBUG
+
+                orderPrint.Print();
+
+                //  orderPrint.Preview();
+#else
+            //orderPrint.Preview(); 
+            orderPrint.Print();
+#endif
+
+            }
+        }
+
+
+
         private void cbPrinter_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Configuration cfa = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
@@ -894,6 +1043,67 @@ namespace WmsApp
         {
             paginator.PageNo = pageSplit1.PageNo;
             BindDgv();
+        }
+
+        private void ccbWave_AllClick(object sender, EventArgs e)
+        {
+            List<string> selectList = new List<string>();
+
+            if (this.ccbWave.CheckedItems.Count > 0)
+            {
+                List<String> waveCodeList = new List<string>();
+                foreach (var item in this.ccbWave.CheckedItems)
+                {
+                    WaveCustomerStoreModel wcsModel = (WaveCustomerStoreModel)item;
+                    //selectText += wcsModel.waveName + ",";
+                    selectList.Add(wcsModel.waveName);
+                }
+            }
+
+            string selectText = "";
+            foreach (var item in selectList)
+            {
+                selectText += item + ",";
+            }
+            selectText = selectText.Trim(',');
+            this.ccbWave.SetTitleText(selectText);
+        }
+
+        private void ccbWave_ItemClick(object sender, ItemCheckEventArgs e)
+        {
+            List<string> selectList = new List<string>();
+
+            if (this.ccbWave.CheckedItems.Count > 0)
+            {
+                List<String> waveCodeList = new List<string>();
+                foreach (var item in this.ccbWave.CheckedItems)
+                {
+                    WaveCustomerStoreModel wcsModel = (WaveCustomerStoreModel)item;
+                    //selectText += wcsModel.waveName + ",";
+                    selectList.Add(wcsModel.waveName);
+                }
+            }
+
+            if (e.NewValue == CheckState.Checked)
+            {
+                //  selectText+=
+                WaveCustomerStoreModel wcsModel = (WaveCustomerStoreModel)this.ccbWave.Items[e.Index];
+                selectList.Add(wcsModel.waveName);
+            }
+
+            if (e.NewValue != CheckState.Checked)
+            {
+                WaveCustomerStoreModel wcsModel = (WaveCustomerStoreModel)this.ccbWave.Items[e.Index];
+                selectList.Remove(wcsModel.waveName);
+            }
+
+            string selectText = "";
+            foreach (var item in selectList)
+            {
+                selectText += item + ",";
+            }
+            selectText = selectText.Trim(',');
+            this.ccbWave.SetTitleText(selectText);
         }
 
 

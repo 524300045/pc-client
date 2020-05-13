@@ -68,6 +68,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="StoreInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StoreInfoForm.Designer.cs">
+      <DependentUpon>StoreInfoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ContainerPrintNumForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,6 +130,12 @@
     </Compile>
     <Compile Include="Order\OrderImportForm.Designer.cs">
       <DependentUpon>OrderImportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Order\OutBoundSecondSendForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Order\OutBoundSecondSendForm.Designer.cs">
+      <DependentUpon>OutBoundSecondSendForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Order\OutBoundSendForm.cs">
       <SubType>Form</SubType>
@@ -263,6 +275,9 @@
     <Compile Include="TabWindow.designer.cs">
       <DependentUpon>TabWindow.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="StoreInfoForm.resx">
+      <DependentUpon>StoreInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ContainerPrintNumForm.resx">
       <DependentUpon>ContainerPrintNumForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -289,6 +304,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Order\OrderImportForm.resx">
       <DependentUpon>OrderImportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Order\OutBoundSecondSendForm.resx">
+      <DependentUpon>OutBoundSecondSendForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Order\OutBoundSendForm.resx">
       <DependentUpon>OutBoundSendForm.cs</DependentUpon>

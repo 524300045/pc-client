@@ -45,6 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComCheckBoxList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ComCheckBoxList.Designer.cs">
+      <DependentUpon>ComCheckBoxList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pager\EnumerableExtension.cs" />
     <Compile Include="Pager\IPagedList.cs" />
     <Compile Include="Pager\IPageSplit.cs" />

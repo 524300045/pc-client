@@ -85,6 +85,11 @@ namespace WmsSDK.Response
           [JsonProperty("categoryCode")]
          public string categoryCode { get; set; }
 
+
+          public String waveCode { get; set; }
+
+          public String waveName { get; set; } 
+
         public string statusDes
         {
             get

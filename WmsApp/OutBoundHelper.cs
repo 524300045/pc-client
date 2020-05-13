@@ -82,6 +82,18 @@ namespace WmsApp
             return mhObj;
         }
 
+        //春播
+        public static MultiHeader BuildChunBoMultiHeader()
+        {
+            MultiHeader mhObj;
+            mhObj = new MultiHeader(1, 12);
+            mhObj.Font = bodyBoldFont;
+            mhObj.ColsAlign = "CCCCCCC";
+            mhObj.Text = new string[,] { { "#", "产品分类.名称.规格", "单位", "单价", "发货数", "备注", "#", "产品分类.名称.规格", "单位", "单价", "发货数", "备注" } };
+            mhObj.ColsWidth = BuildChunBoColsWidth();
+            return mhObj;
+        }
+
         //西贝干调
         public static MultiHeader XiBeiGanTiaoBuildMultiHeader()
         {
@@ -93,6 +105,9 @@ namespace WmsApp
             mhObj.ColsWidth = BuildXiBeiGanTiaoColsWidth();
             return mhObj;
         }
+
+
+
 
         /// <summary>
         /// 胖哥俩
@@ -199,6 +214,19 @@ namespace WmsApp
             return mhObj;
         }
 
+
+        public static MultiHeader BuildXiBeiGanTiaoHeaderNew()
+        {
+            MultiHeader mhObj;
+            mhObj = new MultiHeader(1,13);
+          //  mhObj.Font = bodyBoldFont;
+            mhObj.ColsAlign = "CCCCCCC";
+            // mhObj.Text = new string[,] { { "#", "名称", "单位", "订货量", "发货斤数", "单价(含税)", "金额(含税)", "单价(不含税)", "金额(不含税)" } };
+            mhObj.Text = new string[,] { { "#", "编码", "名称", "规格", "单位", "订单数", "分拣数", "库区属性", "生产日期", "保质期天", "实发箱数", "实收箱数", "备注" } };
+            mhObj.ColsWidth = BuildXiBeiGanTiaoNewColsWidth();
+            return mhObj;
+        }
+
         public static int[] BuildRongDaColsWidth()
         {
             return new int[] { 30, 155, 40, 60, 60, 65, 30, 155, 40, 60, 60, 65 };
@@ -208,6 +236,11 @@ namespace WmsApp
         public static int[] BuildTangChenColsWidth()
         {
             return new int[] { 30, 155, 40, 60, 80, 30, 155, 40, 60,80 };
+        }
+
+        public static int[] BuildXiBeiGanTiaoNewColsWidth()
+        {
+            return new int[] { 20, 70, 130, 80, 40, 55, 55, 70, 65, 65,65, 65, 40 };
         }
 
 
@@ -225,6 +258,11 @@ namespace WmsApp
         public static int[] BuildColsWidth()
         {
             return new int[] { 40, 170, 40, 70, 70, 40, 170, 40, 70, 70};
+        }
+
+        public static int[] BuildChunBoColsWidth()
+        {
+            return new int[] { 30, 170, 40, 60, 65, 50, 30, 170, 40, 60, 65,50};
         }
 
         public static int[] BuildXiBeiGanTiaoColsWidth()
@@ -401,6 +439,17 @@ namespace WmsApp
             return body;
         }
 
+        public static Body BuildChunBoArriveBody(string[,] arr)
+        {
+            Body body = new Body();
+            body.IsAverageColsWidth = false;
+            body.Font = bodyBodyFont2;
+            //    body.ColsAlignString = "CCCCCCC";
+            body.DataSource = arr;
+            body.ColsWidth = BuildChunBoColsWidth();
+            return body;
+        }
+
         public static Body BuildXiBeiGanTiaoArriveBody(string[,] arr)
         {
             Body body = new Body();
@@ -409,6 +458,18 @@ namespace WmsApp
             //    body.ColsAlignString = "CCCCCCC";
             body.DataSource = arr;
             body.ColsWidth = BuildXiBeiGanTiaoColsWidth();
+            return body;
+        }
+
+
+        public static Body BuildXiBeiGanTiaoNewArriveBody(string[,] arr)
+        {
+            Body body = new Body();
+            body.IsAverageColsWidth = false;
+          //  body.Font = bodyBodyFont2;
+            //    body.ColsAlignString = "CCCCCCC";
+            body.DataSource = arr;
+            body.ColsWidth = BuildXiBeiGanTiaoNewColsWidth();
             return body;
         }
 
@@ -588,6 +649,86 @@ namespace WmsApp
         }
 
 
+        public static string[,] ToChunBoArrFromList(List<ShipMentDetailVo> list)
+        {
+
+            if (list == null)
+            {
+                return new string[0, 0];
+            }
+
+            int mRows, mCols;
+            string[,] arrGridText;
+
+            if (list.Count % 2 == 0)
+            {
+                mRows = list.Count / 2;
+            }
+            else
+            {
+                mRows = list.Count / 2 + 1;
+            }
+
+            mCols = 12;
+
+            arrGridText = new string[mRows, mCols];
+
+            if (list.Count % 2 == 0)
+            {
+                int m = 0;
+                for (int i = 0; i < mRows; i++)
+                {
+
+                    arrGridText[i, 0] = (m + 1).ToString();
+                    arrGridText[i, 1] = list[m].twoCategoryName + "." + list[m].goodsName + "." + list[m].goodsModel;
+                    arrGridText[i, 2] = list[m].goodsUnit;
+                   
+                    arrGridText[i, 3] = list[m].taxPrice.ToString("f2");
+                    arrGridText[i, 4] = list[m].deliveryNum.ToString("f3");
+                    arrGridText[i, 5] ="";
+                    m = m + 1;
+                    arrGridText[i, 6] = (m + 1).ToString();
+                    arrGridText[i, 7] = list[m].twoCategoryName + "." + list[m].goodsName + "." + list[m].goodsModel;
+
+                    arrGridText[i, 8] = list[m].goodsUnit;
+                    arrGridText[i, 9] = list[m].taxPrice.ToString("f2");
+                    arrGridText[i, 10] = list[m].deliveryNum.ToString("f3");
+                    arrGridText[i, 11] = "";
+                    m = m + 1;
+                }
+            }
+            else
+            {
+                int m = 0;
+                for (int i = 0; i < mRows; i++)
+                {
+                    arrGridText[i, 0] = (m + 1).ToString();
+                    arrGridText[i, 1] = list[m].twoCategoryName + "." + list[m].goodsName + "." + list[m].goodsModel;
+                    arrGridText[i, 2] = list[m].goodsUnit;
+                    arrGridText[i, 3] = list[m].taxPrice.ToString("f2");
+                    arrGridText[i, 4] = list[m].deliveryNum.ToString("f3");
+                    arrGridText[i, 5] = "";
+                    m = m + 1;
+                    if (i != mRows - 1)
+                    {
+                        arrGridText[i, 6] = (m + 1).ToString();
+                        arrGridText[i, 7] = list[m].twoCategoryName + "." + list[m].goodsName + "." + list[m].goodsModel;
+
+                        arrGridText[i, 8] = list[m].goodsUnit;
+                        arrGridText[i, 9] = list[m].taxPrice.ToString("f2");
+                        arrGridText[i, 10] = list[m].deliveryNum.ToString("f3");
+                        arrGridText[i, 11] = "";
+
+                        m = m + 1;
+                    }
+
+                }
+            }
+
+
+            return arrGridText;
+        }
+
         public static string[,] ToXiBeiGanTiaoArrFromList(List<ShipMentDetailVo> list)
         {
 
@@ -667,6 +808,61 @@ namespace WmsApp
 
             return arrGridText;
         }
+
+
+        public static string[,] ToXiBeiGanTiaoNewArrFromList(List<ShipMentDetailVo> list)
+        {
+
+            if (list == null)
+            {
+                return new string[0, 0];
+            }
+
+            int mRows, mCols;
+            string[,] arrGridText;
+
+            mRows = list.Count;
+            //if (list.Count % 2 == 0)
+            //{
+            //    mRows = list.Count / 2;
+            //}
+            //else
+            //{
+            //    mRows = list.Count / 2 + 1;
+            //}
+
+            mCols = 13;
+
+            arrGridText = new string[mRows, mCols];
+
+      
+              
+                for (int i = 0; i < mRows; i++)
+                {
+
+                    arrGridText[i, 0] = (i + 1).ToString();
+                    arrGridText[i, 1] = list[i].skuCode;
+                    arrGridText[i, 2] =  list[i].goodsName ;
+                    arrGridText[i, 3] = list[i].goodsModel;
+                    arrGridText[i, 4] = list[i].goodsUnit;
+                    arrGridText[i, 5] = list[i].planNum.ToString("f3");
+                    arrGridText[i, 6] = list[i].deliveryNum.ToString("f3");
+                    arrGridText[i, 7] = list[i].areaAttr;
+
+                   
+                    arrGridText[i, 8] = "";
+                    arrGridText[i, 9] = "";
+                    arrGridText[i, 10] = "";
+                    arrGridText[i, 11] = "";
+                    arrGridText[i, 12] = "";
+                 
+                }
+           
+
+
+            return arrGridText;
+        }
+
 
 
         public static string[,] ToPangGeLiangArrFromList(List<ShipMentDetailVo> list)

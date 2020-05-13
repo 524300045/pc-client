@@ -15,7 +15,7 @@ using WmsSDK.Response;
 
 namespace WmsApp.Order
 {
-    public partial class OutBoundSendForm : TabWindow
+    public partial class OutBoundSecondSendForm : TabWindow
     {
 
         private IWMSClient client = null;
@@ -26,7 +26,7 @@ namespace WmsApp.Order
 
         private SortableBindingList<ShipmentModel> sortList = null;
 
-        public OutBoundSendForm()
+        public OutBoundSecondSendForm()
         {
             InitializeComponent();
             client = new DefalutWMSClient();
@@ -83,25 +83,25 @@ namespace WmsApp.Order
 
         private void bindStatus()
         {
-            DictRequest request = new DictRequest();
-            request.type = "outboundStatus";
+            //DictRequest request = new DictRequest();
+            //request.type = "outboundStatus";
 
-            DictResponse response = client.Execute(request);
-            if (!response.IsError)
-            {
-                if (response.result != null)
-                {
+            //DictResponse response = client.Execute(request);
+            //if (!response.IsError)
+            //{
+            //    if (response.result != null)
+            //    {
 
-                    List<Dict> list = new List<Dict>();
-                    list = response.result;
-                    list.Insert(0, new Dict() { code = "-1", name = "全部" });
+            //        List<Dict> list = new List<Dict>();
+            //        list = response.result;
+            //        list.Insert(0, new Dict() { code = "-1", name = "全部" });
 
-                    this.cbStatus.DataSource = list;
-                    this.cbStatus.ValueMember = "code";
-                    this.cbStatus.DisplayMember = "name";
-                    cbStatus.SelectedIndex = 0;
-                }
-            }
+            //        this.cbStatus.DataSource = list;
+            //        this.cbStatus.ValueMember = "code";
+            //        this.cbStatus.DisplayMember = "name";
+            //        cbStatus.SelectedIndex = 0;
+            //    }
+            //}
         }
 
         private void bindFreshAttr()
@@ -132,8 +132,8 @@ namespace WmsApp.Order
         {
 
             string storeCode = cbStore.SelectedValue.ToString();
-            int? status = int.Parse(cbStatus.SelectedValue.ToString());
-            OutBoundQueryRequest request = new OutBoundQueryRequest();
+      //      int? status = int.Parse(cbStatus.SelectedValue.ToString());
+            OutBoundSeondQueryRequest request = new OutBoundSeondQueryRequest();
             request.warehouseCode = UserInfo.WareHouseCode;
             request.customerCode = UserInfo.CustomerCode;
             if (cbStore.SelectedIndex != 0)
@@ -144,14 +144,15 @@ namespace WmsApp.Order
             request.startTime = dtBegin.Value;
             request.endTime = Convert.ToDateTime(dtEnd.Value.ToString("yyyy-MM-dd") + " 23:59:59");
 
-            if (status == -1)
-            {
-                status = null;
-            }
-            else
-            {
-                request.status = status;
-            }
+            //if (status == -1)
+            //{
+            //    status = null;
+            //}
+            //else
+            //{
+            //    request.status = status;
+            //}
+            request.status = null;
             request.isPrint = null;
 
             int? freshAttr = int.Parse(cbFreshAttr.SelectedValue.ToString());

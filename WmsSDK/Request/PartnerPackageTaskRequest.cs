@@ -56,5 +56,7 @@ namespace WmsSDK.Request
 
           [JsonProperty("warehouseCode")]
           public string warehouseCode { get; set; }
+
+          public string waveCode { get; set; }
     }
 }

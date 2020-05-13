@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbStore = new System.Windows.Forms.ComboBox();
             this.cbStatus = new System.Windows.Forms.ComboBox();
             this.btnExport = new System.Windows.Forms.Button();
             this.tbTaskCode = new System.Windows.Forms.TextBox();
@@ -37,12 +38,16 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.btnQuery = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pageSplit1 = new Wms.Controls.Pager.PageSplit();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.cbWave = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.packTaskCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusdes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.skuCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,9 +57,7 @@
             this.goodsUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.physicsUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.planNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.cbStore = new System.Windows.Forms.ComboBox();
+            this.waveName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -64,6 +67,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbWave);
+            this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.cbStore);
             this.groupBox1.Controls.Add(this.cbStatus);
             this.groupBox1.Controls.Add(this.btnExport);
@@ -83,6 +88,15 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "查询条件";
+            // 
+            // cbStore
+            // 
+            this.cbStore.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbStore.FormattingEnabled = true;
+            this.cbStore.Location = new System.Drawing.Point(100, 53);
+            this.cbStore.Name = "cbStore";
+            this.cbStore.Size = new System.Drawing.Size(139, 24);
+            this.cbStore.TabIndex = 6;
             // 
             // cbStatus
             // 
@@ -162,6 +176,15 @@
             this.btnQuery.UseVisualStyleBackColor = true;
             this.btnQuery.Click += new System.EventHandler(this.btnQuery_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(14, 57);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(48, 16);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "门店:";
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -231,7 +254,8 @@
             this.modelNum,
             this.goodsUnit,
             this.physicsUnit,
-            this.planNum});
+            this.planNum,
+            this.waveName});
             this.dataGridView1.Location = new System.Drawing.Point(3, 22);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
@@ -240,6 +264,35 @@
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView1_CellPainting);
             this.dataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.groupBox1);
+            this.groupBox3.Controls.Add(this.groupBox2);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox3.Location = new System.Drawing.Point(0, 0);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(1100, 467);
+            this.groupBox3.TabIndex = 2;
+            this.groupBox3.TabStop = false;
+            // 
+            // cbWave
+            // 
+            this.cbWave.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbWave.FormattingEnabled = true;
+            this.cbWave.Location = new System.Drawing.Point(382, 49);
+            this.cbWave.Name = "cbWave";
+            this.cbWave.Size = new System.Drawing.Size(141, 24);
+            this.cbWave.TabIndex = 21;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(248, 57);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(48, 16);
+            this.label8.TabIndex = 20;
+            this.label8.Text = "批次:";
             // 
             // packTaskCode
             // 
@@ -313,34 +366,12 @@
             this.planNum.ReadOnly = true;
             this.planNum.Width = 81;
             // 
-            // groupBox3
+            // waveName
             // 
-            this.groupBox3.Controls.Add(this.groupBox1);
-            this.groupBox3.Controls.Add(this.groupBox2);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Location = new System.Drawing.Point(0, 0);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1100, 467);
-            this.groupBox3.TabIndex = 2;
-            this.groupBox3.TabStop = false;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(14, 57);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(48, 16);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "门店:";
-            // 
-            // cbStore
-            // 
-            this.cbStore.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbStore.FormattingEnabled = true;
-            this.cbStore.Location = new System.Drawing.Point(100, 53);
-            this.cbStore.Name = "cbStore";
-            this.cbStore.Size = new System.Drawing.Size(139, 24);
-            this.cbStore.TabIndex = 6;
+            this.waveName.DataPropertyName = "waveName";
+            this.waveName.HeaderText = "批次";
+            this.waveName.Name = "waveName";
+            this.waveName.Width = 65;
             // 
             // PartnerPackageTaskQueryForm
             // 
@@ -377,6 +408,12 @@
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.ComboBox cbStatus;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox cbStore;
+        private System.Windows.Forms.ComboBox cbWave;
+        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DataGridViewTextBoxColumn packTaskCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn statusdes;
         private System.Windows.Forms.DataGridViewTextBoxColumn skuCode;
@@ -386,9 +423,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn goodsUnit;
         private System.Windows.Forms.DataGridViewTextBoxColumn physicsUnit;
         private System.Windows.Forms.DataGridViewTextBoxColumn planNum;
-        private System.Windows.Forms.ComboBox cbStatus;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox cbStore;
+        private System.Windows.Forms.DataGridViewTextBoxColumn waveName;
     }
 }

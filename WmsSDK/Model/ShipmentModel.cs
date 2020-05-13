@@ -60,6 +60,8 @@ namespace WmsSDK.Model
 
 
         public int? isPrint { get; set; }
+
+        public string waveName { get; set; }
     
     }
 }

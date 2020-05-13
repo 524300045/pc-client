@@ -222,5 +222,20 @@ namespace WmsApp
             ps.Start();
 
         }
+
+        private void pbSecondSend_Click(object sender, EventArgs e)
+        {
+            OpenForm("tsbSecondSend"); 
+        }
+
+        /// <summary>
+        /// 门店信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pbStoreInfo_Click(object sender, EventArgs e)
+        {
+            OpenForm("tsbStore"); 
+        }
     }
 }

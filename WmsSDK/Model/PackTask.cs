@@ -122,6 +122,10 @@ namespace WmsSDK.Model
           public String customerGoodsName { get; set; }
 
 
+          [JsonProperty("waveName")]
+          public string waveName { get; set; }
+
+
         public string statusdes
         {
             get

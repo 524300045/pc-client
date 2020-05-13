@@ -26,8 +26,11 @@ namespace WmsSDK.Request
         public string storedName;
 
         public int? freshAttr;
-     
 
+
+        public string waveCode;
+
+        public List<string> waveCodeList;
      //   public int status;
         public string GetAPIPath()
         {
@@ -61,12 +64,51 @@ namespace WmsSDK.Request
 
         public int page;
 
+        public string waveCode;
 
+        public List<string> waveCodeList;
 
         //   public int status;
         public string GetAPIPath()
         {
             return "/outBound/getOutBoundPageList";
+        }
+
+    }
+
+
+    public class OutBoundSeondQueryRequest : IWMSRequest<OutBoundPageResponse>
+    {
+        public String storedCode;
+
+        public string storedName { get; set; }
+
+        /** 开始时间 */
+        public DateTime startTime;
+        /** 结束时间 */
+        public DateTime endTime;
+
+        public String warehouseCode;
+
+        public String customerCode;
+
+
+        public int? status;
+
+        public int? freshAttr;
+
+        public int? isPrint;
+
+        public int page;
+
+        public string waveCode;
+
+        public List<string> waveCodeList;
+
+        //   public int status;
+        public string GetAPIPath()
+        {
+            return "/outBound/getOutBoundSecondSendPageList";
         }
 
     }

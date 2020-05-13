@@ -28,9 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ccbWave = new Wms.Controls.ComCheckBoxList();
+            this.label8 = new System.Windows.Forms.Label();
             this.btnInput = new System.Windows.Forms.Button();
             this.btnOrder = new System.Windows.Forms.Button();
             this.chk = new System.Windows.Forms.CheckBox();
@@ -73,6 +75,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.ccbWave);
+            this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.btnInput);
             this.groupBox1.Controls.Add(this.btnOrder);
             this.groupBox1.Controls.Add(this.chk);
@@ -97,9 +101,29 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "查询条件";
             // 
+            // ccbWave
+            // 
+            this.ccbWave.DataSource = null;
+            this.ccbWave.Location = new System.Drawing.Point(763, 15);
+            this.ccbWave.Margin = new System.Windows.Forms.Padding(4);
+            this.ccbWave.Name = "ccbWave";
+            this.ccbWave.Size = new System.Drawing.Size(132, 25);
+            this.ccbWave.TabIndex = 19;
+            this.ccbWave.ItemClick += new Wms.Controls.ComCheckBoxList.CheckBoxListItemClick(this.ccbWave_ItemClick);
+            this.ccbWave.AllClick += new Wms.Controls.ComCheckBoxList.CheckBoxAllClick(this.ccbWave_AllClick);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(727, 20);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(48, 16);
+            this.label8.TabIndex = 18;
+            this.label8.Text = "批次:";
+            // 
             // btnInput
             // 
-            this.btnInput.Location = new System.Drawing.Point(899, 55);
+            this.btnInput.Location = new System.Drawing.Point(785, 54);
             this.btnInput.Name = "btnInput";
             this.btnInput.Size = new System.Drawing.Size(158, 23);
             this.btnInput.TabIndex = 14;
@@ -109,7 +133,7 @@
             // 
             // btnOrder
             // 
-            this.btnOrder.Location = new System.Drawing.Point(741, 56);
+            this.btnOrder.Location = new System.Drawing.Point(627, 54);
             this.btnOrder.Name = "btnOrder";
             this.btnOrder.Size = new System.Drawing.Size(150, 23);
             this.btnOrder.TabIndex = 13;
@@ -120,7 +144,7 @@
             // chk
             // 
             this.chk.AutoSize = true;
-            this.chk.Location = new System.Drawing.Point(616, 58);
+            this.chk.Location = new System.Drawing.Point(524, 56);
             this.chk.Name = "chk";
             this.chk.Size = new System.Drawing.Size(107, 20);
             this.chk.TabIndex = 12;
@@ -131,7 +155,7 @@
             // 
             this.cbWorkGroup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbWorkGroup.FormattingEnabled = true;
-            this.cbWorkGroup.Location = new System.Drawing.Point(671, 17);
+            this.cbWorkGroup.Location = new System.Drawing.Point(581, 17);
             this.cbWorkGroup.Name = "cbWorkGroup";
             this.cbWorkGroup.Size = new System.Drawing.Size(141, 24);
             this.cbWorkGroup.TabIndex = 10;
@@ -140,7 +164,7 @@
             // 
             this.cbWorkShop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbWorkShop.FormattingEnabled = true;
-            this.cbWorkShop.Location = new System.Drawing.Point(454, 55);
+            this.cbWorkShop.Location = new System.Drawing.Point(374, 55);
             this.cbWorkShop.Name = "cbWorkShop";
             this.cbWorkShop.Size = new System.Drawing.Size(141, 24);
             this.cbWorkShop.TabIndex = 10;
@@ -149,7 +173,7 @@
             // 
             this.cbProcessProduct.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbProcessProduct.FormattingEnabled = true;
-            this.cbProcessProduct.Location = new System.Drawing.Point(162, 55);
+            this.cbProcessProduct.Location = new System.Drawing.Point(131, 55);
             this.cbProcessProduct.Name = "cbProcessProduct";
             this.cbProcessProduct.Size = new System.Drawing.Size(141, 24);
             this.cbProcessProduct.TabIndex = 11;
@@ -157,7 +181,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(586, 21);
+            this.label3.Location = new System.Drawing.Point(496, 21);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(80, 16);
             this.label3.TabIndex = 8;
@@ -166,7 +190,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(368, 61);
+            this.label5.Location = new System.Drawing.Point(288, 61);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(80, 16);
             this.label5.TabIndex = 8;
@@ -175,7 +199,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(44, 58);
+            this.label4.Location = new System.Drawing.Point(13, 58);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(80, 16);
             this.label4.TabIndex = 9;
@@ -183,7 +207,7 @@
             // 
             // btnExport
             // 
-            this.btnExport.Location = new System.Drawing.Point(937, 18);
+            this.btnExport.Location = new System.Drawing.Point(955, 53);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(75, 23);
             this.btnExport.TabIndex = 6;
@@ -195,7 +219,7 @@
             // 
             this.dtBegin.CustomFormat = "yyyy-MM-dd";
             this.dtBegin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtBegin.Location = new System.Drawing.Point(454, 15);
+            this.dtBegin.Location = new System.Drawing.Point(375, 15);
             this.dtBegin.Name = "dtBegin";
             this.dtBegin.Size = new System.Drawing.Size(117, 26);
             this.dtBegin.TabIndex = 5;
@@ -203,7 +227,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(368, 22);
+            this.label1.Location = new System.Drawing.Point(289, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(80, 16);
             this.label1.TabIndex = 4;
@@ -211,7 +235,7 @@
             // 
             // tbName
             // 
-            this.tbName.Location = new System.Drawing.Point(162, 15);
+            this.tbName.Location = new System.Drawing.Point(133, 15);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(141, 26);
             this.tbName.TabIndex = 3;
@@ -219,7 +243,7 @@
             // 
             // btnQuery
             // 
-            this.btnQuery.Location = new System.Drawing.Point(829, 18);
+            this.btnQuery.Location = new System.Drawing.Point(902, 19);
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(75, 23);
             this.btnQuery.TabIndex = 1;
@@ -230,7 +254,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(44, 22);
+            this.label2.Location = new System.Drawing.Point(15, 22);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(128, 16);
             this.label2.TabIndex = 0;
@@ -305,10 +329,10 @@
             // 
             // Column12
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Gray;
-            this.Column12.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Gray;
+            this.Column12.DefaultCellStyle = dataGridViewCellStyle3;
             this.Column12.HeaderText = "操作";
             this.Column12.Name = "Column12";
             this.Column12.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -368,8 +392,8 @@
             // weighed
             // 
             this.weighed.DataPropertyName = "weighed";
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            this.weighed.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            this.weighed.DefaultCellStyle = dataGridViewCellStyle4;
             this.weighed.HeaderText = "weighed";
             this.weighed.Name = "weighed";
             this.weighed.Visible = false;
@@ -495,5 +519,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn shortName;
         private System.Windows.Forms.DataGridViewTextBoxColumn groupName;
         private System.Windows.Forms.DataGridViewTextBoxColumn productWorkshopAttr;
+        private System.Windows.Forms.Label label8;
+        private Wms.Controls.ComCheckBoxList ccbWave;
     }
 }

@@ -386,6 +386,23 @@ namespace WmsApp
 
         private void tsbSendPrint_Click(object sender, EventArgs e)
         {
+
+            
+             try
+             {
+
+                 if (!File.Exists(Application.StartupPath + "\\config.xml"))
+                 {
+                     LogHelper.Log(Application.StartupPath);
+                     CreateConfigXml();
+                 }
+             }
+             catch (Exception ex)
+             {
+                 MessageBox.Show("tsbSendPrint_Click" + ex.Message);
+             }
+          
+
          
             DockContent fx = FindCurrentForm("SendPrintForm");
             if (fx == null)
@@ -456,6 +473,42 @@ namespace WmsApp
             if (fx == null)
             {
                 AddToFrame(new OutBoundSendForm());
+            }
+            else
+            {
+                fx.Activate();
+            }
+        }
+
+        /// <summary>
+        /// 二次
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbSecondSend_Click(object sender, EventArgs e)
+        {
+            DockContent fx = FindCurrentForm("OutBoundSecondSendForm");
+            if (fx == null)
+            {
+                AddToFrame(new OutBoundSecondSendForm());
+            }
+            else
+            {
+                fx.Activate();
+            }
+        }
+
+        /// <summary>
+        /// 门店信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbStore_Click(object sender, EventArgs e)
+        {
+            DockContent fx = FindCurrentForm("StoreInfoForm");
+            if (fx == null)
+            {
+                AddToFrame(new StoreInfoForm());
             }
             else
             {

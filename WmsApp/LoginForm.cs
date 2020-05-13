@@ -99,12 +99,11 @@ namespace WmsApp
                 string json = DefalutWMSClient.GetJson(request);
 
                 #if(!DEBUG)
-                 string result = PostMoths("http://www.bjkalf.net:8090/services/user/checkAndGetUserResource", json);
+                string result = PostMoths("http://api.bjkalf.net/services/user/checkAndGetUserResource", json);
 #else
-                string result = PostMoths("http://test.api.portal.bjshengeng.com/services/user/checkAndGetUserResource", json);
-                //string result = PostMoths("http://test.zk.bjkalf.net:9400/services/user/checkAndGetUserResource", json);
+              string result = PostMoths("http://test.api.portal.bjshengeng.com/services/user/checkAndGetUserResource", json);
 
-                //string result = PostMoths("http://test.www.bjkalf.net:81/services/user/checkAndGetUserResource", json);
+            //   string result = PostMoths("http://api.bjkalf.net/services/user/checkAndGetUserResource", json);
 #endif
 
 

@@ -70,5 +70,9 @@ namespace WmsSDK.Request
            public int? productWorkshopAttr { get; set; }
 
            public string groupCode { get; set; }
+
+           public string waveCode { get; set; }
+
+           public List<string> waveCodeList { get; set; }
     }
 }

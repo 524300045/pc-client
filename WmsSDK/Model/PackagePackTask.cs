@@ -96,6 +96,11 @@ namespace WmsSDK.Model
 
         public int packageNum { get; set; }
 
+
+        public String waveCode { get; set; }
+
+        public String waveName { get; set; }
+
         public string statusDes
         {
             get

@@ -39,15 +39,19 @@ namespace WmsApp
         public string orderNum;
         public DateTime dt;
 
+        public string waveCode;
+
+        public string waveName;
 
 
-        public PreWeightForm(Goods _goods, DateTime _dt)
+        public PreWeightForm(Goods _goods, DateTime _dt,string _waveCode,string _waveName)
         {
             InitializeComponent();
             this.goods = _goods;
             client = new DefalutWMSClient();
             this.dt = _dt;
-
+            this.waveCode = _waveCode;
+            this.waveName = _waveName;
         }
 
         double expireDay = 0;
@@ -630,6 +634,8 @@ namespace WmsApp
                             add.skuCode = goods.skuCode;
                             add.status = 0;
                             add.updateUser = UserInfo.RealName;
+                            add.waveCode = waveCode;
+                            add.waveName = waveName;
                             list.Add(add);
                         }
 
@@ -680,6 +686,8 @@ namespace WmsApp
                             add.skuCode = goods.skuCode;
                             add.status = 0;
                             add.updateUser = UserInfo.RealName;
+                            add.waveCode = waveCode;
+                            add.waveName = waveName;
                             list.Add(add);
                         }
                         #endregion
@@ -755,7 +763,7 @@ namespace WmsApp
                             #endregion
                         }
                         else if (UserInfo.CustomerCode == "11001" || UserInfo.CustomerCode == "18001"
-                      || UserInfo.CustomerCode == "19001"
+                      || UserInfo.CustomerCode == "19001" || UserInfo.CustomerCode == "47001"
                       || UserInfo.CustomerCode == "32001")
                         {
 

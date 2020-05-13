@@ -46,8 +46,32 @@ namespace WmsApp
 
             this.dataGridView1.AutoGenerateColumns = false;
             paginator = new PaginatorDTO { PageNo = 1, PageSize = 100 };
+            bindWave();
 
+        }
 
+        private void bindWave()
+        {
+            WaveCustomerStoreRequest request = new WaveCustomerStoreRequest();
+            request.warehouseCode = UserInfo.WareHouseCode;
+            request.customerCode = UserInfo.CustomerCode;
+
+            WaveCustomerStoreResponse response = client.Execute(request);
+            if (!response.IsError)
+            {
+                if (response.result != null)
+                {
+
+                    List<WaveCustomerStoreModel> list = new List<WaveCustomerStoreModel>();
+                    list = response.result;
+                    list.Insert(0, new WaveCustomerStoreModel() { waveCode = "", waveName = "全部" });
+
+                    this.cbWave.DataSource = list;
+                    this.cbWave.ValueMember = "waveCode";
+                    this.cbWave.DisplayMember = "waveName";
+                    cbWave.SelectedIndex = 0;
+                }
+            }
         }
 
         private void BindDgv()

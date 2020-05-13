@@ -60,6 +60,7 @@ namespace WmsApp
             BindProcess();
             BindWorkShop();
             BindWorkGroup();
+            bindWave();
             string name = tbName.Text.Trim();
 
             int? processProduct = null;
@@ -89,11 +90,41 @@ namespace WmsApp
             string startTime = dtBegin.Value.ToString("yyyy-MM-dd 00:00:00");
             string endTime = dtBegin.Value.ToString("yyyy-MM-dd 23:59:59");
 
+          
+         
             Task.Factory.StartNew(() =>
             {
                 // btnQuery_Click(null,null);
-                QueryData(name, processProduct, workShop, isStand, groupCode,startTime,endTime);
+                QueryData(name, processProduct, workShop, isStand, groupCode,startTime,endTime,"",null);
             });
+        }
+
+
+        private void bindWave()
+        {
+            WaveCustomerStoreRequest request = new WaveCustomerStoreRequest();
+            request.warehouseCode = UserInfo.WareHouseCode;
+            request.customerCode = UserInfo.CustomerCode;
+
+            WaveCustomerStoreResponse response = client.Execute(request);
+            if (!response.IsError)
+            {
+                if (response.result != null)
+                {
+
+                    List<WaveCustomerStoreModel> list = new List<WaveCustomerStoreModel>();
+                    list = response.result;
+                    //list.Insert(0, new WaveCustomerStoreModel() { waveCode = "", waveName = "全部" });
+
+                    //this.cbWave.DataSource = list;
+                    //this.cbWave.ValueMember = "waveCode";
+                    //this.cbWave.DisplayMember = "waveName";
+                    //cbWave.SelectedIndex = 0;
+                    this.ccbWave.DataSource = list;
+                    this.ccbWave.ValueMember = "waveCode";
+                    this.ccbWave.DisplayMember = "waveName";
+                }
+            }
         }
 
         private void cbHeader_OnCheckBoxClicked(bool state)
@@ -172,7 +203,7 @@ namespace WmsApp
             }
         }
 
-        private void BindDgv(string name, int? productprocess, int? workshop, int? isStand,string groupCode,string startTime,string endTime)
+        private void BindDgv(string name, int? productprocess, int? workshop, int? isStand, string groupCode, string startTime, string endTime, string waveCode, List<String> waveCodeList)
         {
             GoodsRequest request = new GoodsRequest();
             request.PageIndex = paginator.PageNo;
@@ -207,7 +238,8 @@ namespace WmsApp
 
             request.isStandardProcess = isStand;
 
-
+            request.waveCode = waveCode;
+            request.waveCodeList = waveCodeList;
           
             GoodsResponse response = client.Execute(request);
             if (!response.IsError)
@@ -292,10 +324,18 @@ namespace WmsApp
                         orderNum = this.dataGridView1.CurrentRow.Cells["orderNum"].Value.ToString();
                     }
 
+                    string waveCode = "";
+                    string waveName = "";
+                    //if (cbWave.SelectedValue.ToString() != "")
+                    //{
+                    //    waveCode = cbWave.SelectedValue.ToString();
+                    //    waveName = cbWave.Text.ToString();
+                    //}
+
                     // int weighted =int.Parse(this.dataGridView1.CurrentRow.Cells["weighed"].Value.ToString());
                     //这里可以编写你需要的任意关于按钮事件的操作~
                     Goods goods = goodsList.Where(p => p.skuCode == skucode).FirstOrDefault();
-                    PreWeightForm weightForm = new PreWeightForm(goods, dtBegin.Value);
+                    PreWeightForm weightForm = new PreWeightForm(goods, dtBegin.Value, waveCode, waveName);
                     weightForm.orderNum = orderNum;
 
                     if (weightForm.ShowDialog() == DialogResult.OK)
@@ -336,11 +376,24 @@ namespace WmsApp
 
                     string startTime = dtBegin.Value.ToString("yyyy-MM-dd 00:00:00");
                     string endTime = dtBegin.Value.ToString("yyyy-MM-dd 23:59:59");
+                   // string waveCode = cbWave.SelectedValue.ToString();
+
+                    List<String> waveCodeList = null;
+                    if (this.ccbWave.CheckedItems.Count > 0)
+                    {
+                        waveCodeList = new List<string>();
+                        foreach (var item in this.ccbWave.CheckedItems)
+                        {
+                            WaveCustomerStoreModel wcsModel = (WaveCustomerStoreModel)item;
+                            waveCodeList.Add(wcsModel.waveCode);
+                        }
+
+                    }
 
                     Task.Factory.StartNew(() =>
                     {
                         // btnQuery_Click(null,null);
-                        QueryData(name, processProduct, workShop, isStand, groupCode,startTime,endTime);
+                        QueryData(name, processProduct, workShop, isStand, groupCode, startTime, endTime, waveCode, waveCodeList);
                     });
 
                 }
@@ -394,6 +447,19 @@ namespace WmsApp
             string startTime = dtBegin.Value.ToString("yyyy-MM-dd 00:00:00");
             string endTime = dtBegin.Value.ToString("yyyy-MM-dd 23:59:59");
 
+        //    string waveCode = cbWave.SelectedValue.ToString();
+            List<String> waveCodeList = null;
+            if (this.ccbWave.CheckedItems.Count > 0)
+            {
+                 waveCodeList = new List<string>();
+                foreach (var item in this.ccbWave.CheckedItems)
+                {
+                    WaveCustomerStoreModel wcsModel = (WaveCustomerStoreModel)item;
+                    waveCodeList.Add(wcsModel.waveCode);
+                }
+                
+            }
+
             Task.Factory.StartNew(() =>
             {
 
@@ -405,7 +471,7 @@ namespace WmsApp
                         btnQuery.Enabled = false;
                     }));
                     paginator.PageNo = 1;
-                    BindDgv(name, processProduct, workShop, isStand, groupCode, startTime, endTime);
+                    BindDgv(name, processProduct, workShop, isStand, groupCode, startTime, endTime, "",waveCodeList);
                 }
                 catch (Exception ex)
                 {
@@ -427,28 +493,10 @@ namespace WmsApp
         }
 
 
-        private void QueryData(string name, int? processProduct, int? workShop, int? isStand,string groupCode,string startTime,string endTime)
+        private void QueryData(string name, int? processProduct, int? workShop, int? isStand,string groupCode,string startTime,string endTime,string waveCode,List<String> waveCodeList)
         {
 
-            // string name = tbName.Text.Trim();
-
-            //int? processProduct = null;
-            //   int? workShop = null;
-            //if (cbProcessProduct.SelectedIndex != 0)
-            //{
-            //    processProduct = int.Parse(cbProcessProduct.SelectedValue.ToString());
-            //}
-
-            //if (cbWorkShop.SelectedIndex != 0)
-            //{
-            //    workShop = int.Parse(cbWorkShop.SelectedValue.ToString());
-            //}
-
-            //int? isStand = null;
-            //if (chk.Checked)
-            //{
-            //    isStand = 1;
-            //}
+           
 
             Task.Factory.StartNew(() =>
             {
@@ -461,7 +509,7 @@ namespace WmsApp
                         btnQuery.Enabled = false;
                     }));
                     paginator.PageNo = 1;
-                    BindDgv(name, processProduct, workShop, isStand, groupCode,startTime,endTime);
+                    BindDgv(name, processProduct, workShop, isStand, groupCode, startTime, endTime, waveCode, waveCodeList);
                 }
                 catch (Exception ex)
                 {
@@ -509,8 +557,20 @@ namespace WmsApp
             }
             string startTime = dtBegin.Value.ToString("yyyy-MM-dd 00:00:00");
             string endTime = dtBegin.Value.ToString("yyyy-MM-dd 23:59:59");
+           // string waveCode = cbWave.SelectedValue.ToString();
+            List<String> waveCodeList = null;
+            if (this.ccbWave.CheckedItems.Count > 0)
+            {
+                 waveCodeList = new List<string>();
+                foreach (var item in this.ccbWave.CheckedItems)
+                {
+                    WaveCustomerStoreModel wcsModel = (WaveCustomerStoreModel)item;
+                    waveCodeList.Add(wcsModel.waveCode);
+                }
+               
+            }
 
-            BindDgv(tbName.Text.Trim(), processProduct, workShop, isStand, groupCode,startTime,endTime);
+            BindDgv(tbName.Text.Trim(), processProduct, workShop, isStand, groupCode, startTime, endTime, "", waveCodeList);
         }
 
         private void tbName_KeyDown(object sender, KeyEventArgs e)
@@ -670,23 +730,15 @@ namespace WmsApp
                 {
                     return;
                 }
-              
-                //if (UserInfo.CustomerCode == "19001" || UserInfo.CustomerCode == "12001"
-                //    || UserInfo.CustomerCode == "7001" || UserInfo.CustomerCode == "11001"
-                //      || UserInfo.CustomerCode == "32001" || UserInfo.CustomerCode == "4001"
-                //      || UserInfo.CustomerCode == "1001"||UserInfo.CustomerCode == "18001"
-                //    )
+                //string waveCode = "";
+                //string waveName = "";
+                //if (cbWave.SelectedValue.ToString() != "")
                 //{
-                //    SelectProductDateForm selectDateForm = new SelectProductDateForm();
-                //    if (selectDateForm.ShowDialog() == DialogResult.OK)
-                //    {
-                //        productDate = selectDateForm.ProductDateStr;
-                //    }
-                //    else
-                //    {
-                //        return;
-                //    }
+                //    waveCode = cbWave.SelectedValue.ToString();
+                //    waveName = cbWave.Text.ToString();
                 //}
+
+             
 
                 for (int i = 0; i < dataGridView1.Rows.Count; i++)
                 {
@@ -752,6 +804,9 @@ namespace WmsApp
                                 add.skuCode = goods.skuCode;
                                 add.status = 0;
                                 add.updateUser = UserInfo.RealName;
+
+                                //add.waveCode = waveCode;
+                                //add.waveName = waveName;
                                 list.Add(add);
                             }
                             if (UserInfo.CustomerCode != "7001" && UserInfo.CustomerCode != "7002")
@@ -813,7 +868,7 @@ namespace WmsApp
                                     #endregion
                                 }
                                 else if (UserInfo.CustomerCode == "11001" || UserInfo.CustomerCode == "18001"
-                                    || UserInfo.CustomerCode == "19001"
+                                    || UserInfo.CustomerCode == "19001" || UserInfo.CustomerCode == "47001"
                                     || UserInfo.CustomerCode == "32001")
                                 {
                                      #region 青年餐厅
@@ -2909,23 +2964,7 @@ namespace WmsApp
                     return;
                 }
 
-                //if (UserInfo.CustomerCode == "19001" || UserInfo.CustomerCode == "12001"
-                //  || UserInfo.CustomerCode == "7001" || UserInfo.CustomerCode == "11001"
-                //    || UserInfo.CustomerCode == "32001" || UserInfo.CustomerCode == "4001"
-                //    || UserInfo.CustomerCode == "1001" || UserInfo.CustomerCode == "18001"
-                //  )
-                //{
-                //    SelectProductDateForm selectDateForm = new SelectProductDateForm();
-                //    if (selectDateForm.ShowDialog() == DialogResult.OK)
-                //    {
-                //        productDate = selectDateForm.ProductDateStr;
-                //    }
-                //    else
-                //    {
-                //        return;
-                //    }
-                //}
-
+             
                 SelectProductDateForm selectDateForm = new SelectProductDateForm();
                 if (selectDateForm.ShowDialog() == DialogResult.OK)
                 {
@@ -2936,6 +2975,13 @@ namespace WmsApp
                     return;
                 }
 
+                //string waveCode = "";
+                //string waveName = "";
+                //if (cbWave.SelectedValue.ToString() != "")
+                //{
+                //    waveCode = cbWave.SelectedValue.ToString();
+                //    waveName = cbWave.Text.ToString();
+                //}
 
                 for (int i = 0; i < dataGridView1.Rows.Count; i++)
                 {
@@ -2948,10 +2994,7 @@ namespace WmsApp
                             getCustomerInfo(skuCode);
                             goods = goodsList.Where(p => p.skuCode == skuCode).FirstOrDefault();
 
-                           // if (this.dataGridView1.Rows[i].Cells["productWorkshopAttr"].Value !=null)
-                           //{
-                           //    productWorkshopAttr = Convert.ToInt32(this.dataGridView1.Rows[i].Cells["productWorkshopAttr"].Value);
-                           // }
+            
                             
                             List<PreprocessInfoAdd> list = new List<PreprocessInfoAdd>();
                             for (int n = 0; n < form.num; n++)
@@ -2969,6 +3012,8 @@ namespace WmsApp
                                 add.skuCode = goods.skuCode;
                                 add.status = 0;
                                 add.updateUser = UserInfo.RealName;
+                                //add.waveCode = waveCode;
+                                //add.waveName = waveName;
                                 list.Add(add);
                             }
 
@@ -3040,7 +3085,7 @@ namespace WmsApp
                                     #endregion
                                 }
                                 else if (UserInfo.CustomerCode == "11001" || UserInfo.CustomerCode == "18001"
-                             || UserInfo.CustomerCode == "19001"
+                             || UserInfo.CustomerCode == "19001" || UserInfo.CustomerCode == "47001"
                              || UserInfo.CustomerCode == "32001")
                                 {
                                     #region 青年餐厅
@@ -3550,6 +3595,60 @@ namespace WmsApp
             {
                 MessageBox.Show("异常:" + ex.Message);
             }
+        }
+
+        private void ccbWave_AllClick(object sender, EventArgs e)
+        {
+            List<string> selectList = new List<string>();
+            if (this.ccbWave.CheckedItems.Count > 0)
+            {
+                List<String> waveCodeList = new List<string>();
+                foreach (var item in this.ccbWave.CheckedItems)
+                {
+                    WaveCustomerStoreModel wcsModel = (WaveCustomerStoreModel)item;
+                    selectList.Add(wcsModel.waveName);
+                }
+            }
+            string selectText = "";
+            foreach (var item in selectList)
+            {
+                selectText += item + ",";
+            }
+            selectText = selectText.Trim(',');
+            this.ccbWave.SetTitleText(selectText);
+        }
+
+        private void ccbWave_ItemClick(object sender, ItemCheckEventArgs e)
+        {
+            List<string> selectList = new List<string>();
+            if (this.ccbWave.CheckedItems.Count > 0)
+            {
+                List<String> waveCodeList = new List<string>();
+                foreach (var item in this.ccbWave.CheckedItems)
+                {
+                    WaveCustomerStoreModel wcsModel = (WaveCustomerStoreModel)item;
+                    selectList.Add(wcsModel.waveName);
+                }
+            }
+            if (e.NewValue == CheckState.Checked)
+            {
+                WaveCustomerStoreModel wcsModel = (WaveCustomerStoreModel)this.ccbWave.Items[e.Index];
+                selectList.Add(wcsModel.waveName);
+            }
+
+            if (e.NewValue != CheckState.Checked)
+            {
+                WaveCustomerStoreModel wcsModel = (WaveCustomerStoreModel)this.ccbWave.Items[e.Index];
+                selectList.Remove(wcsModel.waveName);
+            }
+
+            string selectText = "";
+            foreach (var item in selectList)
+            {
+                selectText += item + ",";
+            }
+            selectText = selectText.Trim(',');
+            this.ccbWave.SetTitleText(selectText);
         }
 
 

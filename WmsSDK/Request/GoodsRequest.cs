@@ -71,5 +71,9 @@ namespace WmsSDK.Request
           public int? isStandardProcess { get; set; }
 
           public string groupCode { get; set; }
+
+          public string waveCode { get; set; }
+
+          public List<string> waveCodeList { get; set; }
     }
 }

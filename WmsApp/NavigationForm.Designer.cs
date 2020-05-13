@@ -63,6 +63,10 @@
             this.label16 = new System.Windows.Forms.Label();
             this.pbLogin = new System.Windows.Forms.PictureBox();
             this.label17 = new System.Windows.Forms.Label();
+            this.pbSecondSend = new System.Windows.Forms.PictureBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.pbStoreInfo = new System.Windows.Forms.PictureBox();
+            this.label19 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbOrderPackage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbGoodsPackage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBoxPrint)).BeginInit();
@@ -80,6 +84,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbOrderImport)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSend)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSecondSend)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbStoreInfo)).BeginInit();
             this.SuspendLayout();
             // 
             // pbOrderPackage
@@ -275,7 +281,7 @@
             // pbExit
             // 
             this.pbExit.Image = ((System.Drawing.Image)(resources.GetObject("pbExit.Image")));
-            this.pbExit.Location = new System.Drawing.Point(327, 337);
+            this.pbExit.Location = new System.Drawing.Point(598, 334);
             this.pbExit.Name = "pbExit";
             this.pbExit.Size = new System.Drawing.Size(78, 69);
             this.pbExit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -286,7 +292,7 @@
             // pbCloseAll
             // 
             this.pbCloseAll.Image = ((System.Drawing.Image)(resources.GetObject("pbCloseAll.Image")));
-            this.pbCloseAll.Location = new System.Drawing.Point(79, 337);
+            this.pbCloseAll.Location = new System.Drawing.Point(327, 334);
             this.pbCloseAll.Name = "pbCloseAll";
             this.pbCloseAll.Size = new System.Drawing.Size(78, 69);
             this.pbCloseAll.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -297,7 +303,7 @@
             // label10
             // 
             this.label10.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label10.Location = new System.Drawing.Point(305, 409);
+            this.label10.Location = new System.Drawing.Point(576, 406);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(111, 23);
             this.label10.TabIndex = 1;
@@ -307,7 +313,7 @@
             // label13
             // 
             this.label13.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label13.Location = new System.Drawing.Point(77, 409);
+            this.label13.Location = new System.Drawing.Point(325, 406);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(91, 23);
             this.label13.TabIndex = 1;
@@ -422,7 +428,7 @@
             // pbLogin
             // 
             this.pbLogin.Image = ((System.Drawing.Image)(resources.GetObject("pbLogin.Image")));
-            this.pbLogin.Location = new System.Drawing.Point(207, 337);
+            this.pbLogin.Location = new System.Drawing.Point(464, 334);
             this.pbLogin.Name = "pbLogin";
             this.pbLogin.Size = new System.Drawing.Size(78, 69);
             this.pbLogin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -433,12 +439,54 @@
             // label17
             // 
             this.label17.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label17.Location = new System.Drawing.Point(191, 409);
+            this.label17.Location = new System.Drawing.Point(448, 406);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(111, 23);
             this.label17.TabIndex = 1;
             this.label17.Text = "重新登录";
             this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pbSecondSend
+            // 
+            this.pbSecondSend.Image = ((System.Drawing.Image)(resources.GetObject("pbSecondSend.Image")));
+            this.pbSecondSend.Location = new System.Drawing.Point(87, 334);
+            this.pbSecondSend.Name = "pbSecondSend";
+            this.pbSecondSend.Size = new System.Drawing.Size(78, 69);
+            this.pbSecondSend.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbSecondSend.TabIndex = 0;
+            this.pbSecondSend.TabStop = false;
+            this.pbSecondSend.Click += new System.EventHandler(this.pbSecondSend_Click);
+            // 
+            // label18
+            // 
+            this.label18.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label18.Location = new System.Drawing.Point(85, 406);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(91, 23);
+            this.label18.TabIndex = 1;
+            this.label18.Text = "二次发运";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pbStoreInfo
+            // 
+            this.pbStoreInfo.Image = ((System.Drawing.Image)(resources.GetObject("pbStoreInfo.Image")));
+            this.pbStoreInfo.Location = new System.Drawing.Point(202, 334);
+            this.pbStoreInfo.Name = "pbStoreInfo";
+            this.pbStoreInfo.Size = new System.Drawing.Size(78, 69);
+            this.pbStoreInfo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbStoreInfo.TabIndex = 0;
+            this.pbStoreInfo.TabStop = false;
+            this.pbStoreInfo.Click += new System.EventHandler(this.pbStoreInfo_Click);
+            // 
+            // label19
+            // 
+            this.label19.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label19.Location = new System.Drawing.Point(200, 406);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(91, 23);
+            this.label19.TabIndex = 1;
+            this.label19.Text = "门店信息";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // NavigationForm
             // 
@@ -451,6 +499,8 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label13);
+            this.Controls.Add(this.label19);
+            this.Controls.Add(this.label18);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label2);
@@ -468,6 +518,8 @@
             this.Controls.Add(this.pbTaskQuery);
             this.Controls.Add(this.pbPackageDetail);
             this.Controls.Add(this.pbCloseAll);
+            this.Controls.Add(this.pbStoreInfo);
+            this.Controls.Add(this.pbSecondSend);
             this.Controls.Add(this.pbBoxPrint);
             this.Controls.Add(this.pbSupplierBarCodePrint);
             this.Controls.Add(this.pbPrintMargin);
@@ -498,6 +550,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbOrderImport)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSend)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSecondSend)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbStoreInfo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -538,6 +592,10 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.PictureBox pbLogin;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.PictureBox pbSecondSend;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.PictureBox pbStoreInfo;
+        private System.Windows.Forms.Label label19;
 
     }
 }

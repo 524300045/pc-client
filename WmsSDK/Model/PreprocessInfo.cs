@@ -48,6 +48,11 @@ namespace WmsSDK.Model
 
         public string goodsModel { get; set; }
 
+
+        public string waveCode { get; set; }
+
+        public string waveName { get; set; }
+
         public string StatusDes {
             get
             {

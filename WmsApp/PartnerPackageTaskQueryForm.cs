@@ -46,9 +46,9 @@ namespace WmsApp
             dtBegin.Value = DateTime.Today.AddDays(2).AddDays(-1);
             cbStatus.SelectedIndex = 0;
             this.dataGridView1.AutoGenerateColumns = false;
-            paginator = new PaginatorDTO { PageNo = 1, PageSize =100 };
+            paginator = new PaginatorDTO { PageNo = 1, PageSize = 100 };
             bindStore();
-         
+            bindWave();
         }
 
         private void bindStore()
@@ -74,6 +74,29 @@ namespace WmsApp
             }
         }
 
+        private void bindWave()
+        {
+            WaveCustomerStoreRequest request = new WaveCustomerStoreRequest();
+            request.warehouseCode = UserInfo.WareHouseCode;
+            request.customerCode = UserInfo.CustomerCode;
+
+            WaveCustomerStoreResponse response = client.Execute(request);
+            if (!response.IsError)
+            {
+                if (response.result != null)
+                {
+
+                    List<WaveCustomerStoreModel> list = new List<WaveCustomerStoreModel>();
+                    list = response.result;
+                    list.Insert(0, new WaveCustomerStoreModel() { waveCode = "", waveName = "全部" });
+
+                    this.cbWave.DataSource = list;
+                    this.cbWave.ValueMember = "waveCode";
+                    this.cbWave.DisplayMember = "waveName";
+                    cbWave.SelectedIndex = 0;
+                }
+            }
+        }
 
         private void BindDgv()
         {
@@ -85,21 +108,25 @@ namespace WmsApp
             request.partnerCode = UserInfo.PartnerCode;
             request.customerCode = UserInfo.CustomerCode;
             request.warehouseCode = UserInfo.WareHouseCode;
-
-            if (tbName.Text.Trim()!="")
+            if (cbWave.SelectedValue.ToString() != "")
             {
-                request.skuCode = "%"+tbName.Text.Trim()+"%";
+                request.waveCode = cbWave.SelectedValue.ToString();
+            }
+
+            if (tbName.Text.Trim() != "")
+            {
+                request.skuCode = "%" + tbName.Text.Trim() + "%";
             }
             request.packTaskCode = tbTaskCode.Text.Trim();
-            if (cbStatus.SelectedIndex==1)
+            if (cbStatus.SelectedIndex == 1)
             {
                 request.status = 0;
             }
-            if (cbStatus.SelectedIndex==2)
+            if (cbStatus.SelectedIndex == 2)
             {
-                 request.status = 10;
+                request.status = 10;
             }
-            if (cbStatus.SelectedIndex ==3)
+            if (cbStatus.SelectedIndex == 3)
             {
                 request.status = 15;
             }
@@ -117,7 +144,7 @@ namespace WmsApp
                 request.storedCode = cbStore.SelectedValue.ToString();
             }
             PartnerPackageTaskResponse response = client.Execute(request);
-   
+
             if (!response.IsError)
             {
 
@@ -129,7 +156,7 @@ namespace WmsApp
                     return;
                 }
                 int recordCount = response.pageUtil.totalRow;
-             
+
                 if (recordCount % paginator.PageSize == 0)
                 {
                     totalPage = recordCount / paginator.PageSize;
@@ -158,9 +185,9 @@ namespace WmsApp
                 {
                     //这里可以编写你需要的任意关于按钮事件的操作~
                     WeightForm weightForm = new WeightForm();
-                    if (weightForm.ShowDialog()==DialogResult.OK)
+                    if (weightForm.ShowDialog() == DialogResult.OK)
                     {
-                        
+
                     }
                 }
             }
@@ -200,9 +227,9 @@ namespace WmsApp
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-                 try
+            try
             {
-                  SaveFileDialog sfd = new SaveFileDialog();
+                SaveFileDialog sfd = new SaveFileDialog();
                 sfd.Filter = "供应商包装任务(*.xls)|*.xls";
                 sfd.Title = "供应商包装任务";
                 sfd.FilterIndex = 2;
@@ -213,7 +240,7 @@ namespace WmsApp
                 {
 
                     DataTable dtExecl = new DataTable();
-                    DataColumn dc0= new DataColumn("      任务单号       ");
+                    DataColumn dc0 = new DataColumn("      任务单号       ");
                     dtExecl.Columns.Add(dc0);
                     DataColumn dc1 = new DataColumn("      状态       ");
                     dtExecl.Columns.Add(dc1);
@@ -221,7 +248,7 @@ namespace WmsApp
                     dtExecl.Columns.Add(dc2);
                     DataColumn dc3 = new DataColumn("         商品名称    ");
                     dtExecl.Columns.Add(dc3);
-                    DataColumn dc4= new DataColumn("      门店       ");
+                    DataColumn dc4 = new DataColumn("      门店       ");
                     dtExecl.Columns.Add(dc4);
                     DataColumn dc5 = new DataColumn("      规格     ");
                     dtExecl.Columns.Add(dc5);
@@ -229,19 +256,19 @@ namespace WmsApp
                     DataColumn dc6 = new DataColumn("计价单位");
                     dtExecl.Columns.Add(dc6);
 
-                    DataColumn dc7= new DataColumn("物理单位");
+                    DataColumn dc7 = new DataColumn("物理单位");
                     dtExecl.Columns.Add(dc7);
                     DataColumn dc8 = new DataColumn("计划量");
                     dtExecl.Columns.Add(dc8);
 
                     //查询数据
-                    if (totalPage>0)
+                    if (totalPage > 0)
                     {
-                        for (int m = 1; m <= totalPage;m++ )
+                        for (int m = 1; m <= totalPage; m++)
                         {
 
                             PartnerPackageTaskRequest request = new PartnerPackageTaskRequest();
-                            request.PageIndex =m;
+                            request.PageIndex = m;
                             request.PageSize = 100;
                             request.startTime = dtBegin.Value.ToString("yyyy-MM-dd 00:00:00");
                             request.endTime = dtBegin.Value.ToString("yyyy-MM-dd 23:59:59");
@@ -301,10 +328,10 @@ namespace WmsApp
                         }
                     }
 
-                    
 
-                
-                 
+
+
+
 
                     NPOIHelper.ExportDTtoExcel(dtExecl, sfd.Title, "", sfd.FileName);
 
@@ -314,11 +341,11 @@ namespace WmsApp
             catch (Exception ex)
             {
 
-                MessageBox.Show("异常"+ex.Message);
+                MessageBox.Show("异常" + ex.Message);
             }
             finally
             {
-             
+
             }
 
         }
@@ -364,8 +391,8 @@ namespace WmsApp
                                 {
                                     //背景颜色
                                     //e.CellStyle.BackColor = Color.LightPink;   //仅在CellFormatting方法中可用
-                                  //  this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.LightBlue;
-                                   // this.dataGridView1.Rows[e.RowIndex + 1].Cells[e.ColumnIndex].Style.BackColor = Color.LightBlue;
+                                    //  this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.LightBlue;
+                                    // this.dataGridView1.Rows[e.RowIndex + 1].Cells[e.ColumnIndex].Style.BackColor = Color.LightBlue;
                                     //只读（以免双击单元格时显示值）
                                     this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].ReadOnly = true;
                                     this.dataGridView1.Rows[e.RowIndex + 1].Cells[e.ColumnIndex].ReadOnly = true;
@@ -403,14 +430,14 @@ namespace WmsApp
                     }
                 }
             }
- 
+
         }
 
         private void tbName_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode==Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
-                btnQuery_Click(null,null);
+                btnQuery_Click(null, null);
             }
         }
 

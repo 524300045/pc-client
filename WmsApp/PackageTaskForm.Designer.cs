@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ccbWave = new Wms.Controls.ComCheckBoxList();
+            this.label8 = new System.Windows.Forms.Label();
             this.cbWorkGroup = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.cbWorkShop = new System.Windows.Forms.ComboBox();
@@ -66,6 +68,7 @@
             this.processProductAttrDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productWorkshopAttrDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.waveName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -73,6 +76,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.ccbWave);
+            this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.cbWorkGroup);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.cbWorkShop);
@@ -95,6 +100,26 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "查询条件";
+            // 
+            // ccbWave
+            // 
+            this.ccbWave.DataSource = null;
+            this.ccbWave.Location = new System.Drawing.Point(726, 17);
+            this.ccbWave.Margin = new System.Windows.Forms.Padding(4);
+            this.ccbWave.Name = "ccbWave";
+            this.ccbWave.Size = new System.Drawing.Size(153, 25);
+            this.ccbWave.TabIndex = 19;
+            this.ccbWave.ItemClick += new Wms.Controls.ComCheckBoxList.CheckBoxListItemClick(this.ccbWave_ItemClick);
+            this.ccbWave.AllClick += new Wms.Controls.ComCheckBoxList.CheckBoxAllClick(this.ccbWave_AllClick);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(681, 20);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(48, 16);
+            this.label8.TabIndex = 16;
+            this.label8.Text = "批次:";
             // 
             // cbWorkGroup
             // 
@@ -283,7 +308,8 @@
             this.warehouseName,
             this.processProductAttrDesc,
             this.productWorkshopAttrDesc,
-            this.groupName});
+            this.groupName,
+            this.waveName});
             this.dataGridView1.Location = new System.Drawing.Point(3, 22);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
@@ -294,10 +320,10 @@
             // 
             // Column12
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Gray;
-            this.Column12.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Gray;
+            this.Column12.DefaultCellStyle = dataGridViewCellStyle2;
             this.Column12.HeaderText = "操作";
             this.Column12.Name = "Column12";
             this.Column12.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -449,6 +475,14 @@
             this.groupName.Name = "groupName";
             this.groupName.Width = 97;
             // 
+            // waveName
+            // 
+            this.waveName.DataPropertyName = "waveName";
+            this.waveName.HeaderText = "批次";
+            this.waveName.Name = "waveName";
+            this.waveName.ReadOnly = true;
+            this.waveName.Width = 65;
+            // 
             // PackageTaskForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -487,6 +521,7 @@
         private System.Windows.Forms.ComboBox cbWorkShop;
         private System.Windows.Forms.ComboBox cbWorkGroup;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DataGridViewButtonColumn Column12;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn status;
@@ -506,5 +541,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn processProductAttrDesc;
         private System.Windows.Forms.DataGridViewTextBoxColumn productWorkshopAttrDesc;
         private System.Windows.Forms.DataGridViewTextBoxColumn groupName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn waveName;
+        private Wms.Controls.ComCheckBoxList ccbWave;
     }
 }

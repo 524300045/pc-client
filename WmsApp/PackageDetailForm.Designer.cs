@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ccbWave = new Wms.Controls.ComCheckBoxList();
+            this.label8 = new System.Windows.Forms.Label();
             this.btnImport = new System.Windows.Forms.Button();
             this.cbStore = new System.Windows.Forms.ComboBox();
             this.cbStatus = new System.Windows.Forms.ComboBox();
@@ -72,6 +74,7 @@
             this.updateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.updateUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.warehouseName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.waveName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -93,6 +96,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.ccbWave);
+            this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.btnImport);
             this.groupBox1.Controls.Add(this.cbStore);
             this.groupBox1.Controls.Add(this.cbStatus);
@@ -116,9 +121,29 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "查询条件";
             // 
+            // ccbWave
+            // 
+            this.ccbWave.DataSource = null;
+            this.ccbWave.Location = new System.Drawing.Point(820, 13);
+            this.ccbWave.Margin = new System.Windows.Forms.Padding(5);
+            this.ccbWave.Name = "ccbWave";
+            this.ccbWave.Size = new System.Drawing.Size(127, 25);
+            this.ccbWave.TabIndex = 20;
+            this.ccbWave.ItemClick += new Wms.Controls.ComCheckBoxList.CheckBoxListItemClick(this.ccbWave_ItemClick);
+            this.ccbWave.AllClick += new Wms.Controls.ComCheckBoxList.CheckBoxAllClick(this.ccbWave_AllClick);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(775, 17);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(48, 16);
+            this.label8.TabIndex = 18;
+            this.label8.Text = "批次:";
+            // 
             // btnImport
             // 
-            this.btnImport.Location = new System.Drawing.Point(873, 38);
+            this.btnImport.Location = new System.Drawing.Point(872, 42);
             this.btnImport.Name = "btnImport";
             this.btnImport.Size = new System.Drawing.Size(75, 23);
             this.btnImport.TabIndex = 5;
@@ -188,7 +213,7 @@
             // 
             // btnQuery
             // 
-            this.btnQuery.Location = new System.Drawing.Point(780, 38);
+            this.btnQuery.Location = new System.Drawing.Point(778, 42);
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(75, 23);
             this.btnQuery.TabIndex = 1;
@@ -313,7 +338,8 @@
             this.deliveryDate,
             this.updateTime,
             this.updateUser,
-            this.warehouseName});
+            this.warehouseName,
+            this.waveName});
             this.dataGridView1.Location = new System.Drawing.Point(3, 22);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
@@ -324,10 +350,10 @@
             // 
             // Column12
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Gray;
-            this.Column12.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Gray;
+            this.Column12.DefaultCellStyle = dataGridViewCellStyle4;
             this.Column12.HeaderText = "重打签";
             this.Column12.Name = "Column12";
             this.Column12.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -338,9 +364,9 @@
             // 
             // Column1
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
-            this.Column1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.LightGray;
+            this.Column1.DefaultCellStyle = dataGridViewCellStyle5;
             this.Column1.HeaderText = "箱号补打";
             this.Column1.Name = "Column1";
             this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -352,10 +378,10 @@
             // 
             // Column13
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Gray;
-            this.Column13.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Gray;
+            this.Column13.DefaultCellStyle = dataGridViewCellStyle6;
             this.Column13.HeaderText = "作废";
             this.Column13.Name = "Column13";
             this.Column13.Text = "作废";
@@ -504,6 +530,13 @@
             this.warehouseName.Name = "warehouseName";
             this.warehouseName.Width = 97;
             // 
+            // waveName
+            // 
+            this.waveName.DataPropertyName = "waveName";
+            this.waveName.HeaderText = "批次";
+            this.waveName.Name = "waveName";
+            this.waveName.Width = 65;
+            // 
             // PackageDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -566,5 +599,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn updateTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn updateUser;
         private System.Windows.Forms.DataGridViewTextBoxColumn warehouseName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn waveName;
+        private System.Windows.Forms.Label label8;
+        private Wms.Controls.ComCheckBoxList ccbWave;
     }
 }
