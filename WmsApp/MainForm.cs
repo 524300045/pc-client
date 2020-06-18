@@ -516,6 +516,24 @@ namespace WmsApp
             }
         }
 
+        /// <summary>
+        /// 货位打印
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbBin_Click(object sender, EventArgs e)
+        {
+            DockContent fx = FindCurrentForm("BinForm");
+            if (fx == null)
+            {
+                AddToFrame(new BinForm());
+            }
+            else
+            {
+                fx.Activate();
+            }
+        }
+
 
     }
 }

@@ -173,7 +173,22 @@ namespace WmsApp
 
                 if (goods.weighed == 1)
                 {
-                    g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
+                    decimal curWeight = preprocessInfo.packWeight;
+                    if (curWeight < 2)
+                    {
+                        //小于1KG,显示为g
+                        decimal curG = curWeight * 500;
+                        g.Graphics.DrawString(curG.ToString("f2").TrimEnd('0').TrimEnd('.') + "g", fontCu, brush, layoutRectangle);
+                    }
+                    else
+                    {
+                        //大于1kg，显示为kg
+                        decimal curValue = 0.5m;
+                        decimal cugKg = curWeight * curValue;
+                        g.Graphics.DrawString(cugKg.ToString("f2").TrimEnd('0').TrimEnd('.') + "kg", fontCu, brush, layoutRectangle);
+                    }
+
+                   // g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
 
                     height += 15;
                     layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
@@ -185,14 +200,31 @@ namespace WmsApp
 
                     height += 15;
                     layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                    g.Graphics.DrawString(goods.goodsModel + " 储存方式:1-5℃", new Font("宋体", 8f), brush, layoutRectangleRight);
+
+
+                    decimal curWeight =goods.bomWeight;
+                    string goodsModel = "";
+                    if (curWeight < 1000)
+                    {
+                        //小于1KG,显示为g
+                        goodsModel = curWeight.ToString("f2").TrimEnd('0').TrimEnd('.') + "g";
+                    }
+                    else
+                    {
+                        //大于1kg，显示为kg
+                        decimal cugKg = curWeight / 1000;
+                        goodsModel = cugKg.ToString("f2").TrimEnd('0').TrimEnd('.') + "kg";
+                    }
+
+
+                    g.Graphics.DrawString("净含量:"+goodsModel + " 储存方式:1-5℃", new Font("宋体", 8f), brush, layoutRectangleRight);
                 }
 
           
 
                 height += 15;
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                g.Graphics.DrawString("货主:" + UserInfo.CustomerName, new Font("宋体", 8f), brush, layoutRectangleRight);
+                g.Graphics.DrawString("KH:YHY", new Font("宋体", 8f), brush, layoutRectangleRight);
 
                 height += 15;
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
@@ -287,15 +319,9 @@ namespace WmsApp
 
 
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                g.Graphics.DrawString("货主:" + UserInfo.CustomerName, new Font("宋体", 8f), brush, layoutRectangleRight);
+                g.Graphics.DrawString("KH:YHY" , new Font("宋体", 8f), brush, layoutRectangleRight);
 
-                //编码
-                //height += 15;
-                //Font fontCode = new Font("宋体", 8f);
-                //layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                //g.Graphics.DrawString(preprocessInfo.preprocessCode, fontCode, brush, layoutRectangleRight);
-
-
+         
 
                 height += 40;
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);

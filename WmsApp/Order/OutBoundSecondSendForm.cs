@@ -263,7 +263,7 @@ namespace WmsApp.Order
            
                 for (int i = 0; i < this.dgv.Rows.Count; i++)
                 {
-                    if (this.dgv.Rows[i].Cells["StatusDes"].Value.ToString() == "已发运" || this.dgv.Rows[i].Cells["StatusDes"].Value.ToString() == "关闭")
+                    if (this.dgv.Rows[i].Cells["StatusDes"].Value.ToString()!= "关闭")
                     {
                         this.dgv.Rows[i].DefaultCellStyle.BackColor = Color.Yellow;
                         this.dgv.Rows[i].Cells["chk"].ReadOnly = true;
@@ -303,7 +303,7 @@ namespace WmsApp.Order
             {
                 for (int i = 0; i < dgv.Rows.Count; i++)
                 {
-                    if (this.dgv.Rows[i].Cells["StatusDes"].Value.ToString() == "已发运" || this.dgv.Rows[i].Cells["StatusDes"].Value.ToString() == "关闭")
+                    if (this.dgv.Rows[i].Cells["StatusDes"].Value.ToString() != "关闭")
                     {
                         this.dgv.Rows[i].DefaultCellStyle.BackColor = Color.Yellow;
                         this.dgv.Rows[i].Cells["chk"].ReadOnly = true;
@@ -369,7 +369,7 @@ namespace WmsApp.Order
                 int m = 0;
                 for (int i = 0; i < dgv.Rows.Count; i++)
                 {
-                    if (this.dgv.Rows[i].Cells["status"].Value.ToString() == "30" || this.dgv.Rows[i].Cells["status"].Value.ToString() == "40")
+                    if (this.dgv.Rows[i].Cells["status"].Value.ToString()!= "40")
                     {
                         continue;
                     }
@@ -390,7 +390,7 @@ namespace WmsApp.Order
 
                 for (int i = 0; i < dgv.Rows.Count; i++)
                 {
-                    if (this.dgv.Rows[i].Cells["status"].Value.ToString() == "30" || this.dgv.Rows[i].Cells["status"].Value.ToString() == "40")
+                    if (this.dgv.Rows[i].Cells["status"].Value.ToString()!= "40")
                     {
                         continue;
                     }

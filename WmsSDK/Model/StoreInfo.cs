@@ -15,6 +15,11 @@ namespace WmsSDK.Model
        [JsonProperty("storedName")]
        public String storedName { get; set; }
 
+       /** 波次编码 */
+       public String waveCode { get; set; }
+
+       /** 波次名称 */
+       public String waveName { get; set; }
 
        public int? priority { get; set; }
     }

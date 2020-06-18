@@ -23,6 +23,7 @@ namespace WmsApp
         private IWMSClient client = null;
 
         private BoxInfo curBoxInfo = null;
+        List<StoreInfo> storeList = null;
 
         public PrintBoxStoreForm()
         {
@@ -35,10 +36,54 @@ namespace WmsApp
         private void PrintBoxForm_Load(object sender, EventArgs e)
         {
             bindStore();
+            bindWave();
+        }
+
+        /// <summary>
+        /// 绑定批次
+        /// </summary>
+        private void bindWave()
+        {
+            WaveCustomerStoreRequest request = new WaveCustomerStoreRequest();
+            request.warehouseCode = UserInfo.WareHouseCode;
+            request.customerCode = UserInfo.CustomerCode;
+
+            WaveCustomerStoreResponse response = client.Execute(request);
+            if (!response.IsError)
+            {
+                if (response.result != null)
+                {
+
+                    List<WaveCustomerStoreModel> list = new List<WaveCustomerStoreModel>();
+                    list = response.result;
+                    //list.Insert(0, new WaveCustomerStoreModel() { waveCode = "", waveName = "全部" });
+
+                    //this.cbWave.DataSource = list;
+                    //this.cbWave.ValueMember = "waveCode";
+                    //this.cbWave.DisplayMember = "waveName";
+                    //cbWave.SelectedIndex = 0;
+
+                    this.ccbWave.DataSource = list;
+                    this.ccbWave.ValueMember = "waveCode";
+                    this.ccbWave.DisplayMember = "waveName";
+                }
+            }
         }
 
         private void bindStore()
         {
+            List<String> waveCodes = new List<string>();
+
+            if (this.ccbWave.CheckedItems.Count > 0)
+            {
+                foreach (var item in this.ccbWave.CheckedItems)
+                {
+                    WaveCustomerStoreModel wcsModel = (WaveCustomerStoreModel)item;
+                    waveCodes.Add(wcsModel.waveCode);
+                }
+            }
+
+
             StoreInfoRequest request = new StoreInfoRequest();
             request.partnerCode = UserInfo.PartnerCode;
             request.customerCode = UserInfo.CustomerCode;
@@ -49,8 +94,28 @@ namespace WmsApp
             {
                 if (response.result != null)
                 {
-                    List<StoreInfo> storeList = new List<StoreInfo>();
-                    storeList = response.result.OrderBy(p=>p.priority).ToList();
+                    storeList = new List<StoreInfo>();
+
+                    storeList = response.result.OrderBy(p => p.priority).ToList();
+
+                    if (waveCodes != null && waveCodes.Count > 0)
+                    {
+                        List<StoreInfo> newstoreList = new List<StoreInfo>();
+                        foreach (StoreInfo si in storeList)
+                        {
+                            foreach (String item in waveCodes)
+                            {
+                                if (si.waveCode==item)
+                                {
+                                    newstoreList.Add(si);
+                                    break;
+                                }
+                            }
+                        }
+                        storeList = newstoreList;
+                    }
+
+                    storeList = storeList.OrderBy(p => p.priority).ToList();
                     this.dataGridView1.DataSource = storeList;
                     for (int i = 0; i < dataGridView1.Rows.Count; i++)
                     {
@@ -87,12 +152,12 @@ namespace WmsApp
         {
 
             Font fontCu = new Font("宋体", 12f, FontStyle.Bold);
-          
+
 
             Font font = new Font("宋体", 10f);
             Brush brush = new SolidBrush(Color.Black);
             g.Graphics.SmoothingMode = SmoothingMode.HighQuality;
-       
+
             //门店名称
 
             int height = 5;
@@ -102,12 +167,12 @@ namespace WmsApp
             Rectangle dest2Rect = new Rectangle(70, 20, image.Width, image.Height);
             g.Graphics.DrawImage(image, dest2Rect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel);
 
-            height = image.Height+5 ;
+            height = image.Height + 5;
             //重量
             layoutRectangle = new RectangleF(100, height, 130f, 30f);
-            g.Graphics.DrawString(boxInfo.storedName , fontCu, brush, layoutRectangle);
+            g.Graphics.DrawString(boxInfo.storedName, fontCu, brush, layoutRectangle);
 
-          
+
 
         }
 
@@ -131,7 +196,7 @@ namespace WmsApp
                 btnPrint.Text = "正在打印....";
                 btnPrint.Enabled = false;
 
-                for (int m= 0; m< dataGridView1.Rows.Count; m++)
+                for (int m = 0; m < dataGridView1.Rows.Count; m++)
                 {
                     if (this.dataGridView1.Rows[m].Cells["Num"].Value != null)
                     {
@@ -216,13 +281,13 @@ namespace WmsApp
             }
             finally
             {
-               
+
                 btnPrint.Enabled = true;
                 btnPrint.Text = "批量打印";
                 MessageBox.Show("打印完成");
                 this.DialogResult = DialogResult.OK;
             }
-         
+
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -233,7 +298,51 @@ namespace WmsApp
             }
         }
 
-      
+        private void ccbWave_ItemClick(object sender, ItemCheckEventArgs e)
+        {
+            List<string> selectList = new List<string>();
+
+            if (this.ccbWave.CheckedItems.Count > 0)
+            {
+                List<String> waveCodeList = new List<string>();
+                foreach (var item in this.ccbWave.CheckedItems)
+                {
+                    WaveCustomerStoreModel wcsModel = (WaveCustomerStoreModel)item;
+                    //selectText += wcsModel.waveName + ",";
+                    selectList.Add(wcsModel.waveName);
+                }
+            }
+
+            if (e.NewValue == CheckState.Checked)
+            {
+                //  selectText+=
+                WaveCustomerStoreModel wcsModel = (WaveCustomerStoreModel)this.ccbWave.Items[e.Index];
+                selectList.Add(wcsModel.waveName);
+            }
+
+            if (e.NewValue != CheckState.Checked)
+            {
+                WaveCustomerStoreModel wcsModel = (WaveCustomerStoreModel)this.ccbWave.Items[e.Index];
+                selectList.Remove(wcsModel.waveName);
+            }
+
+            string selectText = "";
+            foreach (var item in selectList)
+            {
+                selectText += item + ",";
+            }
+            selectText = selectText.Trim(',');
+            this.ccbWave.SetTitleText(selectText);
+        }
+
+        private void btnQuery_Click(object sender, EventArgs e)
+        {
+            bindStore();
+        }
+
+
+
+
 
     }
 }

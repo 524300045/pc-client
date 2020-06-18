@@ -396,7 +396,6 @@ namespace WmsApp
                     { 
                          //新的打印逻辑
                         PrintNewConfig(item);
-
                     }
                     else
                     {
@@ -415,7 +414,6 @@ namespace WmsApp
                         else if (UserInfo.CustomerCode=="7003")
                         {
                             //西贝干调
-                          
                             PrintXiBeiGanTiaoNew(item);
                         }
                         else if (UserInfo.CustomerCode=="7002")
@@ -442,6 +440,11 @@ namespace WmsApp
                         {
                            // 春播
                             PrintChunBo(item);
+                        }
+                        else if (UserInfo.CustomerCode=="50005")
+                        {
+                            //永利达
+                            PrintYongLiDa(item);
                         }
                         else
                         {
@@ -810,6 +813,50 @@ namespace WmsApp
 
             }
         }
+
+
+        /// <summary>
+        /// 永利达
+        /// </summary>
+        /// <param name="taskCode"></param>
+        private void PrintYongLiDa(string taskCode)
+        {
+
+            OutBoundDetailPrintRequest request = new OutBoundDetailPrintRequest();
+            request.outboundTaskCode = taskCode;
+            request.printMan = UserInfo.UserName;
+            request.updateUser = UserInfo.UserName;
+            OutBoundPrintDetailResponse response = client.Execute(request);
+            if (!response.IsError)
+            {
+                List<ShipMentDetailVo> detaiList = response.result.detailList;
+
+                OutBoundPrintModel outBoundPrint = response.result;
+
+                OutBoundPrint orderPrint = new OutBoundPrint(false, new Margins(10, 10, 10, 50));
+                Image barcode = Code128Rendering.GetCodeAorBImg(taskCode, 70, 1, true);
+                orderPrint.BarCode = OutBoundHelper.BuildBarCode(response.result.remark + "送货单", 1, null);
+                orderPrint.Header = OutBoundHelper.BuildHeader(outBoundPrint);
+                orderPrint.MultiHeader1 = OutBoundHelper.BuildYongLiDaHeader();
+                string[,] arr = OutBoundHelper.ToPrintYongLiDaArrFromList(detaiList);
+                orderPrint.Body1 = OutBoundHelper.BuildPrintYongLiDaBody(arr);
+                orderPrint.Bottom = OutBoundHelper.BuildBottom(response.result.companyAddress, UserInfo.RealName);
+                orderPrint.Footer = OutBoundHelper.BuildFooter();
+
+                orderPrint.PrintDocument.PrinterSettings.PrinterName = cbPrinter.Text;
+#if DEBUG
+
+                orderPrint.Print();
+
+                //  orderPrint.Preview();
+#else
+                //orderPrint.Preview(); 
+                orderPrint.Print();
+#endif
+
+            }
+        }
+
 
 
 

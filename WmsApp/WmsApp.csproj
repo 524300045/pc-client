@@ -68,6 +68,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BinForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BinForm.Designer.cs">
+      <DependentUpon>BinForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="StoreInfoForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -275,6 +281,9 @@
     <Compile Include="TabWindow.designer.cs">
       <DependentUpon>TabWindow.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="BinForm.resx">
+      <DependentUpon>BinForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StoreInfoForm.resx">
       <DependentUpon>StoreInfoForm.cs</DependentUpon>
     </EmbeddedResource>

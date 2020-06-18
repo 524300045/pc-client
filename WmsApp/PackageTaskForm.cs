@@ -37,6 +37,8 @@ namespace WmsApp
             try
             {
 
+                InitDateTimePicker(dtBiaoQian);
+
                 BindProcess();
                 BindWorkShop();
                 BindWorkGroup();
@@ -56,6 +58,35 @@ namespace WmsApp
             }
 
 
+        }
+
+
+        public static void InitDateTimePicker(DateTimePicker dtp)
+        {
+            dtp.Format = DateTimePickerFormat.Custom;
+            dtp.CustomFormat = " ";  //必须设置成" "
+            dtp.ValueChanged -= DateTimePicker_ValueChanged;
+            dtp.ValueChanged += DateTimePicker_ValueChanged;
+            dtp.KeyPress -= DateTimePicker_KeyPress;
+            dtp.KeyPress += DateTimePicker_KeyPress;
+        }
+
+        public static void DateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            DateTimePicker dtp = (DateTimePicker)sender;
+            dtp.Format = DateTimePickerFormat.Long;
+            dtp.CustomFormat = null; //null;
+            dtp.Checked = false;// 解决BUG ：防止日期控件不能选择相同日期的 --- 要放置在设置格式之后
+        }
+
+        public static void DateTimePicker_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)8)  // backspace左删除键
+            {
+                DateTimePicker dtp = (DateTimePicker)sender;
+                dtp.Format = DateTimePickerFormat.Custom;
+                dtp.CustomFormat = " ";
+            }
         }
 
         private void bindWave()
@@ -290,13 +321,20 @@ namespace WmsApp
                     {
                         productCurWorkshopAttrDesc= this.dataGridView1.CurrentRow.Cells["productWorkshopAttrDesc"].Value.ToString();
                     }
+
+                    if (this.dtBiaoQian.Value == null || String.IsNullOrEmpty(dtBiaoQian.Text.Trim()))
+                    {
+                        MessageBox.Show("请选择标签打印日期！");
+                        return;
+                    }
                     string warehouseName = this.dataGridView1.CurrentRow.Cells["warehouseName"].Value == null ? "" : this.dataGridView1.CurrentRow.Cells["warehouseName"].Value.ToString();
                     //这里可以编写你需要的任意关于按钮事件的操作~
                     if (UserInfo.CustomerCode == "30001" || UserInfo.CustomerCode == "23001" || UserInfo.CustomerCode == "34001"
                         || UserInfo.CustomerCode == "20001" || UserInfo.CustomerCode == "24001" || UserInfo.CustomerCode == "24002"
                         )
                     {
-                        WeightForm weightForm = new WeightForm(id, taskCode, orderCount, standNum, processDes, orderNum, this.dtBegin.Value, productCurWorkshopAttrDesc);
+                      //  WeightForm weightForm = new WeightForm(id, taskCode, orderCount, standNum, processDes, orderNum, this.dtBegin.Value, productCurWorkshopAttrDesc);
+                        WeightForm weightForm = new WeightForm(id, taskCode, orderCount, standNum, processDes, orderNum, this.dtBiaoQian.Value, productCurWorkshopAttrDesc);
                         weightForm.wareHouseName = warehouseName;
                         if (weightForm.ShowDialog() == DialogResult.OK)
                         {
@@ -305,7 +343,8 @@ namespace WmsApp
                     }
                     else
                     {
-                        WeightForm weightForm = new WeightForm(id, taskCode, orderCount, standNum, processDes, orderNum, productCurWorkshopAttrDesc,this.dtBegin.Value);
+                      //  WeightForm weightForm = new WeightForm(id, taskCode, orderCount, standNum, processDes, orderNum, productCurWorkshopAttrDesc,this.dtBegin.Value);
+                        WeightForm weightForm = new WeightForm(id, taskCode, orderCount, standNum, processDes, orderNum, productCurWorkshopAttrDesc, this.dtBiaoQian.Value);
                         weightForm.wareHouseName = warehouseName;
                         if (weightForm.ShowDialog() == DialogResult.OK)
                         {

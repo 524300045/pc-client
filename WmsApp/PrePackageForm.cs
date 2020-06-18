@@ -809,7 +809,7 @@ namespace WmsApp
                                 //add.waveName = waveName;
                                 list.Add(add);
                             }
-                            if (UserInfo.CustomerCode != "7001" && UserInfo.CustomerCode != "7002")
+                            if (UserInfo.CustomerCode != "7001" && UserInfo.CustomerCode != "7002" && UserInfo.CustomerCode != "50005")
                             {
                                 if (UserInfo.CustomerCode == "15001" 
                                        || UserInfo.CustomerCode == "22001" || UserInfo.CustomerCode == "31001" 
@@ -1250,6 +1250,64 @@ namespace WmsApp
                                     }
                                     #endregion
                                 }
+                                else if (UserInfo.CustomerCode == "50003")
+                                {
+                                    #region 三全食品
+
+                                    PreprocessXiBeiInfoRequest request = new PreprocessXiBeiInfoRequest();
+                                    request.wareHouseId = UserInfo.WareHouseCode;
+                                    request.warehouseCode = UserInfo.WareHouseCode;
+                                    request.warehouseName = UserInfo.WareHouseName;
+                                    request.customerCode = UserInfo.CustomerCode;
+                                    request.customerName = UserInfo.CustomerName;
+                                    request.request = list;
+                                    PreprocessInfoAddResponse response = client.Execute(request);
+                                    if (!response.IsError)
+                                    {
+                                        if (response.result != null)
+                                        {
+                                            preprocessInfoList = response.result;
+                                            foreach (PreprocessInfo item in preprocessInfoList)
+                                            {
+                                                item.goodsModel = goodsModel;
+                                                item.productWorkshopAttrDesc = _productWorkshopAttrDesc;
+
+                                                #region 打印
+                                                curPreprocessInfo = item;
+                                                PrintDocument document = new PrintDocument();
+                                                document.DefaultPageSettings.PaperSize = new PaperSize("Custum", 270, 180);
+                                                document.OriginAtMargins = true;
+                                                document.DefaultPageSettings.Landscape = false;
+                                                document.DefaultPageSettings.Margins = new Margins(SystemInfo.PrintMarginLeft, 1, 0, 1);
+#if(!DEBUG)
+                                PrintDialog dialog = new PrintDialog();
+                                document.PrintPage += new PrintPageEventHandler(this.pd_SanQuanPrintPage);
+                                dialog.Document = document;
+#else
+                                                PrintPreviewDialog dialog = new PrintPreviewDialog();
+                                                document.PrintPage += new PrintPageEventHandler(this.pd_SanQuanPrintPage);
+                                                dialog.Document = document;
+#endif
+                                                try
+                                                {
+                                                    document.Print();
+                                                }
+                                                catch (Exception exception)
+                                                {
+                                                    MessageBox.Show("打印异常" + exception);
+                                                    document.PrintController.OnEndPrint(document, new PrintEventArgs());
+                                                }
+                                                #endregion
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("出现错误:" + goodsName + response.Message);
+                                    }
+
+                                    #endregion
+                                }
                                 else
                                 {
 
@@ -1428,6 +1486,12 @@ namespace WmsApp
         {
             Bitmap bt = CreateXiBeiQRCode(curPreprocessInfo.preprocessCode);
             GetXiBeiPrintPicture(bt, e, curPreprocessInfo);
+        }
+
+        private void pd_SanQuanPrintPage(object sender, PrintPageEventArgs e) //触发打印事件
+        {
+            Bitmap bt = CreateXiBeiQRCode(curPreprocessInfo.preprocessCode);
+            GetSanQuanPrintPicture(bt, e, curPreprocessInfo);
         }
 
         public static Bitmap CreateQingQRCode(string asset)
@@ -2862,16 +2926,17 @@ namespace WmsApp
             //绘制加工方式
             if (handleWay!=null&&handleWay.Trim() != "")
             {
-                Pen pen = new Pen(Color.Black, 1);
-                g.Graphics.DrawEllipse(pen, 5, 5, 25, 25);
-                g.Graphics.DrawString(handleWay.Trim(), new Font("宋体", 12f,FontStyle.Bold), brush, 7, 10);
+                //Pen pen = new Pen(Color.Black, 1);
+                //g.Graphics.DrawEllipse(pen, 5, 5, 25, 25);
+                //g.Graphics.DrawString(handleWay.Trim(), new Font("宋体", 12f,FontStyle.Bold), brush, 7, 10);
                
             }
           
 
             //商品名称
             layoutRectangle = new RectangleF(pointX, 15, 165f, 30f);
-            g.Graphics.DrawString("   "+preprocessInfo.goodsName, fontCu11, brush, layoutRectangle);
+         //   g.Graphics.DrawString(""+preprocessInfo.goodsName, fontCu11, brush, layoutRectangle);
+            g.Graphics.DrawString("" + goods.customerGoodsName, fontCu11, brush, layoutRectangle);
 
             height += 30;
             //重量
@@ -2934,6 +2999,103 @@ namespace WmsApp
                 }
             }
 
+
+            height += 15;
+            layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+            g.Graphics.DrawString("经销商:" + (string.IsNullOrWhiteSpace(UserInfo.labelName) ? UserInfo.PartnerName : UserInfo.labelName), new Font("宋体", 8f), brush, layoutRectangleRight);
+
+
+        }
+
+        public void GetSanQuanPrintPicture(Bitmap image, PrintPageEventArgs g, PreprocessInfo preprocessInfo)
+        {
+
+            Font fontCu11 = new Font("宋体", 10f, FontStyle.Bold);
+            Font fontCu = new Font("宋体", 10f, FontStyle.Bold);
+            int height = 15;
+            int heightRight = 15;
+
+            Font font = new Font("宋体", 10f);
+            Brush brush = new SolidBrush(Color.Black);
+            g.Graphics.SmoothingMode = SmoothingMode.HighQuality;
+
+            int pointX = 5;
+
+            RectangleF layoutRectangleRight = new RectangleF(80f, 5, 130f, 85f);
+
+            Rectangle destRect = new Rectangle(145, -5, image.Width, image.Height);
+            g.Graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel);
+
+
+            heightRight += 40;
+
+
+            RectangleF layoutRectangle = new RectangleF(pointX, height, 120f, 30f);
+
+            //绘制加工方式
+            //if (handleWay != null && handleWay.Trim() != "")
+            //{
+            //    Pen pen = new Pen(Color.Black, 1);
+            //    g.Graphics.DrawEllipse(pen, 5, 5, 25, 25);
+            //    g.Graphics.DrawString(handleWay.Trim(), new Font("宋体", 12f, FontStyle.Bold), brush, 7, 10);
+
+            //}
+
+
+            //商品名称
+            layoutRectangle = new RectangleF(pointX, 15, 165f, 30f);
+            g.Graphics.DrawString( preprocessInfo.goodsName, fontCu11, brush, layoutRectangle);
+
+            height += 30;
+            //重量
+
+            layoutRectangle = new RectangleF(pointX, height, 165f, 40f);
+            g.Graphics.DrawString(preprocessInfo.goodsModel, font, brush, layoutRectangle);
+
+            height += 15;
+
+
+            //生产日期
+            layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+            //  g.Graphics.DrawString("生产日期:" + dtBegin.Value.ToShortDateString(), new Font("宋体", 10f), brush, layoutRectangleRight);
+
+            g.Graphics.DrawString("生产日期:" + productDate, new Font("宋体", 10f), brush, layoutRectangleRight);
+
+            height += 15;
+ 
+                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                g.Graphics.DrawString("保质期:T+" + expireDay+"天", new Font("宋体", 10f), brush, layoutRectangleRight);
+  
+         
+                height += 15;
+                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                g.Graphics.DrawString("储存方式:" + "1-10℃", new Font("宋体", 10f), brush, layoutRectangleRight);
+      
+
+
+
+
+
+            height += 15;
+            layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+            
+            if (UserInfo.foodLicenseNo != null && UserInfo.foodLicenseNo != "")
+            {
+                g.Graphics.DrawString("食品经营许可证号:" + UserInfo.foodLicenseNo, new Font("宋体", 8f), brush, layoutRectangleRight);
+            }
+
+            //if (preprocessInfo.productWorkshopAttrDesc != null && preprocessInfo.productWorkshopAttrDesc != "")
+            //{
+            //    if (preprocessInfo.productWorkshopAttrDesc == "三河车间" || preprocessInfo.productWorkshopAttrDesc == "腌菜车间")
+            //    {
+            //        height += 15;
+            //        layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+            //        g.Graphics.DrawString("生产商:三河市鲜洁农产品有限公司", new Font("宋体", 8f), brush, layoutRectangleRight);
+            //    }
+            //}
+            height += 15;
+            layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+            g.Graphics.DrawString("生产商:" + (string.IsNullOrWhiteSpace(UserInfo.labelName) ? UserInfo.PartnerName : UserInfo.labelName), new Font("宋体", 8f), brush, layoutRectangleRight);
 
             height += 15;
             layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
@@ -3024,7 +3186,7 @@ namespace WmsApp
                             {
                                 _productWorkshopAttrDesc = this.dataGridView1.Rows[i].Cells["productWorkshopAttrDesc"].Value.ToString();
                             }
-                            if (UserInfo.CustomerCode != "7001" && UserInfo.CustomerCode != "7002")
+                            if (UserInfo.CustomerCode != "7001" && UserInfo.CustomerCode != "7002" && UserInfo.CustomerCode != "50005")
                             {
 
                                 if (UserInfo.CustomerCode == "15001" 
@@ -3466,6 +3628,64 @@ namespace WmsApp
                                             }
                                         }
                                     }
+                                    #endregion
+                                }
+                                else if (UserInfo.CustomerCode=="50003")
+                                {
+                                    #region 三全食品
+
+                                    PreprocessXiBeiInfoRequest request = new PreprocessXiBeiInfoRequest();
+                                    request.wareHouseId = UserInfo.WareHouseCode;
+                                    request.warehouseCode = UserInfo.WareHouseCode;
+                                    request.warehouseName = UserInfo.WareHouseName;
+                                    request.customerCode = UserInfo.CustomerCode;
+                                    request.customerName = UserInfo.CustomerName;
+                                    request.request = list;
+                                    PreprocessInfoAddResponse response = client.Execute(request);
+                                    if (!response.IsError)
+                                    {
+                                        if (response.result != null)
+                                        {
+                                            preprocessInfoList = response.result;
+                                            foreach (PreprocessInfo item in preprocessInfoList)
+                                            {
+                                                item.goodsModel = goodsModel;
+                                                item.productWorkshopAttrDesc = _productWorkshopAttrDesc;
+
+                                                #region 打印
+                                                curPreprocessInfo = item;
+                                                PrintDocument document = new PrintDocument();
+                                                document.DefaultPageSettings.PaperSize = new PaperSize("Custum", 270, 180);
+                                                document.OriginAtMargins = true;
+                                                document.DefaultPageSettings.Landscape = false;
+                                                document.DefaultPageSettings.Margins = new Margins(SystemInfo.PrintMarginLeft, 1, 0, 1);
+#if(!DEBUG)
+                                PrintDialog dialog = new PrintDialog();
+                                document.PrintPage += new PrintPageEventHandler(this.pd_SanQuanPrintPage);
+                                dialog.Document = document;
+#else
+                                                PrintPreviewDialog dialog = new PrintPreviewDialog();
+                                                document.PrintPage += new PrintPageEventHandler(this.pd_SanQuanPrintPage);
+                                                dialog.Document = document;
+#endif
+                                                try
+                                                {
+                                                    document.Print();
+                                                }
+                                                catch (Exception exception)
+                                                {
+                                                    MessageBox.Show("打印异常" + exception);
+                                                    document.PrintController.OnEndPrint(document, new PrintEventArgs());
+                                                }
+                                                #endregion
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("出现错误:" + goodsName + response.Message);
+                                    }
+
                                     #endregion
                                 }
                                 else

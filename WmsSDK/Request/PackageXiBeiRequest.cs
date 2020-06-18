@@ -11,7 +11,8 @@ namespace WmsSDK.Request
     {
         public string GetAPIPath()
         {
-            return "/packageDetail/packageXiBei";
+           // return "/packageDetail/packageXiBei";
+            return "/packageDetail/packageDetail";
         }
 
 

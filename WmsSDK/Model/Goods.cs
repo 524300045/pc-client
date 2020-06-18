@@ -118,6 +118,8 @@ namespace WmsSDK.Model
           public int? orderNum { get; set; }
 
 
+  
+
           public int diffNum { get; set; }
 
             [JsonProperty("twoCategoryCode")]

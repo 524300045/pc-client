@@ -183,6 +183,18 @@ namespace WmsApp
             return mhObj;
         }
 
+
+        public static MultiHeader BuildYongLiDaHeader()
+        {
+            MultiHeader mhObj;
+            mhObj = new MultiHeader(1,8);
+            mhObj.Font = bodyBoldFont;
+            mhObj.ColsAlign = "CCCCCCC";
+            mhObj.Text = new string[,] { { "#", "商品名称", "单位", "订货数量", "发货数量(公斤)", "单价(公斤)", "金额", "备注" } };
+            mhObj.ColsWidth = BuildYongLiDaColsWidth();
+            return mhObj;
+        }
+
         public static Body BuildPrintConfigBody(string[,] arr)
         {
             Body body = new Body();
@@ -194,6 +206,17 @@ namespace WmsApp
             return body;
         }
 
+        public static Body BuildPrintYongLiDaBody(string[,] arr)
+        {
+            Body body = new Body();
+            body.IsAverageColsWidth = false;
+            body.Font = bodyBodyFont2;
+            //    body.ColsAlignString = "CCCCCCC";
+            body.DataSource = arr;
+            body.ColsWidth = BuildYongLiDaColsWidth();
+            return body;
+        }
+
 
         public static int[] BuildPrintConfigColsWidth()
         {
@@ -201,15 +224,21 @@ namespace WmsApp
         }
 
 
+        public static int[] BuildYongLiDaColsWidth()
+        {
+            return new int[] { 30, 100, 250, 60, 80, 100, 100, 110 };
+        }
+
 
         public static MultiHeader BuildXiBeiHeader()
         {
             MultiHeader mhObj;
-            mhObj = new MultiHeader(1, 9);
+            mhObj = new MultiHeader(1, 7);
             mhObj.Font = bodyBoldFont;
             mhObj.ColsAlign = "CCCCCCC";
-           // mhObj.Text = new string[,] { { "#", "名称", "单位", "订货量", "发货斤数", "单价(含税)", "金额(含税)", "单价(不含税)", "金额(不含税)" } };
-            mhObj.Text = new string[,] { { "#", "名称", "单位", "订货量", "发货斤数", "单价(含税)", "金额(含税)", "(斤)单价" } };
+            //mhObj.Text = new string[,] { { "#", "名称", "单位", "订货量", "发货斤数", "单价(含税)", "金额(含税)", "(斤)单价" } };
+
+            mhObj.Text = new string[,] { { "#", "编码", "名称", "单位", "订货量", "发货数量", "单价(含税)", "金额(含税)", } };
             mhObj.ColsWidth = BuildXiBeiColsWidth();
             return mhObj;
         }
@@ -218,11 +247,12 @@ namespace WmsApp
         public static MultiHeader BuildXiBeiGanTiaoHeaderNew()
         {
             MultiHeader mhObj;
-            mhObj = new MultiHeader(1,13);
+            mhObj = new MultiHeader(1,9);
           //  mhObj.Font = bodyBoldFont;
             mhObj.ColsAlign = "CCCCCCC";
             // mhObj.Text = new string[,] { { "#", "名称", "单位", "订货量", "发货斤数", "单价(含税)", "金额(含税)", "单价(不含税)", "金额(不含税)" } };
-            mhObj.Text = new string[,] { { "#", "编码", "名称", "规格", "单位", "订单数", "分拣数", "库区属性", "生产日期", "保质期天", "实发箱数", "实收箱数", "备注" } };
+          //  mhObj.Text = new string[,] { { "#", "编码", "名称", "规格", "单位", "订单数", "分拣数", "库区属性", "生产日期", "保质期天", "实发箱数", "实收箱数", "备注" } };
+            mhObj.Text = new string[,] { { "#", "编码", "名称", "规格", "单位", "订单数", "分拣数", "库区属性",  "备注" } };
             mhObj.ColsWidth = BuildXiBeiGanTiaoNewColsWidth();
             return mhObj;
         }
@@ -240,13 +270,15 @@ namespace WmsApp
 
         public static int[] BuildXiBeiGanTiaoNewColsWidth()
         {
-            return new int[] { 20, 70, 130, 80, 40, 55, 55, 70, 65, 65,65, 65, 40 };
+           // return new int[] { 20, 70, 130, 80, 40, 55, 55, 70, 65, 65,65, 65, 40 };
+            return new int[] { 20, 70, 250, 120, 40, 55, 55, 140, 60 };
         }
 
 
         public static int[] BuildXiBeiColsWidth()
         {
-            return new int[] { 30, 175, 40, 60, 80, 100, 100, 110 };
+           // return new int[] { 30, 175, 40, 60, 80, 100, 100, 110 };
+            return new int[] { 30, 100, 250, 80, 70, 80, 100, 100 };
         }
 
         public static int[] BuildHuangJiHuangColsWidth()
@@ -831,7 +863,7 @@ namespace WmsApp
             //    mRows = list.Count / 2 + 1;
             //}
 
-            mCols = 13;
+            mCols = 9;
 
             arrGridText = new string[mRows, mCols];
 
@@ -850,11 +882,11 @@ namespace WmsApp
                     arrGridText[i, 7] = list[i].areaAttr;
 
                    
+                    //arrGridText[i, 8] = "";
+                    //arrGridText[i, 9] = "";
+                    //arrGridText[i, 10] = "";
+                    //arrGridText[i, 11] = "";
                     arrGridText[i, 8] = "";
-                    arrGridText[i, 9] = "";
-                    arrGridText[i, 10] = "";
-                    arrGridText[i, 11] = "";
-                    arrGridText[i, 12] = "";
                  
                 }
            
@@ -1356,8 +1388,8 @@ namespace WmsApp
 
             mRows = list.Count;
          
-            mCols =8;
-
+          //  mCols =8;
+            mCols = 8;
             arrGridText = new string[mRows+1, mCols];
 
    
@@ -1365,32 +1397,42 @@ namespace WmsApp
                 for (int i = 0; i < mRows; i++)
                 {
 
+                    //arrGridText[i, 0] = (m + 1).ToString();
+                    //arrGridText[i, 1] = list[m].goodsName;
+                    //arrGridText[i, 2] = list[m].goodsUnit;
+                    //arrGridText[i, 3] = list[m].planNum.ToString("f2");
+                    //arrGridText[i, 4] = list[m].deliveryNum.ToString("f2");
+                    //if (list[m].modelWeight != null && list[m].modelWeight != 0)
+                    //{
+                    //    decimal curNum = list[m].deliveryNum * list[m].modelWeight.Value;
+                    //    arrGridText[i, 4] = (curNum / 500).ToString("f2");
+
+                    //    //转换成斤单价
+                    //    decimal curJin = list[m].modelWeight.Value / 500;
+                    //    arrGridText[i, 7] = (list[m].taxPrice / curJin).ToString("f2");
+                    //}
+                    //else
+                    //{
+
+                    //    arrGridText[i, 7] = list[m].taxPrice.ToString("f2");
+                    //}
+
+
+                    //arrGridText[i, 5] = list[m].taxPrice.ToString("f2");
+                    //arrGridText[i, 6] = (list[m].taxPrice * list[m].deliveryNum).ToString("f2");
+
+
+
                     arrGridText[i, 0] = (m + 1).ToString();
-                    arrGridText[i, 1] = list[m].goodsName;
-                    arrGridText[i, 2] = list[m].goodsUnit;
-                    arrGridText[i, 3] = list[m].planNum.ToString("f2");
-                    arrGridText[i, 4] = list[m].deliveryNum.ToString("f2");
-                    if (list[m].modelWeight != null && list[m].modelWeight != 0)
-                    {
-                        decimal curNum = list[m].deliveryNum * list[m].modelWeight.Value;
-                        arrGridText[i, 4] = (curNum / 500).ToString("f2");
-
-                        //转换成斤单价
-                        decimal curJin = list[m].modelWeight.Value / 500;
-                        arrGridText[i, 7] = (list[m].taxPrice / curJin).ToString("f2");
-                    }
-                    else
-                    {
-
-                        arrGridText[i, 7] = list[m].taxPrice.ToString("f2");
-                    }
-
-
-                    arrGridText[i, 5] = list[m].taxPrice.ToString("f2");
-                    arrGridText[i, 6] = (list[m].taxPrice * list[m].deliveryNum).ToString("f2");
-
-                  //  arrGridText[i, 7] = list[m].taxNoPrice.ToString("f2");
-                   // arrGridText[i, 8] = (list[m].taxNoPrice * list[m].deliveryNum).ToString("f2");
+                    arrGridText[i, 1] = list[m].skuCode;
+                    arrGridText[i, 2] = list[m].goodsName;
+                    arrGridText[i, 3] = list[m].goodsUnit;
+                    arrGridText[i, 4] = list[m].planNum.ToString("f2");
+                    arrGridText[i, 5] = list[m].deliveryNum.ToString("f2");
+                  
+                    arrGridText[i, 6] = list[m].taxPrice.ToString("f2");
+                    arrGridText[i, 7] = (list[m].taxPrice * list[m].deliveryNum).ToString("f2");
+                
         
                     m = m + 1;
                 }
@@ -1406,15 +1448,17 @@ namespace WmsApp
                     {
                         totalPlanNum += list[i].planNum;
 
-                        if (list[i].modelWeight != null && list[i].modelWeight != 0)
-                        {
-                            decimal curNum = list[i].deliveryNum * list[i].modelWeight.Value;
-                            totalDeliveryNum += (curNum / 500);
-                        }
-                        else
-                        {
-                            totalDeliveryNum += list[i].deliveryNum;
-                        }
+                        //if (list[i].modelWeight != null && list[i].modelWeight != 0)
+                        //{
+                        //    decimal curNum = list[i].deliveryNum * list[i].modelWeight.Value;
+                        //    totalDeliveryNum += (curNum / 500);
+                        //}
+                        //else
+                        //{
+                        //    totalDeliveryNum += list[i].deliveryNum;
+                        //}
+
+                        totalDeliveryNum += list[i].deliveryNum;
 
                         decimal taxAmount = list[i].taxPrice * list[i].deliveryNum;
                         totalTaxAmount += taxAmount;
@@ -1424,23 +1468,28 @@ namespace WmsApp
                     }
 
                     arrGridText[mRows, 0] ="";
-                    arrGridText[mRows, 1] ="合计";
-                    arrGridText[mRows, 2] ="";
-                    arrGridText[mRows, 3] = totalPlanNum.ToString("f2");
-                    arrGridText[mRows, 4] = totalDeliveryNum.ToString("f2"); ;
+                    arrGridText[mRows, 1] = "";
+                    arrGridText[mRows, 2] ="合计";
+                    arrGridText[mRows,3] ="";
+                    arrGridText[mRows,4] = totalPlanNum.ToString("f2");
+                    arrGridText[mRows, 5] = totalDeliveryNum.ToString("f2"); ;
                   
 
 
 
-                    arrGridText[mRows, 5] ="";
-                    arrGridText[mRows, 6] = totalTaxAmount.ToString("f2");
+                    arrGridText[mRows, 6] ="";
+                    arrGridText[mRows, 7] = totalTaxAmount.ToString("f2");
 
-                    arrGridText[mRows, 7] ="";
                   //  arrGridText[mRows, 8] = totalTaxNoAmount.ToString("f2");
                 }
           
             return arrGridText;
         }
+
+
+
+
+     
 
 
 
@@ -1508,6 +1557,89 @@ namespace WmsApp
                 arrGridText[i,7] = (list[m].taxPrice * list[m].deliveryNum).ToString("f2");
                 m = m + 1;
             }
+
+            return arrGridText;
+        }
+
+
+
+        public static string[,] ToPrintYongLiDaArrFromList(List<ShipMentDetailVo> list)
+        {
+
+            if (list == null)
+            {
+                return new string[0, 0];
+            }
+
+            int mRows, mCols;
+            string[,] arrGridText;
+
+            mRows = list.Count;
+
+            mCols = 8;
+
+            arrGridText = new string[mRows+1, mCols];
+
+            decimal totalMoney = 0;
+
+            int m = 0;
+            for (int i = 0; i < mRows; i++)
+            {
+
+                arrGridText[i, 0] = (m + 1).ToString();
+                arrGridText[i, 1] = list[m].goodsName;
+              //  arrGridText[i, 2] = list[m].goodsUnit;
+
+                arrGridText[i, 2] = "斤";
+                if (list[m].changeNum == 0)
+                {
+                    list[m].changeNum = 1;
+                }
+
+
+
+                if (list[m].goodsUnit == "KG")
+                {
+                    arrGridText[i, 3] = ((list[m].planNum * list[m].modelWeight.Value) / 500).ToString("f2");
+                    arrGridText[i, 4] = ((list[m].deliveryNum * list[m].modelWeight.Value) / 1000).ToString("f2");
+                }
+                else
+                {
+
+                    arrGridText[i, 3] ="";
+                    arrGridText[i, 4] ="";
+
+                    //arrGridText[i, 3] = (list[m].planNum / list[m].changeNum).ToString("f2");
+                    //arrGridText[i, 4] = (list[m].deliveryNum / list[m].changeNum).ToString("f2");
+                }
+  
+
+
+                if (list[m].customerTaxPrice == null)
+                {
+                    list[m].customerTaxPrice = list[m].taxPrice;
+                }
+                arrGridText[i, 5] = (list[m].taxPrice* list[m].changeNum).ToString("f2");
+                arrGridText[i, 6] = (list[m].taxPrice * list[m].deliveryNum).ToString("f2");
+                arrGridText[i, 7] = "";
+
+                totalMoney += list[m].taxPrice * list[m].deliveryNum;
+
+                m = m + 1;
+            }
+
+            //合计
+
+            arrGridText[mRows, 0] = "";
+            arrGridText[mRows, 1] ="单据合计";
+            arrGridText[mRows, 2] ="";
+            arrGridText[mRows, 3] = "";
+            arrGridText[mRows, 4] = "";
+
+            arrGridText[mRows, 5] = "";
+            arrGridText[mRows, 6] = totalMoney.ToString("f2");
+            arrGridText[mRows, 7] = "";
+
 
             return arrGridText;
         }

@@ -30,18 +30,26 @@
         {
             this.btnPrint = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ccbWave = new Wms.Controls.ComCheckBoxList();
+            this.label8 = new System.Windows.Forms.Label();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnQuery = new System.Windows.Forms.Button();
             this.storedCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.storedName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Num = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnClear = new System.Windows.Forms.Button();
+            this.waveCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.waveName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(210, 12);
+            this.btnPrint.Location = new System.Drawing.Point(514, 12);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(177, 23);
             this.btnPrint.TabIndex = 1;
@@ -56,13 +64,86 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.storedCode,
             this.storedName,
-            this.Num});
+            this.Num,
+            this.waveCode,
+            this.waveName});
             this.dataGridView1.Location = new System.Drawing.Point(0, 51);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(393, 376);
+            this.dataGridView1.Size = new System.Drawing.Size(680, 376);
             this.dataGridView1.TabIndex = 2;
             this.dataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnQuery);
+            this.groupBox1.Controls.Add(this.ccbWave);
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.btnClear);
+            this.groupBox1.Controls.Add(this.btnPrint);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox1.Location = new System.Drawing.Point(0, 0);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(692, 45);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            // 
+            // ccbWave
+            // 
+            this.ccbWave.DataSource = null;
+            this.ccbWave.Location = new System.Drawing.Point(53, 15);
+            this.ccbWave.Name = "ccbWave";
+            this.ccbWave.Size = new System.Drawing.Size(150, 20);
+            this.ccbWave.TabIndex = 18;
+            this.ccbWave.ItemClick += new Wms.Controls.ComCheckBoxList.CheckBoxListItemClick(this.ccbWave_ItemClick);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(12, 17);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(35, 12);
+            this.label8.TabIndex = 17;
+            this.label8.Text = "批次:";
+            // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(319, 12);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(177, 23);
+            this.btnClear.TabIndex = 1;
+            this.btnClear.Text = "清零";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "storedCode";
+            this.dataGridViewTextBoxColumn1.HeaderText = "门店编码";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "storedName";
+            this.dataGridViewTextBoxColumn2.HeaderText = "门店名称";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "打印数量";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            // 
+            // btnQuery
+            // 
+            this.btnQuery.Location = new System.Drawing.Point(209, 12);
+            this.btnQuery.Name = "btnQuery";
+            this.btnQuery.Size = new System.Drawing.Size(93, 23);
+            this.btnQuery.TabIndex = 19;
+            this.btnQuery.Text = "查询";
+            this.btnQuery.UseVisualStyleBackColor = true;
+            this.btnQuery.Click += new System.EventHandler(this.btnQuery_Click);
             // 
             // storedCode
             // 
@@ -83,32 +164,25 @@
             this.Num.HeaderText = "打印数量";
             this.Num.Name = "Num";
             // 
-            // groupBox1
+            // waveCode
             // 
-            this.groupBox1.Controls.Add(this.btnClear);
-            this.groupBox1.Controls.Add(this.btnPrint);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(393, 45);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
+            this.waveCode.DataPropertyName = "waveCode";
+            this.waveCode.HeaderText = "批次编码";
+            this.waveCode.Name = "waveCode";
+            this.waveCode.ReadOnly = true;
             // 
-            // btnClear
+            // waveName
             // 
-            this.btnClear.Location = new System.Drawing.Point(12, 12);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(177, 23);
-            this.btnClear.TabIndex = 1;
-            this.btnClear.Text = "清零";
-            this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            this.waveName.DataPropertyName = "waveName";
+            this.waveName.HeaderText = "批次名称";
+            this.waveName.Name = "waveName";
+            this.waveName.ReadOnly = true;
             // 
             // PrintBoxStoreForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(393, 427);
+            this.ClientSize = new System.Drawing.Size(692, 427);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -119,6 +193,7 @@
             this.Load += new System.EventHandler(this.PrintBoxForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -127,11 +202,19 @@
 
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnClear;
+        private Wms.Controls.ComCheckBoxList ccbWave;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.Button btnQuery;
         private System.Windows.Forms.DataGridViewTextBoxColumn storedCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn storedName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Num;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.DataGridViewTextBoxColumn waveCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn waveName;
 
     }
 }

@@ -237,5 +237,15 @@ namespace WmsApp
         {
             OpenForm("tsbStore"); 
         }
+
+     /// <summary>
+     /// 货位打印
+     /// </summary>
+     /// <param name="sender"></param>
+     /// <param name="e"></param>
+        private void pbBin_Click(object sender, EventArgs e)
+        {
+            OpenForm("tsbBin"); 
+        }
     }
 }

@@ -70,6 +70,8 @@
     <Compile Include="HttpExtension.cs" />
     <Compile Include="IWMSClient.cs" />
     <Compile Include="IWMSRequest.cs" />
+    <Compile Include="Model\AreaModel.cs" />
+    <Compile Include="Model\BinModel.cs" />
     <Compile Include="Model\BomRelationModel.cs" />
     <Compile Include="Model\BoxInfoAdd.cs" />
     <Compile Include="Model\BoxInfo.cs" />
@@ -81,6 +83,7 @@
     <Compile Include="Model\Goods.cs" />
     <Compile Include="Model\GoodsCategory.cs" />
     <Compile Include="Model\ImportOperateInfo.cs" />
+    <Compile Include="Model\LocationsModel.cs" />
     <Compile Include="Model\Menu.cs" />
     <Compile Include="Model\OutBoundPrintModel.cs" />
     <Compile Include="Model\OutBoundModel.cs" />
@@ -110,6 +113,7 @@
     <Compile Include="Request\CustomerPrintConfigRequest.cs" />
     <Compile Include="Request\DictRequest.cs" />
     <Compile Include="Request\ImportOrderExeclRequest.cs" />
+    <Compile Include="Request\LocationsRequest.cs" />
     <Compile Include="Request\OutBoundRequest.cs" />
     <Compile Include="Request\PackageXiBeiRequest.cs" />
     <Compile Include="Request\PreprocessXiBeiInfoRequest.cs" />
@@ -144,6 +148,7 @@
     <Compile Include="Response\CustomerPrintConfigResponse.cs" />
     <Compile Include="Response\DictResponse.cs" />
     <Compile Include="Response\ImportOrderExeclResponse.cs" />
+    <Compile Include="Response\LocationsResponse.cs" />
     <Compile Include="Response\OutBoundResponse.cs" />
     <Compile Include="Response\OutBoundSendResponse.cs" />
     <Compile Include="Response\ProcessProductResponse.cs" />

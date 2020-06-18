@@ -50,6 +50,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.lbStoreWeight = new System.Windows.Forms.Label();
             this.lbStorePlanNumKe = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.lbBiaoQianDt = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -262,11 +264,33 @@
             this.lbStorePlanNumKe.Size = new System.Drawing.Size(0, 23);
             this.lbStorePlanNumKe.TabIndex = 0;
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label10.ForeColor = System.Drawing.Color.Red;
+            this.label10.Location = new System.Drawing.Point(28, 336);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(95, 19);
+            this.label10.TabIndex = 2;
+            this.label10.Text = "标签日期:";
+            // 
+            // lbBiaoQianDt
+            // 
+            this.lbBiaoQianDt.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbBiaoQianDt.ForeColor = System.Drawing.Color.Red;
+            this.lbBiaoQianDt.Location = new System.Drawing.Point(129, 334);
+            this.lbBiaoQianDt.Name = "lbBiaoQianDt";
+            this.lbBiaoQianDt.Size = new System.Drawing.Size(179, 23);
+            this.lbBiaoQianDt.TabIndex = 3;
+            // 
             // WeightForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(917, 470);
+            this.Controls.Add(this.lbBiaoQianDt);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.tbWeight);
             this.Controls.Add(this.btnEsc);
             this.Controls.Add(this.label2);
@@ -321,5 +345,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label lbStoreWeight;
         private System.Windows.Forms.Label lbStorePlanNumKe;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lbBiaoQianDt;
     }
 }
