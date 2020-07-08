@@ -63,6 +63,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.gb = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cbCaiGouType = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.gb.SuspendLayout();
@@ -71,7 +73,7 @@
             // 
             // btnSend
             // 
-            this.btnSend.Location = new System.Drawing.Point(520, 52);
+            this.btnSend.Location = new System.Drawing.Point(661, 53);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(75, 23);
             this.btnSend.TabIndex = 7;
@@ -81,7 +83,7 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(416, 53);
+            this.btnSearch.Location = new System.Drawing.Point(569, 53);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 6;
@@ -307,6 +309,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbCaiGouType);
+            this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.ccbWave);
             this.groupBox1.Controls.Add(this.cbFreshAttr);
             this.groupBox1.Controls.Add(this.label8);
@@ -402,6 +406,28 @@
             this.panel1.Size = new System.Drawing.Size(1032, 33);
             this.panel1.TabIndex = 4;
             // 
+            // cbCaiGouType
+            // 
+            this.cbCaiGouType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCaiGouType.FormattingEnabled = true;
+            this.cbCaiGouType.Items.AddRange(new object[] {
+            "全部",
+            "地采",
+            "集采"});
+            this.cbCaiGouType.Location = new System.Drawing.Point(447, 54);
+            this.cbCaiGouType.Name = "cbCaiGouType";
+            this.cbCaiGouType.Size = new System.Drawing.Size(99, 20);
+            this.cbCaiGouType.TabIndex = 20;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(389, 58);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(59, 12);
+            this.label9.TabIndex = 19;
+            this.label9.Text = "采购类型:";
+            // 
             // OutBoundSendForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -459,5 +485,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn status;
         private System.Windows.Forms.DataGridViewTextBoxColumn waveName;
         private Wms.Controls.ComCheckBoxList ccbWave;
+        private System.Windows.Forms.ComboBox cbCaiGouType;
+        private System.Windows.Forms.Label label9;
     }
 }

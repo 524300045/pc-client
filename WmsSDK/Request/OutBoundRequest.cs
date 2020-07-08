@@ -27,6 +27,7 @@ namespace WmsSDK.Request
 
         public int? freshAttr;
 
+        public int? caigouType;
 
         public string waveCode;
 
@@ -67,6 +68,8 @@ namespace WmsSDK.Request
         public string waveCode;
 
         public List<string> waveCodeList;
+
+        public int? caigouType;
 
         //   public int status;
         public string GetAPIPath()

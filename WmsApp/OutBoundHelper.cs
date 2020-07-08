@@ -226,7 +226,7 @@ namespace WmsApp
 
         public static int[] BuildYongLiDaColsWidth()
         {
-            return new int[] { 30, 100, 250, 60, 80, 100, 100, 110 };
+            return new int[] { 30, 250, 60, 80, 100, 100, 100, 110 };
         }
 
 
@@ -361,6 +361,24 @@ namespace WmsApp
                                                                          { "联系人:"+orderModel.receiver, "地址:"+orderModel.address,""},
                                                                           { "客户电话:"+orderModel.receiverPhone,"业务&电话:"+orderModel.customerPhone,""},
                                                                            { "备注:"+orderModel.orderNo,"单据合计:"+orderModel.priceCount.ToString("f3"),""}
+                                                                         };
+            headerObj.DrawGrid.Merge = GridMergeFlag.Row;
+            return headerObj;
+        }
+
+        public static Header BuildHuangJiHuangHeader(OutBoundPrintModel orderModel)
+        {
+            Header headerObj = new Header();
+            headerObj.Font = bodyBoldFont;
+            if (orderModel.receiverPhone == null || orderModel.receiverPhone.ToString() == "null")
+            {
+                orderModel.receiverPhone = "";
+            }
+            headerObj.DataSource = new string[,] { 
+                                                                         { "购货单位:"+orderModel.storedName, "送货日期:"+Convert.ToDateTime(orderModel.deliveryDate).ToString("yyyy-MM-dd"),"交货单号:"+orderModel.outboundTaskCode}, 
+                                                                         { "联系人:"+orderModel.receiver, "地址:"+orderModel.address,""},
+                                                                          { "客户电话:"+orderModel.receiverPhone,"业务&电话:"+orderModel.customerPhone,""},
+                                                                           { "备注:"+orderModel.orderNo,"",""}
                                                                          };
             headerObj.DrawGrid.Merge = GridMergeFlag.Row;
             return headerObj;
@@ -1529,6 +1547,10 @@ namespace WmsApp
 
                 if (list[m].goodsUnit == "KG")
                 {
+                    if (list[m].modelWeight==null)
+                    {
+                        list[m].modelWeight = 0;
+                    }
                     arrGridText[i, 4] = ((list[m].planNum * list[m].modelWeight.Value) / 1000).ToString("f2");
                     arrGridText[i, 5] = ((list[m].deliveryNum * list[m].modelWeight.Value)/1000).ToString("f2");
                 }

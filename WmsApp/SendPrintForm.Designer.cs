@@ -63,6 +63,8 @@
             this.deliveryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.waveName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pageSplit1 = new Wms.Controls.Pager.PageSplit();
+            this.label9 = new System.Windows.Forms.Label();
+            this.cbCaiGouType = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.gb.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
@@ -72,6 +74,8 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.cbCaiGouType);
+            this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.ccbWave);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.cbFreshAttr);
@@ -409,6 +413,28 @@
             this.pageSplit1.TabIndex = 0;
             this.pageSplit1.PageChanged += new System.EventHandler(this.pageSplit1_PageChanged);
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(610, 57);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(59, 12);
+            this.label9.TabIndex = 17;
+            this.label9.Text = "采购类型:";
+            // 
+            // cbCaiGouType
+            // 
+            this.cbCaiGouType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCaiGouType.FormattingEnabled = true;
+            this.cbCaiGouType.Items.AddRange(new object[] {
+            "全部",
+            "地采",
+            "集采"});
+            this.cbCaiGouType.Location = new System.Drawing.Point(668, 53);
+            this.cbCaiGouType.Name = "cbCaiGouType";
+            this.cbCaiGouType.Size = new System.Drawing.Size(99, 20);
+            this.cbCaiGouType.TabIndex = 18;
+            // 
             // SendPrintForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -464,5 +490,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn deliveryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn waveName;
         private Wms.Controls.ComCheckBoxList ccbWave;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox cbCaiGouType;
     }
 }

@@ -101,12 +101,6 @@ namespace WmsApp
                     
                     List<WaveCustomerStoreModel> list = new List<WaveCustomerStoreModel>();
                     list = response.result;
-                    //list.Insert(0, new WaveCustomerStoreModel() { waveCode = "", waveName = "全部" });
-
-                    //this.cbWave.DataSource = list;
-                    //this.cbWave.ValueMember = "waveCode";
-                    //this.cbWave.DisplayMember = "waveName";
-                    //cbWave.SelectedIndex = 0;
 
                     this.ccbWave.DataSource = list;
                     this.ccbWave.ValueMember = "waveCode";
@@ -163,6 +157,7 @@ namespace WmsApp
             }
             cbPrinter.SelectedIndex = 0;
             cbPrinter.SelectedIndexChanged += cbPrinter_SelectedIndexChanged;
+            this.cbCaiGouType.SelectedIndex = 0;
             GetPrintConfig();
             dtBegin.Focus();
         }
@@ -197,6 +192,18 @@ namespace WmsApp
                 printstatus = 1;//已打印
             }
 
+            //采购类型
+            int? caigouType = null;
+
+            if (cbCaiGouType.SelectedIndex==1)
+            {
+                caigouType = 0;//地采
+            }
+            if (cbCaiGouType.SelectedIndex==2)
+            {
+                caigouType = 1;//集采
+            }
+
             OutBoundPrintQueryRequest request = new OutBoundPrintQueryRequest();
             request.warehouseCode = UserInfo.WareHouseCode;
             request.customerCode = UserInfo.CustomerCode;
@@ -208,7 +215,7 @@ namespace WmsApp
      
             request.startTime = dtBegin.Value;
             request.endTime = Convert.ToDateTime(dtEnd.Value.ToString("yyyy-MM-dd") + " 23:59:59");
-
+            request.caigouType = caigouType;
             request.isPrint = printstatus;
            // request.status = 30;
             request.page = paginator.PageNo;
@@ -704,7 +711,7 @@ namespace WmsApp
                 orderPrint.RowsPerPage = 27;
                 Image barcode = Code128Rendering.GetCodeAorBImg(taskCode, 70, 1, true);
                 orderPrint.BarCode = OutBoundHelper.BuildBarCode(response.result.remark + "送货单", 1, null);
-                orderPrint.Header = OutBoundHelper.BuildHeader(outBoundPrint);
+                orderPrint.Header = OutBoundHelper.BuildHuangJiHuangHeader(outBoundPrint);
                 orderPrint.MultiHeader1 = OutBoundHelper.BuildMultiHuangJiHuangHeader();
                 string[,] arr = OutBoundHelper.ToHuangJiHuangArrFromList(detaiList);
                 orderPrint.Body1 = OutBoundHelper.BuildHuangJiHuangArriveBody(arr);

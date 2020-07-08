@@ -164,10 +164,20 @@ namespace WmsApp.Order
                 request.freshAttr = freshAttr;
             }
 
-            //if (cbWave.SelectedValue.ToString() != "")
-            //{
-            //    request.waveCode = cbWave.SelectedValue.ToString();
-            //}
+            //采购类型
+            int? caigouType = null;
+
+            if (cbCaiGouType.SelectedIndex == 1)
+            {
+                caigouType = 0;//地采
+            }
+            if (cbCaiGouType.SelectedIndex == 2)
+            {
+                caigouType = 1;//集采
+            }
+
+            request.caigouType = caigouType;
+           
 
             if (this.ccbWave.CheckedItems.Count > 0)
             {
