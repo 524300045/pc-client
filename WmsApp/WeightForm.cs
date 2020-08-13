@@ -1775,27 +1775,27 @@ namespace WmsApp
                 g.Graphics.DrawString(curWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
 
 
-
-                height += 15;
-
-
-                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                g.Graphics.DrawString("货主:" + UserInfo.CustomerName, new Font("宋体", 10f), brush, layoutRectangleRight);
-
-                height += 15;
-                //生产日期
-                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                g.Graphics.DrawString("生产日期:" + this.dt.ToString("yyyy-MM-dd"), new Font("宋体", 10f), brush, layoutRectangleRight);
-
                 double day = 0;
                 if (curPackTaskDetail != null)
                 {
                     day = curPackTaskDetail.expiryDate;
 
                 }
+
+
                 height += 15;
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                g.Graphics.DrawString("保质期:" + day + "天 ", new Font("宋体", 10f), brush, layoutRectangleRight);
+                g.Graphics.DrawString("货主:" + UserInfo.CustomerName + "保质期:" + day + "天 ", new Font("宋体", 10f), brush, layoutRectangleRight);
+
+                height += 15;
+                //生产日期
+                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                g.Graphics.DrawString("生产日期:" + this.dt.ToString("yyyy-MM-dd"), new Font("宋体", 10f), brush, layoutRectangleRight);
+
+           
+                //height += 15;
+                //layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                //g.Graphics.DrawString("保质期:" + day + "天 ", new Font("宋体", 10f), brush, layoutRectangleRight);
 
                 height += 15;
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
@@ -1805,6 +1805,10 @@ namespace WmsApp
                 height += 15;
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                 g.Graphics.DrawString("执行标准:NYT 1987-2011 ", new Font("宋体", 8f), brush, layoutRectangleRight);
+
+                height += 15;
+                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                g.Graphics.DrawString("电话:010-89958567", new Font("宋体", 8f), brush, layoutRectangleRight);
 
                 height += 15;
                 //门店
@@ -1840,9 +1844,9 @@ namespace WmsApp
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                 g.Graphics.DrawString("地址:北京市平谷区马坊镇英城南桥东400米路南", new Font("宋体", 8f), brush, layoutRectangleRight);
 
-                height += 15;
-                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                g.Graphics.DrawString("电话:010-89958567", new Font("宋体", 8f), brush, layoutRectangleRight);
+                //height += 15;
+                //layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                //g.Graphics.DrawString("电话:010-89958567", new Font("宋体", 8f), brush, layoutRectangleRight);
                 #endregion
             }
             else
@@ -1900,6 +1904,10 @@ namespace WmsApp
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                 g.Graphics.DrawString("执行标准:NYT 1987-2011 ", new Font("宋体", 8f), brush, layoutRectangleRight);
 
+                height += 15;
+                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                g.Graphics.DrawString("电话:010-89958567", new Font("宋体", 8f), brush, layoutRectangleRight);
+
                 //double day = 0;
                 //if (curPackTaskDetail != null)
                 //{
@@ -1937,9 +1945,9 @@ namespace WmsApp
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                 g.Graphics.DrawString("地址:北京市平谷区马坊镇英城南桥东400米路南", new Font("宋体", 8f), brush, layoutRectangleRight);
 
-                height += 15;
-                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                g.Graphics.DrawString("电话:010-89958567", new Font("宋体", 8f), brush, layoutRectangleRight);
+                //height += 15;
+                //layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                //g.Graphics.DrawString("电话:010-89958567", new Font("宋体", 8f), brush, layoutRectangleRight);
                 
                 #endregion
             }

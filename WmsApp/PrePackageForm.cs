@@ -2234,7 +2234,7 @@ namespace WmsApp
 
 
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                g.Graphics.DrawString("货主:" + UserInfo.CustomerName, new Font("宋体", 8f), brush, layoutRectangleRight);
+                g.Graphics.DrawString("货主:" + UserInfo.CustomerName + " 保质期:" + expireDay + "天", new Font("宋体", 8f), brush, layoutRectangleRight);
 
 
                 height += 15;
@@ -2243,9 +2243,9 @@ namespace WmsApp
                 //  g.Graphics.DrawString("生产日期:" + dtBegin.Value.ToShortDateString(), new Font("宋体", 10f), brush, layoutRectangleRight);
                 g.Graphics.DrawString("生产日期:" + productDate, new Font("宋体", 8f), brush, layoutRectangleRight);
 
-                height += 15;
-                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                g.Graphics.DrawString("保质期:" + expireDay + "天 ", new Font("宋体", 8f), brush, layoutRectangleRight);
+                //height += 15;
+                //layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                //g.Graphics.DrawString("保质期:" + expireDay + "天", new Font("宋体", 8f), brush, layoutRectangleRight);
 
                 height += 15;
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
@@ -2255,6 +2255,10 @@ namespace WmsApp
                 height += 15;
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                 g.Graphics.DrawString("执行标准:NYT 1987-2011 ", new Font("宋体", 8f), brush, layoutRectangleRight);
+
+                height += 15;
+                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                g.Graphics.DrawString("电话:010-89958567", new Font("宋体", 8f), brush, layoutRectangleRight);
 
                 //height += 15;
                 ////编码
@@ -2292,9 +2296,9 @@ namespace WmsApp
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                 g.Graphics.DrawString("地址:北京市平谷区马坊镇英城南桥东400米路南", new Font("宋体", 8f), brush, layoutRectangleRight);
 
-                height += 15;
-                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                g.Graphics.DrawString("电话:010-89958567", new Font("宋体", 8f), brush, layoutRectangleRight);
+                //height += 15;
+                //layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                //g.Graphics.DrawString("电话:010-89958567", new Font("宋体", 8f), brush, layoutRectangleRight);
 
                 #endregion
             }
@@ -2357,6 +2361,11 @@ namespace WmsApp
                 g.Graphics.DrawString("执行标准:NYT 1987-2011 ", new Font("宋体", 8f), brush, layoutRectangleRight);
 
 
+                height += 15;
+                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                g.Graphics.DrawString("电话:010-89958567", new Font("宋体", 8f), brush, layoutRectangleRight);
+
+
                 //height += 15;
                 ////编码
                 //Font fontCode = new Font("宋体", 8f);
@@ -2396,9 +2405,9 @@ namespace WmsApp
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                 g.Graphics.DrawString("地址:北京市平谷区马坊镇英城南桥东400米路南", new Font("宋体", 8f), brush, layoutRectangleRight);
 
-                height += 15;
-                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                g.Graphics.DrawString("电话:010-89958567", new Font("宋体", 8f), brush, layoutRectangleRight);
+                //height += 15;
+                //layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                //g.Graphics.DrawString("电话:010-89958567", new Font("宋体", 8f), brush, layoutRectangleRight);
 
                 #endregion
             }
