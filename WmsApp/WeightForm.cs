@@ -517,6 +517,24 @@ namespace WmsApp
 #endif
                                 #endregion
                             }
+                            else if (UserInfo.CustomerCode=="8001")
+                            {
+                                #region 诺娃
+
+#if(!DEBUG)
+                        PrintDialog dialog = new PrintDialog();
+                        document.PrintPage += new PrintPageEventHandler(this.pd_PrintNuoWaPage);
+                        dialog.Document = document;
+#else
+
+                                PrintPreviewDialog dialog = new PrintPreviewDialog();
+                                document.PrintPage += new PrintPageEventHandler(this.pd_PrintNuoWaPage);
+                                dialog.Document = document;
+
+#endif
+
+                                #endregion
+                            }
                             else
                             {
 #if(!DEBUG)
@@ -745,11 +763,25 @@ namespace WmsApp
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                 g.Graphics.DrawString("电话:010-89958567", new Font("宋体", 8f), brush, layoutRectangleRight);
 
-                height += 15;
-                //生产日期
-                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                g.Graphics.DrawString("生产日期:" + this.dt.ToString("yyyy-MM-dd") + "保质期至:" + this.dt.AddDays(day).ToShortDateString(), new Font("宋体", 8f), brush, layoutRectangleRight);
 
+                if (curPackTaskDetail != null && curPackTaskDetail.handleWay != null && curPackTaskDetail.handleWay == "毛")
+                {
+                    height += 15;
+                    //生产日期
+                    layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                    g.Graphics.DrawString("生产日期:" + this.dt.ToString("yyyy-MM-dd") , new Font("宋体", 8f), brush, layoutRectangleRight);
+
+             
+                }
+                else
+                {
+                    height += 15;
+                    //生产日期
+                    layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                    g.Graphics.DrawString("生产日期:" + this.dt.ToString("yyyy-MM-dd") + "保质期至:" + this.dt.AddDays(day).ToShortDateString(), new Font("宋体", 8f), brush, layoutRectangleRight);
+
+             
+                }
              
 
                 height += 15;
@@ -940,11 +972,20 @@ namespace WmsApp
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                 g.Graphics.DrawString("电话:010-89958567", new Font("宋体", 8f), brush, layoutRectangleRight);
 
+                string baozhiqiStr = "";
+                if (curPackTaskDetail != null && curPackTaskDetail.handleWay != null && curPackTaskDetail.handleWay == "毛")
+                {
+                }
+                else
+                {
+                    baozhiqiStr = "保质期至:" + this.dt.AddDays(day).ToShortDateString();
+                }
+
                 height += 15;
                 //生产日期
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                g.Graphics.DrawString("生产日期:" + this.dt.ToString("yyyy-MM-dd") + "保质期至:" + this.dt.AddDays(day).ToShortDateString(), new Font("宋体", 8f), brush, layoutRectangleRight);
-
+               // g.Graphics.DrawString("生产日期:" + this.dt.ToString("yyyy-MM-dd") + "保质期至:" + this.dt.AddDays(day).ToShortDateString(), new Font("宋体", 8f), brush, layoutRectangleRight);
+                g.Graphics.DrawString("生产日期:" + this.dt.ToString("yyyy-MM-dd") + baozhiqiStr, new Font("宋体", 8f), brush, layoutRectangleRight);
 
                 //height += 15;
                 //layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
@@ -1266,9 +1307,18 @@ namespace WmsApp
                     day = curPackTaskDetail.expiryDate;
 
                 }
-                height += 15;
-                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                g.Graphics.DrawString("保质期:" + day + "天 ", new Font("宋体", 10f), brush, layoutRectangleRight);
+
+                if (curPackTaskDetail != null && curPackTaskDetail.handleWay != null && curPackTaskDetail.handleWay == "毛")
+                {
+
+                }
+                else
+                {
+                    height += 15;
+                    layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                    g.Graphics.DrawString("保质期:" + day + "天 ", new Font("宋体", 10f), brush, layoutRectangleRight);
+                }
+               
 
                 height += 15;
                 //门店
@@ -1442,9 +1492,17 @@ namespace WmsApp
                     day = curPackTaskDetail.expiryDate;
 
                 }
-                height += 15;
-                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                g.Graphics.DrawString("保质期:" + day + "天 ", new Font("宋体", 10f), brush, layoutRectangleRight);
+
+                if (curPackTaskDetail != null && curPackTaskDetail.handleWay != null && curPackTaskDetail.handleWay == "毛")
+                {
+                }
+                else
+                {
+                    height += 15;
+                    layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                    g.Graphics.DrawString("保质期:" + day + "天 ", new Font("宋体", 10f), brush, layoutRectangleRight);
+                }
+                
 
                 height += 15;
                 //门店
@@ -1782,10 +1840,20 @@ namespace WmsApp
 
                 }
 
+                string baozhiqiStr = "";
+                if (curPackTaskDetail != null && curPackTaskDetail.handleWay != null && curPackTaskDetail.handleWay == "毛")
+                {
+                }
+                else
+                { 
+                  baozhiqiStr="保质期:" + day + "天 ";
+                }
 
                 height += 15;
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                g.Graphics.DrawString("货主:" + UserInfo.CustomerName + "保质期:" + day + "天 ", new Font("宋体", 10f), brush, layoutRectangleRight);
+              //  g.Graphics.DrawString("货主:" + UserInfo.CustomerName + "保质期:" + day + "天 ", new Font("宋体", 10f), brush, layoutRectangleRight);
+                g.Graphics.DrawString("货主:" + UserInfo.CustomerName + baozhiqiStr, new Font("宋体", 10f), brush, layoutRectangleRight);
+
 
                 height += 15;
                 //生产日期
@@ -2013,9 +2081,25 @@ namespace WmsApp
                     day = curPackTaskDetail.expiryDate;
 
                 }
-                //height += 15;
-                //layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                //g.Graphics.DrawString("保质期:" + day + "天 ", new Font("宋体", 10f), brush, layoutRectangleRight);
+
+                if (this.curPackTaskDetail.handleWay != null && this.curPackTaskDetail.handleWay == "毛")
+                {
+
+                }
+                else
+                {
+                    height += 15;
+                    layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                    g.Graphics.DrawString("保质期:" + day + "天 ", new Font("宋体", 10f), brush, layoutRectangleRight);
+                }
+
+                //if (this.curPackTaskDetail.handleWay != null && this.curPackTaskDetail.handleWay == "净")
+                //{
+                //    height += 15;
+                //    layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                //    g.Graphics.DrawString("保质期:" + day + "天 ", new Font("宋体", 10f), brush, layoutRectangleRight);
+                //}
+          
 
                 height += 15;
                 //门店
@@ -2214,13 +2298,194 @@ namespace WmsApp
                // g.Graphics.DrawString("生产日期:" + DateTime.Now.ToShortDateString().ToString(), new Font("宋体", 8f), brush, layoutRectangleRight);
                 g.Graphics.DrawString("生产日期:" + this.dt.ToString("yyyy-MM-dd"), new Font("宋体", 8f), brush, layoutRectangleRight);
                 //保质期
+               
+                if (curPackTaskDetail != null && curPackTaskDetail.handleWay != null && curPackTaskDetail.handleWay == "毛")
+                {
+
+                }
+                else
+                {
+                    layoutRectangleRight = new RectangleF(pointX + image.Width, 116, 300f, 85f);
+                    double day = 0;
+                    if (curPackTaskDetail != null)
+                    {
+                        day = curPackTaskDetail.expiryDate;
+                    }
+                    g.Graphics.DrawString("保 质 期: " + day + "天", new Font("宋体", 8f), brush, layoutRectangleRight);
+                }
+               
+
+                Font fontCode = new Font("宋体", 8f);
+                layoutRectangle = new RectangleF(pointX + image.Width, 126, 150f, 30f);
+                g.Graphics.DrawString(curPackageCode, fontCode, brush, layoutRectangle);
+
+            }
+            else
+            {
+
+
+
+                Font fontCu = new Font("宋体", 12f, FontStyle.Bold);
+                int height = 15;
+                int heightRight = 15;
+
+                Font font = new Font("宋体", 10f);
+                Brush brush = new SolidBrush(Color.Black);
+                g.Graphics.SmoothingMode = SmoothingMode.HighQuality;
+                int interval = 5;
+                int pointX = 5;
+
+                RectangleF layoutRectangleRight = new RectangleF(135f, 5, 130f, 85f);
+                //g.Graphics.DrawString(preprocessInfo.preprocessCode, font, brush, layoutRectangleRight);
+
+                Rectangle destRect = new Rectangle(160, -15, image.Width, image.Height);
+                g.Graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel);
+                heightRight = image.Width - 20;
+
+                layoutRectangleRight = new RectangleF(155, heightRight, 150f, 85f);
+                g.Graphics.DrawString(wareHouseName, font, brush, layoutRectangleRight);
+
+                heightRight += 20;
+
+                layoutRectangleRight = new RectangleF(135, heightRight, 150f, 85f);
+                g.Graphics.DrawString(UserInfo.RealName, font, brush, layoutRectangleRight);
+
+                heightRight += 20;
+
+                layoutRectangleRight = new RectangleF(135, heightRight, 150f, 85f);
+                g.Graphics.DrawString("货主:" + UserInfo.CustomerName, font, brush, layoutRectangleRight);
+
+                heightRight += 15;
+                layoutRectangleRight = new RectangleF(155, heightRight, 150f, 85f);
+                // g.Graphics.DrawString(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), font, brush, layoutRectangleRight);
+
+                RectangleF layoutRectangle = new RectangleF(pointX, 5, 180f, 30f);
+                g.Graphics.DrawString(lbStore.Text, fontCu, brush, layoutRectangle);
+
+                height += 10;
+                //商品名称
+                layoutRectangle = new RectangleF(pointX, height, 180f, 30f);
+                g.Graphics.DrawString(curPackTaskDetail.goodsName, font, brush, layoutRectangle);
+
+                height += interval + 20;
+                //重量
+
+                layoutRectangle = new RectangleF(pointX, height, 120f, 40f);
+                g.Graphics.DrawString(curWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
+
+                height += interval + 13;
+
+                Rectangle dest2Rect = new Rectangle(pointX, 80, image.Width, image.Height);
+                g.Graphics.DrawImage(image, dest2Rect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel);
+
+                Font fontCode = new Font("宋体", 8f);
+
+                height = 80 + image.Height - 15;
+                layoutRectangle = new RectangleF(pointX, height, 150f, 30f);
+                g.Graphics.DrawString(curPackageCode, fontCode, brush, layoutRectangle);
+
+            }
+        }
+
+
+        public void GetPrintNuoWaPicture(Bitmap image, PrintPageEventArgs g)
+        {
+
+            if (topCategoryCode == "10")
+            {
+                Font fontCu = new Font("宋体", 12f, FontStyle.Bold);
+                int height = 15;
+                int heightRight = 15;
+
+                Font font = new Font("宋体", 10f);
+                Brush brush = new SolidBrush(Color.Black);
+                g.Graphics.SmoothingMode = SmoothingMode.HighQuality;
+                int interval = 5;
+                int pointX = 5;
+
+                RectangleF layoutRectangleRight = new RectangleF(135f, 5, 130f, 85f);
+  
+
+                Rectangle destRect = new Rectangle(160, -15, image.Width, image.Height);
+                g.Graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel);
+                heightRight = image.Width - 20;
+
+                layoutRectangleRight = new RectangleF(155, heightRight, 150f, 85f);
+                g.Graphics.DrawString(wareHouseName, font, brush, layoutRectangleRight);
+
+                heightRight += 20;
+
+        
+                heightRight += 15;
+                layoutRectangleRight = new RectangleF(155, heightRight, 150f, 85f);
+            
+                RectangleF layoutRectangle = new RectangleF(pointX, 5, 180f, 30f);
+                g.Graphics.DrawString(lbStore.Text, fontCu, brush, layoutRectangle);
+
+                height += 10;
+                //商品名称
+                layoutRectangle = new RectangleF(pointX, height, 180f, 30f);
+                g.Graphics.DrawString(curPackTaskDetail.shortName, font, brush, layoutRectangle);
+
+                height += interval + 20;
+                //重量
+
+                layoutRectangle = new RectangleF(pointX, height - 10, 120f, 40f);
+                g.Graphics.DrawString(curWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
+
+                height += interval + 13;
+
+                Rectangle dest2Rect = new Rectangle(pointX, 85, image.Width, image.Height);
+                g.Graphics.DrawImage(image, dest2Rect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel);
+
+
+
+                //流通号
+                layoutRectangleRight = new RectangleF(pointX, 60, 300f, 85f);
+    
+                if (UserInfo.foodLicenseNo != null && UserInfo.foodLicenseNo != "")
+                {
+                    g.Graphics.DrawString("食品经营许可证号:" + UserInfo.foodLicenseNo, new Font("宋体", 8f), brush, layoutRectangleRight);
+                }
+
+                layoutRectangleRight = new RectangleF(pointX, 72, 300f, 85f);
+                g.Graphics.DrawString("经销商:" + UserInfo.labelName, new Font("宋体", 8f), brush, layoutRectangleRight);
+
+
+                if (curProductCurWorkshopAttrDesc != null && curProductCurWorkshopAttrDesc != "")
+                {
+                    if (curProductCurWorkshopAttrDesc == "三河车间" || curProductCurWorkshopAttrDesc == "腌菜车间")
+                    {
+                        layoutRectangleRight = new RectangleF(pointX, 83, 300f, 85f);
+                        g.Graphics.DrawString("生产商:三河市鲜洁农产品有限公司", new Font("宋体", 8f), brush, layoutRectangleRight);
+                    }
+                }
+
+                //货主
+                layoutRectangleRight = new RectangleF(pointX + image.Width, 96, 300f, 85f);
+                g.Graphics.DrawString("货主:" + UserInfo.CustomerName, new Font("宋体", 8f), brush, layoutRectangleRight);
+
+
+                //生产日期
+                layoutRectangleRight = new RectangleF(pointX + image.Width, 106, 300f, 85f);
+           
+                g.Graphics.DrawString("生产日期:" + this.dt.ToString("yyyy-MM-dd"), new Font("宋体", 8f), brush, layoutRectangleRight);
+                //保质期
                 layoutRectangleRight = new RectangleF(pointX + image.Width, 116, 300f, 85f);
                 double day = 0;
                 if (curPackTaskDetail != null)
                 {
                     day = curPackTaskDetail.expiryDate;
                 }
-                g.Graphics.DrawString("保 质 期: " + day + "天", new Font("宋体", 8f), brush, layoutRectangleRight);
+                if (curPackTaskDetail != null && curPackTaskDetail.handleWay != null && curPackTaskDetail.handleWay == "毛")
+                {
+
+                }
+                else
+                {
+                    g.Graphics.DrawString("保 质 期: " + day + "天", new Font("宋体", 8f), brush, layoutRectangleRight);
+                }
+               
 
                 Font fontCode = new Font("宋体", 8f);
                 layoutRectangle = new RectangleF(pointX + image.Width, 126, 150f, 30f);
@@ -2347,7 +2612,15 @@ namespace WmsApp
                 {
                     day = curPackTaskDetail.expiryDate;
                 }
-                g.Graphics.DrawString("保 质 期:T+" + day + "天", new Font("宋体", 8f), brush, layoutRectangleRight);
+                if (curPackTaskDetail != null && curPackTaskDetail.handleWay != null && curPackTaskDetail.handleWay == "毛")
+                {
+
+                }
+                else
+                {
+                    g.Graphics.DrawString("保 质 期:T+" + day + "天", new Font("宋体", 8f), brush, layoutRectangleRight);
+                }
+               
 
      
                 if (UserInfo.foodLicenseNo != null && UserInfo.foodLicenseNo != "")
@@ -2541,7 +2814,15 @@ namespace WmsApp
                 {
                     day = curPackTaskDetail.expiryDate;
                 }
-                g.Graphics.DrawString("保 质 期: " + day + "天", new Font("宋体", 8f), brush, layoutRectangleRight);
+                if (curPackTaskDetail != null && curPackTaskDetail.handleWay != null && curPackTaskDetail.handleWay == "毛")
+                {
+
+                }
+                else
+                {
+                    g.Graphics.DrawString("保 质 期: " + day + "天", new Font("宋体", 8f), brush, layoutRectangleRight);
+                }
+   
 
                 Font fontCode = new Font("宋体", 8f);
                 layoutRectangle = new RectangleF(pointX + image.Width, 126, 150f, 30f);
@@ -2713,7 +2994,14 @@ namespace WmsApp
                 {
                     day = curPackTaskDetail.expiryDate;
                 }
-                g.Graphics.DrawString("保 质 期: " + day + "天", new Font("宋体", 8f), brush, layoutRectangleRight);
+                if (curPackTaskDetail != null && curPackTaskDetail.handleWay != null && curPackTaskDetail.handleWay == "毛")
+                {
+                }
+                else
+                {
+                    g.Graphics.DrawString("保 质 期: " + day + "天", new Font("宋体", 8f), brush, layoutRectangleRight);
+                }
+               
 
                 Font fontCode = new Font("宋体", 8f);
                 layoutRectangle = new RectangleF(pointX + image.Width, 126, 150f, 30f);
@@ -2792,6 +3080,13 @@ namespace WmsApp
         {
             Bitmap bt = CreateQRCode(curPackageCode);
             GetPrintPicture(bt, e);
+        }
+
+
+        private void pd_PrintNuoWaPage(object sender, PrintPageEventArgs e) //触发打印事件
+        {
+            Bitmap bt = CreateQRCode(curPackageCode);
+            GetPrintNuoWaPicture(bt, e);
         }
 
         /// <summary>

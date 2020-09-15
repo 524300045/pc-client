@@ -965,7 +965,7 @@ namespace WmsApp
                                 if (response.result != null)
                                 {
                                     preprocessInfoList = response.result;
-                                    new CustomerPrint().PrintYunHaiYao(preprocessInfoList, goods, expireDay, this.dt);
+                                    new CustomerPrint().PrintYunHaiYao(preprocessInfoList, goods, expireDay, this.dt,handleWay);
                                 }
                                 GetCount();
                             }

@@ -184,6 +184,17 @@ namespace WmsApp
         }
 
 
+        public static MultiHeader BuildYuWeiGuanHeader()
+        {
+            MultiHeader mhObj;
+            mhObj = new MultiHeader(1, 9);
+            mhObj.Font = bodyBoldFont;
+            mhObj.ColsAlign = "CCCCCCC";
+            mhObj.Text = new string[,] { { "#", "客户商品编码", "客户商品名称", "单位", "订货数量", "发货数量", "发货数量(KG)","单价","金额" } };
+            mhObj.ColsWidth = BuildYuWeiGuanColsWidth();
+            return mhObj;
+        }
+
         public static MultiHeader BuildYongLiDaHeader()
         {
             MultiHeader mhObj;
@@ -206,6 +217,18 @@ namespace WmsApp
             return body;
         }
 
+
+        public static Body BuildYuWeiGuanBody(string[,] arr)
+        {
+            Body body = new Body();
+            body.IsAverageColsWidth = false;
+            body.Font = bodyBodyFont2;
+            //    body.ColsAlignString = "CCCCCCC";
+            body.DataSource = arr;
+            body.ColsWidth = BuildYuWeiGuanColsWidth();
+            return body;
+        }
+
         public static Body BuildPrintYongLiDaBody(string[,] arr)
         {
             Body body = new Body();
@@ -217,6 +240,11 @@ namespace WmsApp
             return body;
         }
 
+
+        public static int[] BuildYuWeiGuanColsWidth()
+        {
+            return new int[] { 30, 100, 200, 80, 80, 80, 100, 60, 100 };
+        }
 
         public static int[] BuildPrintConfigColsWidth()
         {
@@ -1584,6 +1612,72 @@ namespace WmsApp
         }
 
 
+
+        public static string[,] ToYuWeiGuanArrFromList(List<ShipMentDetailVo> list)
+        {
+
+            if (list == null)
+            {
+                return new string[0, 0];
+            }
+
+            int mRows, mCols;
+            string[,] arrGridText;
+
+            mRows = list.Count;
+
+            mCols = 9;
+
+            arrGridText = new string[mRows, mCols];
+
+
+            int m = 0;
+            for (int i = 0; i < mRows; i++)
+            {
+
+              //  list[m].goodsUnit = "KG";
+                arrGridText[i, 0] = (m + 1).ToString();
+                arrGridText[i, 1] = list[m].skuCode;
+                arrGridText[i, 2] = list[m].goodsName;
+                arrGridText[i, 3] = list[m].goodsUnit;
+
+                if (list[m].changeNum == 0)
+                {
+                    list[m].changeNum = 1;
+                }
+
+                arrGridText[i, 4] = list[m].planNum.ToString("f2");
+                arrGridText[i, 5] =list[m].deliveryNum.ToString("f2");
+
+                //if (list[m].goodsUnit == "KG")
+                //{
+                    if (list[m].modelWeight == null)
+                    {
+                        list[m].modelWeight = 0;
+                    }
+               //     arrGridText[i, 4] = ((list[m].planNum * list[m].modelWeight.Value) / 1000).ToString("f2");
+                    arrGridText[i, 6] = ((list[m].deliveryNum * list[m].modelWeight.Value) / 1000).ToString("f2");
+                //}
+                //else
+                //{
+                //    arrGridText[i, 4] = (list[m].planNum / list[m].changeNum).ToString("f2");
+                //    arrGridText[i, 5] = (list[m].deliveryNum / list[m].changeNum).ToString("f2");
+                //}
+
+
+                    if (list[m].customerTaxPrice == null)
+                    {
+                        list[m].customerTaxPrice = list[m].taxPrice;
+                    }
+                    arrGridText[i, 7] = list[m].taxPrice.ToString("f2");
+                   // arrGridText[i,7] = list[m].customerTaxPrice.ToString("f2");
+                    arrGridText[i, 8] = (list[m].taxPrice * list[m].deliveryNum).ToString("f2");
+              
+                  m = m + 1;
+            }
+
+            return arrGridText;
+        }
 
         public static string[,] ToPrintYongLiDaArrFromList(List<ShipMentDetailVo> list)
         {

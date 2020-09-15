@@ -26,6 +26,8 @@ namespace WmsApp
 
         string productDate = "";
 
+         string handleWay="";
+
         public static Bitmap CreateBigQRCode(string asset)
         {
             EncodingOptions options = new QrCodeEncodingOptions
@@ -89,13 +91,15 @@ namespace WmsApp
 
 
         #region 云海肴
-        
-      
-        public void PrintYunHaiYao(List<PreprocessInfo> preprocessInfoList, Goods _goods, double _expireDay,DateTime dt)
+
+
+        public void PrintYunHaiYao(List<PreprocessInfo> preprocessInfoList, Goods _goods, double _expireDay, DateTime dt, String handleWay)
         {
             this.sendDate = dt;
             goods = _goods;
             expireDay = _expireDay;
+            this.handleWay = handleWay;
+
             foreach (PreprocessInfo item in preprocessInfoList)
             {
                 #region 打印
@@ -198,26 +202,26 @@ namespace WmsApp
                 {
                     g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit, fontCu, brush, layoutRectangle);
 
-                    height += 15;
-                    layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-
-
-                    decimal curWeight =goods.bomWeight;
-                    string goodsModel = "";
-                    if (curWeight < 1000)
+                    if (goods.skuCode!="112405")
                     {
-                        //小于1KG,显示为g
-                        goodsModel = curWeight.ToString("f2").TrimEnd('0').TrimEnd('.') + "g";
+                        height += 15;
+                        layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                        decimal curWeight = goods.bomWeight;
+                        string goodsModel = "";
+                        if (curWeight < 1000)
+                        {
+                            //小于1KG,显示为g
+                            goodsModel = curWeight.ToString("f2").TrimEnd('0').TrimEnd('.') + "g";
+                        }
+                        else
+                        {
+                            //大于1kg，显示为kg
+                            decimal cugKg = curWeight / 1000;
+                            goodsModel = cugKg.ToString("f2").TrimEnd('0').TrimEnd('.') + "kg";
+                        }
+                        g.Graphics.DrawString("净含量:" + goodsModel + " 储存方式:1-5℃", new Font("宋体", 8f), brush, layoutRectangleRight);
                     }
-                    else
-                    {
-                        //大于1kg，显示为kg
-                        decimal cugKg = curWeight / 1000;
-                        goodsModel = cugKg.ToString("f2").TrimEnd('0').TrimEnd('.') + "kg";
-                    }
-
-
-                    g.Graphics.DrawString("净含量:"+goodsModel + " 储存方式:1-5℃", new Font("宋体", 8f), brush, layoutRectangleRight);
+                
                 }
 
           
@@ -230,9 +234,40 @@ namespace WmsApp
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                 g.Graphics.DrawString("电话:010-89958567", new Font("宋体", 8f), brush, layoutRectangleRight);
 
-                height += 15;
-                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                g.Graphics.DrawString("生产日期:" + sendDate.ToShortDateString() + " 保质期至:" + sendDate.AddDays(expireDay-1).ToShortDateString(), new Font("宋体", 8f), brush, layoutRectangleRight);
+
+                if (handleWay != null && handleWay == "毛")
+                {
+                    if (goods.skuCode == "101810" || goods.skuCode == "108785"
+                        || goods.skuCode == "101806" || goods.skuCode == "101790" || goods.skuCode == "108570")
+                    {
+                        height += 15;
+                        layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                        g.Graphics.DrawString("分拣日期:" + sendDate.ToShortDateString() , new Font("宋体", 8f), brush, layoutRectangleRight);
+                    }
+                    else
+                    {
+                        height += 15;
+                        layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                        g.Graphics.DrawString("生产日期:" + sendDate.ToShortDateString(), new Font("宋体", 8f), brush, layoutRectangleRight);
+                    }
+                }
+                else
+                {
+                    if (goods.skuCode == "101810" || goods.skuCode == "108785"
+                        || goods.skuCode == "101806" || goods.skuCode == "101790" || goods.skuCode == "108570")
+                    {
+                        height += 15;
+                        layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                        g.Graphics.DrawString("分拣日期:" + sendDate.ToShortDateString() + " 保质期至:" + sendDate.AddDays(expireDay - 1).ToShortDateString(), new Font("宋体", 8f), brush, layoutRectangleRight);
+                    }
+                    else
+                    {
+                        height += 15;
+                        layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+                        g.Graphics.DrawString("生产日期:" + sendDate.ToShortDateString() + " 保质期至:" + sendDate.AddDays(expireDay - 1).ToShortDateString(), new Font("宋体", 8f), brush, layoutRectangleRight);
+                    }
+                }
+               
 
           
                 if (UserInfo.foodLicenseNo != null && UserInfo.foodLicenseNo != "")
@@ -468,12 +503,16 @@ namespace WmsApp
                 layoutRectangleRight = new RectangleF(pointX, height, 180f, 85f);
                 g.Graphics.DrawString("配料:" + goods.mixContent, new Font("宋体", 6f), brush, layoutRectangleRight);
 
-
+                string baozhiqiStr = "";
+                if (handleWay != null && handleWay != "毛")
+                {
+                    baozhiqiStr = " 保质期至:" + Convert.ToDateTime(this.productDate).AddDays(expireDay - 1).ToShortDateString();
+                }
                 height += 20;
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
              //   g.Graphics.DrawString("生产日期:" + DateTime.Now.ToShortDateString() + " 保质期至:" + DateTime.Now.AddDays(expireDay-1).ToShortDateString(), new Font("宋体", 8f), brush, layoutRectangleRight);
-                g.Graphics.DrawString("生产日期:" + this.productDate + " 保质期至:" + Convert.ToDateTime(this.productDate).AddDays(expireDay - 1).ToShortDateString(), new Font("宋体", 8f), brush, layoutRectangleRight);
-             
+               // g.Graphics.DrawString("生产日期:" + this.productDate + " 保质期至:" + Convert.ToDateTime(this.productDate).AddDays(expireDay - 1).ToShortDateString(), new Font("宋体", 8f), brush, layoutRectangleRight);
+                g.Graphics.DrawString("生产日期:" + this.productDate + baozhiqiStr, new Font("宋体", 8f), brush, layoutRectangleRight);
 
                 if (UserInfo.foodLicenseNo != null && UserInfo.foodLicenseNo != "")
                 {
