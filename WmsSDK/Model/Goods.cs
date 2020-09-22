@@ -158,5 +158,8 @@ namespace WmsSDK.Model
 
                 [JsonProperty("bomWeight")]
           public decimal bomWeight { get; set; }
+
+              [JsonProperty("customerSkuCode")]
+                public String customerSkuCode { get; set; }
     }
 }
