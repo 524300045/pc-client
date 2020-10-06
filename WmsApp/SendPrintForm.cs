@@ -418,7 +418,7 @@ namespace WmsApp
                         {
                             PrintXiBei(item);
                         }
-                        else if (UserInfo.CustomerCode=="7003")
+                        else if (UserInfo.CustomerCode == "7003" || UserInfo.CustomerCode == "7004")
                         {
                             //西贝干调
                             PrintXiBeiGanTiaoNew(item);
@@ -495,7 +495,7 @@ namespace WmsApp
                 OutBoundPrintModel outBoundPrint = response.result;
 
                 OutBoundPrint orderPrint = new OutBoundPrint(false, new Margins(10, 10, 1, 1));
-                orderPrint.RowsPerPage = 26;
+                orderPrint.RowsPerPage = 22;
                 Image barcode = Code128Rendering.GetCodeAorBImg(taskCode, 70, 1, true);
                 orderPrint.BarCode = OutBoundHelper.BuildBarCode(response.result.remark + "送货单", 1, null);
                 orderPrint.Header = OutBoundHelper.BuildHeader(outBoundPrint);

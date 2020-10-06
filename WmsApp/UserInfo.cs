@@ -41,6 +41,11 @@ namespace WmsApp
        /// </summary>
        public static String areaName;
 
+
+       public static string phone;
+
+       public static string address;
+
        public static List<Menu> menuDtos { get; set; }
     }
 }

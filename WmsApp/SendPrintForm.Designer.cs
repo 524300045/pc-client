@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbCaiGouType = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.ccbWave = new Wms.Controls.ComCheckBoxList();
             this.label8 = new System.Windows.Forms.Label();
             this.cbFreshAttr = new System.Windows.Forms.ComboBox();
@@ -63,8 +65,6 @@
             this.deliveryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.waveName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pageSplit1 = new Wms.Controls.Pager.PageSplit();
-            this.label9 = new System.Windows.Forms.Label();
-            this.cbCaiGouType = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.gb.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
@@ -72,8 +72,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.cbCaiGouType);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.ccbWave);
@@ -94,12 +92,35 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 5);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1041, 83);
+            this.groupBox1.Size = new System.Drawing.Size(1065, 83);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "查询条件";
+            // 
+            // cbCaiGouType
+            // 
+            this.cbCaiGouType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCaiGouType.FormattingEnabled = true;
+            this.cbCaiGouType.Items.AddRange(new object[] {
+            "全部",
+            "地采",
+            "集采"});
+            this.cbCaiGouType.Location = new System.Drawing.Point(668, 53);
+            this.cbCaiGouType.Name = "cbCaiGouType";
+            this.cbCaiGouType.Size = new System.Drawing.Size(99, 20);
+            this.cbCaiGouType.TabIndex = 18;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(610, 57);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(59, 12);
+            this.label9.TabIndex = 17;
+            this.label9.Text = "采购类型:";
             // 
             // ccbWave
             // 
@@ -158,7 +179,7 @@
             // 
             this.cbPrinter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbPrinter.FormattingEnabled = true;
-            this.cbPrinter.Location = new System.Drawing.Point(727, 24);
+            this.cbPrinter.Location = new System.Drawing.Point(727, 21);
             this.cbPrinter.Name = "cbPrinter";
             this.cbPrinter.Size = new System.Drawing.Size(121, 20);
             this.cbPrinter.TabIndex = 8;
@@ -273,9 +294,10 @@
             // 
             this.gb.Controls.Add(this.dgv);
             this.gb.Controls.Add(this.pageSplit1);
-            this.gb.Location = new System.Drawing.Point(12, 94);
+            this.gb.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gb.Location = new System.Drawing.Point(0, 83);
             this.gb.Name = "gb";
-            this.gb.Size = new System.Drawing.Size(1041, 414);
+            this.gb.Size = new System.Drawing.Size(1065, 437);
             this.gb.TabIndex = 1;
             this.gb.TabStop = false;
             // 
@@ -304,7 +326,7 @@
             this.dgv.Name = "dgv";
             this.dgv.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.dgv.RowTemplate.Height = 23;
-            this.dgv.Size = new System.Drawing.Size(1020, 360);
+            this.dgv.Size = new System.Drawing.Size(1056, 383);
             this.dgv.TabIndex = 1;
             this.dgv.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_RowPostPaint);
             // 
@@ -405,35 +427,13 @@
             this.pageSplit1.BackColor = System.Drawing.Color.LightGray;
             this.pageSplit1.Description = "";
             this.pageSplit1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pageSplit1.Location = new System.Drawing.Point(3, 377);
+            this.pageSplit1.Location = new System.Drawing.Point(3, 400);
             this.pageSplit1.Name = "pageSplit1";
             this.pageSplit1.PageCount = 1;
             this.pageSplit1.PageNo = 1;
-            this.pageSplit1.Size = new System.Drawing.Size(1035, 34);
+            this.pageSplit1.Size = new System.Drawing.Size(1059, 34);
             this.pageSplit1.TabIndex = 0;
             this.pageSplit1.PageChanged += new System.EventHandler(this.pageSplit1_PageChanged);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(610, 57);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(59, 12);
-            this.label9.TabIndex = 17;
-            this.label9.Text = "采购类型:";
-            // 
-            // cbCaiGouType
-            // 
-            this.cbCaiGouType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCaiGouType.FormattingEnabled = true;
-            this.cbCaiGouType.Items.AddRange(new object[] {
-            "全部",
-            "地采",
-            "集采"});
-            this.cbCaiGouType.Location = new System.Drawing.Point(668, 53);
-            this.cbCaiGouType.Name = "cbCaiGouType";
-            this.cbCaiGouType.Size = new System.Drawing.Size(99, 20);
-            this.cbCaiGouType.TabIndex = 18;
             // 
             // SendPrintForm
             // 

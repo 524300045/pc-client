@@ -35,7 +35,6 @@
             this.cbStore = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.pageSplit1 = new Wms.Controls.Pager.PageSplit();
             this.label1 = new System.Windows.Forms.Label();
             this.dgv = new System.Windows.Forms.DataGridView();
             this.chk = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -60,11 +59,10 @@
             this.tbStoreName = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.gb = new System.Windows.Forms.GroupBox();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pageSplit1 = new Wms.Controls.Pager.PageSplit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.gb.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSend
@@ -132,19 +130,6 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "发货日期:";
             // 
-            // pageSplit1
-            // 
-            this.pageSplit1.BackColor = System.Drawing.Color.LightGray;
-            this.pageSplit1.Description = "";
-            this.pageSplit1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pageSplit1.Location = new System.Drawing.Point(0, 0);
-            this.pageSplit1.Name = "pageSplit1";
-            this.pageSplit1.PageCount = 1;
-            this.pageSplit1.PageNo = 1;
-            this.pageSplit1.Size = new System.Drawing.Size(1032, 33);
-            this.pageSplit1.TabIndex = 0;
-            this.pageSplit1.PageChanged += new System.EventHandler(this.pageSplit1_PageChanged);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -157,6 +142,9 @@
             // dgv
             // 
             this.dgv.AllowUserToAddRows = false;
+            this.dgv.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgv.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.chk,
@@ -173,13 +161,13 @@
             this.deliveryDate,
             this.status,
             this.waveName});
-            this.dgv.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgv.Location = new System.Drawing.Point(3, 17);
+            this.dgv.Location = new System.Drawing.Point(12, 93);
             this.dgv.Name = "dgv";
             this.dgv.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.dgv.RowTemplate.Height = 23;
-            this.dgv.Size = new System.Drawing.Size(1014, 331);
+            this.dgv.Size = new System.Drawing.Size(1014, 384);
             this.dgv.TabIndex = 1;
+            this.dgv.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellContentClick);
             this.dgv.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_RowPostPaint);
             // 
             // chk
@@ -360,28 +348,33 @@
             // 
             // gb
             // 
+            this.gb.Controls.Add(this.pageSplit1);
             this.gb.Controls.Add(this.dgv);
-            this.gb.Location = new System.Drawing.Point(0, 93);
+            this.gb.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gb.Location = new System.Drawing.Point(0, 0);
             this.gb.Name = "gb";
-            this.gb.Size = new System.Drawing.Size(1020, 351);
+            this.gb.Size = new System.Drawing.Size(1032, 528);
             this.gb.TabIndex = 3;
             this.gb.TabStop = false;
             // 
-            // panel1
+            // pageSplit1
             // 
-            this.panel1.Controls.Add(this.pageSplit1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 495);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1032, 33);
-            this.panel1.TabIndex = 4;
+            this.pageSplit1.BackColor = System.Drawing.Color.LightGray;
+            this.pageSplit1.Description = "";
+            this.pageSplit1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pageSplit1.Location = new System.Drawing.Point(3, 483);
+            this.pageSplit1.Name = "pageSplit1";
+            this.pageSplit1.PageCount = 1;
+            this.pageSplit1.PageNo = 1;
+            this.pageSplit1.Size = new System.Drawing.Size(1026, 42);
+            this.pageSplit1.TabIndex = 0;
+            this.pageSplit1.PageChanged += new System.EventHandler(this.pageSplit1_PageChanged);
             // 
             // OutBoundSecondSendForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1032, 528);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gb);
             this.Name = "OutBoundSecondSendForm";
@@ -391,7 +384,6 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.gb.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -405,12 +397,10 @@
         private System.Windows.Forms.ComboBox cbStore;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private Wms.Controls.Pager.PageSplit pageSplit1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgv;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox gb;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox tbStoreName;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cbFreshAttr;
@@ -431,5 +421,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn status;
         private System.Windows.Forms.DataGridViewTextBoxColumn waveName;
         private Wms.Controls.ComCheckBoxList ccbWave;
+        private Wms.Controls.Pager.PageSplit pageSplit1;
     }
 }

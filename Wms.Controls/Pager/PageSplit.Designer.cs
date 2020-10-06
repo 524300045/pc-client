@@ -84,7 +84,7 @@
             // 
             // btnext
             // 
-            this.btnext.Location = new System.Drawing.Point(143, 8);
+            this.btnext.Location = new System.Drawing.Point(143, 7);
             this.btnext.Name = "btnext";
             this.btnext.Size = new System.Drawing.Size(58, 23);
             this.btnext.TabIndex = 7;

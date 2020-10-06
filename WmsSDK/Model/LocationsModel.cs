@@ -21,5 +21,29 @@ namespace WmsSDK.Model
 
         /** 箱号 */
         public String areaCode { get; set; }
+
+
+
+        public String sortId { get; set; }
+
+
+    
+        public String path { get; set; }
+
+
+
+        public String layerNo { get; set; }
+
+
+        public String colNo { get; set; }
+
+
+        public String edge { get; set; }
+
+
+        public String pos { get; set; }
+
+   
+      
     }
 }

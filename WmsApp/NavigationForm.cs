@@ -175,7 +175,7 @@ namespace WmsApp
 
         private void pbOrderImport_Click(object sender, EventArgs e)
         {
-            OpenForm("tsbOrderImport"); 
+            OpenForm("tsbTuoPan"); 
         }
 
         private void pbSend_Click(object sender, EventArgs e)

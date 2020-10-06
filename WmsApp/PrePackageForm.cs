@@ -3094,36 +3094,23 @@ namespace WmsApp
             g.Graphics.DrawString("经销商:" + UserInfo.labelName, new Font("宋体", 7f), brush, layoutRectangleRight);
 
 
-            //if (preprocessInfo.productWorkshopAttrDesc != null && preprocessInfo.productWorkshopAttrDesc != "")
-            //{
-            //    if (preprocessInfo.productWorkshopAttrDesc == "三河车间" || preprocessInfo.productWorkshopAttrDesc == "腌菜车间")
-            //    {
-            //        height += interval;
-            //        layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-            //        g.Graphics.DrawString("生产商:三河市鲜洁农产品有限公司", new Font("宋体", 8f), brush, layoutRectangleRight);
-            //    }
-            //}
 
             height += interval;
             layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-            g.Graphics.DrawString("生产商:三河市鲜洁农产品有限公司", new Font("宋体", 8f), brush, layoutRectangleRight);
+            g.Graphics.DrawString("生产商:"+UserInfo.PartnerName, new Font("宋体", 8f), brush, layoutRectangleRight);
 
 
             height += interval;
 
-            //Rectangle dest2Rect = new Rectangle(pointX, 85, image.Width, image.Height);
-            //g.Graphics.DrawImage(image, dest2Rect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel);
 
 
             //货主
             layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-            g.Graphics.DrawString("货主:" + UserInfo.CustomerName, new Font("宋体", 8f), brush, layoutRectangleRight);
+            g.Graphics.DrawString("货主:" + UserInfo.CustomerName+"  生产日期:" + productDate.ToString(), new Font("宋体", 8f), brush, layoutRectangleRight);
 
-            height += interval;
-            //生产日期 productDate
-            layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-            //    g.Graphics.DrawString("生产日期:" + DateTime.Now.ToShortDateString().ToString(), new Font("宋体", 8f), brush, layoutRectangleRight);
-            g.Graphics.DrawString("生产日期:" + productDate.ToString(), new Font("宋体", 8f), brush, layoutRectangleRight);
+            //height += interval;
+            //layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+            //g.Graphics.DrawString("生产日期:" + productDate.ToString(), new Font("宋体", 8f), brush, layoutRectangleRight);
             //保质期
             //if (handleWay != null && handleWay == "毛")
             //{
@@ -3155,19 +3142,20 @@ namespace WmsApp
 
             height += interval;
             layoutRectangle = new RectangleF(pointX, height, 300f, 30f);
-            g.Graphics.DrawString("生产商地址:河北省廊坊市三河市李旗庄镇国家农科园区", fontCode, brush, layoutRectangle);
+          //  g.Graphics.DrawString("生产商地址:三河市李旗庄镇国家农科园区", fontCode, brush, layoutRectangle);
+            g.Graphics.DrawString("生产商地址:"+UserInfo.address, fontCode, brush, layoutRectangle);
 
             height += interval;
             layoutRectangle = new RectangleF(pointX, height, 300f, 30f);
-            g.Graphics.DrawString("生产商电话:0316-3456978", fontCode, brush, layoutRectangle);
+            g.Graphics.DrawString("生产商电话:"+UserInfo.phone+" 经销商电话:18210817107", new Font("宋体", 6f), brush, layoutRectangle);
 
             height += interval;
             layoutRectangle = new RectangleF(pointX, height, 300f, 30f);
             g.Graphics.DrawString("经销商地址:北京市平谷区马坊镇英城南桥东400米", fontCode, brush, layoutRectangle);
 
-            height += interval;
-            layoutRectangle = new RectangleF(pointX, height, 300f, 30f);
-            g.Graphics.DrawString("经销商电话:18210817107", fontCode, brush, layoutRectangle);
+            //height += interval;
+            //layoutRectangle = new RectangleF(pointX, height, 300f, 30f);
+            //g.Graphics.DrawString("经销商电话:18210817107", fontCode, brush, layoutRectangle);
           
         }
 

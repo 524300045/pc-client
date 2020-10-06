@@ -33,17 +33,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.pageSplit1 = new Wms.Controls.Pager.PageSplit();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnExport = new System.Windows.Forms.Button();
-            this.tbTaskCode = new System.Windows.Forms.TextBox();
-            this.tbName = new System.Windows.Forms.TextBox();
-            this.dtBegin = new System.Windows.Forms.DateTimePicker();
-            this.label4 = new System.Windows.Forms.Label();
-            this.btnQuery = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cbWave = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.packTaskCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusdes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.warehouseCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,6 +50,17 @@
             this.packageNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.deliveryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.waveName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.cbWave = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.btnExport = new System.Windows.Forms.Button();
+            this.tbTaskCode = new System.Windows.Forms.TextBox();
+            this.tbName = new System.Windows.Forms.TextBox();
+            this.dtBegin = new System.Windows.Forms.DateTimePicker();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btnQuery = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -117,8 +117,9 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -142,121 +143,10 @@
             this.dataGridView1.Location = new System.Drawing.Point(3, 22);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(1129, 406);
+            this.dataGridView1.Size = new System.Drawing.Size(1129, 410);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView1_CellPainting);
             this.dataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.cbWave);
-            this.groupBox3.Controls.Add(this.label8);
-            this.groupBox3.Controls.Add(this.btnExport);
-            this.groupBox3.Controls.Add(this.tbTaskCode);
-            this.groupBox3.Controls.Add(this.tbName);
-            this.groupBox3.Controls.Add(this.dtBegin);
-            this.groupBox3.Controls.Add(this.label4);
-            this.groupBox3.Controls.Add(this.btnQuery);
-            this.groupBox3.Controls.Add(this.label2);
-            this.groupBox3.Controls.Add(this.label1);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox3.Location = new System.Drawing.Point(3, 17);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1141, 55);
-            this.groupBox3.TabIndex = 2;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "查询条件";
-            // 
-            // btnExport
-            // 
-            this.btnExport.Location = new System.Drawing.Point(1047, 19);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(75, 23);
-            this.btnExport.TabIndex = 4;
-            this.btnExport.Text = "导出";
-            this.btnExport.UseVisualStyleBackColor = true;
-            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
-            // 
-            // tbTaskCode
-            // 
-            this.tbTaskCode.Location = new System.Drawing.Point(627, 17);
-            this.tbTaskCode.Name = "tbTaskCode";
-            this.tbTaskCode.Size = new System.Drawing.Size(141, 26);
-            this.tbTaskCode.TabIndex = 3;
-            this.tbTaskCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbTaskCode_KeyDown);
-            // 
-            // tbName
-            // 
-            this.tbName.Location = new System.Drawing.Point(369, 17);
-            this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(141, 26);
-            this.tbName.TabIndex = 3;
-            this.tbName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbName_KeyDown);
-            // 
-            // dtBegin
-            // 
-            this.dtBegin.CustomFormat = "yyyy-MM-dd";
-            this.dtBegin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtBegin.Location = new System.Drawing.Point(95, 18);
-            this.dtBegin.Name = "dtBegin";
-            this.dtBegin.Size = new System.Drawing.Size(139, 26);
-            this.dtBegin.TabIndex = 2;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(517, 23);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(112, 16);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "加工任务单号:";
-            // 
-            // btnQuery
-            // 
-            this.btnQuery.Location = new System.Drawing.Point(963, 20);
-            this.btnQuery.Name = "btnQuery";
-            this.btnQuery.Size = new System.Drawing.Size(75, 23);
-            this.btnQuery.TabIndex = 1;
-            this.btnQuery.Text = "查询";
-            this.btnQuery.UseVisualStyleBackColor = true;
-            this.btnQuery.Click += new System.EventHandler(this.btnQuery_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(240, 24);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(128, 16);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "商品编码(名称):";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 24);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 16);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "发货日期:";
-            // 
-            // cbWave
-            // 
-            this.cbWave.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbWave.FormattingEnabled = true;
-            this.cbWave.Location = new System.Drawing.Point(828, 17);
-            this.cbWave.Name = "cbWave";
-            this.cbWave.Size = new System.Drawing.Size(129, 24);
-            this.cbWave.TabIndex = 23;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(774, 23);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(48, 16);
-            this.label8.TabIndex = 22;
-            this.label8.Text = "批次:";
             // 
             // packTaskCode
             // 
@@ -389,6 +279,117 @@
             this.waveName.Name = "waveName";
             this.waveName.ReadOnly = true;
             this.waveName.Width = 65;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.cbWave);
+            this.groupBox3.Controls.Add(this.label8);
+            this.groupBox3.Controls.Add(this.btnExport);
+            this.groupBox3.Controls.Add(this.tbTaskCode);
+            this.groupBox3.Controls.Add(this.tbName);
+            this.groupBox3.Controls.Add(this.dtBegin);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Controls.Add(this.btnQuery);
+            this.groupBox3.Controls.Add(this.label2);
+            this.groupBox3.Controls.Add(this.label1);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.groupBox3.Location = new System.Drawing.Point(3, 17);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(1141, 55);
+            this.groupBox3.TabIndex = 2;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "查询条件";
+            // 
+            // cbWave
+            // 
+            this.cbWave.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbWave.FormattingEnabled = true;
+            this.cbWave.Location = new System.Drawing.Point(828, 17);
+            this.cbWave.Name = "cbWave";
+            this.cbWave.Size = new System.Drawing.Size(129, 24);
+            this.cbWave.TabIndex = 23;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(774, 23);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(48, 16);
+            this.label8.TabIndex = 22;
+            this.label8.Text = "批次:";
+            // 
+            // btnExport
+            // 
+            this.btnExport.Location = new System.Drawing.Point(1047, 19);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(75, 23);
+            this.btnExport.TabIndex = 4;
+            this.btnExport.Text = "导出";
+            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
+            // tbTaskCode
+            // 
+            this.tbTaskCode.Location = new System.Drawing.Point(627, 17);
+            this.tbTaskCode.Name = "tbTaskCode";
+            this.tbTaskCode.Size = new System.Drawing.Size(141, 26);
+            this.tbTaskCode.TabIndex = 3;
+            this.tbTaskCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbTaskCode_KeyDown);
+            // 
+            // tbName
+            // 
+            this.tbName.Location = new System.Drawing.Point(369, 17);
+            this.tbName.Name = "tbName";
+            this.tbName.Size = new System.Drawing.Size(141, 26);
+            this.tbName.TabIndex = 3;
+            this.tbName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbName_KeyDown);
+            // 
+            // dtBegin
+            // 
+            this.dtBegin.CustomFormat = "yyyy-MM-dd";
+            this.dtBegin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtBegin.Location = new System.Drawing.Point(95, 18);
+            this.dtBegin.Name = "dtBegin";
+            this.dtBegin.Size = new System.Drawing.Size(139, 26);
+            this.dtBegin.TabIndex = 2;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(517, 23);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(112, 16);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "加工任务单号:";
+            // 
+            // btnQuery
+            // 
+            this.btnQuery.Location = new System.Drawing.Point(963, 20);
+            this.btnQuery.Name = "btnQuery";
+            this.btnQuery.Size = new System.Drawing.Size(75, 23);
+            this.btnQuery.TabIndex = 1;
+            this.btnQuery.Text = "查询";
+            this.btnQuery.UseVisualStyleBackColor = true;
+            this.btnQuery.Click += new System.EventHandler(this.btnQuery_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(240, 24);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(128, 16);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "商品编码(名称):";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 24);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(80, 16);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "发货日期:";
             // 
             // PackageTaskQueryForm
             // 

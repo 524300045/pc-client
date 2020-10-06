@@ -242,7 +242,7 @@
             // pbContaierPrint
             // 
             this.pbContaierPrint.Image = ((System.Drawing.Image)(resources.GetObject("pbContaierPrint.Image")));
-            this.pbContaierPrint.Location = new System.Drawing.Point(464, 195);
+            this.pbContaierPrint.Location = new System.Drawing.Point(463, 195);
             this.pbContaierPrint.Name = "pbContaierPrint";
             this.pbContaierPrint.Size = new System.Drawing.Size(78, 69);
             this.pbContaierPrint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -404,7 +404,7 @@
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(134, 23);
             this.label15.TabIndex = 1;
-            this.label15.Text = "订单导入";
+            this.label15.Text = "托盘打印";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pbSend
@@ -516,7 +516,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1041, 504);
+            this.ClientSize = new System.Drawing.Size(1095, 504);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label6);

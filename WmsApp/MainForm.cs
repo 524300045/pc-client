@@ -278,6 +278,8 @@ namespace WmsApp
                     UserInfo.labelName = response.result.labelName;
                     UserInfo.areaName = response.result.areaName;
                     UserInfo.foodLicenseNo = response.result.foodLicenseNo;
+                    UserInfo.phone = response.result.phone == null ? "" : response.result.phone;
+                    UserInfo.address = response.result.address;
                 }
             }
 
@@ -527,6 +529,19 @@ namespace WmsApp
             if (fx == null)
             {
                 AddToFrame(new BinForm());
+            }
+            else
+            {
+                fx.Activate();
+            }
+        }
+
+        private void tsbTuoPan_Click(object sender, EventArgs e)
+        {
+            DockContent fx = FindCurrentForm("BinForm");
+            if (fx == null)
+            {
+                AddToFrame(new TuoPanPrintForm());
             }
             else
             {

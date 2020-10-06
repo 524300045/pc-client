@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbWave = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.cbStore = new System.Windows.Forms.ComboBox();
             this.cbStatus = new System.Windows.Forms.ComboBox();
             this.btnExport = new System.Windows.Forms.Button();
@@ -45,9 +47,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.pageSplit1 = new Wms.Controls.Pager.PageSplit();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.cbWave = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.packTaskCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusdes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.skuCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,6 +57,7 @@
             this.physicsUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.planNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.waveName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -81,13 +81,32 @@
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(3, 17);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1085, 83);
+            this.groupBox1.Size = new System.Drawing.Size(1094, 83);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "查询条件";
+            // 
+            // cbWave
+            // 
+            this.cbWave.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbWave.FormattingEnabled = true;
+            this.cbWave.Location = new System.Drawing.Point(382, 49);
+            this.cbWave.Name = "cbWave";
+            this.cbWave.Size = new System.Drawing.Size(141, 24);
+            this.cbWave.TabIndex = 21;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(248, 57);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(48, 16);
+            this.label8.TabIndex = 20;
+            this.label8.Text = "批次:";
             // 
             // cbStore
             // 
@@ -205,12 +224,15 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.panel1);
             this.groupBox2.Controls.Add(this.dataGridView1);
             this.groupBox2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox2.Location = new System.Drawing.Point(3, 106);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1085, 358);
+            this.groupBox2.Size = new System.Drawing.Size(1091, 358);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "明细";
@@ -221,19 +243,19 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(3, 308);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1079, 47);
+            this.panel1.Size = new System.Drawing.Size(1085, 47);
             this.panel1.TabIndex = 1;
             // 
             // pageSplit1
             // 
             this.pageSplit1.BackColor = System.Drawing.Color.LightGray;
             this.pageSplit1.Description = "";
-            this.pageSplit1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pageSplit1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pageSplit1.Location = new System.Drawing.Point(0, 0);
             this.pageSplit1.Name = "pageSplit1";
             this.pageSplit1.PageCount = 1;
             this.pageSplit1.PageNo = 1;
-            this.pageSplit1.Size = new System.Drawing.Size(1079, 47);
+            this.pageSplit1.Size = new System.Drawing.Size(1085, 47);
             this.pageSplit1.TabIndex = 1;
             this.pageSplit1.PageChanged += new System.EventHandler(this.pageSplit1_PageChanged);
             // 
@@ -241,8 +263,9 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -259,40 +282,11 @@
             this.dataGridView1.Location = new System.Drawing.Point(3, 22);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(1008, 280);
+            this.dataGridView1.Size = new System.Drawing.Size(1082, 280);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView1_CellPainting);
             this.dataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.groupBox1);
-            this.groupBox3.Controls.Add(this.groupBox2);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Location = new System.Drawing.Point(0, 0);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1100, 467);
-            this.groupBox3.TabIndex = 2;
-            this.groupBox3.TabStop = false;
-            // 
-            // cbWave
-            // 
-            this.cbWave.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbWave.FormattingEnabled = true;
-            this.cbWave.Location = new System.Drawing.Point(382, 49);
-            this.cbWave.Name = "cbWave";
-            this.cbWave.Size = new System.Drawing.Size(141, 24);
-            this.cbWave.TabIndex = 21;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(248, 57);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(48, 16);
-            this.label8.TabIndex = 20;
-            this.label8.Text = "批次:";
             // 
             // packTaskCode
             // 
@@ -372,6 +366,17 @@
             this.waveName.HeaderText = "批次";
             this.waveName.Name = "waveName";
             this.waveName.Width = 65;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.groupBox1);
+            this.groupBox3.Controls.Add(this.groupBox2);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox3.Location = new System.Drawing.Point(0, 0);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(1100, 467);
+            this.groupBox3.TabIndex = 2;
+            this.groupBox3.TabStop = false;
             // 
             // PartnerPackageTaskQueryForm
             // 

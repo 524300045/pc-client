@@ -44,7 +44,7 @@ namespace WmsApp
         {
             try
             {
-                paginator = new PaginatorDTO { PageNo = 1, PageSize = 30 };
+                paginator = new PaginatorDTO { PageNo = 1, PageSize = 50 };
                 btnQuery.Enabled = false;
                 BindDgv();
             }
@@ -123,7 +123,7 @@ namespace WmsApp
                 cbHeader.OnCheckBoxClicked += new CheckBoxClickedHandler(cbHeader_OnCheckBoxClicked);
                 dataGridView1.Columns[0].HeaderCell = cbHeader;
 
-                paginator = new PaginatorDTO { PageNo = 1, PageSize = 30 };
+                paginator = new PaginatorDTO { PageNo = 1, PageSize = 50 };
 
 
 
@@ -171,12 +171,21 @@ namespace WmsApp
         }
 
 
-        private void pd_PrintBoxPage(object sender, PrintPageEventArgs e) //触发打印事件
-        {
+        //private void pd_PrintBoxPage(object sender, PrintPageEventArgs e) //触发打印事件
+        //{
        
-                Bitmap bt = CreateQRCode(curLocationCode);
-                GetPrintPicture(bt, e);
+        //        Bitmap bt = CreateQRCode(curLocationCode);
+        //        GetPrintPicture(bt, e);
           
+
+        //}
+
+
+        private void pd_PrintBoxBatchPage(object sender, PrintPageEventArgs e) //触发打印事件
+        {
+
+
+            GetPrintBatchPicture(e);
 
         }
 
@@ -195,57 +204,103 @@ namespace WmsApp
             return writer.Write(asset);
         }
 
-  
 
-        public void GetPrintPicture(Bitmap image, PrintPageEventArgs g)
+        List<LocationsModel> locationsList = new List<LocationsModel>();
+        public void GetPrintBatchPicture(PrintPageEventArgs g)
         {
-            int x = 10;
-            int y = 100;
-            int imageY = 10;
+            int x = 80;
+            int y = 0;
+           // int imageY = 10;
 
-            String[] barCodeArr = curLocationCode.Split('-');
+            foreach (LocationsModel item in locationsList)
+            {
 
-            string bar1 = barCodeArr[0];
-            string bar2 = barCodeArr[1];
-            string bar3 = barCodeArr[2];
+                Font fontCu = new Font("宋体", 30f, FontStyle.Bold);
+                Brush brush = new SolidBrush(Color.Black);
+                g.Graphics.SmoothingMode = SmoothingMode.HighQuality;
 
-            Font fontCu = new Font("宋体", 30f, FontStyle.Bold);
-            Brush brush = new SolidBrush(Color.Black);
-            g.Graphics.SmoothingMode = SmoothingMode.HighQuality;
+                RectangleF layoutRectangle = new RectangleF(x, y, 100f, 120f);
 
-            RectangleF layoutRectangle = new RectangleF(x, y, 100f, 120f);
-            g.Graphics.DrawString(bar1, fontCu, brush, layoutRectangle);
+                Bitmap bt = CreateQRCode(item.locationCode);
+                //左上角二维码
+                Rectangle dest2Rect = new Rectangle(x, y, bt.Width, bt.Height);
+                g.Graphics.DrawImage(bt, dest2Rect, 0, 0, bt.Width, bt.Height, GraphicsUnit.Pixel);
 
-            y += 60;
-            layoutRectangle = new RectangleF(x, y, 100f, 120f);
-            g.Graphics.DrawString(bar2, fontCu, brush, layoutRectangle);
+                y = y + bt.Height-30;
 
-            y += 60;
-            layoutRectangle = new RectangleF(x, y, 100f, 120f);
-            g.Graphics.DrawString(bar3, fontCu, brush, layoutRectangle);
+                layoutRectangle = new RectangleF(x+20, y, 300f, 120f);
+                g.Graphics.DrawString(item.locationCode, new Font("宋体", 22f, FontStyle.Bold), brush, layoutRectangle);
 
+                //层
 
-            //左上角二维码
-            Rectangle dest2Rect = new Rectangle(x + 80, imageY, image.Width, image.Height);
-            g.Graphics.DrawImage(image, dest2Rect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel);
+                layoutRectangle = new RectangleF(x + bt.Width, y -250, 300f, 120f);
+                g.Graphics.DrawString(item.layerNo+"层", new Font("宋体", 24f, FontStyle.Bold), brush, layoutRectangle);
 
+                layoutRectangle = new RectangleF(x + bt.Width, y - 200, 300f, 120f);
+                g.Graphics.DrawString(item.colNo + "列", new Font("宋体", 22f, FontStyle.Bold), brush, layoutRectangle);
 
-            layoutRectangle = new RectangleF(x + 150, imageY + image.Height - 30, 300f, 120f);
-            g.Graphics.DrawString(curLocationCode, new Font("宋体", 22f, FontStyle.Bold), brush, layoutRectangle);
-
-            //绘制线
-            //Pen Pen = new Pen(Brushes.Black, 1);
-            //Point p1 = new Point(0, 520);
-            //Point p2 = new Point(1400, 520);
-            //g.Graphics.DrawLine(Pen, p1, p2);
+                layoutRectangle = new RectangleF(x + bt.Width, y - 150, 300f, 120f);
+                g.Graphics.DrawString(item.areaCode + "区", new Font("宋体", 22f, FontStyle.Bold), brush, layoutRectangle);
+                y +=100;
+            }
 
 
-            //Point p3 = new Point(700, 0);
-            //Point p4 = new Point(700, 1400);
-            //g.Graphics.DrawLine(Pen, p3, p4);
+            locationsList.Clear();
+         
 
 
         }
+  
+
+        //public void GetPrintPicture(Bitmap image, PrintPageEventArgs g)
+        //{
+        //    int x = 10;
+        //    int y = 100;
+        //    int imageY = 10;
+
+        //    String[] barCodeArr = curLocationCode.Split('-');
+
+        //    //string bar1 = barCodeArr[0];
+        //    //string bar2 = barCodeArr[1];
+        //    //string bar3 = barCodeArr[2];
+
+        //    Font fontCu = new Font("宋体", 30f, FontStyle.Bold);
+        //    Brush brush = new SolidBrush(Color.Black);
+        //    g.Graphics.SmoothingMode = SmoothingMode.HighQuality;
+
+        //    RectangleF layoutRectangle = new RectangleF(x, y, 100f, 120f);
+        //    g.Graphics.DrawString("curLocationCode", fontCu, brush, layoutRectangle);
+
+        //    y += 60;
+        //    layoutRectangle = new RectangleF(x, y, 100f, 120f);
+        //    g.Graphics.DrawString("curLocationCode", fontCu, brush, layoutRectangle);
+
+        //    y += 60;
+        //    layoutRectangle = new RectangleF(x, y, 100f, 120f);
+        //    g.Graphics.DrawString(curLocationCode, fontCu, brush, layoutRectangle);
+
+
+        //    //左上角二维码
+        //    Rectangle dest2Rect = new Rectangle(x + 80, imageY, image.Width, image.Height);
+        //    g.Graphics.DrawImage(image, dest2Rect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel);
+
+
+        //    layoutRectangle = new RectangleF(x + 150, imageY + image.Height - 30, 300f, 120f);
+        //    g.Graphics.DrawString(curLocationCode, new Font("宋体", 22f, FontStyle.Bold), brush, layoutRectangle);
+
+        //    //绘制线
+        //    //Pen Pen = new Pen(Brushes.Black, 1);
+        //    //Point p1 = new Point(0, 520);
+        //    //Point p2 = new Point(1400, 520);
+        //    //g.Graphics.DrawLine(Pen, p1, p2);
+
+
+        //    //Point p3 = new Point(700, 0);
+        //    //Point p4 = new Point(700, 1400);
+        //    //g.Graphics.DrawLine(Pen, p3, p4);
+
+
+        //}
 
         private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
@@ -260,12 +315,10 @@ namespace WmsApp
             e.Graphics.DrawString(rowIdx, this.Font, SystemBrushes.ControlText, headerBounds, centerFormat);
         }
 
-        string curLocationCode = "";
+
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-
             int m = 0;
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
@@ -280,22 +333,73 @@ namespace WmsApp
                 return;
             }
 
+              List<LocationsModel> curlocationsList =new List<LocationsModel>();
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
                 if ((bool)dataGridView1.Rows[i].Cells[0].EditedFormattedValue == true)
                 {
-                    curLocationCode = this.dataGridView1.Rows[i].Cells["locationCode"].Value.ToString();
+                    LocationsModel locationsModel = new LocationsModel();
+                    string curLocationCode = this.dataGridView1.Rows[i].Cells["locationCode"].Value.ToString();
+                    string layer = this.dataGridView1.Rows[i].Cells["layerNo"].Value.ToString();
+                    string colno = this.dataGridView1.Rows[i].Cells["colNo"].Value.ToString();
+
+                    string areaCode = this.dataGridView1.Rows[i].Cells["areaCode"].Value.ToString();
+                    locationsModel.locationCode = curLocationCode;
+                    locationsModel.layerNo = layer;
+                    locationsModel.colNo = colno;
+                    locationsModel.areaCode = areaCode;
+                    curlocationsList.Add(locationsModel);
+                }
+            }
+
+            
+            int mn = 1;
+            for (int i = 0; i < curlocationsList.Count; i++)
+            {
+                locationsList.Add(curlocationsList[i]);
+
+                if (i == curlocationsList.Count - 1)
+                {
+                  
 
                     PrintDocument document = new PrintDocument();
                     document.DefaultPageSettings.PaperSize = new PaperSize("Custum", 500, 400);
 
 #if(!DEBUG)
                                 PrintDialog dialog = new PrintDialog();
-                                document.PrintPage += new PrintPageEventHandler(this.pd_PrintBoxPage);
+                                document.PrintPage += new PrintPageEventHandler(this.pd_PrintBoxBatchPage);
                                 dialog.Document = document;
 #else
                     PrintPreviewDialog dialog = new PrintPreviewDialog();
-                    document.PrintPage += new PrintPageEventHandler(this.pd_PrintBoxPage);
+                    document.PrintPage += new PrintPageEventHandler(this.pd_PrintBoxBatchPage);
+                    dialog.Document = document;
+#endif
+
+                    try
+                    {
+                        document.Print();
+                    }
+                    catch (Exception exception)
+                    {
+                        MessageBox.Show("打印异常" + exception);
+                        document.PrintController.OnEndPrint(document, new PrintEventArgs());
+                    }
+                    break;
+                }
+                if (mn % 3 == 0)
+                {
+          
+
+                    PrintDocument document = new PrintDocument();
+                    document.DefaultPageSettings.PaperSize = new PaperSize("Custum", 500, 400);
+
+#if(!DEBUG)
+                                PrintDialog dialog = new PrintDialog();
+                                document.PrintPage += new PrintPageEventHandler(this.pd_PrintBoxBatchPage);
+                                dialog.Document = document;
+#else
+                    PrintPreviewDialog dialog = new PrintPreviewDialog();
+                    document.PrintPage += new PrintPageEventHandler(this.pd_PrintBoxBatchPage);
                     dialog.Document = document;
 #endif
 
@@ -309,9 +413,12 @@ namespace WmsApp
                         document.PrintController.OnEndPrint(document, new PrintEventArgs());
                     }
                 }
+                else
+                {
+                    
+                }
+                mn+=1;
             }
-         
-
 
         }
 

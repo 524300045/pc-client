@@ -56,6 +56,7 @@
             this.tsbSecondSend = new System.Windows.Forms.ToolStripButton();
             this.tsbStore = new System.Windows.Forms.ToolStripButton();
             this.tsbBin = new System.Windows.Forms.ToolStripButton();
+            this.tsbTuoPan = new System.Windows.Forms.ToolStripButton();
             this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -89,10 +90,11 @@
             this.tsbSend,
             this.tsbSecondSend,
             this.tsbStore,
-            this.tsbBin});
+            this.tsbBin,
+            this.tsbTuoPan});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1370, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(1028, 27);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -334,6 +336,16 @@
             this.tsbBin.Text = "货位打印";
             this.tsbBin.Click += new System.EventHandler(this.tsbBin_Click);
             // 
+            // tsbTuoPan
+            // 
+            this.tsbTuoPan.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbTuoPan.Image = ((System.Drawing.Image)(resources.GetObject("tsbTuoPan.Image")));
+            this.tsbTuoPan.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbTuoPan.Name = "tsbTuoPan";
+            this.tsbTuoPan.Size = new System.Drawing.Size(93, 24);
+            this.tsbTuoPan.Text = "托盘打印";
+            this.tsbTuoPan.Click += new System.EventHandler(this.tsbTuoPan_Click);
+            // 
             // dockPanel1
             // 
             this.dockPanel1.ActiveAutoHideContent = null;
@@ -343,22 +355,20 @@
             this.dockPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.dockPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dockPanel1.Location = new System.Drawing.Point(0, 27);
-            this.dockPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.dockPanel1.Name = "dockPanel1";
-            this.dockPanel1.Size = new System.Drawing.Size(1370, 492);
+            this.dockPanel1.Size = new System.Drawing.Size(1028, 362);
             this.dockPanel1.TabIndex = 18;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1370, 519);
+            this.ClientSize = new System.Drawing.Size(1028, 389);
             this.Controls.Add(this.dockPanel1);
             this.Controls.Add(this.toolStrip1);
-            this.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
             this.Text = "供应商协同生产系统";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -400,6 +410,7 @@
         private System.Windows.Forms.ToolStripButton tsbSecondSend;
         private System.Windows.Forms.ToolStripButton tsbStore;
         private System.Windows.Forms.ToolStripButton tsbBin;
+        private System.Windows.Forms.ToolStripButton tsbTuoPan;
     }
 }
 

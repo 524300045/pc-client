@@ -28,5 +28,7 @@ namespace WmsSDK.Request
 
          [JsonProperty("pageSize")]
          public int pageSize;
+
+
     }
 }

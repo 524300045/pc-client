@@ -529,5 +529,10 @@ namespace WmsApp.Order
             this.ccbWave.SetTitleText(selectText);
         }
 
+        private void dgv_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
     }
 }
