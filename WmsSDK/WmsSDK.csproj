@@ -136,6 +136,7 @@
     <Compile Include="Request\PreprocessInfoRequest.cs" />
     <Compile Include="Request\ProductWorkShopRequest.cs" />
     <Compile Include="Request\StoreInfoRequest.cs" />
+    <Compile Include="Request\WareAreaRequest.cs" />
     <Compile Include="Request\WarehouseAreaRequest.cs" />
     <Compile Include="Request\WarehouseInfoRequest.cs" />
     <Compile Include="Request\WarehouseWorkGroupRequest.cs" />
@@ -165,6 +166,7 @@
     <Compile Include="Response\PartnerResponse.cs" />
     <Compile Include="Response\PreprocessInfoResponse.cs" />
     <Compile Include="Response\ProductWorkShopResponse.cs" />
+    <Compile Include="Response\WareAreaResponse.cs" />
     <Compile Include="Response\StoreInfoResponse.cs" />
     <Compile Include="Response\WarehouseAreaResponse.cs" />
     <Compile Include="Response\WarehouseInfoResponse.cs" />

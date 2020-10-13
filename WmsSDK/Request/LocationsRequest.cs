@@ -29,6 +29,20 @@ namespace WmsSDK.Request
          [JsonProperty("pageSize")]
          public int pageSize;
 
+         public String path { get; set; }
+
+
+         public String layerNo { get; set; }
+
+
+         public String colNo { get; set; }
+
+
+         public String sourceTypeCode { get; set; }
+
+
+         public String typeCode { get; set; }
+
 
     }
 }

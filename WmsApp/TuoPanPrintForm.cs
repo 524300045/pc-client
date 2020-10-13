@@ -117,6 +117,8 @@ namespace WmsApp
             request.areaCode = areaCode;
             request.locationName = tbName.Text.Trim();
             request.page = paginator.PageNo;
+            request.sourceTypeCode = "20";
+            request.typeCode = "20";
 
             LocationsResponse response = client.Execute(request);
 

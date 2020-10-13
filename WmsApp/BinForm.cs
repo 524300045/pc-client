@@ -35,9 +35,28 @@ namespace WmsApp
         {
             InitializeComponent();
             client = new DefalutWMSClient();
-
         }
 
+
+        private void bindWareArea()
+        {
+            WareAreaRequest request = new WareAreaRequest();
+            request.warehouseCode = UserInfo.WareHouseCode;
+            WareAreaResponse response = client.Execute(request);
+            if (!response.IsError)
+            {
+                if (response.result != null)
+                {
+                    List<AreaModel> areaList = new List<AreaModel>();
+                    areaList = response.result;
+                    areaList.Insert(0, new AreaModel() { areaCode = "", areaName = "全部" });
+                    cbArea.DataSource = areaList;
+                    cbArea.DisplayMember = "areaName";
+                    cbArea.ValueMember = "areaCode";
+
+                }
+            }
+        }
 
 
         private void btnQuery_Click(object sender, EventArgs e)
@@ -74,6 +93,9 @@ namespace WmsApp
             request.areaCode = areaCode;
             request.locationName = tbName.Text.Trim();
             request.page = paginator.PageNo;
+            request.layerNo = tbLayerno.Text.Trim();
+            request.colNo = tbCol.Text.Trim();
+            request.path = tbPath.Text.Trim();
 
             LocationsResponse response = client.Execute(request);
 
@@ -84,7 +106,7 @@ namespace WmsApp
                 {
 
                     this.dataGridView1.DataSource = null;
-                    MessageBox.Show("没有打印任务!");
+                    MessageBox.Show("没有获取到数据!");
                     return;
                 }
 
@@ -125,16 +147,16 @@ namespace WmsApp
 
                 paginator = new PaginatorDTO { PageNo = 1, PageSize = 50 };
 
+                bindWareArea();
 
-
-                List<WarehouseArea> list = new List<WarehouseArea>();
-                list.Add(new WarehouseArea() { areaCode = "A", areaName = "A" });
-                list.Add(new WarehouseArea() { areaCode = "B", areaName = "B" });
-                list.Add(new WarehouseArea() { areaCode = "AB", areaName = "AB" });
-                list.Insert(0, new WarehouseArea() { areaCode = "", areaName = "全部" });
-                cbArea.DataSource = list;
-                cbArea.DisplayMember = "areaName";
-                cbArea.ValueMember = "areaCode";
+                //List<WarehouseArea> list = new List<WarehouseArea>();
+                //list.Add(new WarehouseArea() { areaCode = "A", areaName = "A" });
+                //list.Add(new WarehouseArea() { areaCode = "B", areaName = "B" });
+                //list.Add(new WarehouseArea() { areaCode = "AB", areaName = "AB" });
+                //list.Insert(0, new WarehouseArea() { areaCode = "", areaName = "全部" });
+                //cbArea.DataSource = list;
+                //cbArea.DisplayMember = "areaName";
+                //cbArea.ValueMember = "areaCode";
 
                 BindDgv();
 
@@ -228,19 +250,27 @@ namespace WmsApp
 
                 y = y + bt.Height-30;
 
-                layoutRectangle = new RectangleF(x+20, y, 300f, 120f);
-                g.Graphics.DrawString(item.locationCode, new Font("宋体", 22f, FontStyle.Bold), brush, layoutRectangle);
+                layoutRectangle = new RectangleF(x+80, y, 300f, 120f);
+                g.Graphics.DrawString(item.locationCode, new Font("宋体", 24f, FontStyle.Bold), brush, layoutRectangle);
 
                 //层
-
-                layoutRectangle = new RectangleF(x + bt.Width, y -250, 300f, 120f);
-                g.Graphics.DrawString(item.layerNo+"层", new Font("宋体", 24f, FontStyle.Bold), brush, layoutRectangle);
+                //区
+                layoutRectangle = new RectangleF(x + bt.Width, y - 250, 300f, 120f);
+                g.Graphics.DrawString(item.areaCode + "区", new Font("宋体", 24f, FontStyle.Bold), brush, layoutRectangle);
 
                 layoutRectangle = new RectangleF(x + bt.Width, y - 200, 300f, 120f);
-                g.Graphics.DrawString(item.colNo + "列", new Font("宋体", 22f, FontStyle.Bold), brush, layoutRectangle);
+                g.Graphics.DrawString(item.path + "排", new Font("宋体", 22f, FontStyle.Bold), brush, layoutRectangle);
 
                 layoutRectangle = new RectangleF(x + bt.Width, y - 150, 300f, 120f);
-                g.Graphics.DrawString(item.areaCode + "区", new Font("宋体", 22f, FontStyle.Bold), brush, layoutRectangle);
+                g.Graphics.DrawString(item.colNo + "列", new Font("宋体", 22f, FontStyle.Bold), brush, layoutRectangle);
+
+                layoutRectangle = new RectangleF(x + bt.Width, y -100, 300f, 120f);
+                g.Graphics.DrawString(item.layerNo+"层", new Font("宋体", 24f, FontStyle.Bold), brush, layoutRectangle);
+
+            
+
+                //layoutRectangle = new RectangleF(x + bt.Width, y - 150, 300f, 120f);
+                //g.Graphics.DrawString(item.areaCode + "区", new Font("宋体", 22f, FontStyle.Bold), brush, layoutRectangle);
                 y +=100;
             }
 
@@ -342,12 +372,13 @@ namespace WmsApp
                     string curLocationCode = this.dataGridView1.Rows[i].Cells["locationCode"].Value.ToString();
                     string layer = this.dataGridView1.Rows[i].Cells["layerNo"].Value.ToString();
                     string colno = this.dataGridView1.Rows[i].Cells["colNo"].Value.ToString();
-
+                    string path = this.dataGridView1.Rows[i].Cells["path"].Value.ToString();
                     string areaCode = this.dataGridView1.Rows[i].Cells["areaCode"].Value.ToString();
                     locationsModel.locationCode = curLocationCode;
                     locationsModel.layerNo = layer;
                     locationsModel.colNo = colno;
                     locationsModel.areaCode = areaCode;
+                    locationsModel.path = path;
                     curlocationsList.Add(locationsModel);
                 }
             }

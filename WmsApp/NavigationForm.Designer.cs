@@ -284,7 +284,7 @@
             // pbExit
             // 
             this.pbExit.Image = ((System.Drawing.Image)(resources.GetObject("pbExit.Image")));
-            this.pbExit.Location = new System.Drawing.Point(735, 334);
+            this.pbExit.Location = new System.Drawing.Point(874, 334);
             this.pbExit.Name = "pbExit";
             this.pbExit.Size = new System.Drawing.Size(78, 69);
             this.pbExit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -295,7 +295,7 @@
             // pbCloseAll
             // 
             this.pbCloseAll.Image = ((System.Drawing.Image)(resources.GetObject("pbCloseAll.Image")));
-            this.pbCloseAll.Location = new System.Drawing.Point(464, 334);
+            this.pbCloseAll.Location = new System.Drawing.Point(603, 334);
             this.pbCloseAll.Name = "pbCloseAll";
             this.pbCloseAll.Size = new System.Drawing.Size(78, 69);
             this.pbCloseAll.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -306,7 +306,7 @@
             // label10
             // 
             this.label10.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label10.Location = new System.Drawing.Point(713, 406);
+            this.label10.Location = new System.Drawing.Point(852, 406);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(111, 23);
             this.label10.TabIndex = 1;
@@ -316,7 +316,7 @@
             // label13
             // 
             this.label13.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label13.Location = new System.Drawing.Point(462, 406);
+            this.label13.Location = new System.Drawing.Point(601, 406);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(91, 23);
             this.label13.TabIndex = 1;
@@ -389,7 +389,7 @@
             // pbOrderImport
             // 
             this.pbOrderImport.Image = ((System.Drawing.Image)(resources.GetObject("pbOrderImport.Image")));
-            this.pbOrderImport.Location = new System.Drawing.Point(870, 55);
+            this.pbOrderImport.Location = new System.Drawing.Point(459, 334);
             this.pbOrderImport.Name = "pbOrderImport";
             this.pbOrderImport.Size = new System.Drawing.Size(78, 69);
             this.pbOrderImport.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -400,7 +400,7 @@
             // label15
             // 
             this.label15.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label15.Location = new System.Drawing.Point(845, 127);
+            this.label15.Location = new System.Drawing.Point(434, 406);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(134, 23);
             this.label15.TabIndex = 1;
@@ -431,7 +431,7 @@
             // pbLogin
             // 
             this.pbLogin.Image = ((System.Drawing.Image)(resources.GetObject("pbLogin.Image")));
-            this.pbLogin.Location = new System.Drawing.Point(601, 334);
+            this.pbLogin.Location = new System.Drawing.Point(740, 334);
             this.pbLogin.Name = "pbLogin";
             this.pbLogin.Size = new System.Drawing.Size(78, 69);
             this.pbLogin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -442,7 +442,7 @@
             // label17
             // 
             this.label17.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label17.Location = new System.Drawing.Point(585, 406);
+            this.label17.Location = new System.Drawing.Point(724, 406);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(111, 23);
             this.label17.TabIndex = 1;

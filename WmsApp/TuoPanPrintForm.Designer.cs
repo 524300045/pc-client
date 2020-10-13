@@ -30,14 +30,14 @@
         {
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.chk = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.locationCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pageSplit1 = new Wms.Controls.Pager.PageSplit();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnQuery = new System.Windows.Forms.Button();
             this.tbName = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.chk = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.locationCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -48,9 +48,9 @@
             this.groupBox2.Controls.Add(this.dataGridView1);
             this.groupBox2.Controls.Add(this.pageSplit1);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(0, 71);
+            this.groupBox2.Location = new System.Drawing.Point(0, 55);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1234, 430);
+            this.groupBox2.Size = new System.Drawing.Size(1234, 446);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             // 
@@ -65,16 +65,28 @@
             this.dataGridView1.Location = new System.Drawing.Point(3, 17);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(1228, 376);
+            this.dataGridView1.Size = new System.Drawing.Size(1228, 392);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
+            // 
+            // chk
+            // 
+            this.chk.HeaderText = "选择";
+            this.chk.Name = "chk";
+            // 
+            // locationCode
+            // 
+            this.locationCode.DataPropertyName = "locationCode";
+            this.locationCode.HeaderText = "托盘";
+            this.locationCode.Name = "locationCode";
+            this.locationCode.ReadOnly = true;
             // 
             // pageSplit1
             // 
             this.pageSplit1.BackColor = System.Drawing.Color.LightGray;
             this.pageSplit1.Description = "";
             this.pageSplit1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pageSplit1.Location = new System.Drawing.Point(3, 393);
+            this.pageSplit1.Location = new System.Drawing.Point(3, 409);
             this.pageSplit1.Name = "pageSplit1";
             this.pageSplit1.PageCount = 1;
             this.pageSplit1.PageNo = 1;
@@ -91,14 +103,14 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1234, 71);
+            this.groupBox1.Size = new System.Drawing.Size(1234, 55);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "查询条件";
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(407, 20);
+            this.btnPrint.Location = new System.Drawing.Point(435, 20);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(75, 23);
             this.btnPrint.TabIndex = 3;
@@ -108,7 +120,7 @@
             // 
             // btnQuery
             // 
-            this.btnQuery.Location = new System.Drawing.Point(298, 20);
+            this.btnQuery.Location = new System.Drawing.Point(320, 18);
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(75, 23);
             this.btnQuery.TabIndex = 3;
@@ -131,18 +143,6 @@
             this.label4.Size = new System.Drawing.Size(35, 12);
             this.label4.TabIndex = 0;
             this.label4.Text = "托盘:";
-            // 
-            // chk
-            // 
-            this.chk.HeaderText = "选择";
-            this.chk.Name = "chk";
-            // 
-            // locationCode
-            // 
-            this.locationCode.DataPropertyName = "locationCode";
-            this.locationCode.HeaderText = "托盘";
-            this.locationCode.Name = "locationCode";
-            this.locationCode.ReadOnly = true;
             // 
             // TuoPanPrintForm
             // 

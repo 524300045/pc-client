@@ -343,6 +343,7 @@
             this.tsbTuoPan.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbTuoPan.Name = "tsbTuoPan";
             this.tsbTuoPan.Size = new System.Drawing.Size(93, 24);
+            this.tsbTuoPan.Tag = "RE00135";
             this.tsbTuoPan.Text = "托盘打印";
             this.tsbTuoPan.Click += new System.EventHandler(this.tsbTuoPan_Click);
             // 

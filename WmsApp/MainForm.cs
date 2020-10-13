@@ -538,7 +538,7 @@ namespace WmsApp
 
         private void tsbTuoPan_Click(object sender, EventArgs e)
         {
-            DockContent fx = FindCurrentForm("BinForm");
+            DockContent fx = FindCurrentForm("TuoPanPrintForm");
             if (fx == null)
             {
                 AddToFrame(new TuoPanPrintForm());
