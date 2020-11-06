@@ -69,6 +69,8 @@
             this.label19 = new System.Windows.Forms.Label();
             this.pbBin = new System.Windows.Forms.PictureBox();
             this.label20 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label21 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbOrderPackage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbGoodsPackage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBoxPrint)).BeginInit();
@@ -89,6 +91,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbSecondSend)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbStoreInfo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // pbOrderPackage
@@ -473,7 +476,7 @@
             // pbStoreInfo
             // 
             this.pbStoreInfo.Image = ((System.Drawing.Image)(resources.GetObject("pbStoreInfo.Image")));
-            this.pbStoreInfo.Location = new System.Drawing.Point(202, 334);
+            this.pbStoreInfo.Location = new System.Drawing.Point(865, 55);
             this.pbStoreInfo.Name = "pbStoreInfo";
             this.pbStoreInfo.Size = new System.Drawing.Size(78, 69);
             this.pbStoreInfo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -484,7 +487,7 @@
             // label19
             // 
             this.label19.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label19.Location = new System.Drawing.Point(200, 406);
+            this.label19.Location = new System.Drawing.Point(863, 127);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(91, 23);
             this.label19.TabIndex = 1;
@@ -512,6 +515,27 @@
             this.label20.Text = "货位打印";
             this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(207, 334);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(78, 69);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // label21
+            // 
+            this.label21.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label21.Location = new System.Drawing.Point(185, 406);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(111, 23);
+            this.label21.TabIndex = 1;
+            this.label21.Text = "周转筐码打印";
+            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // NavigationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -533,6 +557,7 @@
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label17);
+            this.Controls.Add(this.label21);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label7);
@@ -552,6 +577,7 @@
             this.Controls.Add(this.pbSendPrint);
             this.Controls.Add(this.pbContaierPrint);
             this.Controls.Add(this.pbLogin);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pbBin);
             this.Controls.Add(this.pbExit);
             this.Controls.Add(this.pbGoodsPackage);
@@ -579,6 +605,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbSecondSend)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbStoreInfo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -625,6 +652,8 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.PictureBox pbBin;
         private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label21;
 
     }
 }

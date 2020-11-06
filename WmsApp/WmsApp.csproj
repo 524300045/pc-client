@@ -74,6 +74,18 @@
     <Compile Include="BinForm.Designer.cs">
       <DependentUpon>BinForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PrintTurnBoxStoreForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintTurnBoxStoreForm.Designer.cs">
+      <DependentUpon>PrintTurnBoxStoreForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TurnOverBoxForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TurnOverBoxForm.Designer.cs">
+      <DependentUpon>TurnOverBoxForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TuoPanPrintForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -289,6 +301,12 @@
     </Compile>
     <EmbeddedResource Include="BinForm.resx">
       <DependentUpon>BinForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintTurnBoxStoreForm.resx">
+      <DependentUpon>PrintTurnBoxStoreForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TurnOverBoxForm.resx">
+      <DependentUpon>TurnOverBoxForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TuoPanPrintForm.resx">
       <DependentUpon>TuoPanPrintForm.cs</DependentUpon>

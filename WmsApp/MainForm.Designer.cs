@@ -58,6 +58,7 @@
             this.tsbBin = new System.Windows.Forms.ToolStripButton();
             this.tsbTuoPan = new System.Windows.Forms.ToolStripButton();
             this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
+            this.tsb_turnoverbox = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -91,7 +92,8 @@
             this.tsbSecondSend,
             this.tsbStore,
             this.tsbBin,
-            this.tsbTuoPan});
+            this.tsbTuoPan,
+            this.tsb_turnoverbox});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1028, 27);
@@ -360,6 +362,17 @@
             this.dockPanel1.Size = new System.Drawing.Size(1028, 362);
             this.dockPanel1.TabIndex = 18;
             // 
+            // tsb_turnoverbox
+            // 
+            this.tsb_turnoverbox.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsb_turnoverbox.Image = ((System.Drawing.Image)(resources.GetObject("tsb_turnoverbox.Image")));
+            this.tsb_turnoverbox.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsb_turnoverbox.Name = "tsb_turnoverbox";
+            this.tsb_turnoverbox.Size = new System.Drawing.Size(133, 24);
+            this.tsb_turnoverbox.Tag = "RE00135";
+            this.tsb_turnoverbox.Text = "周转筐码打印";
+            this.tsb_turnoverbox.Click += new System.EventHandler(this.tsb_turnoverbox_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -412,6 +425,7 @@
         private System.Windows.Forms.ToolStripButton tsbStore;
         private System.Windows.Forms.ToolStripButton tsbBin;
         private System.Windows.Forms.ToolStripButton tsbTuoPan;
+        private System.Windows.Forms.ToolStripButton tsb_turnoverbox;
     }
 }
 

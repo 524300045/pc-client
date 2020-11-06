@@ -61,5 +61,15 @@ namespace WmsSDK.Model
         public string waveCode { get; set; }
 
         public string waveName { get; set; }
+
+        /// <summary>
+        /// 配送日期
+        /// </summary>
+        public string deliveryDate { get; set; }
+
+        /// <summary>
+        /// 生产日期
+        /// </summary>
+        public string productionDate { get; set; }
     }
 }

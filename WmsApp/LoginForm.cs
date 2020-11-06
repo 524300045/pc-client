@@ -101,7 +101,7 @@ namespace WmsApp
                 #if(!DEBUG)
                 string result = PostMoths("http://api.bjkalf.net/services/user/checkAndGetUserResource", json);
 #else
-             //   string result = PostMoths("http://test.api.portal.bjshengeng.com/services/user/checkAndGetUserResource", json);
+               //string result = PostMoths("http://test.api.portal.bjshengeng.com/services/user/checkAndGetUserResource", json);
 
                 string result = PostMoths("http://api.bjkalf.net/services/user/checkAndGetUserResource", json);
 #endif

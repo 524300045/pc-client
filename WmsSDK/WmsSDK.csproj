@@ -73,6 +73,8 @@
     <Compile Include="Model\AreaModel.cs" />
     <Compile Include="Model\BinModel.cs" />
     <Compile Include="Model\BomRelationModel.cs" />
+    <Compile Include="Model\WmsTurnBoxAdd.cs" />
+    <Compile Include="Model\TurnOverBox.cs" />
     <Compile Include="Model\BoxInfoAdd.cs" />
     <Compile Include="Model\BoxInfo.cs" />
     <Compile Include="Model\Container.cs" />
@@ -106,8 +108,10 @@
     <Compile Include="PageUtil.cs" />
     <Compile Include="PaginatorDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Request\TurnBoxAddRequest.cs" />
     <Compile Include="Request\BoxInfoAddRequest.cs" />
     <Compile Include="Request\BomRelationRequest.cs" />
+    <Compile Include="Request\TurnOverBoxRequest.cs" />
     <Compile Include="Request\BoxInfoRequest.cs" />
     <Compile Include="Request\CustomerGoodsBySkuRequest.cs" />
     <Compile Include="Request\CustomerPrintConfigRequest.cs" />
@@ -143,6 +147,8 @@
     <Compile Include="Request\WaveCustomerStoreRequest.cs" />
     <Compile Include="Response\BomRelationResponse.cs" />
     <Compile Include="Response\BoxInfoAddResponse.cs" />
+    <Compile Include="Response\TurnInfoResponse.cs" />
+    <Compile Include="Response\TurnOverBoxResponse.cs" />
     <Compile Include="Response\BoxInfoResponse.cs" />
     <Compile Include="Response\ContainerResponse.cs" />
     <Compile Include="Response\CustomerGoodsBySkuResponse.cs" />

@@ -247,5 +247,10 @@ namespace WmsApp
         {
             OpenForm("tsbBin"); 
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            OpenForm("tsb_turnoverbox"); 
+        }
     }
 }

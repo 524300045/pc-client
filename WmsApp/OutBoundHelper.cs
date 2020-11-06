@@ -1599,11 +1599,12 @@ namespace WmsApp
                 //}
            
  
-                if (list[m].customerTaxPrice==null)
-                {
-                    list[m].customerTaxPrice = list[m].taxPrice;
-                }
-                arrGridText[i, 6] = list[m].customerTaxPrice.ToString("f2");
+                //if (list[m].customerTaxPrice==null)
+                //{
+                //    list[m].customerTaxPrice = list[m].taxPrice * list[m].changeNum;
+                //}
+                //arrGridText[i, 6] = list[m].customerTaxPrice.ToString("f2");
+                arrGridText[i, 6] = (list[m].taxPrice * list[m].changeNum).ToString("f2");
                 arrGridText[i,7] = (list[m].taxPrice * list[m].deliveryNum).ToString("f2");
                 m = m + 1;
             }

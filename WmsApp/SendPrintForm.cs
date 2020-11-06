@@ -438,7 +438,8 @@ namespace WmsApp
                             //青年餐厅
                             PrintQingNian(item);
                         }
-                        else if (UserInfo.CustomerCode == "43001" || UserInfo.CustomerCode == "49001")
+                        else if (UserInfo.CustomerCode == "43001" || UserInfo.CustomerCode == "49001"
+                             || UserInfo.CustomerCode == "50013")
                         {
                             //胖哥俩
                             PrintPangGeLiang(item);
@@ -457,6 +458,10 @@ namespace WmsApp
                         {
                             //鱼味馆
                             PrintYuWeiGuan(item);
+                        }
+                        else if (UserInfo.CustomerCode=="50009")
+                        {
+                            PrintShuXiaoHe(item);
                         }
                         else
                         {
@@ -512,6 +517,50 @@ namespace WmsApp
             orderPrint.Print();
 
               // orderPrint.Preview();
+#else
+            //orderPrint.Preview(); 
+            orderPrint.Print();
+#endif
+
+
+            }
+        }
+
+
+        private void PrintShuXiaoHe(string taskCode)
+        {
+
+
+            OutBoundDetailPrintRequest request = new OutBoundDetailPrintRequest();
+            request.outboundTaskCode = taskCode;
+            request.printMan = UserInfo.UserName;
+            request.updateUser = UserInfo.UserName;
+            OutBoundPrintDetailResponse response = client.Execute(request);
+            if (!response.IsError)
+            {
+                List<ShipMentDetailVo> detaiList = response.result.detailList;
+
+                detaiList = detaiList.OrderBy(p=>p.skuCode).ToList();
+                OutBoundPrintModel outBoundPrint = response.result;
+
+                OutBoundPrint orderPrint = new OutBoundPrint(false, new Margins(10, 10, 1, 1));
+                orderPrint.RowsPerPage = 22;
+                Image barcode = Code128Rendering.GetCodeAorBImg(taskCode, 70, 1, true);
+                orderPrint.BarCode = OutBoundHelper.BuildBarCode(response.result.remark + "送货单", 1, null);
+                orderPrint.Header = OutBoundHelper.BuildHeader(outBoundPrint);
+                orderPrint.MultiHeader1 = OutBoundHelper.BuildMultiHeader();
+                string[,] arr = OutBoundHelper.ToArrFromList(detaiList);
+                orderPrint.Body1 = OutBoundHelper.BuildArriveBody(arr);
+                orderPrint.Bottom = OutBoundHelper.BuildBottom(response.result.companyAddress, UserInfo.RealName);
+                orderPrint.Footer = OutBoundHelper.BuildFooter();
+
+                // orderPrint.PrintDocument.DefaultPageSettings.PaperSize = new PaperSize("Custum", 2400, 2800);
+                orderPrint.PrintDocument.PrinterSettings.PrinterName = cbPrinter.Text;
+#if DEBUG
+
+                orderPrint.Print();
+
+                // orderPrint.Preview();
 #else
             //orderPrint.Preview(); 
             orderPrint.Print();

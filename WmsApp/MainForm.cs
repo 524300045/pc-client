@@ -549,6 +549,24 @@ namespace WmsApp
             }
         }
 
+        /// <summary>
+        /// 周转筐打印
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsb_turnoverbox_Click(object sender, EventArgs e)
+        {
+
+            DockContent fx = FindCurrentForm("TurnOverBoxForm");
+            if (fx == null)
+            {
+                AddToFrame(new TurnOverBoxForm());
+            }
+            else
+            {
+                fx.Activate();
+            }
+        }
 
     }
 }
