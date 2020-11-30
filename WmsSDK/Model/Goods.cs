@@ -87,8 +87,8 @@ namespace WmsSDK.Model
            [JsonProperty("abcClass")]
            public String abcClass { get; set; }
         /** 启用日期 */
-           [JsonProperty("enableDate")]
-           public DateTime enableDate { get; set; }
+           //[JsonProperty("enableDate")]
+           //public DateTime enableDate { get; set; }
         /** 启用停用标识:1：是 0：否 */
            [JsonProperty("enabled")]
            public int enabled { get; set; }
@@ -96,14 +96,14 @@ namespace WmsSDK.Model
            [JsonProperty("gbCode")]
            public String gbCode { get; set; }
         /** 创建时间 */
-           [JsonProperty("createTime")]
-           public DateTime createTime { get; set; }
+           //[JsonProperty("createTime")]
+           //public DateTime createTime { get; set; }
         /** 创建人 */
            [JsonProperty("createUser")]
            public String createUser { get; set; }
         /** 更新时间 */
-           [JsonProperty("updateTime")]
-           public DateTime updateTime { get; set; }
+           //[JsonProperty("updateTime")]
+           //public DateTime updateTime { get; set; }
         /** 更新人 */
            [JsonProperty("updateUser")]
            public String updateUser { get; set; }
@@ -161,5 +161,14 @@ namespace WmsSDK.Model
 
               [JsonProperty("customerSkuCode")]
                 public String customerSkuCode { get; set; }
+
+              public int? goodsType { get; set; }
+
+              public String weighedDes { get; set; }
+
+              public String GoodsTypeDes { get; set; }
+
+              public Double expiryDate { get; set; }
+
     }
 }
