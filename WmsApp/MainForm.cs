@@ -568,5 +568,36 @@ namespace WmsApp
             }
         }
 
+        private void tsbFrozenCaij_Click(object sender, EventArgs e)
+        {
+            DockContent fx = FindCurrentForm("FrozenCaiJiForm");
+            if (fx == null)
+            {
+                AddToFrame(new FrozenCaiJiForm());
+            }
+            else
+            {
+                fx.Activate();
+            }
+        }
+
+        /// <summary>
+        /// 冻货入库查询
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbInboundQuery_Click(object sender, EventArgs e)
+        {
+            DockContent fx = FindCurrentForm("InboundQueryForm");
+            if (fx == null)
+            {
+                AddToFrame(new InboundQueryForm());
+            }
+            else
+            {
+                fx.Activate();
+            }
+        }
+
     }
 }

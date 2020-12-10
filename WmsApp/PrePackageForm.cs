@@ -2929,12 +2929,7 @@ namespace WmsApp
 
                 Rectangle destRect = new Rectangle(160, -15, image.Width, image.Height);
                 g.Graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel);
-                //heightRight =image.Width-20;
-
-                //layoutRectangleRight = new RectangleF(155, heightRight, 150f, 85f);
-                //g.Graphics.DrawString(UserInfo.CompanyName, font, brush, layoutRectangleRight);
-
-             //   heightRight += 40;
+               
 
                 //流通号
                 layoutRectangleRight = new RectangleF(pointX, 45, 300f, 85f);
@@ -2974,10 +2969,7 @@ namespace WmsApp
                 }
                 else
                 {
-                    // g.Graphics.DrawString("1" + goods.physicsUnit+"/"+goods.modelNum+goods.goodsUnit, fontCu, brush, layoutRectangle);
-                    // g.Graphics.DrawString(goods.goodsModel, fontCu, brush, layoutRectangle);
                     g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit, fontCu, brush, layoutRectangle);
-                    // g.Graphics.DrawString(int.Parse(goods.modelNum.ToString()) + goods.goodsUnit, fontCu, brush, layoutRectangle);
                 }
 
 
@@ -2986,12 +2978,7 @@ namespace WmsApp
                 Rectangle dest2Rect = new Rectangle(pointX,85, image.Width, image.Height);
                 g.Graphics.DrawImage(image, dest2Rect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel);
 
-                //height = 65 + image.Height;
-
-                //Font fontCode = new Font("宋体", 8f);
-
-                //layoutRectangle = new RectangleF(pointX, height, 150f, 30f);
-                //g.Graphics.DrawString(preprocessInfo.preprocessCode, fontCode, brush, layoutRectangle);
+       
 
 
                 //货主
@@ -3017,6 +3004,10 @@ namespace WmsApp
                 Font fontCode = new Font("宋体", 8f);
                 layoutRectangle = new RectangleF(pointX + image.Width, 126, 150f, 30f);
                 g.Graphics.DrawString(preprocessInfo.preprocessCode, fontCode, brush, layoutRectangle);
+
+                
+                layoutRectangle = new RectangleF(pointX + image.Width, 136, 150f, 30f);
+                g.Graphics.DrawString("非即食", fontCode, brush, layoutRectangle);
 
 
             }

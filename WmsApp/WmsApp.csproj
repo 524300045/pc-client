@@ -68,11 +68,41 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FrozenCaiJiForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrozenCaiJiForm.Designer.cs">
+      <DependentUpon>FrozenCaiJiForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="BinForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="BinForm.Designer.cs">
       <DependentUpon>BinForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrozenNumPrintForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrozenNumPrintForm.Designer.cs">
+      <DependentUpon>FrozenNumPrintForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrozenPrintForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrozenPrintForm.Designer.cs">
+      <DependentUpon>FrozenPrintForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InboundPrintForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InboundPrintForm.Designer.cs">
+      <DependentUpon>InboundPrintForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InboundQueryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InboundQueryForm.Designer.cs">
+      <DependentUpon>InboundQueryForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PrintTurnBoxStoreForm.cs">
       <SubType>Form</SubType>
@@ -299,8 +329,23 @@
     <Compile Include="TabWindow.designer.cs">
       <DependentUpon>TabWindow.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="FrozenCaiJiForm.resx">
+      <DependentUpon>FrozenCaiJiForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BinForm.resx">
       <DependentUpon>BinForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrozenNumPrintForm.resx">
+      <DependentUpon>FrozenNumPrintForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrozenPrintForm.resx">
+      <DependentUpon>FrozenPrintForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InboundPrintForm.resx">
+      <DependentUpon>InboundPrintForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InboundQueryForm.resx">
+      <DependentUpon>InboundQueryForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PrintTurnBoxStoreForm.resx">
       <DependentUpon>PrintTurnBoxStoreForm.cs</DependentUpon>

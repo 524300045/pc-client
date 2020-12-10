@@ -58,16 +58,24 @@ namespace WmsApp
                         {
                             if (((ToolStripButton)tsItem).Name == toolButtonName)
                             {
-                                var curResult = subMenu.Where(p => p.subMenuCode == ((ToolStripButton)tsItem).Tag.ToString());
-                                if (curResult == null || curResult.FirstOrDefault()==null)
+                                if (((ToolStripButton)tsItem).Tag == null)
                                 {
-                                    MessageBox.Show("你无权操作当前菜单!");
+                                    ((ToolStripButton)tsItem).PerformClick();
                                 }
                                 else
                                 {
+                                    var curResult = subMenu.Where(p => p.subMenuCode == ((ToolStripButton)tsItem).Tag.ToString());
+                                    if (curResult == null || curResult.FirstOrDefault() == null)
+                                    {
+                                        MessageBox.Show("你无权操作当前菜单!");
+                                    }
+                                    else
+                                    {
 
-                                    ((ToolStripButton)tsItem).PerformClick();
+                                        ((ToolStripButton)tsItem).PerformClick();
+                                    }
                                 }
+                               
                               
                             }
 
@@ -251,6 +259,31 @@ namespace WmsApp
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             OpenForm("tsb_turnoverbox"); 
+        }
+
+        /// <summary>
+        /// 冻货采集
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pbFrozenCaiJi_Click(object sender, EventArgs e)
+        {
+            OpenForm("tsbFrozenCaij"); 
+        }
+
+        private void NavigationForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// 冻货入库查询
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void frozenInbound_Click(object sender, EventArgs e)
+        {
+            OpenForm("tsbInboundQuery"); 
         }
     }
 }

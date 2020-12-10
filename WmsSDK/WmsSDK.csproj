@@ -73,6 +73,7 @@
     <Compile Include="Model\AreaModel.cs" />
     <Compile Include="Model\BinModel.cs" />
     <Compile Include="Model\BomRelationModel.cs" />
+    <Compile Include="Model\InBoundDetailModel.cs" />
     <Compile Include="Model\WmsFrozenBoxCode.cs" />
     <Compile Include="Model\WmsTurnBoxAdd.cs" />
     <Compile Include="Model\TurnOverBox.cs" />
@@ -111,6 +112,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Request\GoodsFrozenRequest.cs" />
     <Compile Include="Request\FrozenBoxCodeRequest.cs" />
+    <Compile Include="Request\InBoundDetailRequest.cs" />
     <Compile Include="Request\WmsFrozenBoxCodeRequest.cs" />
     <Compile Include="Request\TurnBoxAddRequest.cs" />
     <Compile Include="Request\BoxInfoAddRequest.cs" />
@@ -153,6 +155,7 @@
     <Compile Include="Response\BoxInfoAddResponse.cs" />
     <Compile Include="Response\GoodsFrozenResponse.cs" />
     <Compile Include="Response\FrozenBoxCodeResponse.cs" />
+    <Compile Include="Response\InBoundDetailResponse.cs" />
     <Compile Include="Response\WmsFrozenBoxCodeResponse.cs" />
     <Compile Include="Response\TurnInfoResponse.cs" />
     <Compile Include="Response\TurnOverBoxResponse.cs" />

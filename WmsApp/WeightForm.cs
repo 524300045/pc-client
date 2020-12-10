@@ -2319,6 +2319,9 @@ namespace WmsApp
                 layoutRectangle = new RectangleF(pointX + image.Width, 126, 150f, 30f);
                 g.Graphics.DrawString(curPackageCode, fontCode, brush, layoutRectangle);
 
+                layoutRectangle = new RectangleF(pointX + image.Width, 136, 150f, 30f);
+                g.Graphics.DrawString("非即食", fontCode, brush, layoutRectangle);
+
             }
             else
             {
