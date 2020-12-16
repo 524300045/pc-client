@@ -599,5 +599,19 @@ namespace WmsApp
             }
         }
 
+        //套装打印
+        private void tsbSuit_Click(object sender, EventArgs e)
+        {
+            DockContent fx = FindCurrentForm("SuitPrintForm");
+            if (fx == null)
+            {
+                AddToFrame(new SuitPrintForm());
+            }
+            else
+            {
+                fx.Activate();
+            }
+        }
+
     }
 }

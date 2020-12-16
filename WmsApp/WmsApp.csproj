@@ -68,6 +68,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SuitDateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SuitDateForm.Designer.cs">
+      <DependentUpon>SuitDateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SuitPrintForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SuitPrintForm.Designer.cs">
+      <DependentUpon>SuitPrintForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrozenCaiJiForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -329,6 +341,12 @@
     <Compile Include="TabWindow.designer.cs">
       <DependentUpon>TabWindow.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SuitDateForm.resx">
+      <DependentUpon>SuitDateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SuitPrintForm.resx">
+      <DependentUpon>SuitPrintForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrozenCaiJiForm.resx">
       <DependentUpon>FrozenCaiJiForm.cs</DependentUpon>
     </EmbeddedResource>

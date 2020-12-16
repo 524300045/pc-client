@@ -285,5 +285,10 @@ namespace WmsApp
         {
             OpenForm("tsbInboundQuery"); 
         }
+
+        private void pbSuitCaiJi_Click(object sender, EventArgs e)
+        {
+            OpenForm("tsbSuit"); 
+        }
     }
 }

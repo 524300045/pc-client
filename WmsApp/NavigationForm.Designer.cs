@@ -75,6 +75,8 @@
             this.label22 = new System.Windows.Forms.Label();
             this.frozenInbound = new System.Windows.Forms.PictureBox();
             this.label23 = new System.Windows.Forms.Label();
+            this.pbSuitCaiJi = new System.Windows.Forms.PictureBox();
+            this.label24 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbOrderPackage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbGoodsPackage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBoxPrint)).BeginInit();
@@ -98,6 +100,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbFrozenCaiJi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.frozenInbound)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSuitCaiJi)).BeginInit();
             this.SuspendLayout();
             // 
             // pbOrderPackage
@@ -584,6 +587,27 @@
             this.label23.Text = "冻货入库查询";
             this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // pbSuitCaiJi
+            // 
+            this.pbSuitCaiJi.Image = ((System.Drawing.Image)(resources.GetObject("pbSuitCaiJi.Image")));
+            this.pbSuitCaiJi.Location = new System.Drawing.Point(1007, 55);
+            this.pbSuitCaiJi.Name = "pbSuitCaiJi";
+            this.pbSuitCaiJi.Size = new System.Drawing.Size(78, 69);
+            this.pbSuitCaiJi.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbSuitCaiJi.TabIndex = 0;
+            this.pbSuitCaiJi.TabStop = false;
+            this.pbSuitCaiJi.Click += new System.EventHandler(this.pbSuitCaiJi_Click);
+            // 
+            // label24
+            // 
+            this.label24.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label24.Location = new System.Drawing.Point(1005, 127);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(91, 23);
+            this.label24.TabIndex = 1;
+            this.label24.Text = "套装打印";
+            this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // NavigationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -597,6 +621,7 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label13);
+            this.Controls.Add(this.label24);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.label3);
@@ -620,6 +645,7 @@
             this.Controls.Add(this.pbTaskQuery);
             this.Controls.Add(this.pbPackageDetail);
             this.Controls.Add(this.pbCloseAll);
+            this.Controls.Add(this.pbSuitCaiJi);
             this.Controls.Add(this.pbStoreInfo);
             this.Controls.Add(this.pbSecondSend);
             this.Controls.Add(this.pbBoxPrint);
@@ -661,6 +687,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbFrozenCaiJi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.frozenInbound)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSuitCaiJi)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -713,6 +740,8 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.PictureBox frozenInbound;
         private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.PictureBox pbSuitCaiJi;
+        private System.Windows.Forms.Label label24;
 
     }
 }

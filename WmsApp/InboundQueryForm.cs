@@ -71,6 +71,10 @@ namespace WmsApp
                 }
                 for (int i = 0; i < response.result.Count; i++)
                 {
+                    if (response.result[i].modelNum==null||response.result[i].modelNum==0)
+                    {
+                        response.result[i].modelNum = 1;
+                    }
                     response.result[i].boxNum = response.result[i].realityNum / response.result[i].modelNum;
                 }
                 int recordCount = response.pageUtil.totalRow;
