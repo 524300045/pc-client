@@ -744,7 +744,7 @@ namespace WmsApp
 
                 height += 15;
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
-                g.Graphics.DrawString("KH:YHY", new Font("宋体", 8f), brush, layoutRectangleRight);
+                g.Graphics.DrawString("KH:YHY   非即食", new Font("宋体", 8f), brush, layoutRectangleRight);
 
                 height += 15;
                 //门店
@@ -947,7 +947,7 @@ namespace WmsApp
                 //重量
                 layoutRectangle = new RectangleF(pointX, height, 125f, 40f);
 
-                g.Graphics.DrawString(curWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
+                g.Graphics.DrawString(curWeight.ToString("f2") + "斤  非即食", fontCu, brush, layoutRectangle);
 
 
 
@@ -1286,7 +1286,7 @@ namespace WmsApp
 
                 layoutRectangle = new RectangleF(pointX, height, 125f, 40f);
 
-                g.Graphics.DrawString(curWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
+                g.Graphics.DrawString(curWeight.ToString("f2") + "斤  非即食", fontCu, brush, layoutRectangle);
 
 
 
@@ -1381,7 +1381,7 @@ namespace WmsApp
 
                 layoutRectangle = new RectangleF(pointX, height, 125f, 40f);
 
-                g.Graphics.DrawString(curWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
+                g.Graphics.DrawString(curWeight.ToString("f2") + "斤  非即食", fontCu, brush, layoutRectangle);
 
 
 
@@ -1470,7 +1470,7 @@ namespace WmsApp
 
                 layoutRectangle = new RectangleF(pointX, height, 125f, 40f);
 
-                g.Graphics.DrawString(curWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
+                g.Graphics.DrawString(curWeight.ToString("f2") + "斤  非即食", fontCu, brush, layoutRectangle);
 
 
 
@@ -1565,7 +1565,7 @@ namespace WmsApp
 
                 layoutRectangle = new RectangleF(pointX, height, 125f, 40f);
 
-                g.Graphics.DrawString(curWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
+                g.Graphics.DrawString(curWeight.ToString("f2") + "斤  非即食", fontCu, brush, layoutRectangle);
 
 
 
@@ -1830,7 +1830,7 @@ namespace WmsApp
 
                 layoutRectangle = new RectangleF(pointX, height, 125f, 40f);
 
-                g.Graphics.DrawString(curWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
+                g.Graphics.DrawString(curWeight.ToString("f2") + "斤   非即食", fontCu, brush, layoutRectangle);
 
 
                 double day = 0;
@@ -2060,7 +2060,7 @@ namespace WmsApp
 
                 layoutRectangle = new RectangleF(pointX, height, 125f, 40f);
 
-                g.Graphics.DrawString((curWeight/2).ToString("f2") + "KG", fontCu, brush, layoutRectangle);
+                g.Graphics.DrawString((curWeight / 2).ToString("f2") + "KG  非即食", fontCu, brush, layoutRectangle);
 
 
 
@@ -2595,7 +2595,7 @@ namespace WmsApp
                 //重量
 
                 layoutRectangle = new RectangleF(pointX, height - 10, 120f, 40f);
-                g.Graphics.DrawString(curWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
+                g.Graphics.DrawString(curWeight.ToString("f2") + "斤   非即食", fontCu, brush, layoutRectangle);
                 height += 13;
 
                 //货主
@@ -2767,7 +2767,7 @@ namespace WmsApp
                 //重量
 
                 layoutRectangle = new RectangleF(pointX, height - 10, 120f, 40f);
-                g.Graphics.DrawString(curWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
+                g.Graphics.DrawString(curWeight.ToString("f2") + "斤   非即食", fontCu, brush, layoutRectangle);
 
                 height += interval + 13;
 
@@ -2947,7 +2947,7 @@ namespace WmsApp
                 //重量
 
                 layoutRectangle = new RectangleF(pointX, height - 10, 120f, 40f);
-                g.Graphics.DrawString(curWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
+                g.Graphics.DrawString(curWeight.ToString("f2") + "斤   非即食", fontCu, brush, layoutRectangle);
 
                 height += interval + 13;
 

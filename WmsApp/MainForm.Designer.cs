@@ -60,8 +60,9 @@
             this.tsb_turnoverbox = new System.Windows.Forms.ToolStripButton();
             this.tsbFrozenCaij = new System.Windows.Forms.ToolStripButton();
             this.tsbInboundQuery = new System.Windows.Forms.ToolStripButton();
-            this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.tsbSuit = new System.Windows.Forms.ToolStripButton();
+            this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
+            this.tsbYangChu = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -99,7 +100,8 @@
             this.tsb_turnoverbox,
             this.tsbFrozenCaij,
             this.tsbInboundQuery,
-            this.tsbSuit});
+            this.tsbSuit,
+            this.tsbYangChu});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1028, 27);
@@ -386,6 +388,16 @@
             this.tsbInboundQuery.Text = "冻货入库查询";
             this.tsbInboundQuery.Click += new System.EventHandler(this.tsbInboundQuery_Click);
             // 
+            // tsbSuit
+            // 
+            this.tsbSuit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbSuit.Image = ((System.Drawing.Image)(resources.GetObject("tsbSuit.Image")));
+            this.tsbSuit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSuit.Name = "tsbSuit";
+            this.tsbSuit.Size = new System.Drawing.Size(93, 24);
+            this.tsbSuit.Text = "套装打印";
+            this.tsbSuit.Click += new System.EventHandler(this.tsbSuit_Click);
+            // 
             // dockPanel1
             // 
             this.dockPanel1.ActiveAutoHideContent = null;
@@ -399,15 +411,15 @@
             this.dockPanel1.Size = new System.Drawing.Size(1028, 362);
             this.dockPanel1.TabIndex = 18;
             // 
-            // tsbSuit
+            // tsbYangChu
             // 
-            this.tsbSuit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbSuit.Image = ((System.Drawing.Image)(resources.GetObject("tsbSuit.Image")));
-            this.tsbSuit.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbSuit.Name = "tsbSuit";
-            this.tsbSuit.Size = new System.Drawing.Size(93, 24);
-            this.tsbSuit.Text = "套装打印";
-            this.tsbSuit.Click += new System.EventHandler(this.tsbSuit_Click);
+            this.tsbYangChu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbYangChu.Image = ((System.Drawing.Image)(resources.GetObject("tsbYangChu.Image")));
+            this.tsbYangChu.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbYangChu.Name = "tsbYangChu";
+            this.tsbYangChu.Size = new System.Drawing.Size(93, 24);
+            this.tsbYangChu.Text = "央厨套装";
+            this.tsbYangChu.Click += new System.EventHandler(this.tsbYangChu_Click);
             // 
             // MainForm
             // 
@@ -465,6 +477,7 @@
         private System.Windows.Forms.ToolStripButton tsbFrozenCaij;
         private System.Windows.Forms.ToolStripButton tsbInboundQuery;
         private System.Windows.Forms.ToolStripButton tsbSuit;
+        private System.Windows.Forms.ToolStripButton tsbYangChu;
     }
 }
 

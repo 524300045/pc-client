@@ -613,5 +613,19 @@ namespace WmsApp
             }
         }
 
+        private void tsbYangChu_Click(object sender, EventArgs e)
+        {
+            
+ DockContent fx = FindCurrentForm("YangChuSuitPrintForm");
+            if (fx == null)
+            {
+                AddToFrame(new YangChuSuitPrintForm());
+            }
+            else
+            {
+                fx.Activate();
+            }
+
+        }
     }
 }

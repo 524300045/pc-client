@@ -68,11 +68,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="YangChuSuitDateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YangChuSuitDateForm.Designer.cs">
+      <DependentUpon>YangChuSuitDateForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SuitDateForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SuitDateForm.Designer.cs">
       <DependentUpon>SuitDateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YangChuSuitPrintForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YangChuSuitPrintForm.Designer.cs">
+      <DependentUpon>YangChuSuitPrintForm.cs</DependentUpon>
     </Compile>
     <Compile Include="SuitPrintForm.cs">
       <SubType>Form</SubType>
@@ -341,8 +353,14 @@
     <Compile Include="TabWindow.designer.cs">
       <DependentUpon>TabWindow.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="YangChuSuitDateForm.resx">
+      <DependentUpon>YangChuSuitDateForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SuitDateForm.resx">
       <DependentUpon>SuitDateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YangChuSuitPrintForm.resx">
+      <DependentUpon>YangChuSuitPrintForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SuitPrintForm.resx">
       <DependentUpon>SuitPrintForm.cs</DependentUpon>

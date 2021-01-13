@@ -77,6 +77,8 @@
             this.label23 = new System.Windows.Forms.Label();
             this.pbSuitCaiJi = new System.Windows.Forms.PictureBox();
             this.label24 = new System.Windows.Forms.Label();
+            this.pbYangChu = new System.Windows.Forms.PictureBox();
+            this.label25 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbOrderPackage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbGoodsPackage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBoxPrint)).BeginInit();
@@ -101,6 +103,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbFrozenCaiJi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.frozenInbound)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSuitCaiJi)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbYangChu)).BeginInit();
             this.SuspendLayout();
             // 
             // pbOrderPackage
@@ -608,11 +611,32 @@
             this.label24.Text = "套装打印";
             this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // pbYangChu
+            // 
+            this.pbYangChu.Image = ((System.Drawing.Image)(resources.GetObject("pbYangChu.Image")));
+            this.pbYangChu.Location = new System.Drawing.Point(1129, 55);
+            this.pbYangChu.Name = "pbYangChu";
+            this.pbYangChu.Size = new System.Drawing.Size(78, 69);
+            this.pbYangChu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbYangChu.TabIndex = 0;
+            this.pbYangChu.TabStop = false;
+            this.pbYangChu.Click += new System.EventHandler(this.pbYangChu_Click);
+            // 
+            // label25
+            // 
+            this.label25.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label25.Location = new System.Drawing.Point(1127, 127);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(91, 23);
+            this.label25.TabIndex = 1;
+            this.label25.Text = "央厨套装";
+            this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // NavigationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1178, 504);
+            this.ClientSize = new System.Drawing.Size(1219, 504);
             this.Controls.Add(this.label23);
             this.Controls.Add(this.label22);
             this.Controls.Add(this.label15);
@@ -621,6 +645,7 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label13);
+            this.Controls.Add(this.label25);
             this.Controls.Add(this.label24);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.label18);
@@ -645,6 +670,7 @@
             this.Controls.Add(this.pbTaskQuery);
             this.Controls.Add(this.pbPackageDetail);
             this.Controls.Add(this.pbCloseAll);
+            this.Controls.Add(this.pbYangChu);
             this.Controls.Add(this.pbSuitCaiJi);
             this.Controls.Add(this.pbStoreInfo);
             this.Controls.Add(this.pbSecondSend);
@@ -688,6 +714,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbFrozenCaiJi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.frozenInbound)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSuitCaiJi)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbYangChu)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -742,6 +769,7 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.PictureBox pbSuitCaiJi;
         private System.Windows.Forms.Label label24;
-
+        private System.Windows.Forms.PictureBox pbYangChu;
+        private System.Windows.Forms.Label label25;
     }
 }

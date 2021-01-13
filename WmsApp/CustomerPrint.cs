@@ -182,14 +182,14 @@ namespace WmsApp
                     {
                         //小于1KG,显示为g
                         decimal curG = curWeight * 500;
-                        g.Graphics.DrawString(curG.ToString("f2").TrimEnd('0').TrimEnd('.') + "g", fontCu, brush, layoutRectangle);
+                        g.Graphics.DrawString(curG.ToString("f2").TrimEnd('0').TrimEnd('.') + "g   非即食", fontCu, brush, layoutRectangle);
                     }
                     else
                     {
                         //大于1kg，显示为kg
                         decimal curValue = 0.5m;
                         decimal cugKg = curWeight * curValue;
-                        g.Graphics.DrawString(cugKg.ToString("f2").TrimEnd('0').TrimEnd('.') + "kg", fontCu, brush, layoutRectangle);
+                        g.Graphics.DrawString(cugKg.ToString("f2").TrimEnd('0').TrimEnd('.') + "kg   非即食", fontCu, brush, layoutRectangle);
                     }
 
                    // g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
@@ -200,7 +200,7 @@ namespace WmsApp
                 }
                 else
                 {
-                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit, fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit + "   非即食", fontCu, brush, layoutRectangle);
 
                     if (goods.skuCode!="112405")
                     {
@@ -298,8 +298,10 @@ namespace WmsApp
                 height += 15;
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                 g.Graphics.DrawString("地址:北京平谷区马坊镇英城南桥东400米", new Font("宋体", 8f), brush, layoutRectangleRight);
-              
-              
+
+                //height += 15;
+                //layoutRectangle = new RectangleF(pointX, height, 150f, 30f);
+                //g.Graphics.DrawString("非即食", new Font("宋体", 8f), brush, layoutRectangle);
 
 
                 #endregion
@@ -391,6 +393,10 @@ namespace WmsApp
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                 g.Graphics.DrawString("地址:北京平谷区马坊镇英城南桥东400米", new Font("宋体", 8f), brush, layoutRectangleRight);
 
+                height += 15;
+                layoutRectangle = new RectangleF(pointX, height, 150f, 30f);
+                g.Graphics.DrawString("非即食", new Font("宋体", 8f), brush, layoutRectangle);
+
                 #endregion
             }
         }
@@ -480,12 +486,12 @@ namespace WmsApp
 
                 if (goods.weighed == 1)
                 {
-                    g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤   非即食", fontCu, brush, layoutRectangle);
 
                 }
                 else
                 {
-                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit + "   " + goods.goodsModel, new Font("宋体", 8f), brush, layoutRectangle);
+                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit + "   " + goods.goodsModel + "   非即食", new Font("宋体", 8f), brush, layoutRectangle);
 
              
                 }
@@ -543,6 +549,9 @@ namespace WmsApp
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                 g.Graphics.DrawString("地址:北京平谷区马坊镇英城南桥东400米", new Font("宋体", 8f), brush, layoutRectangleRight);
 
+                //height += 15;
+                //layoutRectangle = new RectangleF(pointX, height, 150f, 30f);
+                //g.Graphics.DrawString("非即食", new Font("宋体", 8f), brush, layoutRectangle);
 
 
 
@@ -583,11 +592,11 @@ namespace WmsApp
 
                 if (goods.weighed == 1)
                 {
-                    g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤  非即食", fontCu, brush, layoutRectangle);
                 }
                 else
                 {
-                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit + "  " + goods.goodsModel, new Font("宋体", 8f), brush, layoutRectangle);
+                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit + "  " + goods.goodsModel + "  非即食", new Font("宋体", 8f), brush, layoutRectangle);
 
                     //height += 15;
                     //layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
@@ -637,6 +646,10 @@ namespace WmsApp
                 height += 13;
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                 g.Graphics.DrawString("地址:北京平谷区马坊镇英城南桥东400米", new Font("宋体", 8f), brush, layoutRectangleRight);
+
+                //height += 15;
+                //layoutRectangle = new RectangleF(pointX, height, 150f, 30f);
+                //g.Graphics.DrawString("非即食", new Font("宋体", 8f), brush, layoutRectangle);
 
                 #endregion
             }

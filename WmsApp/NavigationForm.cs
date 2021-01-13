@@ -290,5 +290,10 @@ namespace WmsApp
         {
             OpenForm("tsbSuit"); 
         }
+
+        private void pbYangChu_Click(object sender, EventArgs e)
+        {
+            OpenForm("tsbYangChu");
+        }
     }
 }

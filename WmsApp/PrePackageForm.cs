@@ -1876,11 +1876,11 @@ namespace WmsApp
 
                 if (goods.weighed == 1)
                 {
-                    g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤   非即食", fontCu, brush, layoutRectangle);
                 }
                 else
                 {
-                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit, fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit + "   非即食", fontCu, brush, layoutRectangle);
                 }
 
                 height +=15;
@@ -1913,11 +1913,12 @@ namespace WmsApp
                     layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                     g.Graphics.DrawString(preprocessInfo.preprocessCode, fontCode, brush, layoutRectangleRight);
 
-                height +=20;
-                layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
+           
              //   g.Graphics.DrawString("食品经营许可证号：JY11117051464030", new Font("宋体", 10f), brush, layoutRectangleRight);
                 if (UserInfo.foodLicenseNo!=null&&UserInfo.foodLicenseNo!="")
                 {
+                    height += 20;
+                    layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                      g.Graphics.DrawString("食品经营许可证号:"+UserInfo.foodLicenseNo, new Font("宋体", 8f), brush, layoutRectangleRight);
                 }
 
@@ -1936,16 +1937,20 @@ namespace WmsApp
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                 g.Graphics.DrawString("经销商:" + (string.IsNullOrWhiteSpace(UserInfo.labelName) ? UserInfo.PartnerName : UserInfo.labelName), new Font("宋体", 8f), brush, layoutRectangleRight);
 
-                height += 15;
+             
                 if (UserInfo.CustomerCode == "11001")
                 {
                     if (goods != null && !string.IsNullOrWhiteSpace(goods.foodWay))
                     {
+                        height += 15;
                         layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                         g.Graphics.DrawString("" + goods.foodWay, new Font("宋体", 8f), brush, layoutRectangleRight);
                     }
                 }
-             
+
+                //height += 15;
+                //layoutRectangle = new RectangleF(pointX, height, 150f, 30f);
+                //g.Graphics.DrawString("非即食", fontCode, brush, layoutRectangle);
 
                 #endregion
             }
@@ -1984,11 +1989,11 @@ namespace WmsApp
 
                 if (goods.weighed == 1)
                 {
-                    g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤    非即食", fontCu, brush, layoutRectangle);
                 }
                 else
                 {
-                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit, fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit + "    非即食", fontCu, brush, layoutRectangle);
                 }
 
                 height += 20;
@@ -2027,17 +2032,20 @@ namespace WmsApp
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                 g.Graphics.DrawString("经销商:" + (string.IsNullOrWhiteSpace(UserInfo.labelName) ? UserInfo.PartnerName : UserInfo.labelName), new Font("宋体", 8f), brush, layoutRectangleRight);
 
-                height += 15;
+                
                 if (UserInfo.CustomerCode == "11001")
                 {
                     if (goods != null && !string.IsNullOrWhiteSpace(goods.foodWay))
                     {
+                        height += 15;
                         layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                         g.Graphics.DrawString("" + goods.foodWay, new Font("宋体", 8f), brush, layoutRectangleRight);
                     }
                 }
-              
-            
+
+                //height += 15;
+                //layoutRectangle = new RectangleF(pointX, height, 150f, 30f);
+                //g.Graphics.DrawString("非即食", fontCode, brush, layoutRectangle);
 
                 #endregion
             }
@@ -2082,11 +2090,11 @@ namespace WmsApp
 
                 if (goods.weighed == 1)
                 {
-                    g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤  非即食", fontCu, brush, layoutRectangle);
                 }
                 else
                 {
-                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit, fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit + "  非即食", fontCu, brush, layoutRectangle);
                 }
 
                 height += 15;
@@ -2144,16 +2152,20 @@ namespace WmsApp
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                 g.Graphics.DrawString("经销商:" + (string.IsNullOrWhiteSpace(UserInfo.labelName) ? UserInfo.PartnerName : UserInfo.labelName), new Font("宋体", 8f), brush, layoutRectangleRight);
 
-                height += 15;
+        
                 if (UserInfo.CustomerCode == "11001")
                 {
                     if (goods != null && !string.IsNullOrWhiteSpace(goods.foodWay))
                     {
+                        height += 15;
                         layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                         g.Graphics.DrawString("" + goods.foodWay, new Font("宋体", 8f), brush, layoutRectangleRight);
                     }
                 }
 
+                //height += 15;
+                //layoutRectangle = new RectangleF(pointX, height, 150f, 30f);
+                //g.Graphics.DrawString("非即食", fontCode, brush, layoutRectangle);
 
                 #endregion
             }
@@ -2192,11 +2204,11 @@ namespace WmsApp
 
                 if (goods.weighed == 1)
                 {
-                    g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤   非即食", fontCu, brush, layoutRectangle);
                 }
                 else
                 {
-                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit, fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit + "   非即食", fontCu, brush, layoutRectangle);
                 }
 
                 height += 20;
@@ -2235,16 +2247,19 @@ namespace WmsApp
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                 g.Graphics.DrawString("经销商:" + (string.IsNullOrWhiteSpace(UserInfo.labelName) ? UserInfo.PartnerName : UserInfo.labelName), new Font("宋体", 8f), brush, layoutRectangleRight);
 
-                height += 15;
+         
                 if (UserInfo.CustomerCode == "11001")
                 {
                     if (goods != null && !string.IsNullOrWhiteSpace(goods.foodWay))
                     {
+                        height += 15;
                         layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                         g.Graphics.DrawString("" + goods.foodWay, new Font("宋体", 8f), brush, layoutRectangleRight);
                     }
                 }
-
+                //height += 15;
+                //layoutRectangle = new RectangleF(pointX, height, 150f, 30f);
+                //g.Graphics.DrawString("非即食", fontCode, brush, layoutRectangle);
 
 
                 #endregion
@@ -2492,11 +2507,11 @@ namespace WmsApp
 
                 if (goods.weighed == 1)
                 {
-                    g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤   非即食", fontCu, brush, layoutRectangle);
                 }
                 else
                 {
-                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit, fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit + "   非即食", fontCu, brush, layoutRectangle);
                 }
 
                 String baozhiqiStr = "";
@@ -2575,6 +2590,10 @@ namespace WmsApp
                 g.Graphics.DrawString("地址:北京市平谷区马坊镇英城南桥东400米路南", new Font("宋体", 8f), brush, layoutRectangleRight);
 
                 //height += 15;
+                //layoutRectangle = new RectangleF(pointX, height, 150f, 30f);
+                //g.Graphics.DrawString("非即食", new Font("宋体", 8f), brush, layoutRectangle);
+
+                //height += 15;
                 //layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                 //g.Graphics.DrawString("电话:010-89958567", new Font("宋体", 8f), brush, layoutRectangleRight);
 
@@ -2615,11 +2634,11 @@ namespace WmsApp
 
                 if (goods.weighed == 1)
                 {
-                    g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤   非即食", fontCu, brush, layoutRectangle);
                 }
                 else
                 {
-                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit, fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit + "   非即食", fontCu, brush, layoutRectangle);
                 }
 
                 height +=15;
@@ -2684,6 +2703,10 @@ namespace WmsApp
                 g.Graphics.DrawString("地址:北京市平谷区马坊镇英城南桥东400米路南", new Font("宋体", 8f), brush, layoutRectangleRight);
 
                 //height += 15;
+                //layoutRectangle = new RectangleF(pointX, height, 150f, 30f);
+                //g.Graphics.DrawString("非即食",  new Font("宋体", 8f), brush, layoutRectangle);
+
+                //height += 15;
                 //layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                 //g.Graphics.DrawString("电话:010-89958567", new Font("宋体", 8f), brush, layoutRectangleRight);
 
@@ -2729,11 +2752,11 @@ namespace WmsApp
 
                 if (goods.weighed == 1)
                 {
-                    g.Graphics.DrawString((preprocessInfo.packWeight/2).ToString("f2") + "KG", fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString((preprocessInfo.packWeight / 2).ToString("f2") + "KG   非即食", fontCu, brush, layoutRectangle);
                 }
                 else
                 {
-                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit, fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit + "   非即食", fontCu, brush, layoutRectangle);
                 }
 
                 height += 15;
@@ -2798,16 +2821,20 @@ namespace WmsApp
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                 g.Graphics.DrawString("经销商:" + (string.IsNullOrWhiteSpace(UserInfo.labelName) ? UserInfo.PartnerName : UserInfo.labelName), new Font("宋体", 8f), brush, layoutRectangleRight);
 
-                height += 15;
+             
                 if (UserInfo.CustomerCode == "11001")
                 {
                     if (goods != null && !string.IsNullOrWhiteSpace(goods.foodWay))
                     {
+                        height += 15;
                         layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                         g.Graphics.DrawString("" + goods.foodWay, new Font("宋体", 8f), brush, layoutRectangleRight);
                     }
                 }
 
+                //height += 15;
+                //layoutRectangle = new RectangleF(pointX, height, 150f, 30f);
+                //g.Graphics.DrawString("非即食", fontCode, brush, layoutRectangle);
 
                 #endregion
             }
@@ -2846,11 +2873,11 @@ namespace WmsApp
 
                 if (goods.weighed == 1)
                 {
-                    g.Graphics.DrawString((preprocessInfo.packWeight/2).ToString("f2") + "KG", fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString((preprocessInfo.packWeight / 2).ToString("f2") + "KG   非即食", fontCu, brush, layoutRectangle);
                 }
                 else
                 {
-                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit, fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit + "   非即食", fontCu, brush, layoutRectangle);
                 }
 
                 height += 20;
@@ -2891,17 +2918,20 @@ namespace WmsApp
                 layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                 g.Graphics.DrawString("经销商:" + (string.IsNullOrWhiteSpace(UserInfo.labelName) ? UserInfo.PartnerName : UserInfo.labelName), new Font("宋体", 10f), brush, layoutRectangleRight);
 
-                height += 15;
+             
                 if (UserInfo.CustomerCode == "11001")
                 {
                     if (goods != null && !string.IsNullOrWhiteSpace(goods.foodWay))
                     {
+                        height += 15;
                         layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
                         g.Graphics.DrawString("" + goods.foodWay, new Font("宋体", 8f), brush, layoutRectangleRight);
                     }
                 }
 
-
+                //height += 15;
+                //layoutRectangle = new RectangleF(pointX, height, 150f, 30f);
+                //g.Graphics.DrawString("非即食", fontCode, brush, layoutRectangle);
 
                 #endregion
             }
@@ -3123,12 +3153,12 @@ namespace WmsApp
             layoutRectangle = new RectangleF(pointX, height - 15, 120f, 40f);
             if (goods.weighed == 1)
             {
-                g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
+                g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤  非即食", fontCu, brush, layoutRectangle);
             }
             else
             {
 
-                g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit, fontCu, brush, layoutRectangle);
+                g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit + "  非即食", fontCu, brush, layoutRectangle);
 
             }
 
@@ -3209,6 +3239,10 @@ namespace WmsApp
             //height += interval;
             //layoutRectangle = new RectangleF(pointX, height, 300f, 30f);
             //g.Graphics.DrawString("经销商电话:18210817107", fontCode, brush, layoutRectangle);
+
+            //height += 15;
+            //layoutRectangle = new RectangleF(pointX, height, 150f, 30f);
+            //g.Graphics.DrawString("非即食", new Font("宋体", 8f), brush, layoutRectangle);
           
         }
 
@@ -3240,12 +3274,12 @@ namespace WmsApp
             layoutRectangle = new RectangleF(pointX, height - 15, 120f, 40f);
             if (goods.weighed == 1)
             {
-                g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
+                g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤  非即食", fontCu, brush, layoutRectangle);
             }
             else
             {
 
-                g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit, fontCu, brush, layoutRectangle);
+                g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit + "  非即食", fontCu, brush, layoutRectangle);
 
             }
 
@@ -3310,7 +3344,10 @@ namespace WmsApp
             layoutRectangle = new RectangleF(pointX, height, 300f, 30f);
             g.Graphics.DrawString("经销商地址:北京市朝阳区小红门乡龙爪树南里68号1号楼一层122号", fontCode, brush, layoutRectangle);
 
-            
+
+            //height += 15;
+            //layoutRectangle = new RectangleF(pointX, height, 150f, 30f);
+            //g.Graphics.DrawString("非即食", new Font("宋体", 8f), brush, layoutRectangle);
 
         }
 
@@ -3369,12 +3406,12 @@ namespace WmsApp
                 layoutRectangle = new RectangleF(pointX, height - 15, 120f, 40f);
                 if (goods.weighed == 1)
                 {
-                    g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤  非即食", fontCu, brush, layoutRectangle);
                 }
                 else
                 {
-      
-                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit, fontCu, brush, layoutRectangle);
+
+                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit + "  非即食", fontCu, brush, layoutRectangle);
    
                 }
 
@@ -3411,6 +3448,9 @@ namespace WmsApp
                 layoutRectangle = new RectangleF(pointX + image.Width, 126, 150f, 30f);
                 g.Graphics.DrawString(preprocessInfo.preprocessCode, fontCode, brush, layoutRectangle);
 
+                //height += 15;
+                //layoutRectangle = new RectangleF(pointX, height, 150f, 30f);
+                //g.Graphics.DrawString("非即食", new Font("宋体", 8f), brush, layoutRectangle);
 
             }
             else
@@ -3474,13 +3514,13 @@ namespace WmsApp
                 layoutRectangle = new RectangleF(pointX, height, 120f, 40f);
                 if (goods.weighed == 1)
                 {
-                    g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤  非即食", fontCu, brush, layoutRectangle);
                 }
                 else
                 {
                     // g.Graphics.DrawString("1" + goods.physicsUnit+"/"+goods.modelNum+goods.goodsUnit, fontCu, brush, layoutRectangle);
                     // g.Graphics.DrawString(goods.goodsModel, fontCu, brush, layoutRectangle);
-                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit, fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit + "  非即食", fontCu, brush, layoutRectangle);
                 }
 
 
@@ -3493,6 +3533,10 @@ namespace WmsApp
                 Font fontCode = new Font("宋体", 8f);
                 layoutRectangle = new RectangleF(pointX, height, 150f, 30f);
                 g.Graphics.DrawString(preprocessInfo.preprocessCode, fontCode, brush, layoutRectangle);
+
+                //height += 15;
+                //layoutRectangle = new RectangleF(pointX, height, 150f, 30f);
+                //g.Graphics.DrawString("非即食", new Font("宋体", 8f), brush, layoutRectangle);
             }
         }
 
@@ -3559,13 +3603,13 @@ namespace WmsApp
                 layoutRectangle = new RectangleF(pointX, height - 15, 120f, 40f);
                 if (goods.weighed == 1)
                 {
-                    g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤  非即食", fontCu, brush, layoutRectangle);
                 }
                 else
                 {
                     // g.Graphics.DrawString("1" + goods.physicsUnit+"/"+goods.modelNum+goods.goodsUnit, fontCu, brush, layoutRectangle);
                     // g.Graphics.DrawString(goods.goodsModel, fontCu, brush, layoutRectangle);
-                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit, fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit + "  非即食", fontCu, brush, layoutRectangle);
                     // g.Graphics.DrawString(int.Parse(goods.modelNum.ToString()) + goods.goodsUnit, fontCu, brush, layoutRectangle);
                 }
 
@@ -3657,12 +3701,12 @@ namespace WmsApp
                 layoutRectangle = new RectangleF(pointX, height, 120f, 40f);
                 if (goods.weighed == 1)
                 {
-                    g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤   非即食", fontCu, brush, layoutRectangle);
                 }
                 else
                 {
 
-                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit, fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit + "   非即食", fontCu, brush, layoutRectangle);
                 }
 
 
@@ -3733,11 +3777,11 @@ namespace WmsApp
                 layoutRectangle = new RectangleF(pointX, height - 15, 120f, 40f);
                 if (goods.weighed == 1)
                 {
-                    g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤   非即食", fontCu, brush, layoutRectangle);
                 }
                 else
                 {
-                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit, fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit + "   非即食", fontCu, brush, layoutRectangle);
                 }
 
 
@@ -3774,6 +3818,9 @@ namespace WmsApp
                 layoutRectangle = new RectangleF(pointX + image.Width, 126, 150f, 30f);
                 g.Graphics.DrawString(preprocessInfo.preprocessCode, fontCode, brush, layoutRectangle);
 
+                //height += 15;
+                //layoutRectangle = new RectangleF(pointX, height, 150f, 30f);
+                //g.Graphics.DrawString("非即食", fontCode, brush, layoutRectangle);
 
             }
             else
@@ -3822,12 +3869,12 @@ namespace WmsApp
                 layoutRectangle = new RectangleF(pointX, height, 120f, 40f);
                 if (goods.weighed == 1)
                 {
-                    g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤", fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString(preprocessInfo.packWeight.ToString("f2") + "斤   非即食", fontCu, brush, layoutRectangle);
                 }
                 else
                 {
 
-                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit, fontCu, brush, layoutRectangle);
+                    g.Graphics.DrawString(Decimal.ToInt32(goods.modelNum) + goods.goodsUnit + "   非即食", fontCu, brush, layoutRectangle);
                 }
 
 
@@ -3840,6 +3887,10 @@ namespace WmsApp
                 Font fontCode = new Font("宋体", 8f);
                 layoutRectangle = new RectangleF(pointX, height, 150f, 30f);
                 g.Graphics.DrawString(preprocessInfo.preprocessCode, fontCode, brush, layoutRectangle);
+
+                //height += 15;
+                //layoutRectangle = new RectangleF(pointX, height, 150f, 30f);
+                //g.Graphics.DrawString("非即食", fontCode, brush, layoutRectangle);
             }
         }
 
@@ -3888,7 +3939,7 @@ namespace WmsApp
             //重量
 
             layoutRectangle = new RectangleF(pointX, height, 165f, 40f);
-            g.Graphics.DrawString(preprocessInfo.goodsModel, font, brush, layoutRectangle);
+            g.Graphics.DrawString(preprocessInfo.goodsModel + "", font, brush, layoutRectangle);
 
             height += 15;
 
@@ -3990,7 +4041,7 @@ namespace WmsApp
             //重量
 
             layoutRectangle = new RectangleF(pointX, height, 165f, 40f);
-            g.Graphics.DrawString(preprocessInfo.goodsModel, font, brush, layoutRectangle);
+            g.Graphics.DrawString(preprocessInfo.goodsModel + "  非即食", font, brush, layoutRectangle);
 
             height += 15;
 
@@ -4067,6 +4118,10 @@ namespace WmsApp
                 g.Graphics.DrawString("生产地址:北京市平谷区马坊镇英城南桥东400米", new Font("宋体", 8f), brush, layoutRectangleRight);
             }
 
+            //height += 15;
+            //layoutRectangle = new RectangleF(pointX, height, 150f, 30f);
+            //g.Graphics.DrawString("非即食", new Font("宋体", 8f), brush, layoutRectangle);
+
         }
 
         public void GetSanQuanPrintPicture(Bitmap image, PrintPageEventArgs g, PreprocessInfo preprocessInfo)
@@ -4112,7 +4167,7 @@ namespace WmsApp
             //重量
 
             layoutRectangle = new RectangleF(pointX, height, 165f, 40f);
-            g.Graphics.DrawString(preprocessInfo.goodsModel, font, brush, layoutRectangle);
+            g.Graphics.DrawString(preprocessInfo.goodsModel + "   非即食", font, brush, layoutRectangle);
 
             height += 15;
 
@@ -4170,6 +4225,9 @@ namespace WmsApp
             layoutRectangleRight = new RectangleF(pointX, height, 300f, 85f);
             g.Graphics.DrawString("经销商:" + (string.IsNullOrWhiteSpace(UserInfo.labelName) ? UserInfo.PartnerName : UserInfo.labelName), new Font("宋体", 8f), brush, layoutRectangleRight);
 
+            //height += 15;
+            //layoutRectangle = new RectangleF(pointX, height, 150f, 30f);
+            //g.Graphics.DrawString("非即食", new Font("宋体", 8f), brush, layoutRectangle);
 
         }
         private void btnInput_Click(object sender, EventArgs e)
