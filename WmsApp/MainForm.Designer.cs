@@ -63,6 +63,7 @@
             this.tsbSuit = new System.Windows.Forms.ToolStripButton();
             this.tsbYangChu = new System.Windows.Forms.ToolStripButton();
             this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
+            this.tsbFengBoxQuery = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -101,7 +102,8 @@
             this.tsbFrozenCaij,
             this.tsbInboundQuery,
             this.tsbSuit,
-            this.tsbYangChu});
+            this.tsbYangChu,
+            this.tsbFengBoxQuery});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1028, 27);
@@ -421,6 +423,16 @@
             this.dockPanel1.Size = new System.Drawing.Size(1028, 362);
             this.dockPanel1.TabIndex = 18;
             // 
+            // tsbFengBoxQuery
+            // 
+            this.tsbFengBoxQuery.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbFengBoxQuery.Image = ((System.Drawing.Image)(resources.GetObject("tsbFengBoxQuery.Image")));
+            this.tsbFengBoxQuery.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbFengBoxQuery.Name = "tsbFengBoxQuery";
+            this.tsbFengBoxQuery.Size = new System.Drawing.Size(133, 24);
+            this.tsbFengBoxQuery.Text = "套装封箱查询";
+            this.tsbFengBoxQuery.Click += new System.EventHandler(this.tsbFengBoxQuery_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -478,6 +490,7 @@
         private System.Windows.Forms.ToolStripButton tsbInboundQuery;
         private System.Windows.Forms.ToolStripButton tsbSuit;
         private System.Windows.Forms.ToolStripButton tsbYangChu;
+        private System.Windows.Forms.ToolStripButton tsbFengBoxQuery;
     }
 }
 

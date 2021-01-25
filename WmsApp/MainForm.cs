@@ -627,5 +627,19 @@ namespace WmsApp
             }
 
         }
+
+        private void tsbFengBoxQuery_Click(object sender, EventArgs e)
+        {
+            DockContent fx = FindCurrentForm("GoodsSuitBoxTransferQueryForm");
+            if (fx == null)
+            {
+                AddToFrame(new GoodsSuitBoxTransferQueryForm());
+            }
+            else
+            {
+                fx.Activate();
+            }
+
+        }
     }
 }

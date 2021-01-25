@@ -12,4 +12,12 @@ namespace WmsSDK.Response
 
      
     }
+
+
+    public class GoodsSuitBoxTransferDetailQueryResponse : WMSResponse
+    {
+        public List<GoodsSuitBoxTransferDetailModel> result { get; set; }
+
+
+    }
 }

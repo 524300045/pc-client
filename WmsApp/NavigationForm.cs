@@ -300,5 +300,10 @@ namespace WmsApp
         {
 
         }
+
+        private void pbSuitQuery_Click(object sender, EventArgs e)
+        {
+            OpenForm("tsbFengBoxQuery");
+        }
     }
 }

@@ -19,4 +19,21 @@ namespace WmsSDK.Request
 
 
     }
+
+
+    public class GoodsSuitBoxTransferDetailQueryRequest : IWMSRequest<GoodsSuitBoxTransferDetailQueryResponse>
+    {
+        public string GetAPIPath()
+        {
+            return "/goodsSuitBoxTransfer/getBoxTransferInfo";
+        }
+
+        public string boxCode { get; set; }
+
+        public string customerCode { get; set; }
+
+        public string warehouseCode { get; set; }
+
+
+    }
 }

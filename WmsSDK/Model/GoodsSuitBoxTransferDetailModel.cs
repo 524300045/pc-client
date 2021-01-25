@@ -15,7 +15,7 @@ namespace WmsSDK.Model
         public String warehouseCode { get; set; }
         public String warehouseName { get; set; }
 
-
+        public String childGoodsName { get; set; }
 
         public String skuCode { get; set; }
 
@@ -55,5 +55,7 @@ namespace WmsSDK.Model
 
         /** 有效标示（1：有效；0：无效） */
         public int yn { get; set; }
+
+        public String goodsName { get; set; }
     }
 }

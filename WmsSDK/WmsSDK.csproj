@@ -75,6 +75,7 @@
     <Compile Include="Model\BomRelationModel.cs" />
     <Compile Include="Model\GoodsSuitBox.cs" />
     <Compile Include="Model\GoodsSuitBoxDetailResponse.cs" />
+    <Compile Include="Model\GoodsSuitBoxTransferModel.cs" />
     <Compile Include="Model\GoodsSuitBoxTransferDetailModel.cs" />
     <Compile Include="Model\GoodsSuitModel.cs" />
     <Compile Include="Model\InBoundDetailModel.cs" />
@@ -114,11 +115,14 @@
     <Compile Include="PageUtil.cs" />
     <Compile Include="PaginatorDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Request\GoodsSuitBoxTransferDetailRequest.cs" />
     <Compile Include="Request\GoodsSuitBoxRequest.cs" />
     <Compile Include="Request\GoodsSuitRequest.cs" />
     <Compile Include="Request\GoodsFrozenRequest.cs" />
     <Compile Include="Request\FrozenBoxCodeRequest.cs" />
     <Compile Include="Request\InBoundDetailRequest.cs" />
+    <Compile Include="Request\GoodsBoxTransferQueryRequest.cs" />
+    <Compile Include="Request\WmsFrozenBoxCodeChaoMaRequest.cs" />
     <Compile Include="Request\WmsFrozenBoxCodeRequest.cs" />
     <Compile Include="Request\TurnBoxAddRequest.cs" />
     <Compile Include="Request\BoxInfoAddRequest.cs" />
@@ -159,11 +163,14 @@
     <Compile Include="Request\WaveCustomerStoreRequest.cs" />
     <Compile Include="Response\BomRelationResponse.cs" />
     <Compile Include="Response\BoxInfoAddResponse.cs" />
+    <Compile Include="Response\GoodsSuitBoxTransferDetailResponse.cs" />
     <Compile Include="Response\GoodsSuitBoxResponse.cs" />
     <Compile Include="Response\GoodsSuitResponse.cs" />
     <Compile Include="Response\GoodsFrozenResponse.cs" />
     <Compile Include="Response\FrozenBoxCodeResponse.cs" />
     <Compile Include="Response\InBoundDetailResponse.cs" />
+    <Compile Include="Response\GoodsBoxTransferQueryResponse.cs" />
+    <Compile Include="Response\WmsFrozenBoxCodeChaoMaResponse.cs" />
     <Compile Include="Response\WmsFrozenBoxCodeResponse.cs" />
     <Compile Include="Response\TurnInfoResponse.cs" />
     <Compile Include="Response\TurnOverBoxResponse.cs" />

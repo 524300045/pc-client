@@ -81,6 +81,8 @@
             this.label25 = new System.Windows.Forms.Label();
             this.pbChaoWeight = new System.Windows.Forms.PictureBox();
             this.label26 = new System.Windows.Forms.Label();
+            this.pbSuitQuery = new System.Windows.Forms.PictureBox();
+            this.label27 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbOrderPackage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbGoodsPackage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBoxPrint)).BeginInit();
@@ -107,6 +109,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbSuitCaiJi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbYangChu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbChaoWeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSuitQuery)).BeginInit();
             this.SuspendLayout();
             // 
             // pbOrderPackage
@@ -313,7 +316,7 @@
             // pbCloseAll
             // 
             this.pbCloseAll.Image = ((System.Drawing.Image)(resources.GetObject("pbCloseAll.Image")));
-            this.pbCloseAll.Location = new System.Drawing.Point(865, 334);
+            this.pbCloseAll.Location = new System.Drawing.Point(1136, 55);
             this.pbCloseAll.Name = "pbCloseAll";
             this.pbCloseAll.Size = new System.Drawing.Size(78, 69);
             this.pbCloseAll.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -334,7 +337,7 @@
             // label13
             // 
             this.label13.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label13.Location = new System.Drawing.Point(863, 406);
+            this.label13.Location = new System.Drawing.Point(1134, 127);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(91, 23);
             this.label13.TabIndex = 1;
@@ -656,11 +659,32 @@
             this.label26.Text = "抄码称重";
             this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // pbSuitQuery
+            // 
+            this.pbSuitQuery.Image = ((System.Drawing.Image)(resources.GetObject("pbSuitQuery.Image")));
+            this.pbSuitQuery.Location = new System.Drawing.Point(865, 334);
+            this.pbSuitQuery.Name = "pbSuitQuery";
+            this.pbSuitQuery.Size = new System.Drawing.Size(78, 69);
+            this.pbSuitQuery.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbSuitQuery.TabIndex = 0;
+            this.pbSuitQuery.TabStop = false;
+            this.pbSuitQuery.Click += new System.EventHandler(this.pbSuitQuery_Click);
+            // 
+            // label27
+            // 
+            this.label27.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label27.Location = new System.Drawing.Point(863, 406);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(91, 23);
+            this.label27.TabIndex = 1;
+            this.label27.Text = "套装封箱查询";
+            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // NavigationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1219, 504);
+            this.ClientSize = new System.Drawing.Size(1251, 504);
             this.Controls.Add(this.label23);
             this.Controls.Add(this.label22);
             this.Controls.Add(this.label15);
@@ -670,6 +694,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label26);
+            this.Controls.Add(this.label27);
             this.Controls.Add(this.label25);
             this.Controls.Add(this.label24);
             this.Controls.Add(this.label19);
@@ -696,6 +721,7 @@
             this.Controls.Add(this.pbPackageDetail);
             this.Controls.Add(this.pbCloseAll);
             this.Controls.Add(this.pbChaoWeight);
+            this.Controls.Add(this.pbSuitQuery);
             this.Controls.Add(this.pbYangChu);
             this.Controls.Add(this.pbSuitCaiJi);
             this.Controls.Add(this.pbStoreInfo);
@@ -742,6 +768,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbSuitCaiJi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbYangChu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbChaoWeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSuitQuery)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -800,5 +827,7 @@
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.PictureBox pbChaoWeight;
         private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.PictureBox pbSuitQuery;
+        private System.Windows.Forms.Label label27;
     }
 }
