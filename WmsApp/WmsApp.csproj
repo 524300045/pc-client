@@ -68,6 +68,30 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SuitWeightForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SuitWeightForm.Designer.cs">
+      <DependentUpon>SuitWeightForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChaoMaWeightForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChaoMaWeightForm.Designer.cs">
+      <DependentUpon>ChaoMaWeightForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FengBoxForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FengBoxForm.Designer.cs">
+      <DependentUpon>FengBoxForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrozenSuitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrozenSuitForm.Designer.cs">
+      <DependentUpon>FrozenSuitForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="YangChuSuitDateForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -353,6 +377,18 @@
     <Compile Include="TabWindow.designer.cs">
       <DependentUpon>TabWindow.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SuitWeightForm.resx">
+      <DependentUpon>SuitWeightForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChaoMaWeightForm.resx">
+      <DependentUpon>ChaoMaWeightForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FengBoxForm.resx">
+      <DependentUpon>FengBoxForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrozenSuitForm.resx">
+      <DependentUpon>FrozenSuitForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="YangChuSuitDateForm.resx">
       <DependentUpon>YangChuSuitDateForm.cs</DependentUpon>
     </EmbeddedResource>

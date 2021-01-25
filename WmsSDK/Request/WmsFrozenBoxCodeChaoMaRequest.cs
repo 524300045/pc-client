@@ -7,11 +7,11 @@ using WmsSDK.Response;
 
 namespace WmsSDK.Request
 {
-    public class WmsFrozenBoxCodeRequest : IWMSRequest<WmsFrozenBoxCodeResponse>
+    public class WmsFrozenBoxCodeChaoMaRequest : IWMSRequest<WmsFrozenBoxCodeChaoMaResponse>
     {
         public string GetAPIPath()
         {
-            return "/wmsFrozenboxcode/batchAdd";
+            return "/wmsFrozenboxcode/addchaoma";
         }
 
         public String warehouseCode { get; set; }
@@ -41,11 +41,12 @@ namespace WmsSDK.Request
     }
 
 
-    public class WmsFrozenBoxCodeBuPrintRequest : IWMSRequest<WmsFrozenBoxCodeResponse>
+
+    public class WmsFrozenBoxCodeSuitRequest : IWMSRequest<WmsFrozenBoxCodeChaoMaResponse>
     {
         public string GetAPIPath()
         {
-            return "/wmsFrozenboxcode/buPrint";
+            return "/wmsFrozenboxcode/addsuit";
         }
 
         public String warehouseCode { get; set; }
@@ -56,43 +57,20 @@ namespace WmsSDK.Request
         /**  */
         public String customerName { get; set; }
 
-
+        /**  */
         public String skuCode { get; set; }
-
-      
 
         /** 数量 */
         public int num { get; set; }
 
         public String createUser { get; set; }
 
-        public long detailId { get; set; }
+
+        public String productionDate { get; set; }
 
 
-    }
+        public decimal modelNum;
 
-    public class WmsFrozenBoxCodeSuitScanRequest : IWMSRequest<WmsFrozenBoxCodeSingleResponse>
-    {
-        public string GetAPIPath()
-        {
-            return "/wmsFrozenboxcode/getsuitboxinfo";
-        }
-
-        public String warehouseCode { get; set; }
-        /**  */
- 
-        /**  */
-        public String customerCode { get; set; }
-        /**  */
-    
-
-
-        public String skuCode { get; set; }
-
-
-        public String boxCode { get; set; }
-
-       
 
 
     }

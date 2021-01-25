@@ -615,11 +615,11 @@ namespace WmsApp
 
         private void tsbYangChu_Click(object sender, EventArgs e)
         {
-            
- DockContent fx = FindCurrentForm("YangChuSuitPrintForm");
+
+            DockContent fx = FindCurrentForm("FrozenSuitForm");
             if (fx == null)
             {
-                AddToFrame(new YangChuSuitPrintForm());
+                AddToFrame(new FrozenSuitForm());
             }
             else
             {

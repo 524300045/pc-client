@@ -61,8 +61,8 @@
             this.tsbFrozenCaij = new System.Windows.Forms.ToolStripButton();
             this.tsbInboundQuery = new System.Windows.Forms.ToolStripButton();
             this.tsbSuit = new System.Windows.Forms.ToolStripButton();
-            this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.tsbYangChu = new System.Windows.Forms.ToolStripButton();
+            this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -398,6 +398,16 @@
             this.tsbSuit.Text = "套装打印";
             this.tsbSuit.Click += new System.EventHandler(this.tsbSuit_Click);
             // 
+            // tsbYangChu
+            // 
+            this.tsbYangChu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbYangChu.Image = ((System.Drawing.Image)(resources.GetObject("tsbYangChu.Image")));
+            this.tsbYangChu.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbYangChu.Name = "tsbYangChu";
+            this.tsbYangChu.Size = new System.Drawing.Size(93, 24);
+            this.tsbYangChu.Text = "套装封箱";
+            this.tsbYangChu.Click += new System.EventHandler(this.tsbYangChu_Click);
+            // 
             // dockPanel1
             // 
             this.dockPanel1.ActiveAutoHideContent = null;
@@ -410,16 +420,6 @@
             this.dockPanel1.Name = "dockPanel1";
             this.dockPanel1.Size = new System.Drawing.Size(1028, 362);
             this.dockPanel1.TabIndex = 18;
-            // 
-            // tsbYangChu
-            // 
-            this.tsbYangChu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbYangChu.Image = ((System.Drawing.Image)(resources.GetObject("tsbYangChu.Image")));
-            this.tsbYangChu.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbYangChu.Name = "tsbYangChu";
-            this.tsbYangChu.Size = new System.Drawing.Size(93, 24);
-            this.tsbYangChu.Text = "央厨套装";
-            this.tsbYangChu.Click += new System.EventHandler(this.tsbYangChu_Click);
             // 
             // MainForm
             // 

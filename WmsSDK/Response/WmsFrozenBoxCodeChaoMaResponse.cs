@@ -6,20 +6,11 @@ using WmsSDK.Model;
 
 namespace WmsSDK.Response
 {
-    public class WmsFrozenBoxCodeResponse : WMSResponse
-    {
-
-        public List<WmsFrozenBoxCode> result { get; set; }
-
-      
-    }
-
-
-    public class WmsFrozenBoxCodeSingleResponse : WMSResponse
+    public class WmsFrozenBoxCodeChaoMaResponse : WMSResponse
     {
 
         public WmsFrozenBoxCode result { get; set; }
 
-
+      
     }
 }

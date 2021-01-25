@@ -32,5 +32,12 @@ namespace Common
            decimal result = jin*stand;
            return result;
        }
+
+        public static decimal ConvertGToKg(decimal g)
+        {
+            decimal stand = 1000;
+            decimal result = g / stand;
+            return result;
+        }
     }
 }

@@ -52,16 +52,16 @@ namespace WmsApp
             log4net.Config.XmlConfigurator.Configure();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-#if(!DEBUG)
+#if (!DEBUG)
             DefalutWMSClient.DefaultServiceAddress = "http://api.cooperate.bjkalf.net/services";
 
 #else
-         //DefalutWMSClient.DefaultServiceAddress = " http://127.0.0.1:80/webservice/services";
-  //  DefalutWMSClient.DefaultServiceAddress = " http://test.api.vcps.bjshengeng.com/services";
-      DefalutWMSClient.DefaultServiceAddress = " http://api.cooperate.bjkalf.net/services";
+        //  DefalutWMSClient.DefaultServiceAddress = " http://127.0.0.1:80/webservice/services";
+          DefalutWMSClient.DefaultServiceAddress = " http://test.api.vcps.bjshengeng.com/services";
+            //DefalutWMSClient.DefaultServiceAddress = " http://api.cooperate.bjkalf.net/services";
 #endif
 
-          
+
             LoginForm loginForm = new LoginForm();
             loginForm.StartPosition = FormStartPosition.CenterParent;
             loginForm.FormBorderStyle = FormBorderStyle.FixedDialog;

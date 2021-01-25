@@ -21,14 +21,14 @@ using ZXing.QrCode;
 
 namespace WmsApp
 {
-    public partial class FrozenCaiJiForm : TabWindow
+    public partial class FrozenSuitForm : TabWindow
     {
 
         private IWMSClient client = null;
 
         public List<Goods> goodsList;
 
-        public FrozenCaiJiForm()
+        public FrozenSuitForm()
         {
             InitializeComponent();
             client = new DefalutWMSClient();
@@ -92,6 +92,7 @@ namespace WmsApp
             {
                 request.goodsType = int.Parse(cbType.SelectedValue.ToString());
             }
+            request.goodsType = 4;
             GoodsFrozenResponse response = client.Execute(request);
             if (!response.IsError)
             {
@@ -184,48 +185,14 @@ namespace WmsApp
                 {
                     string skucode = this.dataGridView1.CurrentRow.Cells["skuCode"].Value.ToString();
                     Goods goods = goodsList.Where(p => p.skuCode == skucode).FirstOrDefault();
-
-                    if (goods.goodsType==0|| goods.goodsType == 1)
-                    {
-                        FrozenPrintForm printForm = new FrozenPrintForm(goods);
-                        printForm.ShowDialog();
-                    }
-                    //if (goods.goodsType==2)
-                    //{
-                    //    MessageBox.Show("当前商品为抄码整箱,请在RF端打印");
-                    //    return;
-                    //}
-                    if (goods.goodsType ==2||goods.goodsType ==3)
-                    {
-                        ChaoMaWeightForm chaoMaWeightForm = new ChaoMaWeightForm(goods);
-                        chaoMaWeightForm.ShowDialog();
-                        //MessageBox.Show("当前商品为抄码拆零,请在RF端打印");
-                        //return;
-                    }
                     if (goods.goodsType ==4)
                     {
-                        //MessageBox.Show("当前商品为套装,请在RF端打印");
-                        //return;
-                        SuitWeightForm suitWeightForm = new SuitWeightForm(goods);
-                        suitWeightForm.ShowDialog();
+                        FengBoxForm fengBoxForm = new FengBoxForm(goods);
+                        fengBoxForm.ShowDialog();
                     }
-
-                   
                 }
             }
         }
 
-        private void btnEmpty_Click(object sender, EventArgs e)
-        {
-
-            FrozenNumPrintForm form = new FrozenNumPrintForm();
-            form.ShowDialog();
-
-            
-        }
-
-
-       
-      
     }
 }

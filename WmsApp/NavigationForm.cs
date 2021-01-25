@@ -295,5 +295,10 @@ namespace WmsApp
         {
             OpenForm("tsbYangChu");
         }
+
+        private void pbChaoWeight_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
